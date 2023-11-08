@@ -12,6 +12,6 @@
 
 (defn input-format-validator
   [input]
-  (re-matches #"[a-eA-E][1-5]-[a-eA-E][1-5]" input))
+  (re-matches #"[1-5][a-eA-E]-[1-5][a-eA-E]" input))
   
-(input-format-validator "a-E3")
+(input-format-validator "1a-4E")
