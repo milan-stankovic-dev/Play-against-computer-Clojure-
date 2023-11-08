@@ -1,44 +1,5 @@
-# seminarski-rad
 
-FIXME: description
+Play-against-computer-Clojure-
+Fun board game against the computer! Whoever will win?
 
-## Installation
-
-Download from http://example.com/FIXME.
-
-## Usage
-
-FIXME: explanation
-
-    $ java -jar seminarski-rad-0.1.0-standalone.jar [args]
-
-## Options
-
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
-
-## License
-
-Copyright © 2023 FIXME
-
-This program and the accompanying materials are made available under the
-terms of the Eclipse Public License 2.0 which is available at
-http://www.eclipse.org/legal/epl-2.0.
-
-This Source Code may also be made available under the following Secondary
-Licenses when the conditions for such availability set forth in the Eclipse
-Public License, v. 2.0 are satisfied: GNU General Public License as published by
-the Free Software Foundation, either version 2 of the License, or (at your
-option) any later version, with the GNU Classpath Exception which is available
-at https://www.gnu.org/software/classpath/license.html.
+This project is made with the intention of learning functional programming and the Clojure programming language in particular. It presents the user with a board game called "Alquerque" where they would be able to choose which move to make, and the board then updates in real time. Games are to be played against the computer which draws its moves after each succssive turn of the player. The game is won (or lost, depending on your situation) when there are only one type of piece remaining on the board (the user draws black tiles whereas the computer plays red)
