@@ -1,5 +1,7 @@
 (ns seminarski-rad.initial
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [seminarski-rad.inputUtility :as util]
+            [seminarski-rad.validator :as val]))
 
 (def board
   { :1 {:A "B" :B "B" :C "B" :D "B" :E "B"}
@@ -12,6 +14,7 @@
 (defn print-the-board
   [board]
   (do
+    (println )
     (println  "   A   B   C   D   E")
     (println )
     (println (str "1  " (get-in board [:1 :A]) " - " (get-in board [:1 :B]) " - "
@@ -36,14 +39,9 @@
 
 (print-the-board board)
 
-(defn extract-keys-from-user-input 
-  [input]
-  (conj (conj (conj (vector (keyword (subs input 0 1)))
-                    (keyword (subs input 1 2)))
-              (keyword (subs input 3 4)))
-        (keyword (subs input 4))))
 
-(extract-keys-from-user-input "1e-2e")
+
+;; (extract-keys-from-user-input "1e-2e")
 
 (defn take-user-input
   []
@@ -56,20 +54,15 @@
 (take-user-input)
 
 (defn move-piece
-  [user-input]
-  (let [user-keys (extract-keys-from-user-input user-input)]
-    ( let [user-color (get-in board [(first user-keys)
-                                     (first (rest user-keys))])]
-       (assoc-in (assoc-in board [(first (rest (rest user-keys)))
-                                  (first (rest (rest (rest user-keys))))] user-color) [(first user-keys)
-                           (first (rest user-keys))] "*") 
-          
-      )))
+  [user-input] 
+    ( let [user-color (get-in board (util/get-move-start user-input))]
+       (assoc-in (assoc-in board (util/get-move-finish user-input) user-color) 
+                 (util/get-move-start user-input) "*")
+           
+      ))
 
 (move-piece "1A-3C")
 
-(assoc-in board [(first (extract-keys-from-user-input "1A-3C"))
-                 (first (rest (extract-keys-from-user-input "1A-3C")))] " ")
 (defn write-out-board-convo
   [board]
   (do
@@ -93,6 +86,7 @@
 
 
 (write-out-board-convo board)
+
 
 (defn play-game
   [board]
