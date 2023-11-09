@@ -19,19 +19,19 @@
     (println (str "1  " (get-in board [:1 :A]) " - " (get-in board [:1 :B]) " - "
                   (get-in board [:1 :C]) " - " (get-in board [:1 :D]) " - "
                   (get-in board [:1 :E])))
-    (println (str "     \\ | / | \\ | /"))
+    (println (str "   | \\ | / | \\ | / |"))
     (println (str "2  " (get-in board [:2 :A]) " - " (get-in board [:2 :B]) " - "
                   (get-in board [:2 :C]) " - " (get-in board [:2 :D]) " - "
                   (get-in board [:2 :E])))
-    (println (str "     / | \\ | / | \\"))
+    (println (str "   | / | \\ | / | \\ |"))
     (println (str "3  " (get-in board [:3 :A]) " - " (get-in board [:3 :B]) " - "
                   (get-in board [:3 :C]) " - " (get-in board [:3 :D]) " - "
                   (get-in board [:3 :E])))
-    (println (str "     \\ | / | \\ | /"))
+    (println (str "   | \\ | / | \\ | / |"))
     (println (str "4  " (get-in board [:4 :A]) " - " (get-in board [:4 :B]) " - "
                   (get-in board [:4 :C]) " - " (get-in board [:4 :D]) " - "
                   (get-in board [:4 :E])))
-    (println (str "     / | \\ | / | \\"))
+    (println (str "   | / | \\ | / | \\ |"))
     (println (str "5  " (get-in board [:5 :A]) " - " (get-in board [:5 :B]) " - "
                   (get-in board [:5 :C]) " - " (get-in board [:5 :D]) " - "
                   (get-in board [:5 :E])))))
@@ -70,13 +70,13 @@
     (println "Here's your board:")
     (println ) 
     (print-the-board board)
-    (println )
-    (print-the-board (move-piece (take-user-input) board)))
+    (println ))
 
-(write-out-board-convo board) 
+(write-out-board-convo board)
 
 (defn play-game
-  [board]
-  (do
-    (write-out-board-convo board) 
-    ))
+  [board] 
+    (write-out-board-convo board)
+  (print-the-board (move-piece (take-user-input) board)))
+
+(play-game board)
