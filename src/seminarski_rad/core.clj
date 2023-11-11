@@ -1,7 +1,8 @@
 (ns seminarski-rad.core
+  (:require [seminarski-rad.gameplay :as game])
   (:gen-class))
 
 (defn -main
-  "I don't do a whole lot ... yet."
+  "Runs the game"
   [& args]
-  (println "Hello, World!"))
+  (game/play-game game/board))

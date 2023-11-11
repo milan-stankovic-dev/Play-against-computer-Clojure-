@@ -1,9 +1,9 @@
-(ns seminarski-rad.initial
+(ns seminarski-rad.gameplay
   (:require [seminarski-rad.inputUtility :as util]
             [seminarski-rad.validator :as val]))
 
 (def board
-  { :1 {:A "B" :B "B" :C "B" :D "B" :E "B"}
+  {:1 {:A "B" :B "B" :C "B" :D "B" :E "B"}
    :2 {:A "B" :B "B" :C "B" :D "B" :E "B"}
    :3 {:A "B" :B "B" :C "*" :D "R" :E "R"}
    :4 {:A "R" :B "R" :C "R" :D "R" :E "R"}
@@ -12,7 +12,6 @@
 
 (defn print-the-board
   [board]
-  (do
     (println )
     (println  "   A   B   C   D   E")
     (println )
@@ -34,7 +33,7 @@
     (println (str "   | / | \\ | / | \\ |"))
     (println (str "5  " (get-in board [:5 :A]) " - " (get-in board [:5 :B]) " - "
                   (get-in board [:5 :C]) " - " (get-in board [:5 :D]) " - "
-                  (get-in board [:5 :E])))))
+                  (get-in board [:5 :E]))))
 
 (print-the-board board)
 
@@ -49,7 +48,7 @@
 
 (defn move-piece 
   [user-input board] 
-  (if (not (val/validate-input user-input board))
+  (if (not (val/validate-input user-input board "B"))
     (move-piece (take-user-input) board)
     ( let [user-color (get-in board (util/get-move-start user-input))]
       (assoc-in (assoc-in board (util/get-move-finish user-input) user-color) 

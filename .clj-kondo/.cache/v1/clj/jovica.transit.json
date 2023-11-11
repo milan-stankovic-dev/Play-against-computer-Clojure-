@@ -1,0 +1,1 @@
+["^ ","~$my-minus",["^ ","~:row",13,"~:col",1,"~:fixed-arities",["~#set",[2]],"~:name","^0","~:ns","~$jovica","~:top-ns","~$perica","~:arities",["^ ","~i2",["^ ","~:ret","~:number","~:arglist-str","[num1 num2]"]],"~:type","~:fn"],"~:filename","/home/milan/clojure projects/seminarski-rad/src/seminarski_rad/test.clj"]
