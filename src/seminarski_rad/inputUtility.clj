@@ -1,5 +1,6 @@
 (ns seminarski-rad.inputUtility
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str]
+             [clojure.data :as data]))
 
 (defn purify-user-input
   "Removes unnecessary blank characters and capitalizes 
@@ -43,8 +44,7 @@
   [input]
   (subs input 4 5))
 
-(def conversion-map {:A 1 :B 2 :C 3 :D 4 :E 5
-                     :a 1 :b 2 :c 3 :d 4 :e 5} )
+(def conversion-map {:A 1 :B 2 :C 3 :D 4 :E 5})
 
 (defn get-initial-col-as-num
  [input] 
@@ -65,3 +65,60 @@
 (defn middle-number [num1 num2]
   (let [bigger-number (max num1 num2)]
     (dec bigger-number)))
+
+(defn opposite-player-color
+  [color]
+  (if (= color "R")
+    "B"
+    "R"))
+
+
+(defn midvalue-num
+  "Returns the middle value of two numbers as a keyword.
+   Best used with integers with odd sized gaps between the values.
+   E.g. 3->5 is good because there is 1 (odd) number between
+        3->6 is not so good because there are two numbers 
+   between them (4 and 5) so the result will be 9/2"
+  [num1 num2]
+  (/ (+ num1 num2) 2))
+
+(defn num->keyword
+  [num]
+  (keyword (str num)))
+
+(defn midvalue-str->keyword
+  [str1 str2]
+  (let [num1 (conversion-map (keyword str1))
+        num2 (conversion-map (keyword str2))
+        midvalue-num (midvalue-num num1 num2)]
+     ((clojure.set/map-invert conversion-map)
+          midvalue-num)))
+
+(midvalue-str->keyword "A" "C")
+
+(defn keyword->str
+  [keyword]
+  (name keyword))
+
+(defn calculate-field-to-eat
+  [purified-input-str] ;e.g. "1A-3C"
+  (let [init-row-num (get-initial-row-as-num purified-input-str)
+        init-col-str (get-initial-col-as-str purified-input-str)
+        final-row-num (get-final-row-as-num purified-input-str)
+        final-col-str (get-final-col-as-str purified-input-str)]
+    (if (distinct? init-row-num
+                   init-col-str
+                   final-row-num
+                   final-col-str)
+      (vector (num->keyword (midvalue-num init-row-num
+                                          final-row-num))
+              (midvalue-str->keyword init-col-str
+                                                   final-col-str))
+      (if (= init-row-num final-row-num)
+        (vector (num->keyword init-row-num)
+                (midvalue-str->keyword init-col-str
+                                                     final-col-str))
+        (vector (num->keyword (midvalue-num init-row-num final-row-num))
+                (keyword init-col-str))))))
+
+(calculate-field-to-eat "3C-3A")

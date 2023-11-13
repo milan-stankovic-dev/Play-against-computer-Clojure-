@@ -1,7 +1,7 @@
 (ns seminarski-rad.validator 
   (:require [seminarski-rad.inputUtility :as util]))
 
-(defn input-length-validator 
+(defn- input-length-validator 
   "Checks if the user's input is longer than needed. Since the
     proper input is (ex. 'a1-b1') the proper length will always be 
    5"
@@ -12,7 +12,7 @@
          false)
      true))
 
-(defn input-format-validator
+(defn- input-format-validator
   "Users input must strictly adhere to said form:
    'NL-NL' where N is a number 1-5 and L is a letter
    a-e or A-E."
@@ -23,7 +23,7 @@
       (println "Your input does not adhere to proper input formatting.")
       false)))
 
-(defn proper-piece-color-validator
+(defn- proper-piece-color-validator
   "Checks if the user is trying to move their own
     piece color or someone elses or a blank field."
   [input-str board player-color]
@@ -33,7 +33,7 @@
       (println "You may not be trying to move your own piece.")
       false)))
 
-(defn start-not-the-same-as-finish-validator 
+(defn- start-not-the-same-as-finish-validator 
   "Checks if the starting position of the move is 
    not the same as the finishing one."
   [input-str]
@@ -44,7 +44,7 @@
       (println "Move lengths of 0 are not allowed.")
       false)))
 
-(defn end-not-occupied-validator 
+(defn- end-not-occupied-validator 
   "Checks if the end location of a move is blank or not.
    Returns true if it's open and false otherwise"
   [input-str board]
@@ -55,7 +55,7 @@
                  field is occupied.")
       false)))
 
-(defn middle-keyword [kw1 kw2]
+(defn- middle-keyword [kw1 kw2]
   (let [char1 (first (name kw1))
         char2 (first (name kw2))
         min-char (char (min (int char1) (int char2)))
@@ -65,7 +65,7 @@
 
 (apply distinct? [1 2 2])
 
-(defn check-for-eating
+(defn- check-for-eating
   "Checks if there is a valid piece to be eaten by player. If true returns \"eat\",
     otherwise returns false."
   [row-to-check-keyword col-to-check-keyword board opposite-player-color]
@@ -75,7 +75,7 @@
     (do (println "You don't have an opponent's tile to eat.")
         false)))
 
-(defn game-logic-validator
+(defn- game-logic-validator
   "Checks if the move length is proper for x and y axis. 
    A proper move constitutes one that is at least one tile 
    across, and at most two. If it is the one that is two
@@ -94,9 +94,7 @@
                                                 (keyword final-col-string))
         middle-row-keyword (keyword (str (util/middle-number init-row-number
                                                              final-row-number))) 
-        opposite-player-color (if (= player-color "R")
-                                "B"
-                                "R")]
+        opposite-player-color (util/opposite-player-color player-color)]
     ;; Checking if the user is trying to jump too far in any direction
     (if (or (> (Math/abs (- init-row-number final-row-number)) 2)
             (> (Math/abs (- init-col-number final-col-number)) 2))
@@ -150,7 +148,15 @@
          (proper-piece-color-validator purified-input-str board player-color)
          (start-not-the-same-as-finish-validator purified-input-str)
          (end-not-occupied-validator purified-input-str board)
-         (game-logic-validator purified-input-str board player-color)
-         )))
+         (game-logic-validator purified-input-str board player-color))))
 
 (middle-keyword :A :C)
+
+(defn user-color-input-validator
+  [user-color-input]
+  (let [purified-input-str (util/purify-user-input user-color-input)]
+    (cond
+      (> (count purified-input-str) 1) (println "Input only 1 character.") false
+      ((and (not= purified-input-str "B")
+            (not= purified-input-str "R"))) (println "Choose R or B.") false
+      :else true)))
