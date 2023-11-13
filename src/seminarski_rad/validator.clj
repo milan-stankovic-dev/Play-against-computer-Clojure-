@@ -105,7 +105,7 @@
                (= 1 (Math/abs (- init-col-number final-col-number)))
                (apply distinct? [init-row-number init-col-string final-row-number final-col-string])
                (not= (odd? init-row-number) (odd? init-col-number)))
-        (do (println "You may not move here since there is no line on the board.")
+        (do (println "You may not move here since is no line on the board. there")
             false)
         ;; Checking if the user can eat horizontally, vertically and diagonally.
         (if (= 2 (Math/abs (- init-row-number final-row-number)))
@@ -160,3 +160,4 @@
       ((and (not= purified-input-str "B")
             (not= purified-input-str "R"))) (println "Choose R or B.") false
       :else true)))
+

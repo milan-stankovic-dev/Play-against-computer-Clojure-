@@ -52,29 +52,29 @@
 (take-user-input-move)
 
 (defn move-piece
+  "Returns board with moved piece if the piece was moved 1 tile or
+   a vector with edited board and the word \"eaten\" inside it 
+   if the user has eaten a piece."
   [user-input board user-color]
   (let [validation-result (val/validate-input user-input board user-color)]
-    (case validation-result
-      false (move-piece (take-user-input-move) board user-color)
-      true (let [purified-input-str (util/purify-user-input user-input)
-                 move-start (util/get-move-start purified-input-str)
-                 move-finish (util/get-move-finish purified-input-str)]
-             (assoc-in (assoc-in board move-finish user-color)
-                       move-start "*"))
-      "eat" (let [purified-input-str (util/purify-user-input user-input)
-                  move-start (util/get-move-start purified-input-str)
-                  move-finish (util/get-move-finish purified-input-str)]
-              (assoc-in (assoc-in (assoc-in board move-finish user-color)
-                                  move-start "*") 
-                        (util/calculate-field-to-eat purified-input-str) "*")))))
-      
-      ;; (if-not (val/validate-input user-input board user-color)
-      ;;   (move-piece (take-user-input-move) board user-color)
-      ;;   (let [purified-input-str (util/purify-user-input user-input)
-      ;;         move-start (util/get-move-start purified-input-str)
-      ;;         move-finish (util/get-move-finish purified-input-str)]
-      ;;     (assoc-in (assoc-in board move-finish user-color)
-      ;;               move-start "*"))))))
+    (if (not validation-result)
+      (move-piece (take-user-input-move) board user-color) 
+      (let [purified-input-str (util/purify-user-input user-input)
+            move-start (util/get-move-start purified-input-str)
+            move-finish (util/get-move-finish purified-input-str)
+            move-done-board (assoc-in (assoc-in board move-finish user-color)
+                  move-start "*")
+            move-done-eaten (assoc-in move-done-board
+                                      (util/calculate-field-to-eat purified-input-str) "*")]
+        (if (= validation-result "eat")
+          [move-done-eaten "eaten"]
+          move-done-board)))))
+
+(move-piece "4C-2C" {:1 {:A "B" :B "B" :C "B" :D "B" :E "B"}
+                     :2 {:A "B" :B "B" :C "*" :D "B" :E "B"}
+                     :3 {:A "B" :B "B" :C "B" :D "R" :E "R"}
+                     :4 {:A "R" :B "R" :C "R" :D "R" :E "R"}
+                     :5 {:A "R" :B "R" :C "R" :D "R" :E "R"}} "R")
 
 (defn write-out-board-convo
   [board]
@@ -104,11 +104,15 @@
   [current-player board human-color computer-color]
   (print-the-board board) 
   (if (= current-player "HUMAN")
-    (let [edited-board (move-piece (take-user-input-move) board human-color)]
-      (take-turns "COMPUTER" edited-board human-color computer-color))
+    (let [result-of-piece-move (move-piece (take-user-input-move)
+                                           board human-color)]
+      (if (vector? result-of-piece-move)
+        (take-turns "HUMAN" (first result-of-piece-move)
+                    human-color computer-color)
+        (take-turns "COMPUTER" result-of-piece-move human-color computer-color)))
     (let [edited-board board] 
       (println "Computer's turn...") 
-      (Thread/sleep 2000)
+      (Thread/sleep 2000) 
       (take-turns "HUMAN" edited-board computer-color human-color))))
 
 (defn play-game
