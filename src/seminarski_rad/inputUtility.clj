@@ -1,6 +1,6 @@
 (ns seminarski-rad.inputUtility
-  (:require [clojure.string :as str]
-             [clojure.data :as data]))
+  (:require [clojure.set :as set]
+            [clojure.string :as str]))
 
 (defn purify-user-input
   "Removes unnecessary blank characters and capitalizes 
@@ -91,7 +91,7 @@
   (let [num1 (conversion-map (keyword str1))
         num2 (conversion-map (keyword str2))
         midvalue-num (midvalue-num num1 num2)]
-     ((clojure.set/map-invert conversion-map)
+     ((set/map-invert conversion-map)
           midvalue-num)))
 
 (midvalue-str->keyword "A" "C")

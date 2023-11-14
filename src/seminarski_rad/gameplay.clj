@@ -9,11 +9,18 @@
    :4 {:A "R" :B "R" :C "R" :D "R" :E "R"}
    :5 {:A "R" :B "R" :C "R" :D "R" :E "R"}})
 
-(def current-game-score (atom {:human {:color ""
+(def current-game-score (atom {"HUMAN" {:color ""
                                        :score 0}
-                               :computer {:color ""
+                               "COMPUTER" {:color ""
                                           :score 0}}))
-(def wins (atom {:human 0 :computer 0}))
+(def wins (atom {"HUMAN" 0 "COMPUTER" 0}))
+@wins
+
+(defn print-the-score
+  []
+  (println "\nHuman Wins: " (get @wins "HUMAN"))
+  (println "Computer Wins: " (get @wins "COMPUTER"))
+  (println))
 
 (defn print-the-board
   [board]
@@ -55,10 +62,10 @@
   "Returns board with moved piece if the piece was moved 1 tile or
    a vector with edited board and the word \"eaten\" inside it 
    if the user has eaten a piece."
-  [user-input board user-color]
+  [user-input board player user-color]
   (let [validation-result (val/validate-input user-input board user-color)]
     (if (not validation-result)
-      (move-piece (take-user-input-move) board user-color) 
+      (move-piece (take-user-input-move) board player user-color) 
       (let [purified-input-str (util/purify-user-input user-input)
             move-start (util/get-move-start purified-input-str)
             move-finish (util/get-move-finish purified-input-str)
@@ -67,14 +74,17 @@
             move-done-eaten (assoc-in move-done-board
                                       (util/calculate-field-to-eat purified-input-str) "*")]
         (if (= validation-result "eat")
-          [move-done-eaten "eaten"]
+          (do
+            ;; (swap! current-game-score
+            ;;        #(update-in % [player :score] inc))
+            [move-done-eaten "eaten"])
           move-done-board)))))
 
 (move-piece "4C-2C" {:1 {:A "B" :B "B" :C "B" :D "B" :E "B"}
                      :2 {:A "B" :B "B" :C "*" :D "B" :E "B"}
                      :3 {:A "B" :B "B" :C "B" :D "R" :E "R"}
                      :4 {:A "R" :B "R" :C "R" :D "R" :E "R"}
-                     :5 {:A "R" :B "R" :C "R" :D "R" :E "R"}} "R")
+                     :5 {:A "R" :B "R" :C "R" :D "R" :E "R"}} "HUMAN" "R")
 
 (defn write-out-board-convo
   [board]
@@ -88,7 +98,8 @@
     So let's begin!\n
     Here's your board:\n")
   (print-the-board board)
-  (println)) 
+  (print-the-score )
+  (println))
 
 (write-out-board-convo board)
 
@@ -100,12 +111,43 @@
         (prompt-user-color)
         (util/purify-user-input user-input))))
 
+(defn check-for-win
+  [human-color computer-color board]
+  (if-not
+   (some (fn [row] (some #(= human-color %) (vals row)))
+         (vals board))
+    (do
+      (println (str "Computer wins!"
+                    "[" computer-color "]"))
+      (swap! wins #(update-in % ["COMPUTER"] (fnil inc 0)))
+      (print-the-score)
+      (System/exit 1))
+    (if-not
+     (some (fn [row] (some #(= computer-color %) (vals row)))
+           (vals board))
+      (do
+        (println (str "Human wins!"
+                      "[" human-color "]"))
+        (swap! wins #(update-in % ["HUMAN"] (fnil inc 0)))
+        (print-the-score)
+        (System/exit 1))
+      false)))
+
+
+(check-for-win "R" "B" {:1 {:A "R" :B "B" :C "*" :D "*" :E "*"}
+                        :2 {:A "*" :B "*" :C "*" :D "*" :E "*"}
+                        :3 {:A "*" :B "*" :C "*" :D "*" :E "*"}
+                        :4 {:A "*" :B "*" :C "*" :D "*" :E "*"}
+                        :5 {:A "*" :B "*" :C "*" :D "*" :E "*"}})
+
 (defn take-turns
   [current-player board human-color computer-color]
   (print-the-board board) 
+  (print-the-score)
+  (check-for-win human-color computer-color board)
   (if (= current-player "HUMAN")
     (let [result-of-piece-move (move-piece (take-user-input-move)
-                                           board human-color)]
+                                           board "HUMAN" human-color)]
       (if (vector? result-of-piece-move)
         (take-turns "HUMAN" (first result-of-piece-move)
                     human-color computer-color)
@@ -117,7 +159,7 @@
 
 (defn play-game
   [board]
-  (write-out-board-convo board)
+  (write-out-board-convo board) 
   (let [human-color (prompt-user-color)
         computer-color (util/opposite-player-color human-color)]
     (take-turns "HUMAN" board human-color computer-color)))
@@ -125,4 +167,3 @@
 (take-turns "HUMAN" board "R" "B")
 
 (play-game board)
-
