@@ -9,6 +9,13 @@
    :4 {:A "R" :B "R" :C "R" :D "R" :E "R"}
    :5 {:A "R" :B "R" :C "R" :D "R" :E "R"}})
 
+;; (def board
+;;   {:1 {:A "R" :B "B" :C "*" :D "*" :E "*"}
+;;    :2 {:A "*" :B "*" :C "*" :D "*" :E "*"}
+;;    :3 {:A "*" :B "*" :C "*" :D "*" :E "*"}
+;;    :4 {:A "*" :B "*" :C "*" :D "*" :E "*"}
+;;    :5 {:A "*" :B "*" :C "*" :D "*" :E "*"}})
+
 (def current-game-score (atom {"HUMAN" {:color ""
                                        :score 0}
                                "COMPUTER" {:color ""
@@ -18,8 +25,8 @@
 
 (defn print-the-score
   []
-  (println "\nHuman Wins: " (get @wins "HUMAN"))
-  (println "Computer Wins: " (get @wins "COMPUTER"))
+  (println "\nHuman Score: " (get @wins "HUMAN"))
+  (println "Computer Score: " (get @wins "COMPUTER"))
   (println))
 
 (defn print-the-board
@@ -47,7 +54,7 @@
                   (get-in board [:5 :C]) " - " (get-in board [:5 :D]) " - "
                   (get-in board [:5 :E]))))
 
-(print-the-board board)
+;; (print-the-board board)
 
 (defn take-user-input-move
   []
@@ -56,7 +63,7 @@
     (println "You entered: " user-input)
     user-input))
 
-(take-user-input-move)
+;; (take-user-input-move)
 
 (defn move-piece
   "Returns board with moved piece if the piece was moved 1 tile or
@@ -88,20 +95,21 @@
 
 (defn write-out-board-convo
   [board]
-  (println "\n**********************************************************************\n")
-  (println
-   "Welcome to alquerque, the board game. Here you play against the computer.
+  (do (println "\n**********************************************************************\n")
+      (println
+       "Welcome to alquerque, the board game. Here you play against the computer.
     You control the black pieces and the computer takes hold of the black.
     To make a turn input the name of the first field (Ex. 1A)
     and then the field you want your piece to go (Ex. 1C).
     If your input is invalid, you will get another chance at making a move!
     So let's begin!\n
     Here's your board:\n")
-  (print-the-board board)
-  (print-the-score )
-  (println))
+      (print-the-board board)
+      (print-the-score )
+      (println)))
 
-(write-out-board-convo board)
+;; (write-out-board-convo board)
+
 
 (defn prompt-user-color
   []
@@ -121,7 +129,7 @@
                     "[" computer-color "]"))
       (swap! wins #(update-in % ["COMPUTER"] (fnil inc 0)))
       (print-the-score)
-      (System/exit 1))
+      true)
     (if-not
      (some (fn [row] (some #(= computer-color %) (vals row)))
            (vals board))
@@ -130,7 +138,7 @@
                       "[" human-color "]"))
         (swap! wins #(update-in % ["HUMAN"] (fnil inc 0)))
         (print-the-score)
-        (System/exit 1))
+        true)
       false)))
 
 
@@ -144,26 +152,26 @@
   [current-player board human-color computer-color]
   (print-the-board board) 
   (print-the-score)
-  (check-for-win human-color computer-color board)
-  (if (= current-player "HUMAN")
-    (let [result-of-piece-move (move-piece (take-user-input-move)
-                                           board "HUMAN" human-color)]
-      (if (vector? result-of-piece-move)
-        (take-turns "HUMAN" (first result-of-piece-move)
-                    human-color computer-color)
-        (take-turns "COMPUTER" result-of-piece-move human-color computer-color)))
-    (let [edited-board board] 
-      (println "Computer's turn...") 
-      (Thread/sleep 2000) 
-      (take-turns "HUMAN" edited-board computer-color human-color))))
+  (if (check-for-win human-color computer-color board)
+    (println "End of game.")
+    
+    (if (= current-player "HUMAN")
+      (let [result-of-piece-move (move-piece (take-user-input-move)
+                                             board "HUMAN" human-color)]
+        (if (vector? result-of-piece-move)
+          (take-turns "HUMAN" (first result-of-piece-move)
+                      human-color computer-color)
+          (take-turns "COMPUTER" result-of-piece-move human-color computer-color)))
+      (let [edited-board board] 
+        (println "Computer's turn...") 
+        (Thread/sleep 2000) 
+        (take-turns "HUMAN" edited-board computer-color human-color)))))
 
 (defn play-game
   [board]
-  (write-out-board-convo board) 
-  (let [human-color (prompt-user-color)
-        computer-color (util/opposite-player-color human-color)]
-    (take-turns "HUMAN" board human-color computer-color)))
-
-(take-turns "HUMAN" board "R" "B")
+   (write-out-board-convo board) 
+      (let [human-color (prompt-user-color)
+            computer-color (util/opposite-player-color human-color)]
+        (take-turns "HUMAN" board human-color computer-color)))
 
 (play-game board)
