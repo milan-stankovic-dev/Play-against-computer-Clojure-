@@ -19,24 +19,24 @@
     (println )
     (println  "   A   B   C   D   E")
     (println )
-    (println (str "1  " (get-in board [:1 :A :piece]) " - " (get-in board [:1 :B :piece]) " - "
-                  (get-in board [:1 :C :piece]) " - " (get-in board [:1 :D :piece]) " - "
+    (println (str "1  " (get-in board [:1 :A :piece]) " ─ " (get-in board [:1 :B :piece]) " ─ "
+                  (get-in board [:1 :C :piece]) " ─ " (get-in board [:1 :D :piece]) " ─ "
                   (get-in board [:1 :E :piece])))
     (println (str "   | \\ | / | \\ | / |"))
-    (println (str "2  " (get-in board [:2 :A :piece]) " - " (get-in board [:2 :B :piece]) " - "
-                  (get-in board [:2 :C :piece]) " - " (get-in board [:2 :D :piece]) " - "
+    (println (str "2  " (get-in board [:2 :A :piece]) " ─ " (get-in board [:2 :B :piece]) " ─ "
+                  (get-in board [:2 :C :piece]) " ─ " (get-in board [:2 :D :piece]) " ─ "
                   (get-in board [:2 :E :piece])))
     (println (str "   | / | \\ | / | \\ |"))
-    (println (str "3  " (get-in board [:3 :A :piece]) " - " (get-in board [:3 :B :piece]) " - "
-                  (get-in board [:3 :C :piece]) " - " (get-in board [:3 :D :piece]) " - "
+    (println (str "3  " (get-in board [:3 :A :piece]) " ─ " (get-in board [:3 :B :piece]) " ─ "
+                  (get-in board [:3 :C :piece]) " ─ " (get-in board [:3 :D :piece]) " ─ "
                   (get-in board [:3 :E :piece])))
     (println (str "   | \\ | / | \\ | / |"))
-    (println (str "4  " (get-in board [:4 :A :piece]) " - " (get-in board [:4 :B :piece]) " - "
-                  (get-in board [:4 :C :piece]) " - " (get-in board [:4 :D :piece]) " - "
+    (println (str "4  " (get-in board [:4 :A :piece]) " ─ " (get-in board [:4 :B :piece]) " ─ "
+                  (get-in board [:4 :C :piece]) " ─ " (get-in board [:4 :D :piece]) " ─ "
                   (get-in board [:4 :E :piece])))
     (println (str "   | / | \\ | / | \\ |"))
-    (println (str "5  " (get-in board [:5 :A :piece]) " - " (get-in board [:5 :B :piece]) " - "
-                  (get-in board [:5 :C :piece]) " - " (get-in board [:5 :D :piece]) " - "
+    (println (str "5  " (get-in board [:5 :A :piece]) " ─ " (get-in board [:5 :B :piece]) " ─ "
+                  (get-in board [:5 :C :piece]) " ─ " (get-in board [:5 :D :piece]) " ─ "
                   (get-in board [:5 :E :piece]))))
 
 (print-the-board board)

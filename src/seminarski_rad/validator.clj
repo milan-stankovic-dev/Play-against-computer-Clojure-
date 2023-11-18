@@ -2,59 +2,45 @@
   (:require [seminarski-rad.inputUtility :as util]
             [seminarski-rad.board :as board]))
 
+(defn- quit?
+  "Checks if the user is trying to quit. If so, then it ends game 
+   process."
+  [purified-input-str]
+  (when (= purified-input-str "Q")
+      (System/exit 0)))
+
 (defn- input-length-validator 
   "Checks if the user's input is longer than needed. Since the
     proper input is (ex. 'a1-b1') the proper length will always be 
    5"
   [input-str length]
-  (if (not (= (count input-str) length))
-     (do (println (str "Your input must contain "
-                       length " characters!"))
-         false)
-     true))
-
+  (= (count input-str) length))
+    
 (defn- input-format-validator
   "Users input must strictly adhere to said form:
    'NL-NL' where N is a number 1-5 and L is a letter
    a-e or A-E."
   [input-str]
-  (if (re-matches #"[1-5][a-eA-E]-[1-5][a-eA-E]" input-str)
-    true
-    (do 
-      (println "Your input does not adhere to proper input formatting.")
-      false)))
+  (re-matches #"[1-5][a-eA-E]-[1-5][a-eA-E]" input-str))
 
 (defn- proper-piece-color-validator
   "Checks if the user is trying to move their own
     piece color or someone elses or a blank field."
   [input-str board player-color]
-  (if (= player-color (get-in board (conj (util/get-move-start input-str) :piece)))
-    true
-    (do
-      (println "You may not be trying to move your own piece.")
-      false)))
+  (= player-color (get-in board (conj (util/get-move-start input-str) :piece))))
 
 (defn- start-not-the-same-as-finish-validator 
   "Checks if the starting position of the move is 
    not the same as the finishing one."
   [input-str]
-  (if (not (= (util/get-move-start input-str)
+  (not= (util/get-move-start input-str)
               (util/get-move-finish input-str)))
-    true
-    (do
-      (println "Move lengths of 0 are not allowed.")
-      false)))
 
 (defn- end-not-occupied-validator 
   "Checks if the end location of a move is blank or not.
    Returns true if it's open and false otherwise"
   [input-str board]
-  (if (= (get-in board (conj (util/get-move-finish input-str) :piece)) " ")
-    true
-    (do
-      (println "You may not move your piece here. The
-                 field is occupied.")
-      false)))
+  (= (get-in board (conj (util/get-move-finish input-str) :piece)) " "))
 
 (defn- middle-keyword [kw1 kw2]
   (let [char1 (first (name kw1))
@@ -71,17 +57,8 @@
   (if (= opposite-player-color (get-in new-board (conj [row-to-check-keyword
                                                         col-to-check-keyword]
                                                        :piece)))
-    "eat"
-    (do (println (str "You don't have an opponent's tile to eat.\n"
-                      [row-to-check-keyword] " " [col-to-check-keyword] "\n"
-                      (conj [row-to-check-keyword col-to-check-keyword :piece])
-                      "\n"
-                      (get-in new-board (conj [row-to-check-keyword
-                                               col-to-check-keyword]
-                                              :piece))
-                      "\n"
-                      new-board))
-        false)))
+    "eat" 
+        false))
 
 (util/calculate-field-to-eat "3C-5E")
 (defn- game-rule-validator 
@@ -110,14 +87,16 @@
 (defn validate-input
   [input-str board player-color]
   (let [purified-input-str (util/purify-user-input input-str)] 
-    (and (input-length-validator purified-input-str 5)
-         (input-format-validator purified-input-str)
-         (proper-piece-color-validator purified-input-str board player-color)
-         (start-not-the-same-as-finish-validator purified-input-str)
-         (end-not-occupied-validator purified-input-str board)
-         (game-rule-validator board purified-input-str player-color))))
+    (and 
+     (quit? purified-input-str)
+     (input-length-validator purified-input-str 5)
+     (input-format-validator purified-input-str)
+     (proper-piece-color-validator purified-input-str board player-color)
+     (start-not-the-same-as-finish-validator purified-input-str)
+     (end-not-occupied-validator purified-input-str board)
+     (game-rule-validator board purified-input-str player-color))))
 
-(validate-input "2c-3c" (board/create-board) "B")
+(validate-input "2c-2c" (board/create-board) "B")
 
 (middle-keyword :A :C)
 

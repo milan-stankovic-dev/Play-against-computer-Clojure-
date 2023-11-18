@@ -19,45 +19,37 @@
       1
       0)))
 
-(defn generate-possible-moves
-  [board player-color]
-  (let [valid-inputs (for [start-row (keys board)
-                           start-col (keys (board start-row))
-                           :let [start-keyword (keyword start-row)
-                                 end-keyword (keyword start-col)
-                                 input-str (str start-keyword (name start-col) "-" end-keyword)]
-                           :when (val/validate-input input-str board player-color)]
-                       input-str)]
-    (concat (filter #(= (val/validate-input % board player-color) "eat") valid-inputs)
-            (filter #(not= (val/validate-input % board player-color) "eat") valid-inputs))))
-
 (defn possible-moves-for-one-blank
-  [[row-key col-key] board player-color]
-  (let [moves (get-in board [row-key col-key :moves])]
-    (filter (fn [[r c]](val/validate-input
-                       (util/reverse-input (str (name row-key)
-                                                (name col-key)
-                                                "-"
-                                                (name r)
-                                                (name c)))
-                       board player-color)) moves)))
+  "For inputted coords of one blank field it returns a vector of strings of possible
+   moves for that given blank"
+  [[blank-r-key blank-c-key] board player-color]
+  (let [moves (get-in board [blank-r-key blank-c-key :moves])
+        eats (get-in board [blank-r-key blank-c-key :eats])
+        blank-str (str (name blank-r-key) (name blank-c-key))
+        solution-vector (filter 
+                         (fn [[r c]]
+                           (val/validate-input 
+                            (util/reverse-input (str (name blank-r-key) 
+                                                     (name blank-c-key)
+                                                     "-"
+                                                     (name r)
+                                                     (name c)))
+                            board player-color)) (into (vec eats) (vec moves)))]
+    (vec (map (fn [[r c]] (str (str (name r) (name c)) "-" blank-str)) 
+              solution-vector))))
 
 (def res ( possible-moves-for-one-blank [:3 :C] (board/create-board) "R"))
+res
 
-(keys game/board)
+(defn find-all-possible-moves [board player-color]
+  (vec (apply concat
+              (for [row-key (keys board)
+                    col-key (keys (board row-key))
+                    :when (= (get-in board [row-key col-key :piece]) " ")]
+                (possible-moves-for-one-blank [row-key col-key] board player-color)))))
 
-(println (generate-possible-moves game/board "R"))
+(find-all-possible-moves (board/create-board) "B")
 
-
-(conj [1 2 3] 0)
-(let [possible-moves (generate-possible-moves
-                      {:1 {:A "B" :B "B" :C "B" :D "B" :E "B"}
-                       :2 {:A "B" :B "B" :C "*" :D "B" :E "B"}
-                       :3 {:A "B" :B "B" :C "B" :D "R" :E "R"}
-                       :4 {:A "R" :B "R" :C "R" :D "R" :E "R"}
-                       :5 {:A "R" :B "R" :C "R" :D "R" :E "R"}}
-                      "B")]
-  (println "Possible Moves:" possible-moves))
 
 (defn make-move
   [board position move]
@@ -76,7 +68,7 @@
       (reduce max
               (for [[k v] board
                     :when (= v "B")]
-                (let [moves (generate-possible-moves board k)]
+                (let [moves (find-all-possible-moves board k)]
                   (apply min
                          (for [move moves]
                            (minimax (make-move board k move)
@@ -85,7 +77,7 @@
       (reduce min 
               (for [[k v] board
                     :when (= v "R")]
-                (let [moves (generate-possible-moves board k)]
+                (let [moves (find-all-possible-moves board k)]
                   (apply max
                          (for [move moves]
                            (minimax (make-move board k move)
@@ -97,7 +89,7 @@
     (first
      (for [[k v] board
            :when (= v "B")]
-       (let [moves (generate-possible-moves board k)]
+       (let [moves (find-all-possible-moves board k)]
          {:position k
           :move (first (filter #(= (minimax (make-move board k %) (dec depth) false)
                                    (minimax board depth true))
