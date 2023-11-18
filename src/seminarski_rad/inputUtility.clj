@@ -126,3 +126,11 @@
                 (keyword init-col-str))))))
 
 (calculate-field-to-eat "3C-3A")
+
+(defn reverse-input
+  "Does a semantic reverse, where the end of a move goes first, then the 
+   beginning. DOES NOT: do a normal string reversed"
+  [purified-input-str]
+  (let [[f l] (.split purified-input-str "-")]
+    (str l "-" f)))
+

@@ -1,7 +1,8 @@
 (ns seminarski-rad.computer 
   (:require [seminarski-rad.gameplay :as game]
             [seminarski-rad.validator :as val]
-            [seminarski-rad.inputUtility :as util]))
+            [seminarski-rad.inputUtility :as util]
+            [seminarski-rad.board :as board]))
 
 (defn game-over?
   [board]
@@ -17,6 +18,7 @@
     ;; Here R wins
       1
       0)))
+
 (defn generate-possible-moves
   [board player-color]
   (let [valid-inputs (for [start-row (keys board)
@@ -29,63 +31,20 @@
     (concat (filter #(= (val/validate-input % board player-color) "eat") valid-inputs)
             (filter #(not= (val/validate-input % board player-color) "eat") valid-inputs))))
 
+(defn possible-moves-for-one-blank
+  [[row-key col-key] board player-color]
+  (let [moves (get-in board [row-key col-key :moves])]
+    (filter (fn [[r c]](val/validate-input
+                       (util/reverse-input (str (name row-key)
+                                                (name col-key)
+                                                "-"
+                                                (name r)
+                                                (name c)))
+                       board player-color)) moves)))
+
+(def res ( possible-moves-for-one-blank [:3 :C] (board/create-board) "R"))
+
 (keys game/board)
-
-
-(defn generate-possible-moves
-  [board player-color]
-  (let [valid-inputs (for [start-row (keys game/board)
-                           start-col (keys (game/board start-row))
-                           :let [start-keyword1 (keyword start-row)
-                                 end-keyword1 (keyword start-col)
-                                 end-point (str (name start-keyword1) (name end-keyword1))]]
-                       
-                       (for [start-row (keys game/board)
-                             start-col (keys (game/board start-row))
-                             :let [start-keyword (keyword start-row)
-                                   end-keyword (keyword start-col)
-                                   start-point (str (name start-keyword) (name end-keyword))]
-                             :when (val/validate-input (str start-point "-" end-point)
-                                                       game/board "R")]
-                         (str start-point "-" end-point)))]
-    valid-inputs))
-
-(defn generate-possible-moves
-  [board player-color]
-  (let [valid-inputs
-        (for [start-row (keys game/board)
-              start-col (keys (game/board start-row))
-              :let [start-keyword1 (keyword start-row)
-                    end-keyword1 (keyword start-col)
-                    end-point (str (name start-keyword1) (name end-keyword1))]
-
-              start-row2 (keys game/board)
-              start-col2 (keys (game/board start-row2))
-              :let [start-keyword (keyword start-row2)
-                    end-keyword (keyword start-col2)
-                    start-point (str (name start-keyword) (name end-keyword))]
-              :when (val/validate-input (str start-point "-" end-point) game/board player-color)]
-          (str start-point "-" end-point))]
-    valid-inputs
-    ))
-
-(defn generate-possible-moves
-  [board player-color]
-  (let [valid-inputs
-        (for [start-row (keys game/board)
-              start-col (keys (game/board start-row))
-              :let [start-keyword1 (keyword start-row)
-                    end-keyword1 (keyword start-col)
-                    end-point (str (name start-keyword1) (name end-keyword1))]
-
-              start-row2 (keys game/board)
-              start-col2 (keys (game/board start-row2))
-              :let [start-keyword (keyword start-row2)
-                    end-keyword (keyword start-col2)
-                    start-point (str (name start-keyword) (name end-keyword))]
-              :when (val/validate-input (str start-point "-" end-point) board player-color)]
-          (str start-point "-" end-point))]
-    valid-inputs))
 
 (println (generate-possible-moves game/board "R"))
 
