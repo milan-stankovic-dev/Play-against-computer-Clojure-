@@ -100,6 +100,10 @@
   [keyword]
   (name keyword))
 
+(defn numeric-keyword->num
+  [a-keyword]
+  (Integer/parseInt (name a-keyword)))
+
 (defn calculate-field-to-eat
   [purified-input-str] ;e.g. "1A-3C"
   (let [init-row-num (get-initial-row-as-num purified-input-str)

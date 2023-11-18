@@ -1,5 +1,6 @@
 (ns seminarski-rad.validator 
-  (:require [seminarski-rad.inputUtility :as util]))
+  (:require [seminarski-rad.inputUtility :as util]
+            [seminarski-rad.board :as board]))
 
 (defn- input-length-validator 
   "Checks if the user's input is longer than needed. Since the
@@ -27,7 +28,7 @@
   "Checks if the user is trying to move their own
     piece color or someone elses or a blank field."
   [input-str board player-color]
-  (if (= player-color (get-in board (util/get-move-start input-str)))
+  (if (= player-color (get-in board (conj (util/get-move-start input-str) :piece)))
     true
     (do
       (println "You may not be trying to move your own piece.")
@@ -48,7 +49,7 @@
   "Checks if the end location of a move is blank or not.
    Returns true if it's open and false otherwise"
   [input-str board]
-  (if (= (get-in board (util/get-move-finish input-str)) "*")
+  (if (= (get-in board (conj (util/get-move-finish input-str) :piece)) " ")
     true
     (do
       (println "You may not move your piece here. The
@@ -63,82 +64,48 @@
         middle-keyword (keyword (str middle-char))]
     middle-keyword)) 
 
-(apply distinct? [1 2 2])
-
-(defn- check-for-eating
+(defn- check-for-eating-new
   "Checks if there is a valid piece to be eaten by player. If true returns \"eat\",
-    otherwise returns false."
-  [row-to-check-keyword col-to-check-keyword board opposite-player-color]
-  (if (= opposite-player-color (get-in board [ row-to-check-keyword
-                                               col-to-check-keyword]))
+    otherwise returns false. Updated to work with new board."
+  [[row-to-check-keyword col-to-check-keyword] new-board opposite-player-color]
+  (if (= opposite-player-color (get-in new-board (conj [row-to-check-keyword
+                                                        col-to-check-keyword]
+                                                       :piece)))
     "eat"
-    (do (println "You don't have an opponent's tile to eat.")
+    (do (println (str "You don't have an opponent's tile to eat.\n"
+                      [row-to-check-keyword] " " [col-to-check-keyword] "\n"
+                      (conj [row-to-check-keyword col-to-check-keyword :piece])
+                      "\n"
+                      (get-in new-board (conj [row-to-check-keyword
+                                               col-to-check-keyword]
+                                              :piece))
+                      "\n"
+                      new-board))
         false)))
 
-(defn- game-logic-validator
-  "Checks if the move length is proper for x and y axis. 
-   A proper move constitutes one that is at least one tile 
-   across, and at most two. If it is the one that is two
-   across, the middle tile must be \"eaten\" (removed from the board).
-   The only valid tile to be removed is the opponent's tile.
-   Returns false if invalid, true if valid and no eat, and 
-   \"eat\" if the opponent's piece is eaten."
-  [input-str board player-color]
-  (let [init-row-number (util/get-initial-row-as-num input-str)
-        init-col-string (util/get-initial-col-as-str input-str)
-        init-col-number (util/get-initial-col-as-num input-str)
-        final-col-string (util/get-final-col-as-str input-str)
-        final-col-number (util/get-final-col-as-num input-str)
-        final-row-number (util/get-final-row-as-num input-str)
-        middle-col-keyword (util/middle-keyword (keyword init-col-string)
-                                                (keyword final-col-string))
-        middle-row-keyword (keyword (str (util/middle-number init-row-number
-                                                             final-row-number))) 
-        opposite-player-color (util/opposite-player-color player-color)]
-    ;; Checking if the user is trying to jump too far in any direction
-    (if (or (> (Math/abs (- init-row-number final-row-number)) 2)
-            (> (Math/abs (- init-col-number final-col-number)) 2))
-      (do (println "Your move is too long. It must be at least 1 line long and at most 2 lines.")
-          false)
-      ;; Checking if the user is trying to jump diagonally 1 tile where there are no viable paths
-      (if (and (= 1 (Math/abs (- init-row-number final-row-number)))
-               (= 1 (Math/abs (- init-col-number final-col-number)))
-               (apply distinct? [init-row-number init-col-string final-row-number final-col-string])
-               (not= (odd? init-row-number) (odd? init-col-number)))
-        (do (println "You may not move here since is no line on the board. there")
-            false)
-        ;; Checking if the user can eat horizontally, vertically and diagonally.
-        (if (= 2 (Math/abs (- init-row-number final-row-number)))
-          (if (= init-col-number final-col-number)
-            
-            (check-for-eating middle-row-keyword (keyword init-col-string) board opposite-player-color)
+(util/calculate-field-to-eat "3C-5E")
+(defn- game-rule-validator 
+  "Checks if the rules of the game are validated (ie. if the player is attempting to
+   make a legal move that is drawn on the board). If the legal move is able to be made,
+   AND the player does not \"eat\", true is returned. If \"eating\" occurs, \"eat\"
+   is returned. False otherwise."
+  [board purified-input-str player-color]
+  (let [first-row-num (util/get-initial-row-as-num purified-input-str)
+        first-col-str (util/get-initial-col-as-str purified-input-str)
+        end-of-move (util/get-move-finish purified-input-str)
+        first-row-keyword (util/num->keyword first-row-num)
+        first-col-keyword (keyword first-col-str)
+        opponents-color (util/opposite-player-color player-color)] 
+      (if (some #(= end-of-move %) (get-in board [first-row-keyword
+                                                   first-col-keyword :moves]))
+         true
+         (when (some #(= end-of-move %) (get-in board [first-row-keyword
+                                                       first-col-keyword :eats]))
+           (check-for-eating-new (util/calculate-field-to-eat
+                                  purified-input-str) board opponents-color)))))
 
-            (if (= 2 (Math/abs (- init-col-number final-col-number)))
-              (if (not= (odd? init-row-number) (odd? init-col-number))
-                (do (println "You may not jump to here since there is no line on the board.")
-                    false)
-                
-                (check-for-eating middle-row-keyword middle-col-keyword board opposite-player-color))
-              
-              false))
-          (if (and (= 2 (Math/abs (- init-col-number final-col-number)))
-                   (= init-row-number final-row-number))
-            
-            (check-for-eating (keyword (str init-row-number)) middle-col-keyword board opposite-player-color)
-            
-            (if (or (and (= 2 (Math/abs (- init-col-number final-col-number)))
-                         (= 1 (Math/abs (- init-row-number final-row-number))))
-                    (and (= 1 (Math/abs (- init-col-number final-col-number)))
-                         (= 2 (Math/abs (- init-row-number final-row-number)))))
-              (do (println "You may not move here since there is no line on the board.")
-                  false)
-              true)))))))
-
-  (game-logic-validator "1A-1C" {:1 {:A "B" :B "B" :C "B" :D "B" :E "B"}
-                                 :2 {:A "R" :B "R" :C "B" :D "B" :E "B"}
-                                 :3 {:A "B" :B "R" :C "*" :D "R" :E "R"}
-                                 :4 {:A "R" :B "R" :C "R" :D "R" :E "R"}
-                                 :5 {:A "R" :B "R" :C "R" :D "R" :E "R"}} "B")
+(def board-input (seminarski-rad.board/create-board))
+(game-rule-validator board-input "1A-1C" "B")
 
 (defn validate-input
   [input-str board player-color]
@@ -148,7 +115,9 @@
          (proper-piece-color-validator purified-input-str board player-color)
          (start-not-the-same-as-finish-validator purified-input-str)
          (end-not-occupied-validator purified-input-str board)
-         (game-logic-validator purified-input-str board player-color))))
+         (game-rule-validator board purified-input-str player-color))))
+
+(validate-input "2c-3c" (board/create-board) "B")
 
 (middle-keyword :A :C)
 

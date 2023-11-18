@@ -66,11 +66,31 @@
                     start-point (str (name start-keyword) (name end-keyword))]
               :when (val/validate-input (str start-point "-" end-point) game/board player-color)]
           (str start-point "-" end-point))]
+    valid-inputs
+    ))
+
+(defn generate-possible-moves
+  [board player-color]
+  (let [valid-inputs
+        (for [start-row (keys game/board)
+              start-col (keys (game/board start-row))
+              :let [start-keyword1 (keyword start-row)
+                    end-keyword1 (keyword start-col)
+                    end-point (str (name start-keyword1) (name end-keyword1))]
+
+              start-row2 (keys game/board)
+              start-col2 (keys (game/board start-row2))
+              :let [start-keyword (keyword start-row2)
+                    end-keyword (keyword start-col2)
+                    start-point (str (name start-keyword) (name end-keyword))]
+              :when (val/validate-input (str start-point "-" end-point) board player-color)]
+          (str start-point "-" end-point))]
     valid-inputs))
 
 (println (generate-possible-moves game/board "R"))
 
 
+(conj [1 2 3] 0)
 (let [possible-moves (generate-possible-moves
                       {:1 {:A "B" :B "B" :C "B" :D "B" :E "B"}
                        :2 {:A "B" :B "B" :C "*" :D "B" :E "B"}
