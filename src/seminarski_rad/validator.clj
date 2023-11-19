@@ -6,8 +6,9 @@
   "Checks if the user is trying to quit. If so, then it ends game 
    process."
   [purified-input-str]
-  (when (= purified-input-str "Q")
-      (System/exit 0)))
+  (if (= purified-input-str "Q")
+      (System/exit 0)
+    true))
 
 (defn- input-length-validator 
   "Checks if the user's input is longer than needed. Since the

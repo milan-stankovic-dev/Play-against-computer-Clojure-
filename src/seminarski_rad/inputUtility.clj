@@ -4,9 +4,14 @@
 
 (defn purify-user-input
   "Removes unnecessary blank characters and capitalizes 
-   all letters in input."
+   all letters in input. If input contains \"EAT\" in the
+   middle of it,function removes it."
   [input]
-  (str/upper-case (str/trim input)))
+  (let [first-step (str/upper-case (str/trim input))] 
+      (if (and (= (count first-step) 9)
+               (clojure.string/includes? first-step "EAT"))
+        (str (subs first-step 0 3) (subs first-step 7))
+        first-step)))
 
 (defn extract-keys-from-user-input
   [input]

@@ -1,7 +1,8 @@
 (ns seminarski-rad.gameplay
   (:require [seminarski-rad.inputUtility :as util]
             [seminarski-rad.validator :as val]
-            [seminarski-rad.board :as board]))
+            [seminarski-rad.board :as board]
+            [seminarski-rad.computer :as computer]))
 
 (def board (board/create-board))
 
@@ -49,14 +50,14 @@
     user-input))
 
 ;; (take-user-input-move)
-(defn move-piece
+(defn move-piece-eaten-indicator
   "Returns board with moved piece if the piece was moved 1 tile or
    a vector with edited board and the word \"eaten\" inside it 
    if the user has eaten a piece."
   [user-input board user-color]
   (let [validation-result (val/validate-input user-input board user-color)]
     (if-not validation-result
-      (move-piece (take-user-input-move) board user-color) 
+      (move-piece-eaten-indicator (take-user-input-move) board user-color) 
       (let [purified-input-str (util/purify-user-input user-input)
             move-start (util/get-move-start purified-input-str)
             move-finish (util/get-move-finish purified-input-str)
@@ -71,6 +72,18 @@
                         ;;        #(update-in % [player :score] inc))
               [move-done-eaten "eaten"])) 
           move-done-board)))))
+
+(defn move-piece-clean
+  "Returns board after move, no caveats or indications of eating or not.
+    If move is improper, returns board as is."
+  [user-input board user-color]
+  (if-not (val/validate-input user-input board user-color)
+    board
+    (let [move-piece-res (move-piece-eaten-indicator 
+                          user-input board user-color)]
+      (if (vector? move-piece-res)
+        (first move-piece-res)
+        move-piece-res))))
 
 (defn write-out-board-convo
   [board]
@@ -99,6 +112,9 @@
         (util/purify-user-input user-input))))
 
 (defn check-for-win
+  "Returns \"HUMAN\" if human won, \"COMPUTER\" if computer
+   won, false otherwise. Note: both \"HUMAN\" and \"COMPUTER\" are truthy:
+   can be checked for truthiness if only win state is of concern."
   [human-color computer-color board]
   (if-not
    (some (fn [row] (some #(= human-color (% :piece)) (vals row)))
@@ -108,7 +124,7 @@
                     "[" computer-color "]"))
       (swap! wins #(update-in % ["COMPUTER"] (fnil inc 0)))
       (print-the-score)
-      true)
+      "COMPUTER")
     (if-not
      (some (fn [row] (some #(= computer-color (% :piece)) (vals row)))
            (vals board))
@@ -117,7 +133,7 @@
                       "[" human-color "]"))
         (swap! wins #(update-in % ["HUMAN"] (fnil inc 0)))
         (print-the-score)
-        true)
+        "HUMAN")
       false)))
 
 (check-for-win "R" "B" board)
@@ -129,16 +145,25 @@
     (println "End of game.")
     
     (if (= current-player "HUMAN")
-      (let [result-of-piece-move (move-piece (take-user-input-move)
+      (let [result-of-piece-move (move-piece-eaten-indicator (take-user-input-move)
                                              board human-color)]
         (if (vector? result-of-piece-move)
           (take-turns "HUMAN" (first result-of-piece-move)
                       human-color computer-color)
           (take-turns "COMPUTER" result-of-piece-move human-color computer-color)))
-      (let [edited-board board] 
-        (println "Computer's turn...") 
-        (Thread/sleep 2000) 
-        (take-turns "HUMAN" edited-board computer-color human-color)))))
+      (do
+        (println "Computer's turn...")
+        (Thread/sleep 2000)
+        (let [[score best-move] (computer/find-best-move 
+                               board 3 computer-color)]
+          (println (str "Computer's move:" best-move))
+          (println (str "Function returned score: " score))
+          (let [result-of-piece-move (move-piece-eaten-indicator best-move
+                                                                   board computer-color)]
+            (if (vector? result-of-piece-move)
+              (take-turns "COMPUTER" (first result-of-piece-move)
+                          human-color computer-color)
+              (take-turns "HUMAN" result-of-piece-move human-color computer-color))))))))
 
 (defn play-game
   [board]
