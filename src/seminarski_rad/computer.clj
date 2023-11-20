@@ -1,15 +1,86 @@
 (ns seminarski-rad.computer
-  (:require [seminarski-rad.gameplay :as game]
-            [seminarski-rad.validator :as val]
-            [seminarski-rad.inputUtility :as util]
+  (:require [seminarski-rad.validator :as val]
+            [seminarski-rad.input-utility :as utility]
             [seminarski-rad.board :as board]
             [clojure.string :as string]
             [clojure.set :as set]))
 
-(defn win-numeric
+;; **************** MOVED FROM GAMEPLAY.CLJ ***************
+
+(def wins (atom {"HUMAN" 0 "COMPUTER" 0}))
+@wins
+
+(defn print-the-score
+  []
+  (println "\nHuman Score: " (get @wins "HUMAN"))
+  (println "Computer Score: " (get @wins "COMPUTER"))
+  (println))
+
+(defn check-for-win
+  "Returns \"HUMAN\" if human won, \"COMPUTER\" if computer
+   won, false otherwise. Note: both \"HUMAN\" and \"COMPUTER\" are truthy:
+   can be checked for truthiness if only win state is of concern."
+  [human-color computer-color board]
+  (if-not
+   (some (fn [row] (some #(= human-color (% :piece)) (vals row)))
+         (vals board))
+    (do
+      (println (str "Computer wins!"
+                    "[" computer-color "]"))
+      (swap! wins #(update-in % ["COMPUTER"] (fnil inc 0)))
+      (print-the-score)
+      "COMPUTER")
+    (if-not
+     (some (fn [row] (some #(= computer-color (% :piece)) (vals row)))
+           (vals board))
+      (do
+        (println (str "Human wins!"
+                      "[" human-color "]"))
+        (swap! wins #(update-in % ["HUMAN"] (fnil inc 0)))
+        (print-the-score)
+        "HUMAN")
+      false)))
+
+(defn move-piece-eaten-indicator
+  "Returns board with moved piece if the piece was moved 1 tile or
+   a vector with edited board and the word \"eaten\" inside it 
+   if the user has eaten a piece."
+  [user-input board user-color]
+  (let [validation-result (val/validate-input user-input board user-color)]
+    (if-not validation-result
+      (move-piece-eaten-indicator (utility/take-user-input-move) board user-color)
+      (let [purified-input-str (utility/purify-user-input user-input)
+            move-start (utility/get-move-start purified-input-str)
+            move-finish (utility/get-move-finish purified-input-str)
+            move-done-board (assoc-in (assoc-in board (conj move-finish :piece) user-color)
+                                      (conj move-start :piece) " ")]
+        (if (= validation-result "eat")
+          (let [move-done-eaten (assoc-in move-done-board
+                                          (conj (utility/calculate-field-to-eat
+                                                 purified-input-str) :piece) " ")]
+            (do
+                        ;; (swap! current-game-score
+                        ;;        #(update-in % [player :score] inc))
+              [move-done-eaten "eaten"]))
+          move-done-board)))))
+
+(defn move-piece-clean
+  "Returns board after move, no caveats or indications of eating or not.
+    If move is improper, returns board as is."
+  [user-input board user-color]
+  (if-not (val/validate-input user-input board user-color)
+    board
+    (let [move-piece-res (move-piece-eaten-indicator
+                          user-input board user-color)]
+      (if (vector? move-piece-res)
+        (first move-piece-res)
+        move-piece-res))))
+;; ********************************************************
+
+(defn- win-numeric
   [board computer-color]
-  (let [human-color (util/opposite-player-color computer-color)
-        win-check-result (game/check-for-win human-color computer-color board)]
+  (let [human-color (utility/opposite-player-color computer-color)
+        win-check-result (check-for-win human-color computer-color board)]
     (case win-check-result
       "HUMAN" -1
       "COMPUTER" 1
@@ -20,7 +91,7 @@
 
 (board/create-board)
 
-(defn add-suffix-eats-to-eating-keyword
+(defn- add-suffix-eats-to-eating-keyword
   "Takes in a vector of row and column keywords and transforms it into a vector
    input which has '-EATS' appended to the col keyword."
   [[row col]]
@@ -28,7 +99,7 @@
 
 (add-suffix-eats-to-eating-keyword [:3 :C])
 
-(defn possible-moves-for-one-blank
+(defn- possible-moves-for-one-blank
   "For inputted coords of one blank field it returns a vector of strings of possible
    moves for that given blank"
   [[blank-r-key blank-c-key] board player-color]
@@ -38,7 +109,7 @@
         solution-vector (filter
                          (fn [[r c]]
                            (val/validate-input
-                            (util/reverse-input (str (name blank-r-key)
+                            (utility/reverse-input (str (name blank-r-key)
                                                      (name blank-c-key)
                                                      "-"
                                                      (name r)
@@ -48,7 +119,7 @@
     (vec (map (fn [[r c]] (str (str (name r) (name c)) "-" blank-str))
               solution-vector))))
 
-(defn find-all-possible-moves [board player-color]
+(defn- find-all-possible-moves [board player-color]
   (vec (apply concat
               (for [row-key (keys board)
                     col-key (keys (board row-key))
@@ -58,13 +129,13 @@
 (find-all-possible-moves (board/create-board) "B")
  
 
-(defn minimax
+(defn- minimax
   "Minimax algorithm helps us determine the move computer should make against
     the player. It is a heuristic and as such may not always give the best
     answer. We minimize for the human and maximize for the computer."
   [board depth maximizing? computer-color]
-  (let [human-color (util/opposite-player-color computer-color)]
-    (if (or (= depth 0) (game/check-for-win human-color computer-color board))
+  (let [human-color (utility/opposite-player-color computer-color)]
+    (if (or (= depth 0) (check-for-win human-color computer-color board))
       (win-numeric board computer-color)
       (if maximizing?
         ;; Maximizing algorithm for the computer
@@ -74,10 +145,10 @@
               moves-without-eat (into '() (set/difference (set all-moves) (set moves-with-eat)))]
           (if (seq moves-with-eat)
             (reduce max (for [move moves-with-eat]
-                          (minimax (game/move-piece-clean move board computer-color)
+                          (minimax (move-piece-clean move board computer-color)
                                    (dec depth) false computer-color )))
             (reduce max (for [move moves-without-eat]
-                          (minimax (game/move-piece-clean move board computer-color)
+                          (minimax (move-piece-clean move board computer-color)
                                    (dec depth) false computer-color)))))
         ;; Minimizing algorithm for the player
         (let [all-moves (find-all-possible-moves board human-color)
@@ -86,10 +157,10 @@
               moves-without-eat (into '() (set/difference (set all-moves) (set moves-with-eat)))]
           (if (seq moves-with-eat)
             (reduce min (for [move moves-with-eat]
-                          (minimax (game/move-piece-clean move board human-color)
+                          (minimax (move-piece-clean move board human-color)
                                    (dec depth) true computer-color)))
             (reduce min (for [move moves-without-eat]
-                          (minimax (game/move-piece-clean move board human-color)
+                          (minimax (move-piece-clean move board human-color)
                                    (dec depth) true computer-color)))))))))
 
 (minimax (board/create-board) 3 true "R")
@@ -103,7 +174,7 @@
         moves (into moves-without-eat moves-with-eat)]
     (if (seq moves)
       (reduce (fn [best-move current-move]
-                (let [score (minimax (game/move-piece-clean current-move board computer-color)
+                (let [score (minimax (move-piece-clean current-move board computer-color)
                                      (dec depth) false computer-color)]
                   (if (or (nil? best-move) (and (nil? (best-move 1)) (< (score 0) (best-move 0))))
                     [score current-move]

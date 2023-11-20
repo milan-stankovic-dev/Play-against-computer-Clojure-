@@ -1,5 +1,5 @@
 (ns seminarski-rad.board
-  (:require [seminarski-rad.inputUtility :as util]))
+  (:require [seminarski-rad.input-utility :as utility]))
 
 (defn game-logic
   "Checks if the move length is proper for x and y axis. 
@@ -10,16 +10,12 @@
    Returns false if invalid, true if valid and no eat, and 
    \"eat\" if the opponent's piece is eaten."
   [input-str]
-  (let [init-row-number (util/get-initial-row-as-num input-str)
-        init-col-string (util/get-initial-col-as-str input-str)
-        init-col-number (util/get-initial-col-as-num input-str)
-        final-col-string (util/get-final-col-as-str input-str)
-        final-col-number (util/get-final-col-as-num input-str)
-        final-row-number (util/get-final-row-as-num input-str)
-        middle-col-keyword (util/middle-keyword (keyword init-col-string)
-                                                (keyword final-col-string))
-        middle-row-keyword (keyword (str (util/middle-number init-row-number
-                                                             final-row-number)))]
+  (let [init-row-number (utility/get-initial-row-as-num input-str)
+        init-col-string (utility/get-initial-col-as-str input-str)
+        init-col-number (utility/get-initial-col-as-num input-str)
+        final-col-string (utility/get-final-col-as-str input-str)
+        final-col-number (utility/get-final-col-as-num input-str)
+        final-row-number (utility/get-final-row-as-num input-str)]
     ;; Checking if the user is trying to jump too far in any direction
     (if (or (> (Math/abs (- init-row-number final-row-number)) 2)
             (> (Math/abs (- init-col-number final-col-number)) 2))
@@ -73,12 +69,12 @@ empty-board
         (reduce-kv
          (fn [row-acc col node]
            (assoc-in row-acc [row col]
-                     (if (or (< 3 (util/numeric-keyword->num row))
-                              (and (= 3 (util/numeric-keyword->num row))
+                     (if (or (< 3 (utility/numeric-keyword->num row))
+                              (and (= 3 (utility/numeric-keyword->num row))
                                    (.contains ["D" "E"] (name col))))
                        (assoc node :piece "R")
-                       (if (or (> 3 (util/numeric-keyword->num row))
-                               (and (= 3 (util/numeric-keyword->num row))
+                       (if (or (> 3 (utility/numeric-keyword->num row))
+                               (and (= 3 (utility/numeric-keyword->num row))
                                     (.contains ["A" "B"] (name col))))
                          (assoc node :piece "B")
                          node))))
@@ -88,7 +84,7 @@ empty-board
 (def assigned-pieces-board (assign-pieces empty-board))
 assigned-pieces-board
 (defn assign-moves-to-node [board row col]
-  (let [validation-result #(game-logic (str(util/numeric-keyword->num row)
+  (let [validation-result #(game-logic (str(utility/numeric-keyword->num row)
                                                           (name col) "-"
                                                           (name %1)
                                                           (name %2)))

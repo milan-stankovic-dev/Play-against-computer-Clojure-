@@ -1,4 +1,4 @@
-(ns seminarski-rad.inputUtility
+(ns seminarski-rad.input-utility
   (:require [clojure.set :as set]
             [clojure.string :as str]))
 
@@ -139,3 +139,9 @@
   (let [[f l] (.split purified-input-str "-")]
     (str l "-" f)))
 
+(defn take-user-input-move
+  []
+  (println "Your move:")
+  (let [user-input (read-line)]
+    (println "You entered: " user-input)
+    user-input))
