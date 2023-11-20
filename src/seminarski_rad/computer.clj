@@ -21,26 +21,30 @@
    won, false otherwise. Note: both \"HUMAN\" and \"COMPUTER\" are truthy:
    can be checked for truthiness if only win state is of concern."
   [human-color computer-color board]
-  (if-not
-   (some (fn [row] (some #(= human-color (% :piece)) (vals row)))
-         (vals board))
-    (do
-      (println (str "Computer wins!"
-                    "[" computer-color "]"))
-      (swap! wins #(update-in % ["COMPUTER"] (fnil inc 0)))
-      (print-the-score)
-      "COMPUTER")
-    (if-not
-     (some (fn [row] (some #(= computer-color (% :piece)) (vals row)))
-           (vals board))
+  (let [human-piece-fields (filter #(= human-color (:piece %))
+                                   (for [row (vals board) col (vals row)] col))
+        computer-piece-fields (filter #(= computer-color (:piece %))
+                                      (for [row (vals board) col (vals row)] col))]
+    (if (and (empty? human-piece-fields) (seq computer-piece-fields))
       (do
-        (println (str "Human wins!"
-                      "[" human-color "]"))
-        (swap! wins #(update-in % ["HUMAN"] (fnil inc 0)))
+        (println (str "Computer wins!" "[" computer-color "]"))
+        (swap! wins #(update-in % ["COMPUTER"] (fnil inc 0)))
         (print-the-score)
-        "HUMAN")
-      false)))
+        "COMPUTER")
+      (if (and (empty? computer-piece-fields) (seq human-piece-fields))
+        (do
+          (println (str "Human wins!" "[" human-color "]"))
+          (swap! wins #(update-in % ["HUMAN"] (fnil inc 0)))
+          (print-the-score)
+          "HUMAN")
+        false))))
 
+(check-for-win "B" "R" (board/create-board))
+(board/create-board)
+(filter #(= " " (:piece %))
+        (for [row (vals (board/create-board))
+              col (vals row)]
+          col))
 (defn move-piece-eaten-indicator
   "Returns board with moved piece if the piece was moved 1 tile or
    a vector with edited board and the word \"eaten\" inside it 
@@ -140,28 +144,60 @@
       (if maximizing?
         ;; Maximizing algorithm for the computer
         (let [all-moves (find-all-possible-moves board computer-color)
-              moves-with-eat (take-while #(string/includes? "EAT" %)
+              moves-with-eat (filter #(string/includes? "EAT" %)
                                          all-moves)
               moves-without-eat (into '() (set/difference (set all-moves) (set moves-with-eat)))]
           (if (seq moves-with-eat)
             (reduce max (for [move moves-with-eat]
                           (minimax (move-piece-clean move board computer-color)
-                                   (dec depth) false computer-color )))
+                                   (dec depth) true computer-color )))
             (reduce max (for [move moves-without-eat]
                           (minimax (move-piece-clean move board computer-color)
                                    (dec depth) false computer-color)))))
         ;; Minimizing algorithm for the player
         (let [all-moves (find-all-possible-moves board human-color)
-              moves-with-eat (take-while #(string/includes? "EAT" %)
+              moves-with-eat (filter #(string/includes? "EAT" %)
                                          all-moves)
               moves-without-eat (into '() (set/difference (set all-moves) (set moves-with-eat)))]
           (if (seq moves-with-eat)
             (reduce min (for [move moves-with-eat]
                           (minimax (move-piece-clean move board human-color)
-                                   (dec depth) true computer-color)))
+                                   (dec depth) false computer-color)))
             (reduce min (for [move moves-without-eat]
                           (minimax (move-piece-clean move board human-color)
                                    (dec depth) true computer-color)))))))))
+
+(defn- minimax
+  "Minimax algorithm helps us determine the move computer should make against
+    the player. It is a heuristic and as such may not always give the best
+    answer. We minimize for the human and maximize for the computer."
+  [board depth maximizing? computer-color]
+  (let [human-color (utility/opposite-player-color computer-color)]
+    (if (or (= depth 0) (check-for-win human-color computer-color board))
+      (win-numeric board computer-color)
+      (if maximizing?
+        ;; Maximizing algorithm for the computer
+        (let [all-moves (find-all-possible-moves board computer-color)
+              moves-with-eat (filter #(string/includes? "EAT" %) all-moves)
+              moves-without-eat (into '() (set/difference (set all-moves) (set moves-with-eat)))]
+          (if (seq moves-with-eat)
+            (reduce max Double/NEGATIVE_INFINITY (for [move moves-with-eat]
+                                                   (minimax (move-piece-clean move board computer-color)
+                                                            (dec depth) true computer-color)))
+            (reduce max Double/NEGATIVE_INFINITY (for [move moves-without-eat]
+                                                   (minimax (move-piece-clean move board computer-color)
+                                                            (dec depth) false computer-color)))))
+        ;; Minimizing algorithm for the player
+        (let [all-moves (find-all-possible-moves board human-color)
+              moves-with-eat (filter #(string/includes? "EAT" %) all-moves)
+              moves-without-eat (into '() (set/difference (set all-moves) (set moves-with-eat)))]
+          (if (seq moves-with-eat)
+            (reduce min Double/POSITIVE_INFINITY (for [move moves-with-eat]
+                                                   (minimax (move-piece-clean move board human-color)
+                                                            (dec depth) false computer-color)))
+            (reduce min Double/POSITIVE_INFINITY (for [move moves-without-eat]
+                                                   (minimax (move-piece-clean move board human-color)
+                                                            (dec depth) true computer-color)))))))))
 
 (minimax (board/create-board) 3 true "R")
 

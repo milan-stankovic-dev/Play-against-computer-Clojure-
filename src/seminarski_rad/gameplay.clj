@@ -40,11 +40,14 @@
   (do (println "\n**********************************************************************\n")
       (println
        "Welcome to alquerque, the board game. Here you play against the computer.
-    You control the black pieces and the computer takes hold of the black.
-    To make a turn input the name of the first field (Ex. 1A)
-    and then the field you want your piece to go (Ex. 1C).
-    If your input is invalid, you will get another chance at making a move!
-    So let's begin!\n
+    Upon starting the game you are prompted to choose player color. Simply input
+    [B] for blue or [R] for red. To make a turn input the name of the first field
+    (Ex. 1A), followed by a '-' symbol and then the field you want your piece to go
+    (Ex. 1C). You may also include the word \"EAT\" in the middle (Ex. 1A-EAT-1C),
+    if you are skipping a field, but this is not necessary. If your input is invalid,
+    you will get another chance at making a move! The player whose onlypieces remain
+    wins! Good luck!\n
+    
     Here's your board:\n")
       (print-the-board board)
       (computer/print-the-score )
@@ -80,7 +83,7 @@
         (println "Computer's turn...")
         (Thread/sleep 2000)
            (let [[score best-move] (computer/find-best-move
-                                  board 3 computer-color)]
+                                  board 5 computer-color)]
           (println (str "Computer's move:" best-move))
           (println (str "Function returned score: " score))
           (let [result-of-piece-move (computer/move-piece-eaten-indicator best-move
