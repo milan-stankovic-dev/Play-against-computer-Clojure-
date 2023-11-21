@@ -100,4 +100,4 @@
             computer-color (utility/opposite-player-color human-color)]
         (take-turns "HUMAN" board human-color computer-color)))
 
-(play-game board)
+;; (play-game board)

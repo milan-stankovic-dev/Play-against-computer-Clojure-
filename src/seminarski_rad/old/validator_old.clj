@@ -1,5 +1,6 @@
 #_{:clj-kondo/ignore [:namespace-name-mismatch]}
-(ns seminarski-rad.old.validator-old)
+(ns seminarski-rad.old.validator-old
+  (:require [seminarski-rad.input-utility :as util]))
 
 (defn- check-for-eating-old
   "Checks if there is a valid piece to be eaten by player. If true returns \"eat\",

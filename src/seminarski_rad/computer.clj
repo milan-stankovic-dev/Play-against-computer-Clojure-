@@ -126,16 +126,6 @@
                     :when (= (get-in board [row-key col-key :piece]) " ")]
                 (possible-moves-for-one-blank [row-key col-key] board player-color)))))
 
-(defn- find-best-scenario-min-max
-  "Helper function that uses the minimax algorithm to minimize/maximize the best/worst score 
-   a human/computer can get as defined by the win-numeric function, that calculates win scenarios."
-  [moves board computer-color depth maximizing? min-or-max placeholder-val]
-  (reduce min-or-max placeholder-val 
-          (for [move moves] 
-            #_{:clj-kondo/ignore [:unresolved-symbol]}
-            (minimax (move-piece-clean move board computer-color) 
-                     (dec depth) maximizing? computer-color))))
-
 (defn- minimax
   "Minimax algorithm helps us determine the move computer should make against
     the player. It is a heuristic and as such may not always give the best

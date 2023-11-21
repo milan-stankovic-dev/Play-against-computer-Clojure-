@@ -5,4 +5,4 @@
 (defn -main
   "Runs the game"
   [& args]
-  (game/play-game game/board))
+  (game/play-game (game/board)))

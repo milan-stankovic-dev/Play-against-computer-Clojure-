@@ -1,0 +1,127 @@
+#'seminarski-rad.database/datasource
+clj꞉seminarski-rad.database꞉> 
+#object[next.jdbc.connection$url_PLUS_etc$reify__1202 0x31c760ba "jdbc:mysql://localhost:3306/seminarski-rad"]
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/get-connection
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/jdbc-test
+clj꞉seminarski-rad.database꞉> 
+; Syntax error compiling at (src/seminarski_rad/database.clj:37:3).
+; Unable to resolve symbol: jdbc-test-1 in this context
+clj꞉seminarski-rad.database꞉> 
+; Syntax error compiling at (src/seminarski_rad/database.clj:37:3).
+; Unable to resolve symbol: jdbc-test-1 in this context
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/datasource
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/get-connection
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/jdbc-test
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/jdbc-test-1
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ClassCastException) at next.jdbc.prepare/create (prepare.clj:94).
+; class java.lang.Character cannot be cast to class java.lang.String (java.lang.Character and java.lang.String are in module java.base of loader 'bootstrap')
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/jdbc-test-1
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ClassCastException) at next.jdbc.prepare/create (prepare.clj:94).
+; class java.lang.Character cannot be cast to class java.lang.String (java.lang.Character and java.lang.String are in module java.base of loader 'bootstrap')
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ClassCastException) at next.jdbc.prepare/create (prepare.clj:94).
+; class java.lang.Character cannot be cast to class java.lang.String (java.lang.Character and java.lang.String are in module java.base of loader 'bootstrap')
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ClassCastException) at next.jdbc.prepare/create (prepare.clj:94).
+; class java.lang.Character cannot be cast to class java.lang.String (java.lang.Character and java.lang.String are in module java.base of loader 'bootstrap')
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/jdbc-test-1
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ClassCastException) at next.jdbc.prepare/create (prepare.clj:94).
+; class java.lang.Character cannot be cast to class java.lang.String (java.lang.Character and java.lang.String are in module java.base of loader 'bootstrap')
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/datasource
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/get-connection
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/jdbc-test
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/jdbc-test-1
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ClassCastException) at next.jdbc.prepare/create (prepare.clj:94).
+; class java.lang.Character cannot be cast to class java.lang.String (java.lang.Character and java.lang.String are in module java.base of loader 'bootstrap')
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ClassCastException) at next.jdbc.prepare/create (prepare.clj:94).
+; class java.lang.Character cannot be cast to class java.lang.String (java.lang.Character and java.lang.String are in module java.base of loader 'bootstrap')
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/jdbc-test
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/jdbc-test-1
+clj꞉seminarski-rad.database꞉> 
+nil
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/db
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/datasource
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/get-connection
+clj꞉seminarski-rad.database꞉> 
+; Syntax error compiling at (src/seminarski_rad/database.clj:1:7946).
+; Unable to resolve symbol: VARCHAR in this context
+; 
+; Execution error (ClassCastException) at seminarski-rad.database/eval8106 (form-init6163577055314803620.clj:21).
+; class java.lang.Long cannot be cast to class clojure.lang.IFn (java.lang.Long is in module java.base of loader 'bootstrap'; clojure.lang.IFn is in unnamed module of loader 'app')
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/jdbc-test
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/jdbc-test-1
+clj꞉seminarski-rad.database꞉> 
+nil
+clj꞉seminarski-rad.database꞉> 
+nil
+clj꞉seminarski-rad.database꞉> 
+nil
+clj꞉seminarski-rad.database꞉> 
+nil
+clj꞉seminarski-rad.database꞉> 
+nil
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/datasource
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/conn
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/conn
+clj꞉seminarski-rad.database꞉> 
+; Syntax error compiling at (src/seminarski_rad/database.clj:26:1).
+; Unable to resolve symbol: initiate-table-user in this context
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/initiate-table-user
+clj꞉seminarski-rad.database꞉> 
+[#:next.jdbc{:update-count 0}]
+clj꞉seminarski-rad.database꞉> 
+; Syntax error compiling at (src/seminarski_rad/database.clj:33:1).
+; Unable to resolve symbol: insert-user in this context
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/insert-user
+clj꞉seminarski-rad.database꞉> 
+; Execution error (MySQLSyntaxErrorException) at jdk.internal.reflect.NativeConstructorAccessorImpl/newInstance0 (NativeConstructorAccessorImpl.java:-2).
+; Unknown column 'username' in 'field list'
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/insert-user
+clj꞉seminarski-rad.database꞉> 
+; Execution error (SQLException) at com.mysql.jdbc.SQLError/createSQLException (SQLError.java:1055).
+; Column count doesn't match value count at row 1
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/insert-user
+clj꞉seminarski-rad.database꞉> 
+; Execution error (MySQLSyntaxErrorException) at jdk.internal.reflect.NativeConstructorAccessorImpl/newInstance0 (NativeConstructorAccessorImpl.java:-2).
+; Unknown column 'username' in 'field list'
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/conn
+clj꞉seminarski-rad.database꞉> 
+; Execution error (MySQLSyntaxErrorException) at jdk.internal.reflect.NativeConstructorAccessorImpl/newInstance0 (NativeConstructorAccessorImpl.java:-2).
+; Unknown column 'username' in 'field list'
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/insert-user
+clj꞉seminarski-rad.database꞉> 
+[#:next.jdbc{:update-count 1}]
+clj꞉seminarski-rad.database꞉> 
