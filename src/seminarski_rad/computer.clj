@@ -147,28 +147,26 @@
       (if maximizing?
         ;; Maximizing algorithm for the computer
         (let [all-moves (find-all-possible-moves board computer-color)
-              moves-with-eat (set (filter #(string/includes? "EAT" %) all-moves))
-              moves-without-eat (set/difference (set all-moves) (set moves-with-eat))]
+              moves-with-eat (filter #(string/includes? "EAT" %) all-moves)
+              moves-without-eat (into '() (set/difference (set all-moves) (set moves-with-eat)))]
           (if (seq moves-with-eat)
-            (find-best-scenario-min-max moves-with-eat board
-                                        computer-color depth
-                                        true max Double/NEGATIVE_INFINITY)
-            
-            (find-best-scenario-min-max moves-without-eat board
-                                        computer-color depth
-                                        false max Double/NEGATIVE_INFINITY)))
+            (reduce max Double/NEGATIVE_INFINITY (for [move moves-with-eat]
+                                                   (minimax (move-piece-clean move board computer-color)
+                                                            (dec depth) true computer-color)))
+            (reduce max Double/NEGATIVE_INFINITY (for [move moves-without-eat]
+                                                   (minimax (move-piece-clean move board computer-color)
+                                                            (dec depth) false computer-color)))))
         ;; Minimizing algorithm for the player
         (let [all-moves (find-all-possible-moves board human-color)
-              moves-with-eat (set (filter #(string/includes? "EAT" %) all-moves))
-              moves-without-eat (set/difference (set all-moves) (set moves-with-eat))]
+              moves-with-eat (filter #(string/includes? "EAT" %) all-moves)
+              moves-without-eat (into '() (set/difference (set all-moves) (set moves-with-eat)))]
           (if (seq moves-with-eat)
-            (find-best-scenario-min-max moves-with-eat board
-                                        computer-color depth
-                                        false min Double/POSITIVE_INFINITY)
-            
-            (find-best-scenario-min-max moves-without-eat board
-                                        computer-color depth true
-                                        min Double/POSITIVE_INFINITY)))))))
+            (reduce min Double/POSITIVE_INFINITY (for [move moves-with-eat]
+                                                   (minimax (move-piece-clean move board human-color)
+                                                            (dec depth) false computer-color)))
+            (reduce min Double/POSITIVE_INFINITY (for [move moves-without-eat]
+                                                   (minimax (move-piece-clean move board human-color)
+                                                            (dec depth) true computer-color)))))))))
 
 (def all-moves (find-all-possible-moves (board/create-board) "R"))
 all-moves
