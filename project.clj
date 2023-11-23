@@ -5,7 +5,8 @@
             :url "https://www.eclipse.org/legal/epl-2.0/"}
   :dependencies [[org.clojure/clojure "1.11.1"]
                  [seancorfield/next.jdbc "1.2.659"]
-                 [mysql/mysql-connector-java "5.1.6"]]
+                 [mysql/mysql-connector-java "5.1.6"]
+                 [buddy/buddy-hashers "2.0.167"]]
   :main ^:skip-aot seminarski-rad.core
   ;; :target-path "target/%s"
   :profiles {:uberjar {:aot :all

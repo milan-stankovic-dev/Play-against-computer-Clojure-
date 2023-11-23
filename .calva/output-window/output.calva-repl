@@ -1,127 +1,719 @@
-#'seminarski-rad.database/datasource
-clj꞉seminarski-rad.database꞉> 
-#object[next.jdbc.connection$url_PLUS_etc$reify__1202 0x31c760ba "jdbc:mysql://localhost:3306/seminarski-rad"]
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/get-connection
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/jdbc-test
-clj꞉seminarski-rad.database꞉> 
-; Syntax error compiling at (src/seminarski_rad/database.clj:37:3).
-; Unable to resolve symbol: jdbc-test-1 in this context
-clj꞉seminarski-rad.database꞉> 
-; Syntax error compiling at (src/seminarski_rad/database.clj:37:3).
-; Unable to resolve symbol: jdbc-test-1 in this context
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/datasource
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/get-connection
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/jdbc-test
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/jdbc-test-1
-clj꞉seminarski-rad.database꞉> 
-; Execution error (ClassCastException) at next.jdbc.prepare/create (prepare.clj:94).
-; class java.lang.Character cannot be cast to class java.lang.String (java.lang.Character and java.lang.String are in module java.base of loader 'bootstrap')
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/jdbc-test-1
-clj꞉seminarski-rad.database꞉> 
-; Execution error (ClassCastException) at next.jdbc.prepare/create (prepare.clj:94).
-; class java.lang.Character cannot be cast to class java.lang.String (java.lang.Character and java.lang.String are in module java.base of loader 'bootstrap')
-clj꞉seminarski-rad.database꞉> 
-; Execution error (ClassCastException) at next.jdbc.prepare/create (prepare.clj:94).
-; class java.lang.Character cannot be cast to class java.lang.String (java.lang.Character and java.lang.String are in module java.base of loader 'bootstrap')
-clj꞉seminarski-rad.database꞉> 
-; Execution error (ClassCastException) at next.jdbc.prepare/create (prepare.clj:94).
-; class java.lang.Character cannot be cast to class java.lang.String (java.lang.Character and java.lang.String are in module java.base of loader 'bootstrap')
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/jdbc-test-1
-clj꞉seminarski-rad.database꞉> 
-; Execution error (ClassCastException) at next.jdbc.prepare/create (prepare.clj:94).
-; class java.lang.Character cannot be cast to class java.lang.String (java.lang.Character and java.lang.String are in module java.base of loader 'bootstrap')
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/datasource
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/get-connection
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/jdbc-test
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/jdbc-test-1
-clj꞉seminarski-rad.database꞉> 
-; Execution error (ClassCastException) at next.jdbc.prepare/create (prepare.clj:94).
-; class java.lang.Character cannot be cast to class java.lang.String (java.lang.Character and java.lang.String are in module java.base of loader 'bootstrap')
-clj꞉seminarski-rad.database꞉> 
-; Execution error (ClassCastException) at next.jdbc.prepare/create (prepare.clj:94).
-; class java.lang.Character cannot be cast to class java.lang.String (java.lang.Character and java.lang.String are in module java.base of loader 'bootstrap')
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/jdbc-test
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/jdbc-test-1
-clj꞉seminarski-rad.database꞉> 
-nil
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/db
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/datasource
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/get-connection
-clj꞉seminarski-rad.database꞉> 
-; Syntax error compiling at (src/seminarski_rad/database.clj:1:7946).
-; Unable to resolve symbol: VARCHAR in this context
-; 
-; Execution error (ClassCastException) at seminarski-rad.database/eval8106 (form-init6163577055314803620.clj:21).
-; class java.lang.Long cannot be cast to class clojure.lang.IFn (java.lang.Long is in module java.base of loader 'bootstrap'; clojure.lang.IFn is in unnamed module of loader 'app')
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/jdbc-test
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/jdbc-test-1
-clj꞉seminarski-rad.database꞉> 
 nil
 clj꞉seminarski-rad.database꞉> 
 nil
 clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/hash-a-password
+clj꞉seminarski-rad.database꞉> 
+[-35, 19, 10, -124, -99, 123, 41, -27, 84, 27, 5, -46, -9, -8, 106, 74, -51, 79, 30, -59, -104, -63, -55, 67, -121,
+ -125, -11, 107, -60, -16, -1, -128]
+clj꞉seminarski-rad.database꞉> 
+; Execution error (IllegalStateException) at seminarski-rad.database/eval8343$loading (form-init1683786072961385303.clj:1).
+; Alias hashers already exists in namespace seminarski-rad.database, aliasing buddy.core.hash
+clj꞉seminarski-rad.database꞉> 
+nil
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/hash-a-password
+clj꞉seminarski-rad.database꞉> 
+"bcrypt+sha512$847a2785b477d03079744e75becbe50e$12$fd7ad0c3e5f73050f968e956a6f4b54634d98d475b2b8500"
+clj꞉seminarski-rad.database꞉> 
+"bcrypt+sha512$6fff4c16fc39753b64612a60e6fac25a$12$25c575d7fbcee531c9aab2e3c1eaa8551106df20d4600666"
+clj꞉seminarski-rad.database꞉> 
+"bcrypt+sha512$22631c5c4385c7a1f3db9abd3a64a507$12$518862a024ea930fa2daf9230aad3ab2e8b784c7d92b90d6"
+clj꞉seminarski-rad.database꞉> 
+"bcrypt+sha512$925e3e6dca431de352a275b776dcf060$12$cfb0c4c2b979ef6e14a7e932d9e3ab931201a25c2f4374ab"
+clj꞉seminarski-rad.database꞉> 
+; Syntax error compiling at (src/seminarski_rad/database.clj:41:3).
+; No such var: hashing/hash-password
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/hash-a-password
+clj꞉seminarski-rad.database꞉> 
+; Execution error (IllegalArgumentException) at seminarski-rad.database/hash-a-password (form-init1683786072961385303.clj:41).
+; No method in multimethod 'derive-password' for dispatch value: null
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/hash-a-password
+clj꞉seminarski-rad.database꞉> 
+"bcrypt+sha512$d3c73bcbdcc7ae91295af49dd5432215$12$074428047c5abd72dc424e7bae893845752602d9eef4aab7"
+clj꞉seminarski-rad.database꞉> 
+"bcrypt+sha512$d5a419abd7b8050c63c24fbcdc87cd69$12$f935df63dcc65cf8774084e984e5b0509d34decac358b760"
+clj꞉seminarski-rad.database꞉> 
+"bcrypt+sha512$f86bbe4e5188252ab87cc9fe87d835c5$12$85d3d6045d344a0e485aeb9d4a226265729e4436e8d06484"
+clj꞉seminarski-rad.database꞉> 
+"bcrypt+sha512$ac307aa7c95f6701646332e4067b9a51$12$1dcea41fa07b8400b37519fcc6a64d0c3c462c8abeecd6d2"
+clj꞉seminarski-rad.database꞉> 
+"bcrypt+sha512$d5ad9d22240f90fdd865f8eb3b291335$12$c49141ac8e47a87a94abf225a4ff6c6e1709ac84331014b1"
+clj꞉seminarski-rad.database꞉> 
+"bcrypt+sha512$40d4415c902d5533b8345acf738e9e0d$12$678b6a5d087c45d3a1d186d923401106d00953fcba7e4d39"
+clj꞉seminarski-rad.database꞉> 
+{:valid true, :update false}
+clj꞉seminarski-rad.database꞉> 
+; Execution error (FileNotFoundException) at seminarski-rad.database/eval8685$loading (form-init1683786072961385303.clj:1).
+; Could not locate clojure/java/codec__init.class, clojure/java/codec.clj or clojure/java/codec.cljc on classpath.
+clj꞉seminarski-rad.database꞉> 
+; Execution error (FileNotFoundException) at seminarski-rad.database/eval8691$loading (form-init1683786072961385303.clj:1).
+; Could not locate clojure/java/codec/digest__init.class, clojure/java/codec/digest.clj or clojure/java/codec/digest.cljc on classpath.
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/hash-a-password
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ClassCastException) at buddy.hashers/derive (hashers.clj:370).
+; class java.lang.String cannot be cast to class clojure.lang.Associative (java.lang.String is in module java.base of loader 'bootstrap'; clojure.lang.Associative is in unnamed module of loader 'app')
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/hash-a-password
+clj꞉seminarski-rad.database꞉> 
+"bcrypt+sha512$198838d9232d6e2384a5138f9c111775$12$cd51d9dec79b8442759fc6d05454c5572e0732b916b9f011"
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/password-correct?
+clj꞉seminarski-rad.database꞉> 
+; Execution error (IllegalArgumentException) at seminarski-rad.database/password-correct? (form-init1683786072961385303.clj:44).
+; Don't know how to create ISeq from: java.lang.Boolean
+clj꞉seminarski-rad.database꞉> 
+clojure.lang.RT/seqFrom (RT.java:557)
+clojure.lang.RT/seq (RT.java:537)
+clojure.lang.RT/first (RT.java:693)
+clojure.core/first (core.clj:55)
+seminarski-rad.database/password-correct? (form-init1683786072961385303.clj:44)
+seminarski-rad.database/eval8708 (form-init1683786072961385303.clj:48)
+clojure.lang.Compiler/eval (Compiler.java:7194)
+clojure.core/eval (core.clj:3215)
+clojure.core/eval (core.clj:3211)
+nrepl.middleware.interruptible-eval/evaluate (interruptible_eval.clj:87)
+clojure.core/apply (core.clj:667)
+clojure.core/with-bindings* (core.clj:1990)
+nrepl.middleware.interruptible-eval/evaluate (interruptible_eval.clj:87)
+clojure.main/repl (main.clj:437)
+clojure.main/repl (main.clj:458)
+nrepl.middleware.interruptible-eval/evaluate (interruptible_eval.clj:115)
+nrepl.middleware.interruptible-eval/interruptible-eval (interruptible_eval.clj:150)
+nrepl.middleware.session/session-exec (session.clj:218)
+nrepl.middleware.session/session-exec (session.clj:217)
+java.lang.Thread/run (Thread.java:833)
+clj꞉seminarski-rad.database꞉> 
+; Execution error (IllegalArgumentException) at seminarski-rad.database/password-correct? (form-init1683786072961385303.clj:44).
+; Don't know how to create ISeq from: java.lang.Boolean
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/password-correct?
+clj꞉seminarski-rad.database꞉> 
+true
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/find-user-by-username
+clj꞉seminarski-rad.database꞉> 
+; Syntax error compiling at (src/seminarski_rad/database.clj:60:24).
+; Unable to resolve symbol: get-connection in this context
+clj꞉seminarski-rad.database꞉> 
+; Syntax error compiling at (src/seminarski_rad/database.clj:17:3).
+; Unable to resolve symbol: datasource in this context
+clj꞉seminarski-rad.database꞉> 
+; Evaluating file: database.clj
+[#:app_user{:id 1, :username "stanmil", :password "123abc"}]
+clj꞉seminarski-rad.database꞉> 
+[#:app_user{:id 1, :username "stanmil", :password "123abc"}]
+clj꞉seminarski-rad.database꞉> 
+[]
+clj꞉seminarski-rad.database꞉> 
+false
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/register-user
+clj꞉seminarski-rad.database꞉> 
+User exists. Try again.
+nil
+clj꞉seminarski-rad.database꞉> 
+User exists. Try again.
+nil
+clj꞉seminarski-rad.database꞉> 
+User exists. Try again.
 nil
 clj꞉seminarski-rad.database꞉> 
 nil
 clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/register-user
+clj꞉seminarski-rad.database꞉> 
+User exists. Try again.
+false
+clj꞉seminarski-rad.database꞉> 
+true
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/register-user
+clj꞉seminarski-rad.database꞉> 
+true
+clj꞉seminarski-rad.database꞉> 
+true
+clj꞉seminarski-rad.database꞉> 
+true
+clj꞉seminarski-rad.database꞉> 
+[]
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/get-user-by-username
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/login-user
+clj꞉seminarski-rad.database꞉> 
+; Execution error (IllegalArgumentException) at seminarski-rad.database/login-user (form-init1683786072961385303.clj:77).
+; Key must be integer
+clj꞉seminarski-rad.database꞉> 
+[#:app_user{:id 6,
+            :username "stanmil",
+            :password
+            "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"}]
+clj꞉seminarski-rad.database꞉> 
+#:app_user{:id 6,
+           :username "stanmil",
+           :password
+           "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"}
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/login-user
+clj꞉seminarski-rad.database꞉> 
+; Execution error (IllegalArgumentException) at seminarski-rad.database/login-user (form-init1683786072961385303.clj:77).
+; Key must be integer
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/login-user
+clj꞉seminarski-rad.database꞉> 
 nil
 clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/datasource
+#:app_user{:id 6,
+           :username "stanmil",
+           :password
+           "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"}
 clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/conn
+nil
 clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/conn
+#:app_user{:id 6,
+           :username "stanmil",
+           :password
+           "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"}
 clj꞉seminarski-rad.database꞉> 
-; Syntax error compiling at (src/seminarski_rad/database.clj:26:1).
-; Unable to resolve symbol: initiate-table-user in this context
+nil
 clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/initiate-table-user
+nil
 clj꞉seminarski-rad.database꞉> 
-[#:next.jdbc{:update-count 0}]
+#'seminarski-rad.database/login-user
 clj꞉seminarski-rad.database꞉> 
-; Syntax error compiling at (src/seminarski_rad/database.clj:33:1).
-; Unable to resolve symbol: insert-user in this context
+; Execution error (IllegalArgumentException) at seminarski-rad.database/login-user (form-init1683786072961385303.clj:77).
+; No matching field found: password for class clojure.lang.PersistentVector
 clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/insert-user
+#'seminarski-rad.database/login-user
+clj꞉seminarski-rad.database꞉> 
+nil
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/login-user
+clj꞉seminarski-rad.database꞉> 
+nil
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ArityException) at seminarski-rad.database/eval8806 (form-init1683786072961385303.clj:79).
+; Wrong number of args (0) passed to: clojure.lang.PersistentArrayMap
+clj꞉seminarski-rad.database꞉> 
+#:app_user{:id 6,
+           :username "stanmil",
+           :password
+           "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"}
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/login-user
+clj꞉seminarski-rad.database꞉> 
+#:app_user{:id 6,
+           :username "stanmil",
+           :password
+           "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"}
+clj꞉seminarski-rad.database꞉> 
+nil
+clj꞉seminarski-rad.database꞉> 
+nil
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/login-user
+clj꞉seminarski-rad.database꞉> 
+nil
+clj꞉seminarski-rad.database꞉> 
+[#:app_user{:id 6,
+            :username "stanmil",
+            :password
+            "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"}]
+clj꞉seminarski-rad.database꞉> 
+#:app_user{:id 6,
+           :username "stanmil",
+           :password
+           "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"}
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ArityException) at seminarski-rad.database/eval8824 (form-init1683786072961385303.clj:80).
+; Wrong number of args (2) passed to: clojure.core/first--5449
+clj꞉seminarski-rad.database꞉> 
+nil
+clj꞉seminarski-rad.database꞉> 
+; Execution error (IllegalArgumentException) at seminarski-rad.database/eval8828 (form-init1683786072961385303.clj:80).
+; No matching field found: password for class clojure.lang.PersistentArrayMap
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ArityException) at seminarski-rad.database/eval8830 (form-init1683786072961385303.clj:80).
+; Wrong number of args (0) passed to: clojure.lang.PersistentArrayMap
+clj꞉seminarski-rad.database꞉> 
+; Execution error (IllegalArgumentException) at seminarski-rad.database/eval8832 (form-init1683786072961385303.clj:80).
+; No matching field found: getPassowrd for class clojure.lang.PersistentArrayMap
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ArityException) at seminarski-rad.database/eval8834 (form-init1683786072961385303.clj:79).
+; Wrong number of args (0) passed to: clojure.lang.PersistentArrayMap
+clj꞉seminarski-rad.database꞉> 
+#:app_user{:id 6,
+           :username "stanmil",
+           :password
+           "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"}
+clj꞉seminarski-rad.database꞉> 
+clojure.lang.PersistentArrayMap
+clj꞉seminarski-rad.database꞉> 
+(6 "stanmil" "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc")
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/login-user
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ClassCastException) at seminarski-rad.database/login-user (form-init1683786072961385303.clj:78).
+; class java.lang.String cannot be cast to class clojure.lang.IFn (java.lang.String is in module java.base of loader 'bootstrap'; clojure.lang.IFn is in unnamed module of loader 'app')
+clj꞉seminarski-rad.database꞉> 
+"bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"
+clj꞉seminarski-rad.database꞉> 
+java.lang.String
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/login-user
+clj꞉seminarski-rad.database꞉> 
+true
+clj꞉seminarski-rad.database꞉> 
+false
+clj꞉seminarski-rad.database꞉> 
+true
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/login-user
+clj꞉seminarski-rad.database꞉> 
+[#:app_user{:id 6,
+            :username "stanmil",
+            :password
+            "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"}]
+clj꞉seminarski-rad.database꞉> 
+nil
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/insert-board
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/insert-board
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/get-board-by-size
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/get-board-by-size
 clj꞉seminarski-rad.database꞉> 
 ; Execution error (MySQLSyntaxErrorException) at jdk.internal.reflect.NativeConstructorAccessorImpl/newInstance0 (NativeConstructorAccessorImpl.java:-2).
-; Unknown column 'username' in 'field list'
+; You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHEN SIZE = (3)' at line 1
 clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/insert-user
+#'seminarski-rad.database/get-board-by-size
+clj꞉seminarski-rad.database꞉> 
+; Execution error (MySQLSyntaxErrorException) at jdk.internal.reflect.NativeConstructorAccessorImpl/newInstance0 (NativeConstructorAccessorImpl.java:-2).
+; You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHEN SIZE = (3)' at line 1
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/get-board-by-size
+clj꞉seminarski-rad.database꞉> 
+nil
+clj꞉seminarski-rad.database꞉> 
+true
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/insert-board
 clj꞉seminarski-rad.database꞉> 
 ; Execution error (SQLException) at com.mysql.jdbc.SQLError/createSQLException (SQLError.java:1055).
 ; Column count doesn't match value count at row 1
 clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/insert-user
-clj꞉seminarski-rad.database꞉> 
-; Execution error (MySQLSyntaxErrorException) at jdk.internal.reflect.NativeConstructorAccessorImpl/newInstance0 (NativeConstructorAccessorImpl.java:-2).
-; Unknown column 'username' in 'field list'
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/conn
-clj꞉seminarski-rad.database꞉> 
-; Execution error (MySQLSyntaxErrorException) at jdk.internal.reflect.NativeConstructorAccessorImpl/newInstance0 (NativeConstructorAccessorImpl.java:-2).
-; Unknown column 'username' in 'field list'
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/insert-user
+#'seminarski-rad.database/insert-board
 clj꞉seminarski-rad.database꞉> 
 [#:next.jdbc{:update-count 1}]
+clj꞉seminarski-rad.database꞉> 
+nil
+clj꞉seminarski-rad.database꞉> 
+[#:next.jdbc{:update-count 1}]
+clj꞉seminarski-rad.database꞉> 
+[#:next.jdbc{:update-count 1}]
+clj꞉seminarski-rad.database꞉> 
+nil
+clj꞉seminarski-rad.database꞉> 
+nil
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/login-user
+clj꞉seminarski-rad.database꞉> 
+#:app_user{:id 6,
+           :username "stanmil",
+           :password
+           "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"}
+clj꞉seminarski-rad.database꞉> 
+[#:app_user{:id 6,
+            :username "stanmil",
+            :password
+            "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"}]
+clj꞉seminarski-rad.database꞉> 
+; Execution error (IllegalArgumentException) at seminarski-rad.database/eval8898 (form-init1683786072961385303.clj:100).
+; Key must be integer
+clj꞉seminarski-rad.database꞉> 
+; Execution error (IndexOutOfBoundsException) at seminarski-rad.database/eval8900 (form-init1683786072961385303.clj:100).
+; null
+clj꞉seminarski-rad.database꞉> 
+#:app_user{:id 6,
+           :username "stanmil",
+           :password
+           "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"}
+clj꞉seminarski-rad.database꞉> 
+nil
+clj꞉seminarski-rad.database꞉> 
+nil
+clj꞉seminarski-rad.database꞉> 
+nil
+clj꞉seminarski-rad.database꞉> 
+; Execution error (IllegalArgumentException) at seminarski-rad.database/eval8910 (form-init1683786072961385303.clj:100).
+; Don't know how to create ISeq from: java.lang.Long
+clj꞉seminarski-rad.database꞉> 
+[#:app_user{:id 6,
+            :username "stanmil",
+            :password
+            "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"}]
+clj꞉seminarski-rad.database꞉> 
+#:app_user{:id 6,
+           :username "stanmil",
+           :password
+           "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"}
+clj꞉seminarski-rad.database꞉> 
+nil
+clj꞉seminarski-rad.database꞉> 
+nil
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ArityException) at seminarski-rad.database/eval8920 (form-init1683786072961385303.clj:100).
+; Wrong number of args (0) passed to: clojure.lang.PersistentArrayMap
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/nth-of-dbres
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/nth-of-dbres
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/get-board-by-size
+clj꞉seminarski-rad.database꞉> 
+#:board{:id 4, :size 3}
+clj꞉seminarski-rad.database꞉> 
+; Execution error (IndexOutOfBoundsException) at seminarski-rad.database/eval8927 (form-init1683786072961385303.clj:90).
+; null
+clj꞉seminarski-rad.database꞉> 
+; Execution error (IndexOutOfBoundsException) at seminarski-rad.database/eval8929 (form-init1683786072961385303.clj:90).
+; null
+clj꞉seminarski-rad.database꞉> 
+3
+clj꞉seminarski-rad.database꞉> 
+4
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/find-board-by-size
+clj꞉seminarski-rad.database꞉> 
+; Evaluating file: database.clj
+User exists. Try again.
+User exists. Try again.
+User exists. Try again.
+#'seminarski-rad.database/insert-game-session
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ClassCastException) at seminarski-rad.database/nth-of-dbres (database.clj:102).
+; class java.lang.Long cannot be cast to class clojure.lang.IFn (java.lang.Long is in module java.base of loader 'bootstrap'; clojure.lang.IFn is in unnamed module of loader 'app')
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ClassCastException) at seminarski-rad.database/nth-of-dbres (database.clj:102).
+; class java.lang.Long cannot be cast to class clojure.lang.IFn (java.lang.Long is in module java.base of loader 'bootstrap'; clojure.lang.IFn is in unnamed module of loader 'app')
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ArityException) at seminarski-rad.database/nth-of-dbres (database.clj:102).
+; Wrong number of args (0) passed to: clojure.lang.PersistentVector
+clj꞉seminarski-rad.database꞉> 
+[#:app_user{:id 6,
+            :username "stanmil",
+            :password
+            "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"}]
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/find-user-by-username
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ArityException) at seminarski-rad.database/nth-of-dbres (database.clj:102).
+; Wrong number of args (0) passed to: clojure.lang.PersistentArrayMap
+clj꞉seminarski-rad.database꞉> 
+#:app_user{:id 6,
+           :username "stanmil",
+           :password
+           "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"}
+clj꞉seminarski-rad.database꞉> 
+(6 "stanmil" "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc")
+clj꞉seminarski-rad.database꞉> 
+6
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/insert-game-session
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ArityException) at seminarski-rad.database/nth-of-dbres (database.clj:102).
+; Wrong number of args (0) passed to: clojure.lang.PersistentArrayMap
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/find-user-by-username
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/find-board-by-size
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ArityException) at seminarski-rad.database/nth-of-dbres (database.clj:102).
+; Wrong number of args (0) passed to: clojure.lang.PersistentArrayMap
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ArityException) at seminarski-rad.database/nth-of-dbres (database.clj:102).
+; Wrong number of args (0) passed to: clojure.lang.PersistentArrayMap
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ArityException) at seminarski-rad.database/nth-of-dbres (database.clj:102).
+; Wrong number of args (0) passed to: clojure.lang.PersistentArrayMap
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ArityException) at seminarski-rad.database/nth-of-dbres (database.clj:102).
+; Wrong number of args (0) passed to: clojure.lang.PersistentArrayMap
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/nth-of-dbres
+clj꞉seminarski-rad.database꞉> 
+#:app_user{:id 6,
+           :username "stanmil",
+           :password
+           "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"}
+clj꞉seminarski-rad.database꞉> 
+(6 "stanmil" "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc")
+clj꞉seminarski-rad.database꞉> 
+6
+clj꞉seminarski-rad.database꞉> 
+#:board{:id 4, :size 3}
+clj꞉seminarski-rad.database꞉> 
+(4 3)
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/find-user-by-username
+clj꞉seminarski-rad.database꞉> 
+#:app_user{:id 6,
+           :username "stanmil",
+           :password
+           "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"}
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ArityException) at seminarski-rad.database/nth-of-dbres (form-init1683786072961385303.clj:106).
+; Wrong number of args (0) passed to: clojure.lang.PersistentArrayMap
+clj꞉seminarski-rad.database꞉> 
+3
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ArityException) at seminarski-rad.database/nth-of-dbres (form-init1683786072961385303.clj:106).
+; Wrong number of args (0) passed to: clojure.lang.PersistentArrayMap
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ArityException) at seminarski-rad.database/eval9032 (form-init1683786072961385303.clj:108).
+; Wrong number of args (1) passed to: seminarski-rad.database/nth-of-dbres
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/nth-of-dbres
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ArityException) at seminarski-rad.database/nth-of-dbres (form-init1683786072961385303.clj:106).
+; Wrong number of args (0) passed to: clojure.lang.PersistentArrayMap
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ArityException) at seminarski-rad.database/nth-of-dbres (form-init1683786072961385303.clj:106).
+; Wrong number of args (0) passed to: clojure.lang.PersistentArrayMap
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/nth-of-dbres
+clj꞉seminarski-rad.database꞉> 
+#:board{:id 4, :size 3}
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ArityException) at seminarski-rad.database/eval9042 (form-init1683786072961385303.clj:108).
+; Wrong number of args (2) passed to: seminarski-rad.database/nth-of-dbres
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/nth-of-dbres
+clj꞉seminarski-rad.database꞉> 
+#:board{:id 4, :size 3}
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/nth-of-dbres
+clj꞉seminarski-rad.database꞉> 
+(4 3)
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/nth-of-dbres
+clj꞉seminarski-rad.database꞉> 
+4
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/nth-of-dbres
+clj꞉seminarski-rad.database꞉> 
+4
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/insert-game-session
+clj꞉seminarski-rad.database꞉> 
+[#:next.jdbc{:update-count 1}]
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/find-all-game-sessions
+clj꞉seminarski-rad.database꞉> 
+; Syntax error compiling at (src/seminarski_rad/database.clj:136:25).
+; Unable to resolve symbol: get-con in this context
+clj꞉seminarski-rad.database꞉> 
+[#:game_session{:id 1, :app_user_id 6, :board_id 4, :won "H", :human_score 3, :computer_score 0, :human_color "R"}]
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/find-all-game-sessions-with-board-size
+clj꞉seminarski-rad.database꞉> 
+; Execution error (MySQLSyntaxErrorException) at jdk.internal.reflect.NativeConstructorAccessorImpl/newInstance0 (NativeConstructorAccessorImpl.java:-2).
+; Unknown column 'board' in 'where clause'
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/find-all-game-sessions-with-board-size
+clj꞉seminarski-rad.database꞉> 
+[{:game_session/app_user_id 6,
+  :game_session/board_id 4,
+  :game_session/human_color "R",
+  :game_session/id 1,
+  :board/id 4,
+  :board/size 3,
+  :game_session/won "H",
+  :game_session/computer_score 0,
+  :game_session/human_score 3}]
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/find-all-game-sessions-with-board-size
+clj꞉seminarski-rad.database꞉> 
+; Execution error (MySQLSyntaxErrorException) at jdk.internal.reflect.NativeConstructorAccessorImpl/newInstance0 (NativeConstructorAccessorImpl.java:-2).
+; Unknown column 's.user_id' in 'on clause'
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/find-all-game-sessions-with-board-size
+clj꞉seminarski-rad.database꞉> 
+[{:app_user/username "stanmil",
+  :game_session/app_user_id 6,
+  :game_session/board_id 4,
+  :game_session/human_color "R",
+  :game_session/id 1,
+  :app_user/id 6,
+  :board/id 4,
+  :app_user/password
+  "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc",
+  :board/size 3,
+  :game_session/won "H",
+  :game_session/computer_score 0,
+  :game_session/human_score 3}]
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/find-all-game-sessions-with-board-size
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/find-all-game-sessions-with-board-size
+clj꞉seminarski-rad.database꞉> 
+; Execution error (SQLException) at com.mysql.jdbc.SQLError/createSQLException (SQLError.java:1055).
+; Operand should contain 1 column(s)
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/find-all-game-sessions-with-board-size
+clj꞉seminarski-rad.database꞉> 
+; Execution error (SQLException) at com.mysql.jdbc.SQLError/createSQLException (SQLError.java:1055).
+; Operand should contain 1 column(s)
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/find-all-game-sessions-with-board-size
+clj꞉seminarski-rad.database꞉> 
+[{:game_session/won "H",
+  :game_session/human_score 3,
+  :game_session/computer_score 0,
+  :game_session/human_color "R",
+  :app_user/username "stanmil",
+  :board/size 3}]
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/find-all-game-sessions-for-user
+clj꞉seminarski-rad.database꞉> 
+; Execution error (MySQLSyntaxErrorException) at jdk.internal.reflect.NativeConstructorAccessorImpl/newInstance0 (NativeConstructorAccessorImpl.java:-2).
+; Unknown column 's.username' in 'field list'
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/find-all-game-sessions-for-user
+clj꞉seminarski-rad.database꞉> 
+[{:game_session/won "H",
+  :game_session/human_score 3,
+  :game_session/computer_score 0,
+  :game_session/human_color "R",
+  :app_user/username "stanmil",
+  :board/size 3}]
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/find-all-game-sessions-for-user
+clj꞉seminarski-rad.database꞉> 
+[{:game_session/computer_score 0, :game_session/human_color "R", :app_user/username "stanmil", :board/size 3}]
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/find-all-game-sessions-human-won
+clj꞉seminarski-rad.database꞉> 
+[{:app_user/username "stanmil",
+  :game_session/app_user_id 6,
+  :game_session/board_id 4,
+  :game_session/human_color "R",
+  :game_session/id 1,
+  :app_user/id 6,
+  :board/id 4,
+  :app_user/password
+  "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc",
+  :board/size 3,
+  :game_session/won "H",
+  :game_session/computer_score 0,
+  :game_session/human_score 3}]
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/find-all-game-sessions-stated-won
+clj꞉seminarski-rad.database꞉> 
+; Execution error (SQLException) at com.mysql.jdbc.SQLError/createSQLException (SQLError.java:1055).
+; Parameter index out of range (1 > number of parameters, which is 0).
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/find-all-game-sessions-stated-won
+clj꞉seminarski-rad.database꞉> 
+; Execution error (SQLException) at com.mysql.jdbc.SQLError/createSQLException (SQLError.java:1055).
+; Parameter index out of range (1 > number of parameters, which is 0).
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/find-all-game-sessions-stated-won
+clj꞉seminarski-rad.database꞉> 
+[]
+clj꞉seminarski-rad.database꞉> 
+[]
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/find-all-game-sessions-stated-won
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ClassCastException) at next.jdbc/execute! (jdbc.clj:247).
+; class java.lang.String cannot be cast to class clojure.lang.Associative (java.lang.String is in module java.base of loader 'bootstrap'; clojure.lang.Associative is in unnamed module of loader 'app')
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/find-all-game-sessions-stated-won
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ClassCastException) at next.jdbc/execute! (jdbc.clj:247).
+; class java.lang.String cannot be cast to class clojure.lang.Associative (java.lang.String is in module java.base of loader 'bootstrap'; clojure.lang.Associative is in unnamed module of loader 'app')
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ClassCastException) at next.jdbc/execute! (jdbc.clj:247).
+; class clojure.lang.Symbol cannot be cast to class clojure.lang.Associative (clojure.lang.Symbol and clojure.lang.Associative are in unnamed module of loader 'app')
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ClassCastException) at (REPL:1).
+; null
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/find-all-game-sessions-stated-won
+clj꞉seminarski-rad.database꞉> 
+[{:game_session/computer_score 0,
+  :game_session/human_score 3,
+  :game_session/human_color "R",
+  :app_user/username "stanmil",
+  :board/size 3}]
+clj꞉seminarski-rad.database꞉> 
+[]
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/find-all-game-sessions-stated-won
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ClassCastException) at seminarski-rad.database/find-all-game-sessions-stated-won (form-init1683786072961385303.clj:170).
+; class java.lang.String cannot be cast to class clojure.lang.IFn (java.lang.String is in module java.base of loader 'bootstrap'; clojure.lang.IFn is in unnamed module of loader 'app')
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/find-all-game-sessions-stated-won
+clj꞉seminarski-rad.database꞉> 
+; Execution error (IllegalArgumentException) at seminarski-rad.database/find-all-game-sessions-stated-won (form-init1683786072961385303.clj:170).
+; Key must be integer
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/find-all-game-sessions-stated-won
+clj꞉seminarski-rad.database꞉> 
+; Execution error (IllegalArgumentException) at seminarski-rad.database/find-all-game-sessions-stated-won (form-init1683786072961385303.clj:170).
+; contains? not supported on type: java.lang.String
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/find-all-game-sessions-stated-won
+clj꞉seminarski-rad.database꞉> 
+nil
+clj꞉seminarski-rad.database꞉> 
+false
+clj꞉seminarski-rad.database꞉> 
+; Execution error (IllegalArgumentException) at seminarski-rad.database/eval9137 (form-init1683786072961385303.clj:183).
+; contains? not supported on type: java.lang.String
+clj꞉seminarski-rad.database꞉> 
+; Execution error (IllegalArgumentException) at seminarski-rad.database/eval9139 (form-init1683786072961385303.clj:183).
+; Key must be integer
+clj꞉seminarski-rad.database꞉> 
+; Execution error (ClassCastException) at seminarski-rad.database/eval9141 (form-init1683786072961385303.clj:183).
+; class java.lang.String cannot be cast to class clojure.lang.IFn (java.lang.String is in module java.base of loader 'bootstrap'; clojure.lang.IFn is in unnamed module of loader 'app')
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/find-all-game-sessions-stated-won
+clj꞉seminarski-rad.database꞉> 
+[{:game_session/computer_score 0,
+  :game_session/human_score 3,
+  :game_session/human_color "R",
+  :app_user/username "stanmil",
+  :board/size 3}]
+clj꞉seminarski-rad.database꞉> 
+[{:game_session/computer_score 0,
+  :game_session/human_score 3,
+  :game_session/human_color "R",
+  :app_user/username "stanmil",
+  :board/size 3}]
+clj꞉seminarski-rad.database꞉> 
+nil
+clj꞉seminarski-rad.database꞉> 
+; Syntax error compiling at (src/seminarski_rad/database.clj:1:7946).
+; Unable to resolve symbol: c in this context
+clj꞉seminarski-rad.database꞉> 
+[]
+clj꞉seminarski-rad.database꞉> 
+[]
+clj꞉seminarski-rad.database꞉> 
+nil
+clj꞉seminarski-rad.database꞉> 
+[{:game_session/computer_score 0,
+  :game_session/human_score 3,
+  :game_session/human_color "R",
+  :app_user/username "stanmil",
+  :board/size 3}]
 clj꞉seminarski-rad.database꞉> 

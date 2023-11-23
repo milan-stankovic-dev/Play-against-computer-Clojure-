@@ -1,5 +1,6 @@
 (ns seminarski-rad.database
-  (:require [next.jdbc :as jdbc]))
+  (:require [next.jdbc :as jdbc]
+            [buddy.hashers :as hashing]))
 
 (def ^:private db
   {:dbtype "mysql"
@@ -11,10 +12,12 @@
 
 (def ^:private datasource (jdbc/get-datasource db))
 
-(defn get-connection []
+(defn get-connection 
+  []
   (jdbc/get-connection datasource))
 
-(defn- initiate-table-user []
+(defn- initiate-table-user 
+  []
   (jdbc/execute!
    datasource
    ["CREATE TABLE IF NOT EXISTS app_user 
@@ -22,7 +25,8 @@
      username VARCHAR(255) NOT NULL,
      password VARCHAR(255) NOT NULL)"]))
 
-(defn- insert-user [conn username password]
+(defn- insert-user 
+  [conn username password]
   (jdbc/execute!
    conn
    ["INSERT INTO app_user (username, password)
@@ -31,3 +35,152 @@
 ;; (def ^:private conn (get-connection))
 ;; (initiate-table-user)
 ;; (insert-user conn "stanmil" "123abc")
+
+(defn- hash-a-password
+  [password]
+  (hashing/derive password))
+(hash-a-password "123abc")
+
+(defn hashed-password-correct?
+  [password hashed-pass]
+  (hashing/check password hashed-pass))
+
+;; (hashed-password-correct? "123abc" "bcrypt+sha512$198838d9232d6e2384a5138f9c111775$12$cd51d9dec79b8442759fc6d05454c5572e0732b916b9f011")
+
+(defn- find-user-by-username
+  [conn username]
+  (let [db-result (jdbc/execute! 
+                   conn
+                   ["SELECT * FROM app_user
+                     WHERE USERNAME = (?)" username])]
+    (when db-result
+      (first db-result))))
+
+(defn- register-user
+  [conn username password]
+  (if-not (= [] (find-user-by-username conn username)) 
+    (do (println "User exists. Try again.")
+        false)
+    (do
+      (jdbc/execute!
+       conn ["INSERT INTO app_user (username, password) VALUES (?, ?)"
+             username (hash-a-password password)])
+      (.close conn)
+      true)))
+
+(register-user (get-connection) "stanmil" "123abc")
+(register-user (get-connection) "ppetar" "abc123")
+(register-user (get-connection) "saraa" "a1b2c3")
+
+(find-user-by-username (get-connection)"stanmil")
+
+(defn login-user 
+  [conn username password]
+  (let [db-user (find-user-by-username conn username)]
+     (when (hashed-password-correct? password 
+                                     (nth ( vals (first db-user)) 2))
+       (first db-user))))
+
+(defn- find-board-by-size
+  [conn size]
+  (when (number? size)
+    (let [db-result (jdbc/execute!
+                     conn
+                     ["SELECT * FROM board WHERE size = (?)" size])]
+      (when db-result
+        (first db-result)))))
+
+(find-board-by-size (get-connection) 3)
+(nth (vals (find-board-by-size (get-connection )3 )) 0)
+(defn- insert-board
+  [conn size]
+  (when (and (number? size)
+             (not (find-board-by-size conn size)))
+        (jdbc/execute!
+         conn
+         ["INSERT INTO board (size) VALUES (?)" size])))
+
+(defn- nth-of-dbres
+  [nth-place db-res]
+  (when db-res
+    (nth (vals db-res) nth-place)))
+
+(nth-of-dbres 0 (find-board-by-size (get-connection) 3))
+(insert-board (get-connection) 3)
+(insert-board (get-connection) 5)
+(insert-board (get-connection) 7)
+
+(defn- insert-game-session
+  [conn board-size username
+   who-won human-score
+   computer-score human-color]
+  (let [app-user-id (nth-of-dbres 
+                     0 (find-user-by-username conn username))
+        board-id (nth-of-dbres
+                  0 (find-board-by-size conn board-size))]
+    (jdbc/execute!
+     conn
+     ["INSERT INTO game_session (app_user_id,
+       board_id, won, human_score, computer_score, human_color)
+       VALUES (?, ?, ?, ?, ?, ?)"
+      app-user-id board-id who-won
+      human-score computer-score
+      human-color])))
+
+(defn find-all-game-sessions
+  [conn]
+  (jdbc/execute!
+   conn
+   ["SELECT * FROM game_session"]))
+
+;; (find-all-game-sessions (get-connection))
+
+(defn find-all-game-sessions-with-board-size
+  [conn board-size]
+  (jdbc/execute!
+   conn
+   ["SELECT s.won, s.human_score, s.computer_score,
+     s.human_color, u.username, b.size
+     FROM game_session s JOIN board b
+     ON (s.board_id = b.id) JOIN app_user u
+     ON (s.app_user_id = u.id)
+     WHERE b.size = (?)" board-size]))
+
+(defn find-all-game-sessions-for-user
+  [conn username]
+  (let [u-id (nth-of-dbres 0 
+                           (find-user-by-username conn username))]
+    (when u-id
+      (jdbc/execute!
+       conn
+       ["SELECT
+         s.computer_score, s.human_color,
+         u.username, b.size
+         FROM game_session s
+         JOIN board b
+         ON (s.board_id = b.id)
+         JOIN app_user u
+         ON (s.app_user_id = u.id)
+         WHERE (u.id = (?))" u-id]))))
+
+(defn find-all-game-sessions-stated-won
+  "Finds relevant information for all game sessions for stated
+   user type (human [H] or computer [C])"
+  [conn stated-player-type]
+  (when (some #(= % stated-player-type) ["H" "h" "C" "c"])
+    (jdbc/execute!
+     conn
+     ["SELECT 
+     s.computer_score, s.human_score,
+     s.human_color, u.username, b.size
+     FROM game_session s
+     JOIN board b
+     ON (s.board_id = b.id)
+     JOIN app_user u
+     ON (s.app_user_id = u.id)
+     WHERE (s.won = ?)" stated-player-type])))
+
+;; (find-all-game-sessions-with-board-size (get-connection)3)
+;; (find-all-game-sessions-for-user (get-connection) "stanmil")
+;; (find-all-game-sessions-stated-won (get-connection) "H")
+;; (insert-game-session (get-connection) 3 "stanmil" "H" 3 0 "R")
