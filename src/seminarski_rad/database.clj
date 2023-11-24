@@ -25,7 +25,7 @@
      username VARCHAR(255) NOT NULL,
      password VARCHAR(255) NOT NULL)"]))
 
-(defn- insert-user 
+(defn- insert-user
   [conn username password]
   (jdbc/execute!
    conn
@@ -44,8 +44,6 @@
 (defn hashed-password-correct?
   [password hashed-pass]
   (hashing/check password hashed-pass))
-
-;; (hashed-password-correct? "123abc" "bcrypt+sha512$198838d9232d6e2384a5138f9c111775$12$cd51d9dec79b8442759fc6d05454c5572e0732b916b9f011")
 
 (defn- find-user-by-username
   [conn username]
@@ -90,8 +88,6 @@
       (when db-result
         (first db-result)))))
 
-(find-board-by-size (get-connection) 3)
-(nth (vals (find-board-by-size (get-connection )3 )) 0)
 (defn- insert-board
   [conn size]
   (when (and (number? size)
