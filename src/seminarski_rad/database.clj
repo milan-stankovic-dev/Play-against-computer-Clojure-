@@ -70,14 +70,14 @@
 (register-user (get-connection) "ppetar" "abc123")
 (register-user (get-connection) "saraa" "a1b2c3")
 
-(find-user-by-username (get-connection)"stanmil")
-
 (defn login-user 
   [conn username password]
   (let [db-user (find-user-by-username conn username)]
      (when (hashed-password-correct? password 
-                                     (nth ( vals (first db-user)) 2))
-       (first db-user))))
+                                     (nth ( vals db-user) 2))
+       db-user)))
+
+(login-user (get-connection) "stanmil" "123abc")
 
 (defn- find-board-by-size
   [conn size]

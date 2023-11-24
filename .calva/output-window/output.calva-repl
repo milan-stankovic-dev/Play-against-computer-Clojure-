@@ -1,0 +1,532 @@
+
+  *********************************************************************
+            
+      Welcome to "Play against computer- the app"! This interactive
+      game will have you competing against your family and friends in 
+      no time. But first, you need to beat the computer in a one-to-one
+      matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+nil
+clj꞉seminarski-rad.gameplay꞉> 
+; Evaluating file: gameplay.clj
+
+   A   B   C   D   E
+
+1  B ─ B ─ B ─ B ─ B
+   | \ | / | \ | / |
+2  B ─ B ─ B ─ B ─ B
+   | / | \ | / | \ |
+3  B ─ B ─   ─ R ─ R
+   | \ | / | \ | / |
+4  R ─ R ─ R ─ R ─ R
+   | / | \ | / | \ |
+5  R ─ R ─ R ─ R ─ R
+
+  *********************************************************************
+            
+      Welcome to "Play against computer- the app"! This interactive
+      game will have you competing against your family and friends in 
+      no time. But first, you need to beat the computer in a one-to-one
+      matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+
+**********************************************************************
+
+Welcome to alquerque, the board game. Here you play against the computer.
+    Upon starting the game you are prompted to choose player color. Simply input
+    [B] for blue or [R] for red. To make a turn input the name of the first field
+    (Ex. 1A), followed by a '-' symbol and then the field you want your piece to go
+    (Ex. 1C). You may also include the word "EAT" in the middle (Ex. 1A-EAT-1C),
+    if you are skipping a field, but this is not necessary. If your input is invalid,
+    you will get another chance at making a move! The player whose onlypieces remain
+    wins! Good luck!
+
+    
+    Here's your board:
+
+
+   A   B   C   D   E
+
+1  B ─ B ─ B ─ B ─ B
+   | \ | / | \ | / |
+2  B ─ B ─ B ─ B ─ B
+   | / | \ | / | \ |
+3  B ─ B ─   ─ R ─ R
+   | \ | / | \ | / |
+4  R ─ R ─ R ─ R ─ R
+   | / | \ | / | \ |
+5  R ─ R ─ R ─ R ─ R
+
+Human Score:  0
+Computer Score:  0
+
+
+#'seminarski-rad.gameplay/play-game
+clj꞉seminarski-rad.gameplay꞉> 
+#'seminarski-rad.gameplay/prompt-info
+clj꞉seminarski-rad.gameplay꞉> 
+User exists. Try again.
+User exists. Try again.
+User exists. Try again.
+nil
+clj꞉seminarski-rad.gameplay꞉> 
+#'seminarski-rad.gameplay/prompt-login
+clj꞉seminarski-rad.gameplay꞉> 
+Please enter yourusername:
+Please enter yourpassword:
+Please enter yourusername:
+Please enter yourpassword:
+Please enter yourusername:
+Please enter yourpassword:
+; Execution error (IndexOutOfBoundsException) at seminarski-rad.database/login-user (database.clj:79).
+; null
+clj꞉seminarski-rad.gameplay꞉> 
+#'seminarski-rad.gameplay/prompt-info
+clj꞉seminarski-rad.gameplay꞉> 
+#'seminarski-rad.gameplay/prompt-login
+clj꞉seminarski-rad.gameplay꞉> 
+Please enter your username:
+Please enter your password:
+Please enter your username:
+Please enter your password:
+Please enter your username:
+Please enter your password:
+Please enter your username:
+Sending interrupt.; Evaluation was interrupted
+clj꞉seminarski-rad.gameplay꞉> 
+; Execution error (InterruptedException) at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject/await (AbstractQueuedSynchronizer.java:1638).
+; null
+clj꞉seminarski-rad.gameplay꞉> 
+#'seminarski-rad.gameplay/prompt-login
+clj꞉seminarski-rad.gameplay꞉> 
+Please enter your username:
+Please enter your password:
+Wrong credentials. Try again.
+Please enter your username:
+Please enter your password:
+Wrong credentials. Try again.
+Please enter your username:
+Please enter your password:
+Wrong credentials. Try again.
+Please enter your username:
+Please enter your password:
+Wrong credentials. Try again.
+Please enter your username:
+Please enter your password:
+Wrong credentials. Try again.
+Please enter your username:
+Please enter your password:
+Wrong credentials. Try again.
+Please enter your username:
+Please enter your password:
+Wrong credentials. Try again.
+Please enter your username:
+Please enter your password:
+Wrong credentials. Try again.
+Please enter your username:
+Please enter your password:
+Wrong credentials. Try again.
+Please enter your username:
+Please enter your password:
+Wrong credentials. Try again.
+Please enter your username:
+Please enter your password:
+Wrong credentials. Try again.
+Please enter your username:
+Please enter your password:
+Wrong credentials. Try again.
+Please enter your username:
+Please enter your password:
+Wrong credentials. Try again.
+Please enter your username:
+Please enter your password:
+Wrong credentials. Try again.
+Please enter your username:
+Please enter your password:
+Wrong credentials. Try again.
+Please enter your username:
+Please enter your password:
+Wrong credentials. Try again.
+Please enter your username:
+Please enter your password:
+Wrong credentials. Try again.
+Please enter your username:
+Please enter your password:
+Wrong credentials. Try again.
+Please enter your username:
+Sending interrupt.; Evaluation was interrupted
+clj꞉seminarski-rad.gameplay꞉> 
+; Execution error (InterruptedException) at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject/await (AbstractQueuedSynchronizer.java:1638).
+; null
+clj꞉seminarski-rad.gameplay꞉> 
+#'seminarski-rad.gameplay/prompt-login
+clj꞉seminarski-rad.gameplay꞉> 
+Please enter your username:
+Please enter your password:
+
+Wrong credentials. Try again.
+
+Please enter your username:
+Please enter your password:
+
+Wrong credentials. Try again.
+
+Please enter your username:
+Please enter your password:
+
+Wrong credentials. Try again.
+
+Please enter your username:
+Please enter your password:
+
+Wrong credentials. Try again.
+
+Please enter your username:
+Please enter your password:
+
+Wrong credentials. Try again.
+
+Please enter your username:
+Please enter your password:
+
+Wrong credentials. Try again.
+
+Please enter your username:
+Sending interrupt.; Evaluation was interrupted
+clj꞉seminarski-rad.gameplay꞉> 
+; Execution error (InterruptedException) at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject/await (AbstractQueuedSynchronizer.java:1638).
+; null
+clj꞉seminarski-rad.gameplay꞉> 
+#'seminarski-rad.database/login-user
+clj꞉seminarski-rad.database꞉> 
+; Execution error (IndexOutOfBoundsException) at seminarski-rad.database/login-user (form-init14305743825045357902.clj:79).
+; null
+clj꞉seminarski-rad.database꞉> 
+#:app_user{:id 6,
+           :username "stanmil",
+           :password
+           "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"}
+clj꞉seminarski-rad.database꞉> 
+(6 "stanmil" "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc")
+clj꞉seminarski-rad.database꞉> 
+"bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/login-user
+clj꞉seminarski-rad.database꞉> 
+[:app_user/id 6]
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.gameplay/prompt-login
+clj꞉seminarski-rad.gameplay꞉> 
+Please enter your username:
+Please enter your password:
+
+Wrong credentials. Try again.
+
+Please enter your username:
+Please enter your password:
+
+Wrong credentials. Try again.
+
+Please enter your username:
+Please enter your password:
+
+Wrong credentials. Try again.
+
+Please enter your username:
+Please enter your password:
+
+Wrong credentials. Try again.
+
+Please enter your username:
+Please enter your password:
+
+Wrong credentials. Try again.
+
+Please enter your username:
+Please enter your password:
+
+Wrong credentials. Try again.
+
+Please enter your username:
+Please enter your password:
+
+Wrong credentials. Try again.
+
+Please enter your username:
+Please enter your password:
+
+Wrong credentials. Try again.
+
+Please enter your username:
+Please enter your password:
+nil
+clj꞉seminarski-rad.gameplay꞉> 
+#'seminarski-rad.gameplay/prompt-info
+clj꞉seminarski-rad.gameplay꞉> 
+#'seminarski-rad.gameplay/prompt-login
+clj꞉seminarski-rad.gameplay꞉> 
+Please enter your username:
+Please enter your password:
+
+Wrong credentials. Try again.
+
+Please enter your username:
+Please enter your password:
+
+Wrong credentials. Try again.
+
+Please enter your username:
+Please enter your password:
+
+Wrong credentials. Try again.
+
+Please enter your username:
+Please enter your password:
+
+Wrong credentials. Try again.
+
+Please enter your username:
+Please enter your password:
+
+Wrong credentials. Try again.
+
+Please enter your username:
+Sending interrupt.; Evaluation was interrupted
+clj꞉seminarski-rad.gameplay꞉> 
+; Execution error (InterruptedException) at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject/await (AbstractQueuedSynchronizer.java:1638).
+; null
+clj꞉seminarski-rad.gameplay꞉> 
+#'seminarski-rad.gameplay/prompt-info
+clj꞉seminarski-rad.gameplay꞉> 
+Please enter your username:
+Please enter your password:
+
+Wrong credentials. Try again.
+
+Please enter your username:
+Please enter your password:
+
+Wrong credentials. Try again.
+
+Please enter your username:
+Please enter your password:
+
+Wrong credentials. Try again.
+
+Please enter your username:
+Please enter your password:
+
+Wrong credentials. Try again.
+
+Please enter your username:
+Please enter your password:
+
+Wrong credentials. Try again.
+
+Please enter your username:
+Please enter your password:
+
+Wrong credentials. Try again.
+
+Please enter your username:
+Sending interrupt.; Evaluation was interrupted
+clj꞉seminarski-rad.gameplay꞉> 
+; Execution error (InterruptedException) at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject/await (AbstractQueuedSynchronizer.java:1638).
+; null
+clj꞉seminarski-rad.gameplay꞉> 
+#'seminarski-rad.gameplay/prompt-info
+clj꞉seminarski-rad.gameplay꞉> 
+#'seminarski-rad.gameplay/prompt-login
+clj꞉seminarski-rad.gameplay꞉> 
+Please enter your username:
+Please enter a valid username
+Please enter your username:
+Please enter a valid username
+Please enter your username:
+Please enter a valid username
+Please enter your username:
+Please enter a valid username
+Please enter your username:
+Please enter your password:
+Please enter a valid password
+Please enter your password:
+Please enter a valid password
+Please enter your password:
+nil
+clj꞉seminarski-rad.gameplay꞉> 
+#'seminarski-rad.gameplay/prompt-login
+clj꞉seminarski-rad.gameplay꞉> 
+Please enter your username:
+Please enter your password:
+Please enter a valid password
+Please enter your password:
+Please enter a valid password
+Please enter your password:
+Please enter a valid password
+Please enter your password:
+Please enter a valid password
+Please enter your password:
+Sending interrupt.; Evaluation was interrupted
+clj꞉seminarski-rad.gameplay꞉> 
+; Execution error (InterruptedException) at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject/await (AbstractQueuedSynchronizer.java:1638).
+; null
+Please enter your username:
+clj꞉seminarski-rad.gameplay꞉> 
+Sending interrupt.; Evaluation was interrupted
+clj꞉seminarski-rad.gameplay꞉> 
+; Execution error (InterruptedException) at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject/await (AbstractQueuedSynchronizer.java:1638).
+; null
+#'seminarski-rad.gameplay/prompt-info
+#'seminarski-rad.gameplay/prompt-info
+clj꞉seminarski-rad.gameplay꞉> 
+clj꞉seminarski-rad.gameplay꞉> 
+#'seminarski-rad.gameplay/prompt-info
+clj꞉seminarski-rad.gameplay꞉> 
+#'seminarski-rad.gameplay/prompt-login
+clj꞉seminarski-rad.gameplay꞉> 
+clj꞉seminarski-rad.gameplay꞉> 
+#'seminarski-rad.gameplay/prompt-info
+clj꞉seminarski-rad.gameplay꞉> 
+#'seminarski-rad.gameplay/prompt-login
+clj꞉seminarski-rad.gameplay꞉> 
+Please enter your USERNAME:
+USERNAME invalid.
+Please enter your USERNAME:
+Please enter your PASSWORD:
+PASSWORD invalid.
+Please enter your PASSWORD:
+[:app_user/id 6]
+clj꞉seminarski-rad.gameplay꞉> 
+#'seminarski-rad.database/login-user
+clj꞉seminarski-rad.database꞉> 
+Please enter your USERNAME:
+USERNAME invalid.
+Please enter your USERNAME:
+Please enter your PASSWORD:
+
+Wrong credentials. Try again.
+
+Please enter your USERNAME:
+Please enter your PASSWORD:
+[:app_user/id 6]
+clj꞉seminarski-rad.gameplay꞉> 
+#'seminarski-rad.database/find-user-by-username
+clj꞉seminarski-rad.database꞉> 
+#:app_user{:id 6,
+           :username "stanmil",
+           :password
+           "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"}
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.database/login-user
+clj꞉seminarski-rad.database꞉> 
+#:app_user{:id 6,
+           :username "stanmil",
+           :password
+           "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"}
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.gameplay/prompt-login
+clj꞉seminarski-rad.gameplay꞉> 
+Please enter your USERNAME:
+Please enter your PASSWORD:
+#:app_user{:id 6,
+           :username "stanmil",
+           :password
+           "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"}
+clj꞉seminarski-rad.gameplay꞉> 
+; Syntax error compiling at (src/seminarski_rad/gameplay.clj:45:23).
+; No such namespace: str
+clj꞉seminarski-rad.gameplay꞉> 
+nil
+clj꞉seminarski-rad.gameplay꞉> 
+#'seminarski-rad.gameplay/prompt-info
+clj꞉seminarski-rad.gameplay꞉> 
+#'seminarski-rad.gameplay/prompt-login
+clj꞉seminarski-rad.gameplay꞉> 
+Please enter your username:
+Username invalid.
+Please enter your username:
+Username invalid.
+Please enter your username:
+Username invalid.
+Please enter your username:
+Username invalid.
+Please enter your username:
+Please enter your password:
+
+Wrong credentials. Try again.
+
+Please enter your username:
+Please enter your password:
+#:app_user{:id 6,
+           :username "stanmil",
+           :password
+           "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"}
+clj꞉seminarski-rad.gameplay꞉> 
+#'seminarski-rad.gameplay/write-main-menu
+clj꞉seminarski-rad.gameplay꞉> 
+
+  *********************************************************************
+            
+      Welcomestanmilto "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+nil
+clj꞉seminarski-rad.gameplay꞉> 
+#'seminarski-rad.gameplay/write-main-menu
+clj꞉seminarski-rad.gameplay꞉> 
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+nil
+clj꞉seminarski-rad.gameplay꞉> 

@@ -2,7 +2,9 @@
   (:require [seminarski-rad.input-utility :as utility]
             [seminarski-rad.validator :as val]
             [seminarski-rad.board :as board]
-            [seminarski-rad.computer :as computer]))
+            [seminarski-rad.computer :as computer]
+            [seminarski-rad.database :as db]
+            [clojure.string :as str]))
 
 (def board (board/create-board))
 
@@ -34,6 +36,53 @@
 
 (print-the-board board)
 
+(defn prompt-info
+  [what-to-prompt]
+  (println (str "Please enter your " what-to-prompt ":"))
+  (let [info (read-line)]
+    (if (empty? info)
+      (do
+        (println (str (str/capitalize what-to-prompt) " invalid."))
+        (prompt-info what-to-prompt))
+      info)))
+
+(defn prompt-login
+  []
+  (let [username (prompt-info "username")
+        password (prompt-info "password")
+        user-db (db/login-user (db/get-connection)
+                               username password)] 
+      (if-not user-db
+        (do
+          (println "\nWrong credentials. Try again.\n")
+          (prompt-login))
+        user-db)))
+
+(defn write-main-menu
+  [logged-in-user] 
+  (println (str "
+  *********************************************************************
+            
+      Welcome " (nth (vals logged-in-user) 1) " to \"Play against computer- the app\"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************\n")))
+
+(write-main-menu #:app_user{:id 6,
+                            :username "stanmil",
+                            :password
+                            "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"})
 
 (defn write-out-board-convo
   [board]
