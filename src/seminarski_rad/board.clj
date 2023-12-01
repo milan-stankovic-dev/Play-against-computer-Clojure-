@@ -138,7 +138,7 @@ assigned-pieces-board
     (print pattern))
   (println "|"))
 
-(print-slants 9 "| \\ | / ")
+;; (print-slants 9 "| \\ | / ")
 
 (defn- print-row
   [size row-keyword board]
@@ -153,14 +153,14 @@ assigned-pieces-board
       (print (str (get-in board [row-keyword col :piece])) "─ "))
     (println (get-in board [row-keyword last-col-keyword :piece]))))
 
-(apply keyword (utility/numeric-seq->letter-seq (range 1 (inc 5))))
+;; (apply keyword (utility/numeric-seq->letter-seq (range 1 (inc 5))))
 (defn print-the-board
   [board size]
   (println)
  (print "   ")
-  (doseq [num (utility/numeric-seq->letter-seq 
+  (doseq [row-num (utility/numeric-seq->letter-seq 
                (range 1 (inc size)))]
-    (print (str num "   ")))
+    (print (str row-num "   ")))
   (println)
   (println)
   (let [numeric-seq (range 1 size)
@@ -174,5 +174,5 @@ assigned-pieces-board
         (print-slants size "| / | \\ ")))
     (print-row size last-row-keyword board)))
 
-(print-the-board (create-board 9) 9)
-(create-board 9)
+;; (print-the-board (create-board 9) 9)
+;; (create-board 9)

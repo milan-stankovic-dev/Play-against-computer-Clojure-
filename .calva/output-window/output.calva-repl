@@ -1,263 +1,31 @@
+nil
+clj꞉seminarski-rad.core꞉> 
+; Evaluating file: gameplay.clj
 
-   A   B   C   D   E   F   G   H   I   
+   A   B   C   D   E   
 
-1  B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B
-   | \ | / | \ | / | \ | / | \ | / |
-2  B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B
-   | / | \ | / | \ | / | \ | / | \ |
-3  B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B
-   | \ | / | \ | / | \ | / | \ | / |
-4  B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B
-   | / | \ | / | \ | / | \ | / | \ |
-5  B ─ B ─ B ─ B ─   ─ R ─ R ─ R ─ R
-   | \ | / | \ | / | \ | / | \ | / |
-6  R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R
-   | / | \ | / | \ | / | \ | / | \ |
-7  R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R
-   | \ | / | \ | / | \ | / | \ | / |
-8  R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R
-   | / | \ | / | \ | / | \ | / | \ |
-9  R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R
-nil
-clj꞉seminarski-rad.board꞉> 
-{:4
- {:I {:piece "B", :moves ([:3 :I] [:4 :H] [:4 :I] [:5 :I]), :eats ([:2 :I] [:4 :G] [:6 :I])},
-  :A {:piece "B", :moves ([:3 :A] [:4 :A] [:4 :B] [:5 :A]), :eats ([:2 :A] [:4 :C] [:6 :A])},
-  :F
-  {:piece "B",
-   :moves ([:3 :E] [:3 :F] [:3 :G] [:4 :E] [:4 :F] [:4 :G] [:5 :E] [:5 :F] [:5 :G]),
-   :eats ([:2 :D] [:2 :F] [:2 :H] [:4 :D] [:4 :H] [:6 :D] [:6 :F] [:6 :H])},
-  :D
-  {:piece "B",
-   :moves ([:3 :C] [:3 :D] [:3 :E] [:4 :C] [:4 :D] [:4 :E] [:5 :C] [:5 :D] [:5 :E]),
-   :eats ([:2 :B] [:2 :D] [:2 :F] [:4 :B] [:4 :F] [:6 :B] [:6 :D] [:6 :F])},
-  :B
-  {:piece "B",
-   :moves ([:3 :A] [:3 :B] [:3 :C] [:4 :A] [:4 :B] [:4 :C] [:5 :A] [:5 :B] [:5 :C]),
-   :eats ([:2 :B] [:2 :D] [:4 :D] [:6 :B] [:6 :D])},
-  :C {:piece "B", :moves ([:3 :C] [:4 :B] [:4 :C] [:4 :D] [:5 :C]), :eats ([:2 :C] [:4 :A] [:4 :E] [:6 :C])},
-  :E {:piece "B", :moves ([:3 :E] [:4 :D] [:4 :E] [:4 :F] [:5 :E]), :eats ([:2 :E] [:4 :C] [:4 :G] [:6 :E])},
-  :G {:piece "B", :moves ([:3 :G] [:4 :F] [:4 :G] [:4 :H] [:5 :G]), :eats ([:2 :G] [:4 :E] [:4 :I] [:6 :G])},
-  :H
-  {:piece "B",
-   :moves ([:3 :G] [:3 :H] [:3 :I] [:4 :G] [:4 :H] [:4 :I] [:5 :G] [:5 :H] [:5 :I]),
-   :eats ([:2 :F] [:2 :H] [:4 :F] [:6 :F] [:6 :H])}},
- :7
- {:I
-  {:piece "R",
-   :moves ([:6 :H] [:6 :I] [:7 :H] [:7 :I] [:8 :H] [:8 :I]),
-   :eats ([:5 :G] [:5 :I] [:7 :G] [:9 :G] [:9 :I])},
-  :A
-  {:piece "R",
-   :moves ([:6 :A] [:6 :B] [:7 :A] [:7 :B] [:8 :A] [:8 :B]),
-   :eats ([:5 :A] [:5 :C] [:7 :C] [:9 :A] [:9 :C])},
-  :F {:piece "R", :moves ([:6 :F] [:7 :E] [:7 :F] [:7 :G] [:8 :F]), :eats ([:5 :F] [:7 :D] [:7 :H] [:9 :F])},
-  :D {:piece "R", :moves ([:6 :D] [:7 :C] [:7 :D] [:7 :E] [:8 :D]), :eats ([:5 :D] [:7 :B] [:7 :F] [:9 :D])},
-  :B {:piece "R", :moves ([:6 :B] [:7 :A] [:7 :B] [:7 :C] [:8 :B]), :eats ([:5 :B] [:7 :D] [:9 :B])},
-  :C
-  {:piece "R",
-   :moves ([:6 :B] [:6 :C] [:6 :D] [:7 :B] [:7 :C] [:7 :D] [:8 :B] [:8 :C] [:8 :D]),
-   :eats ([:5 :A] [:5 :C] [:5 :E] [:7 :A] [:7 :E] [:9 :A] [:9 :C] [:9 :E])},
-  :E
-  {:piece "R",
-   :moves ([:6 :D] [:6 :E] [:6 :F] [:7 :D] [:7 :E] [:7 :F] [:8 :D] [:8 :E] [:8 :F]),
-   :eats ([:5 :C] [:5 :E] [:5 :G] [:7 :C] [:7 :G] [:9 :C] [:9 :E] [:9 :G])},
-  :G
-  {:piece "R",
-   :moves ([:6 :F] [:6 :G] [:6 :H] [:7 :F] [:7 :G] [:7 :H] [:8 :F] [:8 :G] [:8 :H]),
-   :eats ([:5 :E] [:5 :G] [:5 :I] [:7 :E] [:7 :I] [:9 :E] [:9 :G] [:9 :I])},
-  :H {:piece "R", :moves ([:6 :H] [:7 :G] [:7 :H] [:7 :I] [:8 :H]), :eats ([:5 :H] [:7 :F] [:9 :H])}},
- :1
- {:I {:piece "B", :moves ([:1 :H] [:1 :I] [:2 :H] [:2 :I]), :eats ([:1 :G] [:3 :G] [:3 :I])},
-  :A {:piece "B", :moves ([:1 :A] [:1 :B] [:2 :A] [:2 :B]), :eats ([:1 :C] [:3 :A] [:3 :C])},
-  :F {:piece "B", :moves ([:1 :E] [:1 :F] [:1 :G] [:2 :F]), :eats ([:1 :D] [:1 :H] [:3 :F])},
-  :D {:piece "B", :moves ([:1 :C] [:1 :D] [:1 :E] [:2 :D]), :eats ([:1 :B] [:1 :F] [:3 :D])},
-  :B {:piece "B", :moves ([:1 :A] [:1 :B] [:1 :C] [:2 :B]), :eats ([:1 :D] [:3 :B])},
-  :C
-  {:piece "B",
-   :moves ([:1 :B] [:1 :C] [:1 :D] [:2 :B] [:2 :C] [:2 :D]),
-   :eats ([:1 :A] [:1 :E] [:3 :A] [:3 :C] [:3 :E])},
-  :E
-  {:piece "B",
-   :moves ([:1 :D] [:1 :E] [:1 :F] [:2 :D] [:2 :E] [:2 :F]),
-   :eats ([:1 :C] [:1 :G] [:3 :C] [:3 :E] [:3 :G])},
-  :G
-  {:piece "B",
-   :moves ([:1 :F] [:1 :G] [:1 :H] [:2 :F] [:2 :G] [:2 :H]),
-   :eats ([:1 :E] [:1 :I] [:3 :E] [:3 :G] [:3 :I])},
-  :H {:piece "B", :moves ([:1 :G] [:1 :H] [:1 :I] [:2 :H]), :eats ([:1 :F] [:3 :H])}},
- :8
- {:I {:piece "R", :moves ([:7 :I] [:8 :H] [:8 :I] [:9 :I]), :eats ([:6 :I] [:8 :G])},
-  :A {:piece "R", :moves ([:7 :A] [:8 :A] [:8 :B] [:9 :A]), :eats ([:6 :A] [:8 :C])},
-  :F
-  {:piece "R",
-   :moves ([:7 :E] [:7 :F] [:7 :G] [:8 :E] [:8 :F] [:8 :G] [:9 :E] [:9 :F] [:9 :G]),
-   :eats ([:6 :D] [:6 :F] [:6 :H] [:8 :D] [:8 :H])},
-  :D
-  {:piece "R",
-   :moves ([:7 :C] [:7 :D] [:7 :E] [:8 :C] [:8 :D] [:8 :E] [:9 :C] [:9 :D] [:9 :E]),
-   :eats ([:6 :B] [:6 :D] [:6 :F] [:8 :B] [:8 :F])},
-  :B
-  {:piece "R",
-   :moves ([:7 :A] [:7 :B] [:7 :C] [:8 :A] [:8 :B] [:8 :C] [:9 :A] [:9 :B] [:9 :C]),
-   :eats ([:6 :B] [:6 :D] [:8 :D])},
-  :C {:piece "R", :moves ([:7 :C] [:8 :B] [:8 :C] [:8 :D] [:9 :C]), :eats ([:6 :C] [:8 :A] [:8 :E])},
-  :E {:piece "R", :moves ([:7 :E] [:8 :D] [:8 :E] [:8 :F] [:9 :E]), :eats ([:6 :E] [:8 :C] [:8 :G])},
-  :G {:piece "R", :moves ([:7 :G] [:8 :F] [:8 :G] [:8 :H] [:9 :G]), :eats ([:6 :G] [:8 :E] [:8 :I])},
-  :H
-  {:piece "R",
-   :moves ([:7 :G] [:7 :H] [:7 :I] [:8 :G] [:8 :H] [:8 :I] [:9 :G] [:9 :H] [:9 :I]),
-   :eats ([:6 :F] [:6 :H] [:8 :F])}},
- :9
- {:I {:piece "R", :moves ([:8 :H] [:8 :I] [:9 :H] [:9 :I]), :eats ([:7 :G] [:7 :I] [:9 :G])},
-  :A {:piece "R", :moves ([:8 :A] [:8 :B] [:9 :A] [:9 :B]), :eats ([:7 :A] [:7 :C] [:9 :C])},
-  :F {:piece "R", :moves ([:8 :F] [:9 :E] [:9 :F] [:9 :G]), :eats ([:7 :F] [:9 :D] [:9 :H])},
-  :D {:piece "R", :moves ([:8 :D] [:9 :C] [:9 :D] [:9 :E]), :eats ([:7 :D] [:9 :B] [:9 :F])},
-  :B {:piece "R", :moves ([:8 :B] [:9 :A] [:9 :B] [:9 :C]), :eats ([:7 :B] [:9 :D])},
-  :C
-  {:piece "R",
-   :moves ([:8 :B] [:8 :C] [:8 :D] [:9 :B] [:9 :C] [:9 :D]),
-   :eats ([:7 :A] [:7 :C] [:7 :E] [:9 :A] [:9 :E])},
-  :E
-  {:piece "R",
-   :moves ([:8 :D] [:8 :E] [:8 :F] [:9 :D] [:9 :E] [:9 :F]),
-   :eats ([:7 :C] [:7 :E] [:7 :G] [:9 :C] [:9 :G])},
-  :G
-  {:piece "R",
-   :moves ([:8 :F] [:8 :G] [:8 :H] [:9 :F] [:9 :G] [:9 :H]),
-   :eats ([:7 :E] [:7 :G] [:7 :I] [:9 :E] [:9 :I])},
-  :H {:piece "R", :moves ([:8 :H] [:9 :G] [:9 :H] [:9 :I]), :eats ([:7 :H] [:9 :F])}},
- :2
- {:I {:piece "B", :moves ([:1 :I] [:2 :H] [:2 :I] [:3 :I]), :eats ([:2 :G] [:4 :I])},
-  :A {:piece "B", :moves ([:1 :A] [:2 :A] [:2 :B] [:3 :A]), :eats ([:2 :C] [:4 :A])},
-  :F
-  {:piece "B",
-   :moves ([:1 :E] [:1 :F] [:1 :G] [:2 :E] [:2 :F] [:2 :G] [:3 :E] [:3 :F] [:3 :G]),
-   :eats ([:2 :D] [:2 :H] [:4 :D] [:4 :F] [:4 :H])},
-  :D
-  {:piece "B",
-   :moves ([:1 :C] [:1 :D] [:1 :E] [:2 :C] [:2 :D] [:2 :E] [:3 :C] [:3 :D] [:3 :E]),
-   :eats ([:2 :B] [:2 :F] [:4 :B] [:4 :D] [:4 :F])},
-  :B
-  {:piece "B",
-   :moves ([:1 :A] [:1 :B] [:1 :C] [:2 :A] [:2 :B] [:2 :C] [:3 :A] [:3 :B] [:3 :C]),
-   :eats ([:2 :D] [:4 :B] [:4 :D])},
-  :C {:piece "B", :moves ([:1 :C] [:2 :B] [:2 :C] [:2 :D] [:3 :C]), :eats ([:2 :A] [:2 :E] [:4 :C])},
-  :E {:piece "B", :moves ([:1 :E] [:2 :D] [:2 :E] [:2 :F] [:3 :E]), :eats ([:2 :C] [:2 :G] [:4 :E])},
-  :G {:piece "B", :moves ([:1 :G] [:2 :F] [:2 :G] [:2 :H] [:3 :G]), :eats ([:2 :E] [:2 :I] [:4 :G])},
-  :H
-  {:piece "B",
-   :moves ([:1 :G] [:1 :H] [:1 :I] [:2 :G] [:2 :H] [:2 :I] [:3 :G] [:3 :H] [:3 :I]),
-   :eats ([:2 :F] [:4 :F] [:4 :H])}},
- :5
- {:I
-  {:piece "R",
-   :moves ([:4 :H] [:4 :I] [:5 :H] [:5 :I] [:6 :H] [:6 :I]),
-   :eats ([:3 :G] [:3 :I] [:5 :G] [:7 :G] [:7 :I])},
-  :A
-  {:piece "B",
-   :moves ([:4 :A] [:4 :B] [:5 :A] [:5 :B] [:6 :A] [:6 :B]),
-   :eats ([:3 :A] [:3 :C] [:5 :C] [:7 :A] [:7 :C])},
-  :F {:piece "R", :moves ([:4 :F] [:5 :E] [:5 :F] [:5 :G] [:6 :F]), :eats ([:3 :F] [:5 :D] [:5 :H] [:7 :F])},
-  :D {:piece "B", :moves ([:4 :D] [:5 :C] [:5 :D] [:5 :E] [:6 :D]), :eats ([:3 :D] [:5 :B] [:5 :F] [:7 :D])},
-  :B {:piece "B", :moves ([:4 :B] [:5 :A] [:5 :B] [:5 :C] [:6 :B]), :eats ([:3 :B] [:5 :D] [:7 :B])},
-  :C
-  {:piece "B",
-   :moves ([:4 :B] [:4 :C] [:4 :D] [:5 :B] [:5 :C] [:5 :D] [:6 :B] [:6 :C] [:6 :D]),
-   :eats ([:3 :A] [:3 :C] [:3 :E] [:5 :A] [:5 :E] [:7 :A] [:7 :C] [:7 :E])},
-  :E
-  {:piece " ",
-   :moves ([:4 :D] [:4 :E] [:4 :F] [:5 :D] [:5 :E] [:5 :F] [:6 :D] [:6 :E] [:6 :F]),
-   :eats ([:3 :C] [:3 :E] [:3 :G] [:5 :C] [:5 :G] [:7 :C] [:7 :E] [:7 :G])},
-  :G
-  {:piece "R",
-   :moves ([:4 :F] [:4 :G] [:4 :H] [:5 :F] [:5 :G] [:5 :H] [:6 :F] [:6 :G] [:6 :H]),
-   :eats ([:3 :E] [:3 :G] [:3 :I] [:5 :E] [:5 :I] [:7 :E] [:7 :G] [:7 :I])},
-  :H {:piece "R", :moves ([:4 :H] [:5 :G] [:5 :H] [:5 :I] [:6 :H]), :eats ([:3 :H] [:5 :F] [:7 :H])}},
- :3
- {:I
-  {:piece "B",
-   :moves ([:2 :H] [:2 :I] [:3 :H] [:3 :I] [:4 :H] [:4 :I]),
-   :eats ([:1 :G] [:1 :I] [:3 :G] [:5 :G] [:5 :I])},
-  :A
-  {:piece "B",
-   :moves ([:2 :A] [:2 :B] [:3 :A] [:3 :B] [:4 :A] [:4 :B]),
-   :eats ([:1 :A] [:1 :C] [:3 :C] [:5 :A] [:5 :C])},
-  :F {:piece "B", :moves ([:2 :F] [:3 :E] [:3 :F] [:3 :G] [:4 :F]), :eats ([:1 :F] [:3 :D] [:3 :H] [:5 :F])},
-  :D {:piece "B", :moves ([:2 :D] [:3 :C] [:3 :D] [:3 :E] [:4 :D]), :eats ([:1 :D] [:3 :B] [:3 :F] [:5 :D])},
-  :B {:piece "B", :moves ([:2 :B] [:3 :A] [:3 :B] [:3 :C] [:4 :B]), :eats ([:1 :B] [:3 :D] [:5 :B])},
-  :C
-  {:piece "B",
-   :moves ([:2 :B] [:2 :C] [:2 :D] [:3 :B] [:3 :C] [:3 :D] [:4 :B] [:4 :C] [:4 :D]),
-   :eats ([:1 :A] [:1 :C] [:1 :E] [:3 :A] [:3 :E] [:5 :A] [:5 :C] [:5 :E])},
-  :E
-  {:piece "B",
-   :moves ([:2 :D] [:2 :E] [:2 :F] [:3 :D] [:3 :E] [:3 :F] [:4 :D] [:4 :E] [:4 :F]),
-   :eats ([:1 :C] [:1 :E] [:1 :G] [:3 :C] [:3 :G] [:5 :C] [:5 :E] [:5 :G])},
-  :G
-  {:piece "B",
-   :moves ([:2 :F] [:2 :G] [:2 :H] [:3 :F] [:3 :G] [:3 :H] [:4 :F] [:4 :G] [:4 :H]),
-   :eats ([:1 :E] [:1 :G] [:1 :I] [:3 :E] [:3 :I] [:5 :E] [:5 :G] [:5 :I])},
-  :H {:piece "B", :moves ([:2 :H] [:3 :G] [:3 :H] [:3 :I] [:4 :H]), :eats ([:1 :H] [:3 :F] [:5 :H])}},
- :6
- {:I {:piece "R", :moves ([:5 :I] [:6 :H] [:6 :I] [:7 :I]), :eats ([:4 :I] [:6 :G] [:8 :I])},
-  :A {:piece "R", :moves ([:5 :A] [:6 :A] [:6 :B] [:7 :A]), :eats ([:4 :A] [:6 :C] [:8 :A])},
-  :F
-  {:piece "R",
-   :moves ([:5 :E] [:5 :F] [:5 :G] [:6 :E] [:6 :F] [:6 :G] [:7 :E] [:7 :F] [:7 :G]),
-   :eats ([:4 :D] [:4 :F] [:4 :H] [:6 :D] [:6 :H] [:8 :D] [:8 :F] [:8 :H])},
-  :D
-  {:piece "R",
-   :moves ([:5 :C] [:5 :D] [:5 :E] [:6 :C] [:6 :D] [:6 :E] [:7 :C] [:7 :D] [:7 :E]),
-   :eats ([:4 :B] [:4 :D] [:4 :F] [:6 :B] [:6 :F] [:8 :B] [:8 :D] [:8 :F])},
-  :B
-  {:piece "R",
-   :moves ([:5 :A] [:5 :B] [:5 :C] [:6 :A] [:6 :B] [:6 :C] [:7 :A] [:7 :B] [:7 :C]),
-   :eats ([:4 :B] [:4 :D] [:6 :D] [:8 :B] [:8 :D])},
-  :C {:piece "R", :moves ([:5 :C] [:6 :B] [:6 :C] [:6 :D] [:7 :C]), :eats ([:4 :C] [:6 :A] [:6 :E] [:8 :C])},
-  :E {:piece "R", :moves ([:5 :E] [:6 :D] [:6 :E] [:6 :F] [:7 :E]), :eats ([:4 :E] [:6 :C] [:6 :G] [:8 :E])},
-  :G {:piece "R", :moves ([:5 :G] [:6 :F] [:6 :G] [:6 :H] [:7 :G]), :eats ([:4 :G] [:6 :E] [:6 :I] [:8 :G])},
-  :H
-  {:piece "R",
-   :moves ([:5 :G] [:5 :H] [:5 :I] [:6 :G] [:6 :H] [:6 :I] [:7 :G] [:7 :H] [:7 :I]),
-   :eats ([:4 :F] [:4 :H] [:6 :F] [:8 :F] [:8 :H])}}}
-clj꞉seminarski-rad.board꞉> 
-nil
-clj꞉seminarski-rad.validator꞉> 
-; Syntax error compiling at (src/seminarski_rad/validator.clj:28:22).
-; No such namespace: str
-clj꞉seminarski-rad.validator꞉> 
-nil
-clj꞉seminarski-rad.validator꞉> 
-#'seminarski-rad.validator/input-format-validator
-clj꞉seminarski-rad.validator꞉> 
-"1a-3f"
-clj꞉seminarski-rad.validator꞉> 
-nil
-clj꞉seminarski-rad.validator꞉> 
-nil
-clj꞉seminarski-rad.validator꞉> 
-nil
-clj꞉seminarski-rad.validator꞉> 
-nil
-clj꞉seminarski-rad.validator꞉> 
-nil
-clj꞉seminarski-rad.validator꞉> 
-"1a-7a"
-clj꞉seminarski-rad.validator꞉> 
-#'seminarski-rad.validator/input-format-validator
-clj꞉seminarski-rad.validator꞉> 
-"1a-7a"
-clj꞉seminarski-rad.validator꞉> 
-"1A-7E"
-clj꞉seminarski-rad.validator꞉> 
-nil
-clj꞉seminarski-rad.validator꞉> 
-"1A-7a"
-clj꞉seminarski-rad.validator꞉> 
-"1e-7a"
-clj꞉seminarski-rad.validator꞉> 
-"1e-9a"
-clj꞉seminarski-rad.validator꞉> 
-nil
-clj꞉seminarski-rad.validator꞉> 
+1  B ─ B ─ B ─ B ─ B
+   | \ | / | \ | / |
+2  B ─ B ─ B ─ B ─ B
+   | / | \ | / | \ |
+3  B ─ B ─   ─ R ─ R
+   | \ | / | \ | / |
+4  R ─ R ─ R ─ R ─ R
+   | / | \ | / | \ |
+5  R ─ R ─ R ─ R ─ R
+Please enter your username:
+Sending interrupt.; Evaluation of file gameplay.clj failed: Evaluation was interrupted
+clj꞉seminarski-rad.gameplay꞉> 
+; Execution error (InterruptedException) at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject/await (AbstractQueuedSynchronizer.java:1638).
+; null
+clj꞉seminarski-rad.gameplay꞉> 
+#'seminarski-rad.gameplay/manage-menus
+clj꞉seminarski-rad.gameplay꞉> 
+#'seminarski-rad.gameplay/manage-menus
+clj꞉seminarski-rad.gameplay꞉> 
+#'seminarski-rad.gameplay/manage-menus
+clj꞉seminarski-rad.gameplay꞉> 
+#'seminarski-rad.gameplay/manage-menus
+clj꞉seminarski-rad.gameplay꞉> 
+#'seminarski-rad.gameplay/play-game
+clj꞉seminarski-rad.gameplay꞉> 

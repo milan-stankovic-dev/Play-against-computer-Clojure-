@@ -54,7 +54,7 @@
     (when db-result
       (first db-result))))
 
-((find-user-by-username (get-connection) "stanmil") :app_user/password)
+;; ((find-user-by-username (get-connection) "stanmil") :app_user/password)
 
 (defn- register-user
   [conn username password]
@@ -68,9 +68,9 @@
       (.close conn)
       true)))
 
-(register-user (get-connection) "stanmil" "123abc")
-(register-user (get-connection) "ppetar" "abc123")
-(register-user (get-connection) "saraa" "a1b2c3")
+;; (register-user (get-connection) "stanmil" "123abc")
+;; (register-user (get-connection) "ppetar" "abc123")
+;; (register-user (get-connection) "saraa" "a1b2c3")
 
 (defn login-user 
   [conn username password]
@@ -79,7 +79,7 @@
                                      (:app_user/password db-user))
        db-user)))
 
-(login-user (get-connection) "stanmil" "123abc")
+;; (login-user (get-connection) "stanmil" "123abc")
 
 (defn- find-board-by-size
   [conn size]
@@ -90,7 +90,7 @@
       (when db-result
         (first db-result)))))
 
-(find-board-by-size (get-connection) 5)
+;; (find-board-by-size (get-connection) 5)
 
 (defn- insert-board
   [conn size]
@@ -106,9 +106,9 @@
 ;;     (nth (vals db-res) nth-place)))
 
 ;; (nth-of-dbres 0 (find-board-by-size (get-connection) 3))
-(insert-board (get-connection) 3)
-(insert-board (get-connection) 5)
-(insert-board (get-connection) 7)
+;; (insert-board (get-connection) 3)
+;; (insert-board (get-connection) 5)
+;; (insert-board (get-connection) 7)
 
 (defn- insert-game-session
   [conn board-size username
@@ -133,7 +133,7 @@
    conn
    ["SELECT * FROM game_session"]))
 
-(find-all-game-sessions (get-connection))
+;; (find-all-game-sessions (get-connection))
 
 (defn find-all-game-sessions-with-board-size
   [conn board-size]

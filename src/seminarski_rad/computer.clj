@@ -179,6 +179,6 @@ all-moves
               moves)
       nil)))
 
-(let [initial-board (board/create-board 5)
-      best-move (find-best-move initial-board 3 "R" 5)]
-  (println "Best Move:" best-move))
+;; (let [initial-board (board/create-board 5)
+;;       best-move (find-best-move initial-board 3 "R" 5)]
+;;   (println "Best Move:" best-move))

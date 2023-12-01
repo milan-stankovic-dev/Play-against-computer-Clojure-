@@ -6,24 +6,20 @@
             [seminarski-rad.database :as db]
             [clojure.string :as str]))
 
-(def board (board/create-board 5))
-
-(board/print-the-board board 5)
-
 (defn prompt-info
-  [what-to-prompt]
-  (println (str "Please enter your " what-to-prompt ":"))
+  [what-to-prompt validator-function]
+  (println (str "Please enter " what-to-prompt ":"))
   (let [info (read-line)]
-    (if (empty? info)
+    (if-not (validator-function info)
       (do
         (println (str (str/capitalize what-to-prompt) " invalid."))
-        (prompt-info what-to-prompt))
+        (prompt-info what-to-prompt validator-function))
       info)))
 
 (defn prompt-login
   []
-  (let [username (prompt-info "username")
-        password (prompt-info "password")
+  (let [username (prompt-info "your username" utility/not-empty?)
+        password (prompt-info "your password" utility/not-empty?)
         user-db (db/login-user (db/get-connection)
                                username password)] 
       (if-not user-db
@@ -31,6 +27,8 @@
           (println "\nWrong credentials. Try again.\n")
           (prompt-login))
         user-db)))
+
+;; (prompt-login)
 
 (defn write-main-menu
   [logged-in-user] 
@@ -53,13 +51,13 @@
             
   *********************************************************************\n")))
 
-(write-main-menu #:app_user{:id 6,
-                            :username "stanmil",
-                            :password
-                            "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"})
+;; (write-main-menu #:app_user{:id 6,
+;;                             :username "stanmil",
+;;                             :password
+;;                             "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"})
 
 (defn write-out-board-convo
-  [board]
+  [board board-size]
   (do (println "\n**********************************************************************\n")
       (println
        "Welcome to alquerque, the board game. Here you play against the computer.
@@ -72,11 +70,11 @@
     wins! Good luck!\n
     
     Here's your board:\n")
-      (board/print-the-board board 5)
+      (board/print-the-board board board-size)
       (computer/print-the-score )
       (println)))
 
-(write-out-board-convo board)
+;; (write-out-board-convo board)
 
 
 (defn prompt-user-color
@@ -89,7 +87,7 @@
 
 (defn take-turns
   [current-player board human-color computer-color board-size]
-  (board/print-the-board board 5) 
+  (board/print-the-board board board-size) 
   (computer/print-the-score)
   (if (computer/check-for-win human-color computer-color board)
     (println "End of game.")
@@ -117,10 +115,19 @@
               (take-turns "HUMAN" result-of-piece-move human-color computer-color board-size))))))))
 
 (defn play-game
-  [board]
-   (write-out-board-convo board) 
+  [board board-size]
+   (write-out-board-convo board board-size) 
       (let [human-color (prompt-user-color)
             computer-color (utility/opposite-player-color human-color)]
-        (take-turns "HUMAN" board human-color computer-color 5)))
+        (take-turns "HUMAN" board human-color computer-color board-size)))
 
-;; (play-game board)
+(defn manage-menus
+  []
+  (let [logged-in-user (prompt-login)]
+    (write-main-menu logged-in-user)
+    (let [user-choice (utility/purify-user-input
+                       (prompt-info "a number" utility/not-empty?))]
+      (case user-choice
+        "1" (play-game (board/create-board 5) 5)
+        "2" (play-game (board/create-board 7) 7)
+        "3" (play-game (board/create-board 9) 9)))))
