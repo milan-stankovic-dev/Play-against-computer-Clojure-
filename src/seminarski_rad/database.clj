@@ -54,6 +54,8 @@
     (when db-result
       (first db-result))))
 
+((find-user-by-username (get-connection) "stanmil") :app_user/password)
+
 (defn- register-user
   [conn username password]
   (if-not (= [] (find-user-by-username conn username)) 
@@ -74,7 +76,7 @@
   [conn username password]
   (let [db-user (find-user-by-username conn username)]
      (when (hashed-password-correct? password 
-                                     (nth ( vals db-user) 2))
+                                     (:app_user/password db-user))
        db-user)))
 
 (login-user (get-connection) "stanmil" "123abc")
@@ -88,6 +90,8 @@
       (when db-result
         (first db-result)))))
 
+(find-board-by-size (get-connection) 5)
+
 (defn- insert-board
   [conn size]
   (when (and (number? size)
@@ -96,12 +100,12 @@
          conn
          ["INSERT INTO board (size) VALUES (?)" size])))
 
-(defn- nth-of-dbres
-  [nth-place db-res]
-  (when db-res
-    (nth (vals db-res) nth-place)))
+;; (defn- nth-of-dbres
+;;   [nth-place db-res]
+;;   (when db-res
+;;     (nth (vals db-res) nth-place)))
 
-(nth-of-dbres 0 (find-board-by-size (get-connection) 3))
+;; (nth-of-dbres 0 (find-board-by-size (get-connection) 3))
 (insert-board (get-connection) 3)
 (insert-board (get-connection) 5)
 (insert-board (get-connection) 7)
@@ -110,10 +114,10 @@
   [conn board-size username
    who-won human-score
    computer-score human-color]
-  (let [app-user-id (nth-of-dbres 
-                     0 (find-user-by-username conn username))
-        board-id (nth-of-dbres
-                  0 (find-board-by-size conn board-size))]
+  (let [app-user-id (:app_user/id
+                    (find-user-by-username conn username))
+        board-id (:board/id
+                  (find-board-by-size conn board-size))]
     (jdbc/execute!
      conn
      ["INSERT INTO game_session (app_user_id,
@@ -129,7 +133,7 @@
    conn
    ["SELECT * FROM game_session"]))
 
-;; (find-all-game-sessions (get-connection))
+(find-all-game-sessions (get-connection))
 
 (defn find-all-game-sessions-with-board-size
   [conn board-size]
@@ -144,8 +148,7 @@
 
 (defn find-all-game-sessions-for-user
   [conn username]
-  (let [u-id (nth-of-dbres 0 
-                           (find-user-by-username conn username))]
+  (let [u-id (:app_user/id (find-user-by-username conn username))]
     (when u-id
       (jdbc/execute!
        conn

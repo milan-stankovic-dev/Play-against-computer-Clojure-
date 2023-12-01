@@ -63,7 +63,7 @@
   (println (str "
   *********************************************************************
             
-      Welcome " (nth (vals logged-in-user) 1) " to \"Play against computer- the app\"! This
+      Welcome " (:app_user/username logged-in-user) " to \"Play against computer- the app\"! This
       interactive game will have you competing against your family and
       friends in no time. But first, you need to beat the computer in
       a one-to-one matchup. Can you do it?
