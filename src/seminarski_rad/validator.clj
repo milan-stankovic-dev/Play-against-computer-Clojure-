@@ -1,5 +1,6 @@
 (ns seminarski-rad.validator 
-  (:require [seminarski-rad.input-utility :as utility]))
+  (:require [seminarski-rad.input-utility :as utility]
+            [clojure.string :as str]))
 
 (defn- quit?
   "Checks if the user is trying to quit. If so, then it ends game 
@@ -10,9 +11,8 @@
     true))
 
 (defn- input-length-validator 
-  "Checks if the user's input is longer than needed. Since the
-    proper input is (ex. 'a1-b1') the proper length will always be 
-   5"
+  "Checks if the user's input is longer or shorter than needed.
+   Returns false if it is, true otherwise."
   [input-str length]
   (= (count input-str) length))
     
@@ -20,8 +20,15 @@
   "Users input must strictly adhere to said form:
    'NL-NL' where N is a number 1-5 and L is a letter
    a-e or A-E."
-  [input-str]
-  (re-matches #"[1-5][a-eA-E]-[1-5][a-eA-E]" input-str))
+  [input-str board-size] 
+  (let [num-limit board-size
+        str-limit-uc (name (utility/num->letter-keyword
+                            utility/conversion-map num-limit))
+        str-limit-lc (str/lower-case str-limit-uc)]
+    ;; (re-matches #"[1-5][a-eA-E]-[1-5][a-eA-E]" input-str) 
+    (re-matches (re-pattern (format "[1-%d][a-%sA-%s]-[1-%d][a-%sA-%s]"
+                                    num-limit str-limit-lc str-limit-uc
+                                    num-limit str-limit-lc str-limit-uc)) input-str)))
 
 (defn- proper-piece-color-validator
   "Checks if the user is trying to move their own
@@ -85,12 +92,12 @@
 ;; (game-rule-validator board-input "1A-1C" "B")
 
 (defn validate-input
-  [input-str board player-color]
+  [input-str board player-color board-size]
   (let [purified-input-str (utility/purify-user-input input-str)] 
     (and 
      (quit? purified-input-str)
      (input-length-validator purified-input-str 5)
-     (input-format-validator purified-input-str)
+     (input-format-validator purified-input-str board-size)
      (proper-piece-color-validator purified-input-str board player-color)
      (start-not-the-same-as-finish-validator purified-input-str)
      (end-not-occupied-validator purified-input-str board)

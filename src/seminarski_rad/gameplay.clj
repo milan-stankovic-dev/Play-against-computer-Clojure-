@@ -88,7 +88,7 @@
         (utility/purify-user-input user-input))))
 
 (defn take-turns
-  [current-player board human-color computer-color]
+  [current-player board human-color computer-color board-size]
   (board/print-the-board board 5) 
   (computer/print-the-score)
   (if (computer/check-for-win human-color computer-color board)
@@ -97,30 +97,30 @@
     (if (= current-player "HUMAN")
       (let [result-of-piece-move (computer/move-piece-eaten-indicator
                                   (utility/take-user-input-move)
-                                             board human-color)]
+                                             board human-color board-size)]
         (if (vector? result-of-piece-move)
           (take-turns "HUMAN" (first result-of-piece-move)
-                      human-color computer-color)
-          (take-turns "COMPUTER" result-of-piece-move human-color computer-color)))
+                      human-color computer-color board-size)
+          (take-turns "COMPUTER" result-of-piece-move human-color computer-color board-size)))
       (do
         (println "Computer's turn...")
         (Thread/sleep 2000)
            (let [[score best-move] (computer/find-best-move
-                                  board 5 computer-color)]
+                                  board 5 computer-color board-size)]
           (println (str "Computer's move:" best-move))
           (println (str "Function returned score: " score))
           (let [result-of-piece-move (computer/move-piece-eaten-indicator best-move
-                                                                   board computer-color)]
+                                                                   board computer-color board-size)]
             (if (vector? result-of-piece-move)
               (take-turns "COMPUTER" (first result-of-piece-move)
-                          human-color computer-color)
-              (take-turns "HUMAN" result-of-piece-move human-color computer-color))))))))
+                          human-color computer-color board-size)
+              (take-turns "HUMAN" result-of-piece-move human-color computer-color board-size))))))))
 
 (defn play-game
   [board]
    (write-out-board-convo board) 
       (let [human-color (prompt-user-color)
             computer-color (utility/opposite-player-color human-color)]
-        (take-turns "HUMAN" board human-color computer-color)))
+        (take-turns "HUMAN" board human-color computer-color 5)))
 
 ;; (play-game board)
