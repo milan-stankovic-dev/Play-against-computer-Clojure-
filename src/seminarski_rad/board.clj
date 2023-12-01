@@ -53,65 +53,126 @@
 
 (def empty-node {:piece " " :moves '() :eats '()})
 
-(defn initialize-empty-board [] 
-    (into {} (for [row (map keyword (map str (range 1 6)))]
-               [row (into {} (for [col (map keyword '("A" "B" "C" "D" "E"))]
-                               [col empty-node]))])))
+(defn initialize-empty-board 
+  [size] 
+  (let [numeric-range (range 1 (inc size))
+        letter-range (utility/numeric-seq->letter-seq
+                      numeric-range)]
+    (into {} (for [row (map keyword (map str numeric-range))]
+               [row (into {} (for [col (map keyword letter-range)]
+                               [col empty-node]))]))))
 
-(def empty-board (initialize-empty-board))
+(def empty-board (initialize-empty-board 9))
 empty-board
 
 ;; ex. col  =>   :A
 ;; ex. row  =>   :1
-(defn assign-pieces [board]
-  (reduce-kv 
-    (fn [acc row cols]
-        (reduce-kv
-         (fn [row-acc col node]
-           (assoc-in row-acc [row col]
-                     (if (or (< 3 (utility/numeric-keyword->num row))
-                              (and (= 3 (utility/numeric-keyword->num row))
-                                   (.contains ["D" "E"] (name col))))
-                       (assoc node :piece "R")
-                       (if (or (> 3 (utility/numeric-keyword->num row))
-                               (and (= 3 (utility/numeric-keyword->num row))
-                                    (.contains ["A" "B"] (name col))))
-                         (assoc node :piece "B")
-                         node))))
-         acc cols))
-      {} board))
+(defn assign-pieces
+  [board size]
+  (let [numeric-range (range 1 (inc size))
+        letter-range (into [] (utility/numeric-seq->letter-seq numeric-range))
+        letter-range-first-half
+        (into [] (utility/?-half-of-seq letter-range 1))
+        letter-range-second-half
+        (into [] (utility/?-half-of-seq letter-range 2))
+        middle-row-num (inc (quot size 2))]
+    (reduce-kv
+     (fn [acc row cols]
+       (reduce-kv
+        (fn [row-acc col node]
+          (assoc-in row-acc [row col]
+                    (if (or (< middle-row-num (utility/numeric-keyword->num row))
+                            (and (= middle-row-num (utility/numeric-keyword->num row))
+                                 (.contains letter-range-second-half (name col))))
+                      (assoc node :piece "R")
+                      (if (or (> middle-row-num (utility/numeric-keyword->num row))
+                              (and (= middle-row-num (utility/numeric-keyword->num row))
+                                   (.contains letter-range-first-half (name col))))
+                        (assoc node :piece "B")
+                        node))))
+        acc cols))
+     {} board)))
 
-(def assigned-pieces-board (assign-pieces empty-board))
+
+(def assigned-pieces-board (assign-pieces empty-board 9))
 assigned-pieces-board
-(defn assign-moves-to-node [board row col]
+(defn assign-moves-to-node [board row col size]
   (let [validation-result #(game-logic (str(utility/numeric-keyword->num row)
                                                           (name col) "-"
                                                           (name %1)
                                                           (name %2)))
-        moves (for [r (map keyword (map str (range 1 6)))
-                    c (map keyword '("A" "B" "C" "D" "E"))
+        numeric-range (range 1 (inc size))
+        letter-range (utility/numeric-seq->letter-seq numeric-range)
+        moves (for [r (map keyword (map str numeric-range))
+                    c (map keyword letter-range)
                     :when (and (validation-result r c)
                                (not= (validation-result r c) "eat"))]
                 [r c])
-        eats (for [r (map keyword (map str (range 1 6)))
-                   c (map keyword '("A" "B" "C" "D" "E"))
+        eats (for [r (map keyword (map str numeric-range))
+                   c (map keyword letter-range)
                    :when (= (validation-result r c) "eat")]
                [r c])]
     (update-in board [row col]
                (fn [node]
                  (assoc node :eats eats :moves moves)))))
 
-(defn assign-all-moves [board ]
+(defn assign-all-moves [board size]
   (reduce-kv
    (fn [acc row cols]
      (reduce-kv
       (fn [row-acc col _]
-        (assign-moves-to-node row-acc row col))
+        (assign-moves-to-node row-acc row col size))
       acc cols))
    board board))
 
 (defn create-board
-  []
-  (assign-all-moves (assign-pieces (initialize-empty-board))))
+  [size]
+  (assign-all-moves (assign-pieces (initialize-empty-board size) size) size))
 
-(create-board)
+(create-board 5)
+
+(defn- print-slants
+  [size pattern]
+  (print "   ")
+  (doseq [_ (range (/ (- size 1) 2))]
+    (print pattern))
+  (println "|"))
+
+(print-slants 9 "| \\ | / ")
+
+(defn- print-row
+  [size row-keyword board]
+  (let [numeric-sequence (range 1 size) 
+        letter-range-keywords 
+        (utility/numeric-seq->letter-keyword-seq 
+         numeric-sequence)
+        last-col-keyword (utility/num->letter-keyword
+                          utility/conversion-map size)]
+    (print (str (name row-keyword) "  "))
+    (doseq [col letter-range-keywords] 
+      (print (str (get-in board [row-keyword col :piece])) "─ "))
+    (println (get-in board [row-keyword last-col-keyword :piece]))))
+
+(apply keyword (utility/numeric-seq->letter-seq (range 1 (inc 5))))
+(defn print-the-board
+  [board size]
+  (println)
+ (print "   ")
+  (doseq [num (utility/numeric-seq->letter-seq 
+               (range 1 (inc size)))]
+    (print (str num "   ")))
+  (println)
+  (println)
+  (let [numeric-seq (range 1 size)
+        row-keyword-seq (utility/seq->keyword-seq
+                         numeric-seq)
+        last-row-keyword (utility/num->keyword size)]
+    (doseq [row-keyword row-keyword-seq]
+      (print-row size row-keyword board)
+      (if (odd? (utility/numeric-keyword->num row-keyword))
+        (print-slants size "| \\ | / ")
+        (print-slants size "| / | \\ ")))
+    (print-row size last-row-keyword board)))
+
+(print-the-board (create-board 9) 9)
+(create-board 9)

@@ -39,10 +39,10 @@
           "HUMAN")
         false))))
 
-(check-for-win "B" "R" (board/create-board))
-(board/create-board)
+(check-for-win "B" "R" (board/create-board 5))
+(board/create-board 5)
 (filter #(= " " (:piece %))
-        (for [row (vals (board/create-board))
+        (for [row (vals (board/create-board 5))
               col (vals row)]
           col))
 (defn move-piece-eaten-indicator
@@ -158,7 +158,7 @@
                                                    (minimax (move-piece-clean move board human-color)
                                                             (dec depth) true computer-color)))))))))
 
-(def all-moves (find-all-possible-moves (board/create-board) "R"))
+(def all-moves (find-all-possible-moves (board/create-board 5) "R"))
 all-moves
 
 (defn find-best-move
@@ -179,6 +179,6 @@ all-moves
               moves)
       nil)))
 
-(let [initial-board (board/create-board)
+(let [initial-board (board/create-board 5)
       best-move (find-best-move initial-board 3 "R")]
   (println "Best Move:" best-move))

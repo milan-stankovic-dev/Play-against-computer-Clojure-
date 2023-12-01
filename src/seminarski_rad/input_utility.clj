@@ -49,7 +49,8 @@
   [input]
   (subs input 4 5))
 
-(def conversion-map {:A 1 :B 2 :C 3 :D 4 :E 5})
+(def conversion-map {:A 1 :B 2 :C 3 :D 4 :E 5 :F 6 :G 7 :H 8 :I 9
+                     :J 10 :K 11 :L 12 :M 13})
 
 (defn get-initial-col-as-num
  [input] 
@@ -145,3 +146,52 @@
   (let [user-input (read-line)]
     (println "You entered: " user-input)
     user-input))
+
+(defn num->letter-keyword
+  "Returns key under which a value is stored
+   in given map, nil otherwise."
+  [a-map value]
+  (some (fn [[k v]] (when (= v value) k)) a-map))
+
+(num->letter-keyword conversion-map 9)
+
+(defn seq->keyword-seq
+  "Returns list of keyword values for given collection 
+   of members given as sequence."
+  [a-seq]
+  (map #(keyword (str %)) a-seq))
+
+(seq->keyword-seq [1 2 3 4])
+
+(defn numeric-seq->letter-seq
+  "Returns list of appropriate character values for given collection 
+   of numbers given as sequence. Uses conversion map for converting
+   values."
+  [numeric-seq]
+   (map #(name (num->letter-keyword conversion-map %))
+                numeric-seq))
+
+(defn numeric-seq->letter-keyword-seq
+  "Returns list of appropriate keyword char values for given collection 
+   of numbers given as sequence. Uses conversion map for converting
+   values."
+  [numeric-seq]
+  (let [letter-seq (numeric-seq->letter-seq numeric-seq)]
+    (map #(keyword %) letter-seq)))
+
+(numeric-seq->letter-seq [1 2 3 4])
+(numeric-seq->letter-keyword-seq [1 2 3 4])
+(defn ?-half-of-seq
+  "Returns specified half of sequence. If sequence has odd
+   number of elements, middle is excluded from both halves."
+  [a-seq which-half]
+  (let [len (count a-seq)
+        cutoff-index (quot (inc len) 2)]
+    (if (= 1 which-half)
+      (subvec a-seq 0
+              (if (odd? len)
+                (dec cutoff-index)
+                cutoff-index))
+      (subvec a-seq cutoff-index))))
+
+(?-half-of-seq [1 2 3 4 5 6 7 8 9 10] 1)
