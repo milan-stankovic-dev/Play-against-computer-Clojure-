@@ -79,7 +79,7 @@
                                      (:app_user/password db-user))
        db-user)))
 
-;; (login-user (get-connection) "stanmil" "123abc")
+;; (login-user (get-connection) "STANMIL" "123abc")
 
 (defn- find-board-by-size
   [conn size]

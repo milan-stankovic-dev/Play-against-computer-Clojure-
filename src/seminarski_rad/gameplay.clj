@@ -3,32 +3,20 @@
             [seminarski-rad.validator :as val]
             [seminarski-rad.board :as board]
             [seminarski-rad.computer :as computer]
-            [seminarski-rad.database :as db]
-            [clojure.string :as str]))
-
-(defn prompt-info
-  [what-to-prompt validator-function]
-  (println (str "Please enter " what-to-prompt ":"))
-  (let [info (read-line)]
-    (if-not (validator-function info)
-      (do
-        (println (str (str/capitalize what-to-prompt) " invalid."))
-        (prompt-info what-to-prompt validator-function))
-      info)))
+            [seminarski-rad.database :as db]))
 
 (defn prompt-login
   []
-  (let [username (prompt-info "your username" utility/not-empty?)
-        password (prompt-info "your password" utility/not-empty?)
+  (let [username (utility/prompt-info "your username" val/not-empty?)
+        password (utility/prompt-info "your password" val/not-empty?)
         user-db (db/login-user (db/get-connection)
-                               username password)] 
-      (if-not user-db
-        (do
-          (println "\nWrong credentials. Try again.\n")
-          (prompt-login))
-        user-db)))
+                               username password)]
+    (if-not user-db
+      (do
+        (println "\nWrong credentials. Try again.\n")
+        (prompt-login))
+      user-db)))
 
-;; (prompt-login)
 
 (defn write-main-menu
   [logged-in-user] 
@@ -51,14 +39,9 @@
             
   *********************************************************************\n")))
 
-;; (write-main-menu #:app_user{:id 6,
-;;                             :username "stanmil",
-;;                             :password
-;;                             "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"})
-
 (defn write-out-board-convo
   [board board-size]
-  (do (println "\n**********************************************************************\n")
+   (println "\n**********************************************************************\n")
       (println
        "Welcome to alquerque, the board game. Here you play against the computer.
     Upon starting the game you are prompted to choose player color. Simply input
@@ -72,18 +55,7 @@
     Here's your board:\n")
       (board/print-the-board board board-size)
       (computer/print-the-score )
-      (println)))
-
-;; (write-out-board-convo board)
-
-
-(defn prompt-user-color
-  []
-    (println "Enter your color: [B/R]")
-    (let [user-input (read-line)] 
-      (if-not (val/user-color-input-validator user-input)
-        (prompt-user-color)
-        (utility/purify-user-input user-input))))
+      (println))
 
 (defn take-turns
   [current-player board human-color computer-color board-size]
@@ -93,41 +65,55 @@
     (println "End of game.")
     
     (if (= current-player "HUMAN")
-      (let [result-of-piece-move (computer/move-piece-eaten-indicator
+      (let [result-of-piece-move (computer/apply-move-indicator
                                   (utility/take-user-input-move)
                                              board human-color board-size)]
-        (if (vector? result-of-piece-move)
-          (take-turns "HUMAN" (first result-of-piece-move)
-                      human-color computer-color board-size)
+        (if (vector? result-of-piece-move) 
+          (if (= "quit" (last result-of-piece-move))
+            nil 
+            (take-turns "HUMAN" (first result-of-piece-move)
+                        human-color computer-color board-size))
           (take-turns "COMPUTER" result-of-piece-move human-color computer-color board-size)))
       (do
         (println "Computer's turn...")
-        (Thread/sleep 2000)
+        ;; (Thread/sleep 2000)
            (let [[score best-move] (computer/find-best-move
                                   board 5 computer-color board-size)]
-          (println (str "Computer's move:" best-move))
+          (println (str "Computer's move: " best-move))
           (println (str "Function returned score: " score))
-          (let [result-of-piece-move (computer/move-piece-eaten-indicator best-move
+          (let [result-of-piece-move (computer/apply-move-indicator best-move
                                                                    board computer-color board-size)]
             (if (vector? result-of-piece-move)
+              ;; Here we do not check for quits because a computer may not quit!
               (take-turns "COMPUTER" (first result-of-piece-move)
                           human-color computer-color board-size)
               (take-turns "HUMAN" result-of-piece-move human-color computer-color board-size))))))))
 
 (defn play-game
   [board board-size]
-   (write-out-board-convo board board-size) 
-      (let [human-color (prompt-user-color)
-            computer-color (utility/opposite-player-color human-color)]
-        (take-turns "HUMAN" board human-color computer-color board-size)))
+  (write-out-board-convo board board-size) 
+  (let [human-color (utility/purify-user-input 
+                     (utility/prompt-info "user color [B] or [R]"
+                                          val/user-color-input-validator))
+        computer-color (utility/opposite-player-color human-color)]
+    (take-turns "HUMAN" board human-color computer-color board-size)))
+
+(defn access-main-menu-item
+  []
+  (let [user-choice (utility/purify-user-input
+                     (utility/prompt-info "a number" val/not-empty?))]
+    (case user-choice
+      "1" (play-game (board/create-board 5) 5)
+      "2" (play-game (board/create-board 7) 7)
+      "3" (play-game (board/create-board 9) 9)
+      "END")))
 
 (defn manage-menus
-  []
-  (let [logged-in-user (prompt-login)]
-    (write-main-menu logged-in-user)
-    (let [user-choice (utility/purify-user-input
-                       (prompt-info "a number" utility/not-empty?))]
-      (case user-choice
-        "1" (play-game (board/create-board 5) 5)
-        "2" (play-game (board/create-board 7) 7)
-        "3" (play-game (board/create-board 9) 9)))))
+  ([]
+   (manage-menus (prompt-login)))
+  ([logged-in-user]
+   (write-main-menu logged-in-user)
+   (when-not (= "END" (access-main-menu-item))
+     (manage-menus logged-in-user))))
+
+(manage-menus)

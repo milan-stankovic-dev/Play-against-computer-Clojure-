@@ -127,9 +127,9 @@ assigned-pieces-board
 
 (defn create-board
   [size]
-  (assign-all-moves (assign-pieces (initialize-empty-board size) size) size))
-
-(create-board 5)
+  (let [adjusted-size (utility/adjust-board-size size)]
+    (assign-all-moves (assign-pieces (initialize-empty-board adjusted-size)
+                                     adjusted-size) adjusted-size)))
 
 (defn- print-slants
   [size pattern]

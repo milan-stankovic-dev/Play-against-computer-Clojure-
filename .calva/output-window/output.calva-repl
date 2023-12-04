@@ -1,6 +1,141 @@
-nil
-clj꞉seminarski-rad.core꞉> 
 ; Evaluating file: gameplay.clj
+#'seminarski-rad.gameplay/manage-menus
+clj꞉seminarski-rad.gameplay꞉> 
+; Evaluating file: input_utility.clj
+#'seminarski-rad.input-utility/prompt-info
+clj꞉seminarski-rad.input-utility꞉> 
+; Evaluating file: validator.clj
+#'seminarski-rad.validator/number-in-range?
+clj꞉seminarski-rad.validator꞉> 
+; Evaluating file: board.clj
+#'seminarski-rad.board/print-the-board
+clj꞉seminarski-rad.board꞉> 
+; Evaluating file: computer.clj
+#'seminarski-rad.computer/find-best-move
+clj꞉seminarski-rad.computer꞉> 
+; Evaluating file: core.clj
+#'seminarski-rad.core/-main
+clj꞉seminarski-rad.core꞉> 
+; Evaluating file: database.clj
+#'seminarski-rad.database/find-all-game-sessions-stated-won
+clj꞉seminarski-rad.database꞉> 
+; Evaluating file: gameplay.clj
+#'seminarski-rad.gameplay/manage-menus
+clj꞉seminarski-rad.gameplay꞉> 
+Please enter your username:
+Please enter your password:
+
+Wrong credentials. Try again.
+
+Please enter your username:
+Please enter your password:
+
+Wrong credentials. Try again.
+
+Please enter your username:
+Please enter your password:
+
+Wrong credentials. Try again.
+
+Please enter your username:
+Please enter your password:
+
+Wrong credentials. Try again.
+
+Please enter your username:
+Please enter your password:
+
+Wrong credentials. Try again.
+
+Please enter your username:
+Please enter your password:
+
+Wrong credentials. Try again.
+
+Please enter your username:
+Sending interrupt.; Evaluation was interrupted
+clj꞉seminarski-rad.gameplay꞉> 
+; Execution error (InterruptedException) at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject/await (AbstractQueuedSynchronizer.java:1638).
+; null
+clj꞉seminarski-rad.gameplay꞉> 
+; Evaluating file: gameplay.clj
+Please enter your username:
+Please enter your password:
+"STANMIL" " USERNAME"
+"123ABC" " PASSWORD"
+nil " USERDB"
+
+Wrong credentials. Try again.
+
+Please enter your username:
+Sending interrupt.; Evaluation of file gameplay.clj failed: Evaluation was interrupted
+clj꞉seminarski-rad.gameplay꞉> 
+; Execution error (InterruptedException) at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject/await (AbstractQueuedSynchronizer.java:1638).
+; null
+clj꞉seminarski-rad.gameplay꞉> 
+#:app_user{:id 6,
+           :username "stanmil",
+           :password
+           "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"}
+clj꞉seminarski-rad.database꞉> 
+#:app_user{:id 6,
+           :username "stanmil",
+           :password
+           "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"}
+clj꞉seminarski-rad.database꞉> 
+nil
+clj꞉seminarski-rad.database꞉> 
+#:app_user{:id 6,
+           :username "stanmil",
+           :password
+           "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"}
+clj꞉seminarski-rad.database꞉> 
+#'seminarski-rad.input-utility/prompt-info
+clj꞉seminarski-rad.input-utility꞉> 
+; Evaluating file: input_utility.clj
+#'seminarski-rad.input-utility/prompt-info
+clj꞉seminarski-rad.input-utility꞉> 
+; Evaluating file: gameplay.clj
+Please enter your username:
+Please enter your password:
+"stanmil" " USERNAME"
+"123abc" " PASSWORD"
+#:app_user{:id 6, :username "stanmil", :password "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"} " USERDB"
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+
+**********************************************************************
+
+Welcome to alquerque, the board game. Here you play against the computer.
+    Upon starting the game you are prompted to choose player color. Simply input
+    [B] for blue or [R] for red. To make a turn input the name of the first field
+    (Ex. 1A), followed by a '-' symbol and then the field you want your piece to go
+    (Ex. 1C). You may also include the word "EAT" in the middle (Ex. 1A-EAT-1C),
+    if you are skipping a field, but this is not necessary. If your input is invalid,
+    you will get another chance at making a move! The player whose onlypieces remain
+    wins! Good luck!
+
+    
+    Here's your board:
+
 
    A   B   C   D   E   
 
@@ -13,19 +148,972 @@ clj꞉seminarski-rad.core꞉> 
 4  R ─ R ─ R ─ R ─ R
    | / | \ | / | \ |
 5  R ─ R ─ R ─ R ─ R
+
+Human Score:  0
+Computer Score:  0
+
+
+Please enter user color [B] or [R]:
+
+   A   B   C   D   E   
+
+1  B ─ B ─ B ─ B ─ B
+   | \ | / | \ | / |
+2  B ─ B ─ B ─ B ─ B
+   | / | \ | / | \ |
+3  B ─ B ─   ─ R ─ R
+   | \ | / | \ | / |
+4  R ─ R ─ R ─ R ─ R
+   | / | \ | / | \ |
+5  R ─ R ─ R ─ R ─ R
+
+Human Score:  0
+Computer Score:  0
+
+Your move:
+You entered:  Q
+Are you sure you want to quit? 
+                Quitting gives a victory to the computer.
+                [Y] or [N]
+Please enter your choice:
+WIN CONDITION AFTER QUIT
+COMPUTER wins![B]
+
+Human Score:  0
+Computer Score:  1
+
+
+Human Score:  0
+Computer Score:  1
+
+nil
+clj꞉seminarski-rad.gameplay꞉> 
+; Evaluating file: computer.clj
+#'seminarski-rad.computer/find-best-move
+clj꞉seminarski-rad.computer꞉> 
+; Evaluating file: gameplay.clj
 Please enter your username:
+Please enter your password:
+"stanmil" " USERNAME"
+"123abc" " PASSWORD"
+#:app_user{:id 6, :username "stanmil", :password "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"} " USERDB"
+
+  *********************************************************************
+            
+      ;; Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+
+**********************************************************************
+
+Welcome to alquerque, the board game. Here you play against the computer.
+    Upon starting the game you are prompted to choose player color. Simply input
+    [B] for blue or [R] for red. To make a turn input the name of the first field
+    (Ex. 1A), followed by a '-' symbol and then the field you want your piece to go
+    (Ex. 1C). You may also include the word "EAT" in the middle (Ex. 1A-EAT-1C),
+    if you are skipping a field, but this is not necessary. If your input is invalid,
+    you will get another chance at making a move! The player whose onlypieces remain
+    wins! Good luck!
+
+    
+    Here's your board:
+
+
+   A   B   C   D   E   
+
+1  B ─ B ─ B ─ B ─ B
+   | \ | / | \ | / |
+2  B ─ B ─ B ─ B ─ B
+   | / | \ | / | \ |
+3  B ─ B ─   ─ R ─ R
+   | \ | / | \ | / |
+4  R ─ R ─ R ─ R ─ R
+   | / | \ | / | \ |
+5  R ─ R ─ R ─ R ─ R
+
+Human Score:  0
+Computer Score:  0
+
+
+Please enter user color [B] or [R]:
+
+   A   B   C   D   E   
+
+1  B ─ B ─ B ─ B ─ B
+   | \ | / | \ | / |
+2  B ─ B ─ B ─ B ─ B
+   | / | \ | / | \ |
+3  B ─ B ─   ─ R ─ R
+   | \ | / | \ | / |
+4  R ─ R ─ R ─ R ─ R
+   | / | \ | / | \ |
+5  R ─ R ─ R ─ R ─ R
+
+Human Score:  0
+Computer Score:  0
+
+Your move:
+You entered:  Q   
+Are you sure you want to quit? 
+                Quitting gives a victory to the computer.
+                [Y] or [N]
+Please enter your choice:
+Your choice:  Y
+
+USER QUIT. COMPUTER WINS!
+COMPUTER wins![R]
+
+Human Score:  0
+Computer Score:  1
+
+
+Human Score:  0
+Computer Score:  1
+
+nil
+clj꞉seminarski-rad.gameplay꞉> 
+; Evaluating file: gameplay.clj
+Please enter your username:
+Please enter your password:
+"stanmil" " USERNAME"
+"123abc" " PASSWORD"
+#:app_user{:id 6, :username "stanmil", :password "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"} " USERDB"
+
+  *********************************************************************
+            
+      ;; Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+
+**********************************************************************
+
+Welcome to alquerque, the board game. Here you play against the computer.
+    Upon starting the game you are prompted to choose player color. Simply input
+    [B] for blue or [R] for red. To make a turn input the name of the first field
+    (Ex. 1A), followed by a '-' symbol and then the field you want your piece to go
+    (Ex. 1C). You may also include the word "EAT" in the middle (Ex. 1A-EAT-1C),
+    if you are skipping a field, but this is not necessary. If your input is invalid,
+    you will get another chance at making a move! The player whose onlypieces remain
+    wins! Good luck!
+
+    
+    Here's your board:
+
+
+   A   B   C   D   E   
+
+1  B ─ B ─ B ─ B ─ B
+   | \ | / | \ | / |
+2  B ─ B ─ B ─ B ─ B
+   | / | \ | / | \ |
+3  B ─ B ─   ─ R ─ R
+   | \ | / | \ | / |
+4  R ─ R ─ R ─ R ─ R
+   | / | \ | / | \ |
+5  R ─ R ─ R ─ R ─ R
+
+Human Score:  0
+Computer Score:  1
+
+
+Please enter user color [B] or [R]:
+
+   A   B   C   D   E   
+
+1  B ─ B ─ B ─ B ─ B
+   | \ | / | \ | / |
+2  B ─ B ─ B ─ B ─ B
+   | / | \ | / | \ |
+3  B ─ B ─   ─ R ─ R
+   | \ | / | \ | / |
+4  R ─ R ─ R ─ R ─ R
+   | / | \ | / | \ |
+5  R ─ R ─ R ─ R ─ R
+
+Human Score:  0
+Computer Score:  1
+
+Your move:
+You entered:  Q
+Are you sure you want to quit? 
+                Quitting gives a victory to the computer.
+                [Y] or [N]
+Please enter your choice:
+Your choice:  N
+Your move:
+You entered:  2c-3c
+Your move:
+You entered:  2C-3C
+Your move:
+You entered:  4C-3C
+
+   A   B   C   D   E   
+
+1  B ─ B ─ B ─ B ─ B
+   | \ | / | \ | / |
+2  B ─ B ─ B ─ B ─ B
+   | / | \ | / | \ |
+3  B ─ B ─ R ─ R ─ R
+   | \ | / | \ | / |
+4  R ─ R ─   ─ R ─ R
+   | / | \ | / | \ |
+5  R ─ R ─ R ─ R ─ R
+
+Human Score:  0
+Computer Score:  1
+
+Computer's turn...
+Computer's move: 2C-EAT-4C
+Function returned score: 0
+
+   A   B   C   D   E   
+
+1  B ─ B ─ B ─ B ─ B
+   | \ | / | \ | / |
+2  B ─ B ─   ─ B ─ B
+   | / | \ | / | \ |
+3  B ─ B ─   ─ R ─ R
+   | \ | / | \ | / |
+4  R ─ R ─ B ─ R ─ R
+   | / | \ | / | \ |
+5  R ─ R ─ R ─ R ─ R
+
+Human Score:  0
+Computer Score:  1
+
+Computer's turn...
+Computer's move: 2B-3C
+Function returned score: 0
+
+   A   B   C   D   E   
+
+1  B ─ B ─ B ─ B ─ B
+   | \ | / | \ | / |
+2  B ─   ─   ─ B ─ B
+   | / | \ | / | \ |
+3  B ─ B ─ B ─ R ─ R
+   | \ | / | \ | / |
+4  R ─ R ─ B ─ R ─ R
+   | / | \ | / | \ |
+5  R ─ R ─ R ─ R ─ R
+
+Human Score:  0
+Computer Score:  1
+
+Your move:
 Sending interrupt.; Evaluation of file gameplay.clj failed: Evaluation was interrupted
 clj꞉seminarski-rad.gameplay꞉> 
 ; Execution error (InterruptedException) at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject/await (AbstractQueuedSynchronizer.java:1638).
 ; null
 clj꞉seminarski-rad.gameplay꞉> 
-#'seminarski-rad.gameplay/manage-menus
+Please enter your username:
+Please enter your password:
+"stanmil" " USERNAME"
+"123abc" " PASSWORD"
+#:app_user{:id 6, :username "stanmil", :password "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"} " USERDB"
+
+  *********************************************************************
+            
+      ;; Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+
+  *********************************************************************
+            
+      ;; Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+nil
 clj꞉seminarski-rad.gameplay꞉> 
-#'seminarski-rad.gameplay/manage-menus
+; Evaluating file: gameplay.clj
+Please enter your username:
+Please enter your password:
+"stanmil" " USERNAME"
+"123abc" " PASSWORD"
+#:app_user{:id 6, :username "stanmil", :password "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"} " USERDB"
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+nil
 clj꞉seminarski-rad.gameplay꞉> 
-#'seminarski-rad.gameplay/manage-menus
+; Evaluating file: gameplay.clj
+Please enter your username:
+Please enter your password:
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+
+**********************************************************************
+
+Welcome to alquerque, the board game. Here you play against the computer.
+    Upon starting the game you are prompted to choose player color. Simply input
+    [B] for blue or [R] for red. To make a turn input the name of the first field
+    (Ex. 1A), followed by a '-' symbol and then the field you want your piece to go
+    (Ex. 1C). You may also include the word "EAT" in the middle (Ex. 1A-EAT-1C),
+    if you are skipping a field, but this is not necessary. If your input is invalid,
+    you will get another chance at making a move! The player whose onlypieces remain
+    wins! Good luck!
+
+    
+    Here's your board:
+
+
+   A   B   C   D   E   F   G   
+
+1  B ─ B ─ B ─ B ─ B ─ B ─ B
+   | \ | / | \ | / | \ | / |
+2  B ─ B ─ B ─ B ─ B ─ B ─ B
+   | / | \ | / | \ | / | \ |
+3  B ─ B ─ B ─ B ─ B ─ B ─ B
+   | \ | / | \ | / | \ | / |
+4  B ─ B ─ B ─   ─ R ─ R ─ R
+   | / | \ | / | \ | / | \ |
+5  R ─ R ─ R ─ R ─ R ─ R ─ R
+   | \ | / | \ | / | \ | / |
+6  R ─ R ─ R ─ R ─ R ─ R ─ R
+   | / | \ | / | \ | / | \ |
+7  R ─ R ─ R ─ R ─ R ─ R ─ R
+
+Human Score:  0
+Computer Score:  1
+
+
+Please enter user color [B] or [R]:
+
+   A   B   C   D   E   F   G   
+
+1  B ─ B ─ B ─ B ─ B ─ B ─ B
+   | \ | / | \ | / | \ | / |
+2  B ─ B ─ B ─ B ─ B ─ B ─ B
+   | / | \ | / | \ | / | \ |
+3  B ─ B ─ B ─ B ─ B ─ B ─ B
+   | \ | / | \ | / | \ | / |
+4  B ─ B ─ B ─   ─ R ─ R ─ R
+   | / | \ | / | \ | / | \ |
+5  R ─ R ─ R ─ R ─ R ─ R ─ R
+   | \ | / | \ | / | \ | / |
+6  R ─ R ─ R ─ R ─ R ─ R ─ R
+   | / | \ | / | \ | / | \ |
+7  R ─ R ─ R ─ R ─ R ─ R ─ R
+
+Human Score:  0
+Computer Score:  1
+
+Your move:
+You entered:  Q
+Are you sure you want to quit? 
+                Quitting gives a victory to the computer.
+                [Y] or [N]
+Please enter your choice:
+Your choice:  Y
+
+USER QUIT. COMPUTER WINS!
+COMPUTER wins![R]
+
+Human Score:  0
+Computer Score:  2
+
+
+Human Score:  0
+Computer Score:  2
+
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+nil
 clj꞉seminarski-rad.gameplay꞉> 
-#'seminarski-rad.gameplay/manage-menus
+#'seminarski-rad.gameplay/access-main-menu-item
 clj꞉seminarski-rad.gameplay꞉> 
-#'seminarski-rad.gameplay/play-game
+; Evaluating file: gameplay.clj
+Please enter your username:
+Please enter your password:
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+
+**********************************************************************
+
+Welcome to alquerque, the board game. Here you play against the computer.
+    Upon starting the game you are prompted to choose player color. Simply input
+    [B] for blue or [R] for red. To make a turn input the name of the first field
+    (Ex. 1A), followed by a '-' symbol and then the field you want your piece to go
+    (Ex. 1C). You may also include the word "EAT" in the middle (Ex. 1A-EAT-1C),
+    if you are skipping a field, but this is not necessary. If your input is invalid,
+    you will get another chance at making a move! The player whose onlypieces remain
+    wins! Good luck!
+
+    
+    Here's your board:
+
+
+   A   B   C   D   E   F   G   
+
+1  B ─ B ─ B ─ B ─ B ─ B ─ B
+   | \ | / | \ | / | \ | / |
+2  B ─ B ─ B ─ B ─ B ─ B ─ B
+   | / | \ | / | \ | / | \ |
+3  B ─ B ─ B ─ B ─ B ─ B ─ B
+   | \ | / | \ | / | \ | / |
+4  B ─ B ─ B ─   ─ R ─ R ─ R
+   | / | \ | / | \ | / | \ |
+5  R ─ R ─ R ─ R ─ R ─ R ─ R
+   | \ | / | \ | / | \ | / |
+6  R ─ R ─ R ─ R ─ R ─ R ─ R
+   | / | \ | / | \ | / | \ |
+7  R ─ R ─ R ─ R ─ R ─ R ─ R
+
+Human Score:  0
+Computer Score:  2
+
+
+Please enter user color [B] or [R]:
+
+   A   B   C   D   E   F   G   
+
+1  B ─ B ─ B ─ B ─ B ─ B ─ B
+   | \ | / | \ | / | \ | / |
+2  B ─ B ─ B ─ B ─ B ─ B ─ B
+   | / | \ | / | \ | / | \ |
+3  B ─ B ─ B ─ B ─ B ─ B ─ B
+   | \ | / | \ | / | \ | / |
+4  B ─ B ─ B ─   ─ R ─ R ─ R
+   | / | \ | / | \ | / | \ |
+5  R ─ R ─ R ─ R ─ R ─ R ─ R
+   | \ | / | \ | / | \ | / |
+6  R ─ R ─ R ─ R ─ R ─ R ─ R
+   | / | \ | / | \ | / | \ |
+7  R ─ R ─ R ─ R ─ R ─ R ─ R
+
+Human Score:  0
+Computer Score:  2
+
+Your move:
+You entered:  Q
+Are you sure you want to quit? 
+                Quitting gives a victory to the computer.
+                [Y] or [N]
+Please enter your choice:
+Your choice:  Y
+
+USER QUIT. COMPUTER WINS!
+COMPUTER wins![R]
+
+Human Score:  0
+Computer Score:  3
+
+
+Human Score:  0
+Computer Score:  3
+
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+nil
 clj꞉seminarski-rad.gameplay꞉> 
+Please enter your username:
+Please enter your password:
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+
+**********************************************************************
+
+Welcome to alquerque, the board game. Here you play against the computer.
+    Upon starting the game you are prompted to choose player color. Simply input
+    [B] for blue or [R] for red. To make a turn input the name of the first field
+    (Ex. 1A), followed by a '-' symbol and then the field you want your piece to go
+    (Ex. 1C). You may also include the word "EAT" in the middle (Ex. 1A-EAT-1C),
+    if you are skipping a field, but this is not necessary. If your input is invalid,
+    you will get another chance at making a move! The player whose onlypieces remain
+    wins! Good luck!
+
+    
+    Here's your board:
+
+
+   A   B   C   D   E   
+
+1  B ─ B ─ B ─ B ─ B
+   | \ | / | \ | / |
+2  B ─ B ─ B ─ B ─ B
+   | / | \ | / | \ |
+3  B ─ B ─   ─ R ─ R
+   | \ | / | \ | / |
+4  R ─ R ─ R ─ R ─ R
+   | / | \ | / | \ |
+5  R ─ R ─ R ─ R ─ R
+
+Human Score:  0
+Computer Score:  3
+
+
+Please enter user color [B] or [R]:
+
+   A   B   C   D   E   
+
+1  B ─ B ─ B ─ B ─ B
+   | \ | / | \ | / |
+2  B ─ B ─ B ─ B ─ B
+   | / | \ | / | \ |
+3  B ─ B ─   ─ R ─ R
+   | \ | / | \ | / |
+4  R ─ R ─ R ─ R ─ R
+   | / | \ | / | \ |
+5  R ─ R ─ R ─ R ─ R
+
+Human Score:  0
+Computer Score:  3
+
+Your move:
+You entered:  Q
+Are you sure you want to quit? 
+                Quitting gives a victory to the computer.
+                [Y] or [N]
+Please enter your choice:
+Your choice:  N
+Your move:
+You entered:  Q
+Are you sure you want to quit? 
+                Quitting gives a victory to the computer.
+                [Y] or [N]
+Please enter your choice:
+Your choice:  Y
+
+USER QUIT. COMPUTER WINS!
+COMPUTER wins![B]
+
+Human Score:  0
+Computer Score:  4
+
+
+Human Score:  0
+Computer Score:  4
+
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+
+**********************************************************************
+
+Welcome to alquerque, the board game. Here you play against the computer.
+    Upon starting the game you are prompted to choose player color. Simply input
+    [B] for blue or [R] for red. To make a turn input the name of the first field
+    (Ex. 1A), followed by a '-' symbol and then the field you want your piece to go
+    (Ex. 1C). You may also include the word "EAT" in the middle (Ex. 1A-EAT-1C),
+    if you are skipping a field, but this is not necessary. If your input is invalid,
+    you will get another chance at making a move! The player whose onlypieces remain
+    wins! Good luck!
+
+    
+    Here's your board:
+
+
+   A   B   C   D   E   F   G   
+
+1  B ─ B ─ B ─ B ─ B ─ B ─ B
+   | \ | / | \ | / | \ | / |
+2  B ─ B ─ B ─ B ─ B ─ B ─ B
+   | / | \ | / | \ | / | \ |
+3  B ─ B ─ B ─ B ─ B ─ B ─ B
+   | \ | / | \ | / | \ | / |
+4  B ─ B ─ B ─   ─ R ─ R ─ R
+   | / | \ | / | \ | / | \ |
+5  R ─ R ─ R ─ R ─ R ─ R ─ R
+   | \ | / | \ | / | \ | / |
+6  R ─ R ─ R ─ R ─ R ─ R ─ R
+   | / | \ | / | \ | / | \ |
+7  R ─ R ─ R ─ R ─ R ─ R ─ R
+
+Human Score:  0
+Computer Score:  4
+
+
+Please enter user color [B] or [R]:
+
+   A   B   C   D   E   F   G   
+
+1  B ─ B ─ B ─ B ─ B ─ B ─ B
+   | \ | / | \ | / | \ | / |
+2  B ─ B ─ B ─ B ─ B ─ B ─ B
+   | / | \ | / | \ | / | \ |
+3  B ─ B ─ B ─ B ─ B ─ B ─ B
+   | \ | / | \ | / | \ | / |
+4  B ─ B ─ B ─   ─ R ─ R ─ R
+   | / | \ | / | \ | / | \ |
+5  R ─ R ─ R ─ R ─ R ─ R ─ R
+   | \ | / | \ | / | \ | / |
+6  R ─ R ─ R ─ R ─ R ─ R ─ R
+   | / | \ | / | \ | / | \ |
+7  R ─ R ─ R ─ R ─ R ─ R ─ R
+
+Human Score:  0
+Computer Score:  4
+
+Your move:
+You entered:  Q
+Are you sure you want to quit? 
+                Quitting gives a victory to the computer.
+                [Y] or [N]
+Please enter your choice:
+Your choice:  Y
+
+USER QUIT. COMPUTER WINS!
+COMPUTER wins![B]
+
+Human Score:  0
+Computer Score:  5
+
+
+Human Score:  0
+Computer Score:  5
+
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+nil
+clj꞉seminarski-rad.gameplay꞉> 
+; Execution error (ClassCastException) at seminarski-rad.input-utility/eval9171 (form-init9348990916859548552.clj:248).
+; class java.lang.String cannot be cast to class java.lang.Number (java.lang.String and java.lang.Number are in module java.base of loader 'bootstrap')
+clj꞉seminarski-rad.input-utility꞉> 
+true
+clj꞉seminarski-rad.input-utility꞉> 
+#'seminarski-rad.input-utility/adjust-board-size
+clj꞉seminarski-rad.input-utility꞉> 
+5
+clj꞉seminarski-rad.input-utility꞉> 
+5
+clj꞉seminarski-rad.input-utility꞉> 
+5
+clj꞉seminarski-rad.input-utility꞉> 
+-1
+clj꞉seminarski-rad.input-utility꞉> 
+#'seminarski-rad.input-utility/adjust-board-size
+clj꞉seminarski-rad.input-utility꞉> 
+5
+clj꞉seminarski-rad.input-utility꞉> 
+3
+clj꞉seminarski-rad.input-utility꞉> 
+1
+clj꞉seminarski-rad.input-utility꞉> 
+5
+clj꞉seminarski-rad.input-utility꞉> 
+5
+clj꞉seminarski-rad.input-utility꞉> 
+5
+clj꞉seminarski-rad.input-utility꞉> 
+5
+clj꞉seminarski-rad.input-utility꞉> 
+#'seminarski-rad.input-utility/adjust-board-size
+clj꞉seminarski-rad.input-utility꞉> 
+#'seminarski-rad.board/create-board
+clj꞉seminarski-rad.board꞉> 
+{:1
+ {:A {:piece "B", :moves ([:1 :A] [:1 :B] [:2 :A] [:2 :B]), :eats ([:1 :C] [:3 :A] [:3 :C])},
+  :B {:piece "B", :moves ([:1 :A] [:1 :B] [:1 :C] [:2 :B]), :eats ([:1 :D] [:3 :B])},
+  :C
+  {:piece "B",
+   :moves ([:1 :B] [:1 :C] [:1 :D] [:2 :B] [:2 :C] [:2 :D]),
+   :eats ([:1 :A] [:1 :E] [:3 :A] [:3 :C] [:3 :E])},
+  :D {:piece "B", :moves ([:1 :C] [:1 :D] [:1 :E] [:2 :D]), :eats ([:1 :B] [:3 :D])},
+  :E {:piece "B", :moves ([:1 :D] [:1 :E] [:2 :D] [:2 :E]), :eats ([:1 :C] [:3 :C] [:3 :E])}},
+ :2
+ {:A {:piece "B", :moves ([:1 :A] [:2 :A] [:2 :B] [:3 :A]), :eats ([:2 :C] [:4 :A])},
+  :B
+  {:piece "B",
+   :moves ([:1 :A] [:1 :B] [:1 :C] [:2 :A] [:2 :B] [:2 :C] [:3 :A] [:3 :B] [:3 :C]),
+   :eats ([:2 :D] [:4 :B] [:4 :D])},
+  :C {:piece "B", :moves ([:1 :C] [:2 :B] [:2 :C] [:2 :D] [:3 :C]), :eats ([:2 :A] [:2 :E] [:4 :C])},
+  :D
+  {:piece "B",
+   :moves ([:1 :C] [:1 :D] [:1 :E] [:2 :C] [:2 :D] [:2 :E] [:3 :C] [:3 :D] [:3 :E]),
+   :eats ([:2 :B] [:4 :B] [:4 :D])},
+  :E {:piece "B", :moves ([:1 :E] [:2 :D] [:2 :E] [:3 :E]), :eats ([:2 :C] [:4 :E])}},
+ :3
+ {:A
+  {:piece "B",
+   :moves ([:2 :A] [:2 :B] [:3 :A] [:3 :B] [:4 :A] [:4 :B]),
+   :eats ([:1 :A] [:1 :C] [:3 :C] [:5 :A] [:5 :C])},
+  :B {:piece "B", :moves ([:2 :B] [:3 :A] [:3 :B] [:3 :C] [:4 :B]), :eats ([:1 :B] [:3 :D] [:5 :B])},
+  :C
+  {:piece " ",
+   :moves ([:2 :B] [:2 :C] [:2 :D] [:3 :B] [:3 :C] [:3 :D] [:4 :B] [:4 :C] [:4 :D]),
+   :eats ([:1 :A] [:1 :C] [:1 :E] [:3 :A] [:3 :E] [:5 :A] [:5 :C] [:5 :E])},
+  :D {:piece "R", :moves ([:2 :D] [:3 :C] [:3 :D] [:3 :E] [:4 :D]), :eats ([:1 :D] [:3 :B] [:5 :D])},
+  :E
+  {:piece "R",
+   :moves ([:2 :D] [:2 :E] [:3 :D] [:3 :E] [:4 :D] [:4 :E]),
+   :eats ([:1 :C] [:1 :E] [:3 :C] [:5 :C] [:5 :E])}},
+ :4
+ {:A {:piece "R", :moves ([:3 :A] [:4 :A] [:4 :B] [:5 :A]), :eats ([:2 :A] [:4 :C])},
+  :B
+  {:piece "R",
+   :moves ([:3 :A] [:3 :B] [:3 :C] [:4 :A] [:4 :B] [:4 :C] [:5 :A] [:5 :B] [:5 :C]),
+   :eats ([:2 :B] [:2 :D] [:4 :D])},
+  :C {:piece "R", :moves ([:3 :C] [:4 :B] [:4 :C] [:4 :D] [:5 :C]), :eats ([:2 :C] [:4 :A] [:4 :E])},
+  :D
+  {:piece "R",
+   :moves ([:3 :C] [:3 :D] [:3 :E] [:4 :C] [:4 :D] [:4 :E] [:5 :C] [:5 :D] [:5 :E]),
+   :eats ([:2 :B] [:2 :D] [:4 :B])},
+  :E {:piece "R", :moves ([:3 :E] [:4 :D] [:4 :E] [:5 :E]), :eats ([:2 :E] [:4 :C])}},
+ :5
+ {:A {:piece "R", :moves ([:4 :A] [:4 :B] [:5 :A] [:5 :B]), :eats ([:3 :A] [:3 :C] [:5 :C])},
+  :B {:piece "R", :moves ([:4 :B] [:5 :A] [:5 :B] [:5 :C]), :eats ([:3 :B] [:5 :D])},
+  :C
+  {:piece "R",
+   :moves ([:4 :B] [:4 :C] [:4 :D] [:5 :B] [:5 :C] [:5 :D]),
+   :eats ([:3 :A] [:3 :C] [:3 :E] [:5 :A] [:5 :E])},
+  :D {:piece "R", :moves ([:4 :D] [:5 :C] [:5 :D] [:5 :E]), :eats ([:3 :D] [:5 :B])},
+  :E {:piece "R", :moves ([:4 :D] [:4 :E] [:5 :D] [:5 :E]), :eats ([:3 :C] [:3 :E] [:5 :C])}}}
+clj꞉seminarski-rad.board꞉> 
+; Execution error (ArityException) at seminarski-rad.board/eval9213 (form-init9348990916859548552.clj:135).
+; Wrong number of args (1) passed to: seminarski-rad.board/print-the-board
+clj꞉seminarski-rad.board꞉> 
+; Execution error (ArityException) at seminarski-rad.board/eval9215 (form-init9348990916859548552.clj:135).
+; Wrong number of args (0) passed to: seminarski-rad.board/create-board
+clj꞉seminarski-rad.board꞉> 
+
+   A   B   C   D   E   
+
+1  B ─ B ─ B ─ B ─ B
+   | \ | / | \ | / |
+2  B ─ B ─ B ─ B ─ B
+   | / | \ | / | \ |
+3  B ─ B ─   ─ R ─ R
+   | \ | / | \ | / |
+4  R ─ R ─ R ─ R ─ R
+   | / | \ | / | \ |
+5  R ─ R ─ R ─ R ─ R
+nil
+clj꞉seminarski-rad.board꞉> 
+
+   
+
+0  nil
+nil
+clj꞉seminarski-rad.board꞉> 
+
+   A   
+
+1   
+nil
+clj꞉seminarski-rad.board꞉> 
+#'seminarski-rad.board/create-board
+clj꞉seminarski-rad.board꞉> 
+
+   A   
+
+1   
+nil
+clj꞉seminarski-rad.board꞉> 
+
+   A   
+
+1   
+nil
+clj꞉seminarski-rad.board꞉> 
+
+   A   
+
+1   
+nil
+clj꞉seminarski-rad.board꞉> 
+
+   A   B   C   
+
+1  B ─ B ─ B
+   | \ | / |
+2  B ─   ─ R
+   | / | \ |
+3  R ─ R ─ R
+nil
+clj꞉seminarski-rad.board꞉> 

@@ -2,13 +2,15 @@
   (:require [seminarski-rad.input-utility :as utility]
             [clojure.string :as str]))
 
-(defn- quit?
-  "Checks if the user is trying to quit. If so, then it ends game 
-   process."
-  [purified-input-str]
-  (if (= purified-input-str "Q")
-      (System/exit 0)
-    true))
+(defn confirm-validator-Y-N
+  "Checks if the confirmation input of user is contained
+   in [\"Y\" \"N\"]."
+  [input-str]
+  (let [purified-input-str (utility/purify-user-input
+                            input-str)]
+    (some #(= % purified-input-str) ["Y" "N"])))
+
+
 
 (defn- input-length-validator 
   "Checks if the user's input is longer or shorter than needed.
@@ -67,7 +69,6 @@
     "eat" 
         false))
 
-(utility/calculate-field-to-eat "3C-5E")
 (defn- game-rule-validator 
   "Checks if the rules of the game are validated (ie. if the player is attempting to
    make a legal move that is drawn on the board). If the legal move is able to be made,
@@ -95,7 +96,6 @@
   [input-str board player-color board-size]
   (let [purified-input-str (utility/purify-user-input input-str)] 
     (and 
-     (quit? purified-input-str)
      (input-length-validator purified-input-str 5)
      (input-format-validator purified-input-str board-size)
      (proper-piece-color-validator purified-input-str board player-color)
@@ -107,12 +107,27 @@
 
 (middle-keyword :A :C)
 
+(defn not-empty?
+  [input]
+  (not (empty? input)))
+
 (defn user-color-input-validator
-  [user-color-input]
+  [user-color-input] 
   (let [purified-input-str (utility/purify-user-input user-color-input)]
     (cond
-      (> (count purified-input-str) 1) (println "Input only 1 character.") false
-      ((and (not= purified-input-str "B")
-            (not= purified-input-str "R"))) (println "Choose R or B.") false
+      (empty? purified-input-str) false
+      (> (count purified-input-str) 1) false
+      (not (some #(= % purified-input-str) ["R" "B"])) false
       :else true)))
+
+(defn number-in-range?
+  "Checks if a number is in range of given bounds.
+    Both lower and upper bound inclusive."
+  [a-number ]
+  (if-not (number? a-number)
+    nil  
+    (<= a-number 5)))
+
+
+
 

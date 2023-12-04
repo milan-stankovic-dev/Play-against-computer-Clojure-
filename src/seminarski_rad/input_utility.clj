@@ -1,6 +1,7 @@
 (ns seminarski-rad.input-utility
   (:require [clojure.set :as set]
-            [clojure.string :as str]))
+            [clojure.string :as str]
+            [seminarski-rad.input-utility :as utility]))
 
 (defn purify-user-input
   "Removes unnecessary blank characters and capitalizes 
@@ -14,6 +15,8 @@
         first-step)))
 
 (defn extract-keys-from-user-input
+  "Takes in a string representing user input and returns
+   a vector of every character (except '-') as a keyword."
   [input]
   (conj (conj (conj (vector (keyword (subs input 0 1)))
                     (keyword (subs input 1 2)))
@@ -21,6 +24,8 @@
         (keyword (subs input 4))))
 
 (defn get-move-start
+  "Takes in a string representing user input and returns
+     a vector of starting coordinates as keywords."
   [input]
   (let [user-keys (extract-keys-from-user-input input)]
     (vector (first user-keys) (first (rest user-keys)))))
@@ -28,50 +33,72 @@
 (get-move-start "1a-2b")
 
 (defn get-move-finish
+  "Takes in a string representing user input and returns
+       a vector of ending coordinates as keywords."
   [input]
   (let [user-keys (extract-keys-from-user-input input)]
     (vector (first (rest (rest user-keys)))
             (first (rest (rest (rest user-keys)))))))
 
 (defn get-initial-row-as-num
+  "Takes in a string representing user input and returns
+    the numeric value of the starting coordinate's row."
   [input]
   (Integer/parseInt (subs input 0 1)))
 
 (defn get-final-row-as-num
+  "Takes in a string representing user input and returns
+      the numeric value of the ending coordinate's row."
   [input]
   (Integer/parseInt (subs input 3 4)))
 
 (defn get-initial-col-as-str 
+  "Takes in a string representing user input and returns
+      the string value of the starting coordinate's column."
   [input]
   (subs input 1 2))
 
 (defn get-final-col-as-str
+  "Takes in a string representing user input and returns
+        the string value of the ending coordinate's column."
   [input]
   (subs input 4 5))
 
 (def conversion-map {:A 1 :B 2 :C 3 :D 4 :E 5 :F 6 :G 7 :H 8 :I 9})
 
 (defn get-initial-col-as-num
+  "Takes in a string representing user input and returns
+            the numeric value of the starting coordinate's column."
  [input] 
    (get conversion-map (keyword (get-initial-col-as-str input))))
 
 (defn get-final-col-as-num
+  "Takes in a string representing user input and returns
+          the numeric value of the ending coordinate's column."
   [input]
   (get conversion-map (keyword (get-final-col-as-str input))))
 
-(defn middle-keyword [kw1 kw2]
+(defn middle-keyword
+  "Takes in two keywords that are single char and alphabetic,
+   returns the midvalue between those characters, as a keyword."
+  [kw1 kw2]
   (let [char1 (first (name kw1))
         char2 (first (name kw2))
         min-char (char (min (int char1) (int char2)))
         middle-char (char (inc (int min-char)))
         middle-keyword (keyword (str middle-char))]
-    middle-keyword)) 
+    middle-keyword))
 
-(defn middle-number [num1 num2]
+(defn middle-number
+  "Takes in two numbers, returns the previous value of the one
+   that's greater."
+  [num1 num2] 
   (let [bigger-number (max num1 num2)]
     (dec bigger-number)))
 
 (defn opposite-player-color
+  "For given user color as single char string, returns opposite 
+   user color (for \"R\" returns \"B\" and vice versa)."
   [color]
   (if (= color "R")
     "B"
@@ -92,6 +119,8 @@
   (keyword (str num)))
 
 (defn midvalue-str->keyword
+  "Takes in two strings that are single char and alphabetic,
+     returns the midvalue between those characters, as a keyword."
   [str1 str2]
   (let [num1 (conversion-map (keyword str1))
         num2 (conversion-map (keyword str2))
@@ -106,10 +135,15 @@
   (name keyword))
 
 (defn numeric-keyword->num
+  "Takes in a keyword that is numeric and returns the number
+   represented by it."
   [a-keyword]
   (Integer/parseInt (name a-keyword)))
 
 (defn calculate-field-to-eat
+  "For a string given as representation of a user's move (supposedly
+   validated) returns vector of keyworded coordinates of field that
+   is to be eaten by user's move."
   [purified-input-str] ;e.g. "1A-3C"
   (let [init-row-num (get-initial-row-as-num purified-input-str)
         init-col-str (get-initial-col-as-str purified-input-str)
@@ -130,8 +164,6 @@
         (vector (num->keyword (midvalue-num init-row-num final-row-num))
                 (keyword init-col-str))))))
 
-(calculate-field-to-eat "3C-3A")
-
 (defn reverse-input
   "Does a semantic reverse, where the end of a move goes first, then the 
    beginning. DOES NOT: do a normal string reversed"
@@ -151,8 +183,6 @@
    in given map, nil otherwise."
   [a-map value]
   (some (fn [[k v]] (when (= v value) k)) a-map))
-
-(num->letter-keyword conversion-map 9)
 
 (defn seq->keyword-seq
   "Returns list of keyword values for given collection 
@@ -195,6 +225,27 @@
 
 (?-half-of-seq [1 2 3 4 5 6 7 8 9 10] 1)
 
-(defn not-empty?
-  [input]
-  (not (empty? input)))
+(defn prompt-info
+  [what-to-prompt validator-function]
+  (println (str "Please enter " what-to-prompt ":"))
+  (let [info (read-line)]
+    (if-not (validator-function info)
+      (do
+        (println (str (str/capitalize what-to-prompt) " invalid."))
+        (prompt-info what-to-prompt validator-function))
+      info)))
+
+(defn adjust-board-size
+  "Takes in a desired number of board size and converts it to a 
+   reasonable value. If input is invalid (non-numeric, less than 0 etc.)
+   defaults to 5. If even, adds one. The only fair boards are the odd x odd
+   boards."
+  [inputted-size]
+  (if-not (number? inputted-size)
+    5 
+    (if (< inputted-size 0)
+      5
+      (if (even? inputted-size)
+        (inc inputted-size)
+        inputted-size))))
+
