@@ -1,6 +1,5 @@
 (ns seminarski-rad.input-utility
-  (:require [clojure.set :as set]
-            [clojure.string :as str]
+  (:require [clojure.string :as str]
             [seminarski-rad.input-utility :as utility]))
 
 (defn purify-user-input
@@ -64,19 +63,37 @@
   [input]
   (subs input 4 5))
 
-(def conversion-map {:A 1 :B 2 :C 3 :D 4 :E 5 :F 6 :G 7 :H 8 :I 9})
+(defn number->char
+  "Converts number to its character in the alphabet. May behave funky
+   for numbers less than 1 and greater than 26."
+  [a-number]
+  (if-not (number? a-number)
+    nil
+    (char (+ 64 a-number))))
+
+(defn char->number 
+  "Converts single char to the position in the alphabet for that letter.
+   May behave funky for non letters or lowercase letters."
+  [a-char]
+  (if-not (char? a-char)
+    nil
+    (- (int a-char) 64)))
+
+(int \A) ;;65
+(int \Z) ;;90
+(char 65) ;;\A
 
 (defn get-initial-col-as-num
   "Takes in a string representing user input and returns
             the numeric value of the starting coordinate's column."
- [input] 
-   (get conversion-map (keyword (get-initial-col-as-str input))))
+ [input-str] 
+   (char->number (first (get-initial-col-as-str input-str))))
 
 (defn get-final-col-as-num
   "Takes in a string representing user input and returns
           the numeric value of the ending coordinate's column."
   [input]
-  (get conversion-map (keyword (get-final-col-as-str input))))
+  (char->number (first (get-final-col-as-str input))))
 
 (defn middle-keyword
   "Takes in two keywords that are single char and alphabetic,
@@ -122,13 +139,12 @@
   "Takes in two strings that are single char and alphabetic,
      returns the midvalue between those characters, as a keyword."
   [str1 str2]
-  (let [num1 (conversion-map (keyword str1))
-        num2 (conversion-map (keyword str2))
+  (let [num1 (char->number (first str1))
+        num2 (char->number (first str2))
         midvalue-num (midvalue-num num1 num2)]
-     ((set/map-invert conversion-map)
-          midvalue-num)))
+    (keyword (str (number->char midvalue-num)))))
 
-(midvalue-str->keyword "A" "C")
+(midvalue-str->keyword "A" "A")
 
 (defn keyword->str
   [keyword]
@@ -181,8 +197,8 @@
 (defn num->letter-keyword
   "Returns key under which a value is stored
    in given map, nil otherwise."
-  [a-map value]
-  (some (fn [[k v]] (when (= v value) k)) a-map))
+  [a-number]
+  (keyword (str (number->char a-number))))
 
 (defn seq->keyword-seq
   "Returns list of keyword values for given collection 
@@ -197,7 +213,7 @@
    of numbers given as sequence. Uses conversion map for converting
    values."
   [numeric-seq]
-   (map #(name (num->letter-keyword conversion-map %))
+   (map #(name (num->letter-keyword %))
                 numeric-seq))
 
 (defn numeric-seq->letter-keyword-seq

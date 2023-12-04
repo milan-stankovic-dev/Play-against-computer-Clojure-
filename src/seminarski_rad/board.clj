@@ -146,8 +146,7 @@ assigned-pieces-board
         letter-range-keywords 
         (utility/numeric-seq->letter-keyword-seq 
          numeric-sequence)
-        last-col-keyword (utility/num->letter-keyword
-                          utility/conversion-map size)]
+        last-col-keyword (utility/num->letter-keyword size)]
     (print (str (name row-keyword) "  "))
     (doseq [col letter-range-keywords] 
       (print (str (get-in board [row-keyword col :piece])) "─ "))
@@ -174,5 +173,5 @@ assigned-pieces-board
         (print-slants size "| / | \\ ")))
     (print-row size last-row-keyword board)))
 
-;; (print-the-board (create-board 9) 9)
+;; (print-the-board (create-board 13) 13)
 ;; (create-board 9)

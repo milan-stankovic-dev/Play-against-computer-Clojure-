@@ -24,8 +24,7 @@
    a-e or A-E."
   [input-str board-size] 
   (let [num-limit board-size
-        str-limit-uc (name (utility/num->letter-keyword
-                            utility/conversion-map num-limit))
+        str-limit-uc (name (utility/num->letter-keyword num-limit))
         str-limit-lc (str/lower-case str-limit-uc)]
     ;; (re-matches #"[1-5][a-eA-E]-[1-5][a-eA-E]" input-str) 
     (re-matches (re-pattern (format "[1-%d][a-%sA-%s]-[1-%d][a-%sA-%s]"

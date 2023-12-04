@@ -76,7 +76,7 @@
           (take-turns "COMPUTER" result-of-piece-move human-color computer-color board-size)))
       (do
         (println "Computer's turn...")
-        ;; (Thread/sleep 2000)
+        (Thread/sleep 2000)
            (let [[score best-move] (computer/find-best-move
                                   board 5 computer-color board-size)]
           (println (str "Computer's move: " best-move))
@@ -103,7 +103,7 @@
   (let [user-choice (utility/purify-user-input
                      (utility/prompt-info "a number" val/not-empty?))]
     (case user-choice
-      "1" (play-game (board/create-board 5) 5)
+      "1" (play-game (board/create-board 3) 3)
       "2" (play-game (board/create-board 7) 7)
       "3" (play-game (board/create-board 9) 9)
       "END")))
