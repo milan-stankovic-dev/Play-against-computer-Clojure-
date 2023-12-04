@@ -55,12 +55,14 @@
     Here's your board:\n")
       (board/print-the-board board board-size)
       (computer/print-the-score )
+      ;; (computer/initiate-piece-count board-size)
       (println))
 
 (defn take-turns
   [current-player board human-color computer-color board-size]
   (board/print-the-board board board-size) 
   (computer/print-the-score)
+  (computer/print-the-pieces)
   (if (computer/check-for-win human-color computer-color board)
     (println "End of game.")
     
@@ -71,8 +73,13 @@
         (if (vector? result-of-piece-move) 
           (if (= "quit" (last result-of-piece-move))
             nil 
-            (take-turns "HUMAN" (first result-of-piece-move)
-                        human-color computer-color board-size))
+            (do
+              (computer/assign-victory (computer/check-for-win 
+                                        human-color computer-color board)
+                                       human-color)
+              (swap! computer/pieces update "COMPUTER" dec)
+              (take-turns "HUMAN" (first result-of-piece-move)
+                          human-color computer-color board-size)))
           (take-turns "COMPUTER" result-of-piece-move human-color computer-color board-size)))
       (do
         (println "Computer's turn...")
@@ -85,8 +92,13 @@
                                                                    board computer-color board-size)]
             (if (vector? result-of-piece-move)
               ;; Here we do not check for quits because a computer may not quit!
-              (take-turns "COMPUTER" (first result-of-piece-move)
-                          human-color computer-color board-size)
+              (do
+                (computer/assign-victory (computer/check-for-win
+                                          human-color computer-color board)
+                                         computer-color)
+                (swap! computer/pieces update "HUMAN" dec)
+                (take-turns "COMPUTER" (first result-of-piece-move)
+                            human-color computer-color board-size))
               (take-turns "HUMAN" result-of-piece-move human-color computer-color board-size))))))))
 
 (defn play-game
@@ -96,6 +108,8 @@
                      (utility/prompt-info "user color [B] or [R]"
                                           val/user-color-input-validator))
         computer-color (utility/opposite-player-color human-color)]
+    (computer/initiate-piece-count board
+                                   human-color computer-color) 
     (take-turns "HUMAN" board human-color computer-color board-size)))
 
 (defn access-main-menu-item

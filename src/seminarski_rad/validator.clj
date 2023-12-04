@@ -119,13 +119,6 @@
       (not (some #(= % purified-input-str) ["R" "B"])) false
       :else true)))
 
-(defn number-in-range?
-  "Checks if a number is in range of given bounds.
-    Both lower and upper bound inclusive."
-  [a-number ]
-  (if-not (number? a-number)
-    nil  
-    (<= a-number 5)))
 
 
 

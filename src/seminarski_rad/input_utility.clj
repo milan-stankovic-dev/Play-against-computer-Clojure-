@@ -79,10 +79,6 @@
     nil
     (- (int a-char) 64)))
 
-(int \A) ;;65
-(int \Z) ;;90
-(char 65) ;;\A
-
 (defn get-initial-col-as-num
   "Takes in a string representing user input and returns
             the numeric value of the starting coordinate's column."

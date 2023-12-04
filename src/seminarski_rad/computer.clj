@@ -7,8 +7,21 @@
 
 ;; **************** MOVED FROM GAMEPLAY.CLJ ***************
 
+(defn- pieces-on-board-for?
+  [player-color board]
+  (count (filter #(= player-color (:piece %))
+                 (for [row (vals board) col (vals row)] col))))
+
 (def wins (atom {"HUMAN" 0 "COMPUTER" 0}))
+(def pieces (atom {"HUMAN" 0 "COMPUTER" 0}))
 @wins
+
+(defn initiate-piece-count
+  [board human-color computer-color]
+  (let [human-piece-count (pieces-on-board-for? human-color board)
+        computer-piece-count (pieces-on-board-for? computer-color board)]
+    (reset! pieces {"HUMAN" human-piece-count 
+                    "COMPUTER" computer-piece-count} )))
 
 (defn print-the-score
   []
@@ -16,42 +29,39 @@
   (println "Computer Score: " (get @wins "COMPUTER"))
   (println))
 
+(defn print-the-pieces
+  []
+  (println "\nHuman pieces left: " (get @pieces "HUMAN"))
+  (println "Computer pieces left: " (get @pieces "COMPUTER"))
+  (println))
+
 (defn assign-victory
   "Updates atom to reflect victory status of user who won,
    prints winner and score. Returns winner as string." 
   [winner winner-color] 
-    (println (str winner " wins!" "[" winner-color "]"))
-    (swap! wins #(update-in % [winner] (fnil inc 0)))
-    (print-the-score)
-  winner)
+  (if-not winner
+    nil
+    (do
+      (println (str winner " wins!" "[" winner-color "]"))
+      (swap! wins #(update-in % [winner] (fnil inc 0))))))
 
-(defn check-for-win
-  "Returns \"HUMAN\" if human won, \"COMPUTER\" if computer
-   won, false otherwise. Note: both \"HUMAN\" and \"COMPUTER\" are truthy:
-   can be checked for truthiness if only win state is of concern."
+(defn check-for-win 
   [human-color computer-color board]
-  (let [human-piece-fields (filter #(= human-color (:piece %))
-                                   (for [row (vals board) col (vals row)] col))
-        computer-piece-fields (filter #(= computer-color (:piece %))
-                                      (for [row (vals board) col (vals row)] col))]
-    (if (and (empty? human-piece-fields) (seq computer-piece-fields))
-      ;; (do
-      ;;   (println (str "Computer wins!" "[" computer-color "]"))
-      ;;   (swap! utility/wins #(update-in % ["COMPUTER"] (fnil inc 0)))
-      ;;   (utility/print-the-score)
-      ;;   "COMPUTER")
-      (assign-victory "COMPUTER" computer-color)
-      (if (and (empty? computer-piece-fields) (seq human-piece-fields))
-        ;; (do
-        ;;   (println (str "Human wins!" "[" human-color "]"))
-        ;;   (swap! utility/wins #(update-in % ["HUMAN"] (fnil inc 0)))
-        ;;   (utility/print-the-score)
-        ;;   "HUMAN")
-        (assign-victory "HUMAN" human-color)
+  (let [
+        ;; human-piece-count (pieces-on-board-for? human-color board)
+        ;; computer-piece-count (pieces-on-board-for? computer-color board)
+        human-piece-count (get @pieces "HUMAN")
+        computer-piece-count (get @pieces "COMPUTER")]
+    (if (= 0 human-piece-count)
+      "COMPUTER"
+      (if (= 0 computer-piece-count)
+        "HUMAN"
         false))))
 
+@pieces
+
 (check-for-win "B" "R" (board/create-board 5))
-(board/create-board 5)
+(board/create-board 3)
 (filter #(= " " (:piece %))
         (for [row (vals (board/create-board 5))
               col (vals row)]
@@ -101,11 +111,8 @@
             (if (= validation-result "eat")
               (let [move-done-eaten (assoc-in move-done-board
                                               (conj (utility/calculate-field-to-eat
-                                                     purified-input-str) :piece) " ")]
-                (do
-                        ;; (swap! current-game-score
-                        ;;        #(update-in % [player :score] inc))
-                  [move-done-eaten "eaten"]))
+                                                     purified-input-str) :piece) " ")] 
+                  [move-done-eaten "eaten"])
               move-done-board)))))))
 
 (defn move-piece-computer
@@ -122,7 +129,6 @@
         move-piece-res))))
 
 ;; ********************************************************
-
 
 (defn- win-numeric
   [board computer-color]
