@@ -1,1713 +1,87 @@
-#'seminarski-rad.statistics/write-to-file
-clj꞉seminarski-rad.statistics꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.input-utility/write-to-file
-clj꞉seminarski-rad.input-utility꞉> 
+; Evaluating file: validator.clj
+#'seminarski-rad.validator/user-color-input-validator
+clj꞉seminarski-rad.validator꞉> 
 ; Evaluating file: input_utility.clj
-#'seminarski-rad.input-utility/write-to-file
+#'seminarski-rad.input-utility/adjust-board-size
 clj꞉seminarski-rad.input-utility꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.database/find-all-game-sessions-stated-won
-clj꞉seminarski-rad.database꞉> 
-; Execution error (SQLException) at com.mysql.jdbc.SQLError/createSQLException (SQLError.java:1055).
-; Invalid utf8mb4 character string: 'ACED00'
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/find-all-game-sessions-stated-won
-clj꞉seminarski-rad.database꞉> 
-[{:game_session/computer_score 0,
-  :game_session/human_score 3,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 3}]
-clj꞉seminarski-rad.database꞉> 
-; Evaluating file: database.clj
-[{:game_session/computer_score 0,
-  :game_session/human_score 3,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 3}]
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.statistics/human-wins
-clj꞉seminarski-rad.statistics꞉> 
-[{:game_session/computer_score 0,
-  :game_session/human_score 3,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 3}]
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/wins-human-vs-comp
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/wins-human-vs-comp
-clj꞉seminarski-rad.statistics꞉> 
-"*****************WINS SUM TOTAL:*******************\n          HUMAN: 1COMPUTER: 0"
-clj꞉seminarski-rad.statistics꞉> 
-; Execution error (ArityException) at seminarski-rad.statistics/eval8237 (form-init8530266764389672516.clj:19).
-; Wrong number of args (1) passed to: seminarski-rad.input-utility/write-to-file
-clj꞉seminarski-rad.statistics꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/wins-human-vs-comp
-clj꞉seminarski-rad.statistics꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/wins-human-vs-comp
-clj꞉seminarski-rad.statistics꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/wins-human-vs-comp
-clj꞉seminarski-rad.statistics꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/wins-human-vs-comp
-clj꞉seminarski-rad.statistics꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/wins-human-vs-comp
-clj꞉seminarski-rad.statistics꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/wins-human-vs-comp
-clj꞉seminarski-rad.statistics꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/wins-human-vs-comp
-clj꞉seminarski-rad.statistics꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/wins-human-vs-comp
-clj꞉seminarski-rad.statistics꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-; Syntax error compiling at (src/seminarski_rad/statistics.clj:13:3).
-; Unable to resolve symbol: stats in this context
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/stats
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/reset-user-stats!
-clj꞉seminarski-rad.statistics꞉> 
-{"stanmil" {:human-wins 0, :computer-wins 0, :human-score 0, :computer-score 0}}
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/reset-stats!
-clj꞉seminarski-rad.statistics꞉> 
-{"stanmil" {:human-wins 0, :computer-wins 0, :human-score 0, :computer-score 0}}
-clj꞉seminarski-rad.statistics꞉> 
-{}
-clj꞉seminarski-rad.statistics꞉> 
-{}
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/app-users
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/game-sessions
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/boards
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/reset-stats!
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.database/find-all-users
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/find-all-?
-clj꞉seminarski-rad.database꞉> 
-; Execution error (ClassCastException) at next.jdbc.connection/spec->url+etc (connection.clj:148).
-; class clojure.lang.PersistentVector cannot be cast to class clojure.lang.IPersistentMap (clojure.lang.PersistentVector and clojure.lang.IPersistentMap are in unnamed module of loader 'app')
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/find-all-?
-clj꞉seminarski-rad.database꞉> 
-; Execution error (ClassCastException) at next.jdbc.connection/spec->url+etc (connection.clj:148).
-; class clojure.lang.PersistentVector cannot be cast to class clojure.lang.IPersistentMap (clojure.lang.PersistentVector and clojure.lang.IPersistentMap are in unnamed module of loader 'app')
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/find-all-?
-clj꞉seminarski-rad.database꞉> 
-; Execution error (ClassCastException) at next.jdbc.connection/spec->url+etc (connection.clj:148).
-; class clojure.lang.PersistentVector cannot be cast to class clojure.lang.IPersistentMap (clojure.lang.PersistentVector and clojure.lang.IPersistentMap are in unnamed module of loader 'app')
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/find-all-?
-clj꞉seminarski-rad.database꞉> 
-; Execution error (MySQLSyntaxErrorException) at jdk.internal.reflect.NativeConstructorAccessorImpl/newInstance0 (NativeConstructorAccessorImpl.java:-2).
-; You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''app_user')' at line 1
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/find-all-?
-clj꞉seminarski-rad.database꞉> 
-; Execution error (MySQLSyntaxErrorException) at jdk.internal.reflect.NativeConstructorAccessorImpl/newInstance0 (NativeConstructorAccessorImpl.java:-2).
-; You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''app_user'' at line 1
-clj꞉seminarski-rad.database꞉> 
-; Execution error (MySQLSyntaxErrorException) at jdk.internal.reflect.NativeConstructorAccessorImpl/newInstance0 (NativeConstructorAccessorImpl.java:-2).
-; You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''app_user'' at line 1
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/find-all-?
-clj꞉seminarski-rad.database꞉> 
-[#:app_user{:id 6,
-            :username "stanmil",
-            :password
-            "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"}
- #:app_user{:id 7,
-            :username "ppetar",
-            :password
-            "bcrypt+sha512$a0fe7b43a52cc19cf51194f96975f560$12$26df5d8873f84f23592cc86c9170f9d159596bceac54bd63"}
- #:app_user{:id 8,
-            :username "saraa",
-            :password
-            "bcrypt+sha512$aedc6450da3ad5555b69a4a8cd1dfe57$12$64eeb775042b47054cde8b8dfc7149e59614f83f09058037"}]
-clj꞉seminarski-rad.database꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/populate-atoms!
-clj꞉seminarski-rad.statistics꞉> 
-[#:board{:id 4, :size 3} #:board{:id 5, :size 5} #:board{:id 6, :size 7}]
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/populate-atoms!
-clj꞉seminarski-rad.statistics꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-[#:app_user{:id 6,
-            :username "stanmil",
-            :password
-            "bcrypt+sha512$d0ef5d08ea0ca8d37b5ed7707a2e9d0b$12$c7da695cfd64c5343f0c88cc673e369be54f678177ad1ddc"}
- #:app_user{:id 7,
-            :username "ppetar",
-            :password
-            "bcrypt+sha512$a0fe7b43a52cc19cf51194f96975f560$12$26df5d8873f84f23592cc86c9170f9d159596bceac54bd63"}
- #:app_user{:id 8,
-            :username "saraa",
-            :password
-            "bcrypt+sha512$aedc6450da3ad5555b69a4a8cd1dfe57$12$64eeb775042b47054cde8b8dfc7149e59614f83f09058037"}]
-clj꞉seminarski-rad.statistics꞉> 
-[#:game_session{:id 1, :app_user_id 6, :board_id 4, :won "H", :human_score 3, :computer_score 0, :human_color "R"}]
-clj꞉seminarski-rad.statistics꞉> 
-[#:board{:id 4, :size 3} #:board{:id 5, :size 5} #:board{:id 6, :size 7}]
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/repopulate-atoms!
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/count-?-wins
-clj꞉seminarski-rad.statistics꞉> 
-1
-clj꞉seminarski-rad.statistics꞉> 
-1
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/count-?-wins
-clj꞉seminarski-rad.statistics꞉> 
-1
-clj꞉seminarski-rad.statistics꞉> 
-1
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/count-?-wins
-clj꞉seminarski-rad.statistics꞉> 
-1
-clj꞉seminarski-rad.statistics꞉> 
-1
-clj꞉seminarski-rad.statistics꞉> 
-1
-clj꞉seminarski-rad.statistics꞉> 
-1
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/count-?-wins
-clj꞉seminarski-rad.statistics꞉> 
-1
-clj꞉seminarski-rad.statistics꞉> 
-0
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/count-wins-difficulty?-type?
-clj꞉seminarski-rad.statistics꞉> 
-0
-clj꞉seminarski-rad.statistics꞉> 
-0
-clj꞉seminarski-rad.statistics꞉> 
-0
-clj꞉seminarski-rad.statistics꞉> 
-4
-clj꞉seminarski-rad.statistics꞉> 
-1
-clj꞉seminarski-rad.statistics꞉> 
-0
-clj꞉seminarski-rad.statistics꞉> 
-0
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.database/find-info-for-game-session-id
-clj꞉seminarski-rad.database꞉> 
-[{:game_session/won "H",
-  :game_session/human_score 3,
-  :game_session/computer_score 0,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 3}]
-clj꞉seminarski-rad.database꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.database/find-info-for-game-session-id
-clj꞉seminarski-rad.database꞉> 
-; Execution error (MySQLSyntaxErrorException) at jdk.internal.reflect.NativeConstructorAccessorImpl/newInstance0 (NativeConstructorAccessorImpl.java:-2).
-; You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '.computer_score, s.human_color, 
-;      u.username, b.size
-;      FROM game_sessi...' at line 2
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/find-info-for-game-session-id
-clj꞉seminarski-rad.database꞉> 
-[{:game_session/won "H",
-  :game_session/human_score 3,
-  :game_session/computer_score 0,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 3}]
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/find-info-for-game-sessions
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/find-info-for-game-sessions
-clj꞉seminarski-rad.database꞉> 
-; Execution error (ArityException) at seminarski-rad.database/eval8557 (form-init8530266764389672516.clj:150).
-; Wrong number of args (2) passed to: seminarski-rad.database/find-info-for-game-sessions
-clj꞉seminarski-rad.database꞉> 
-[{:game_session/won "H",
-  :game_session/human_score 3,
-  :game_session/computer_score 0,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 3}]
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/find-info-for-game-sessions
-clj꞉seminarski-rad.database꞉> 
-[{:game_session/won "H",
-  :game_session/id 1,
-  :game_session/human_score 3,
-  :game_session/computer_score 0,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 3}]
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/find-info-for-game-sessions
-clj꞉seminarski-rad.database꞉> 
-[{:game_session/id 1,
-  :game_session/won "H",
-  :game_session/human_score 3,
-  :game_session/computer_score 0,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 3}]
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.database/find-game-sessions-info
-clj꞉seminarski-rad.database꞉> 
-[{:game_session/id 1,
-  :game_session/won "H",
-  :game_session/human_score 3,
-  :game_session/computer_score 0,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 3}]
-clj꞉seminarski-rad.database꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-; Syntax error compiling at (src/seminarski_rad/statistics.clj:16:3).
-; Unable to resolve symbol: game-sessions-info in this context
-clj꞉seminarski-rad.statistics꞉> 
-; Syntax error compiling at (src/seminarski_rad/statistics.clj:16:3).
-; Unable to resolve symbol: game-sessions-info in this context
-clj꞉seminarski-rad.statistics꞉> 
 ; Evaluating file: database.clj
 #'seminarski-rad.database/find-all-game-sessions-stated-won
 clj꞉seminarski-rad.database꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-; Syntax error compiling at (src/seminarski_rad/statistics.clj:16:3).
-; Unable to resolve symbol: game-sessions-info in this context
-clj꞉seminarski-rad.statistics꞉> 
-; Syntax error compiling at (src/seminarski_rad/statistics.clj:16:3).
-; Unable to resolve symbol: game-sessions-info in this context
-clj꞉seminarski-rad.statistics꞉> 
-; Syntax error compiling at (src/seminarski_rad/statistics.clj:16:3).
-; Unable to resolve symbol: game-sessions-info in this context
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/game-sessions-info
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/repopulate-atoms!
-clj꞉seminarski-rad.statistics꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-[{:game_session/id 1,
-  :game_session/won "H",
-  :game_session/human_score 3,
-  :game_session/computer_score 0,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 3}]
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/count-type?-wins
-clj꞉seminarski-rad.statistics꞉> 
-1
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/count-wins-board-size?-type?
-clj꞉seminarski-rad.statistics꞉> 
-0
-clj꞉seminarski-rad.statistics꞉> 
-0
-clj꞉seminarski-rad.statistics꞉> 
-0
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/count-wins-board-size?-type?
-clj꞉seminarski-rad.statistics꞉> 
-0
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/count-wins-board-size?-type?
-clj꞉seminarski-rad.statistics꞉> 
-1
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/score-for-type?-wins
-clj꞉seminarski-rad.statistics꞉> 
-({:game_session/id 1,
-  :game_session/won "H",
-  :game_session/human_score 3,
-  :game_session/computer_score 0,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 3})
-clj꞉seminarski-rad.statistics꞉> 
-()
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/score-for-type?-wins
-clj꞉seminarski-rad.statistics꞉> 
-(#:game_session{:human_score 3, :computer_score 0})
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/count-type?-wins
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/type?-wins
-clj꞉seminarski-rad.statistics꞉> 
-({:game_session/id 1,
-  :game_session/won "H",
-  :game_session/human_score 3,
-  :game_session/computer_score 0,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 3})
-clj꞉seminarski-rad.statistics꞉> 
-{:d 4}
-clj꞉seminarski-rad.statistics꞉> 
-{:d 4}
-clj꞉seminarski-rad.statistics꞉> 
-; Execution error (ClassCastException) at seminarski-rad.statistics/eval8972 (form-init8530266764389672516.clj:48).
-; class java.lang.Long cannot be cast to class clojure.lang.IFn (java.lang.Long is in module java.base of loader 'bootstrap'; clojure.lang.IFn is in unnamed module of loader 'app')
-clj꞉seminarski-rad.statistics꞉> 
-{:d 6}
-clj꞉seminarski-rad.statistics꞉> 
-; Execution error (NullPointerException) at seminarski-rad.statistics/eval8976 (form-init8530266764389672516.clj:48).
-; Cannot invoke "Object.getClass()" because "x" is null
-clj꞉seminarski-rad.statistics꞉> 
-(:d)
-clj꞉seminarski-rad.statistics꞉> 
-{:pera 1}
-clj꞉seminarski-rad.statistics꞉> 
-{:jova 2, :pera 1}
-clj꞉seminarski-rad.statistics꞉> 
-; Syntax error compiling at (src/seminarski_rad/statistics.clj:47:5).
-; Unable to resolve symbol: human-most-won-helper in this context
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/human-most-won-helper
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/human-most-won
-clj꞉seminarski-rad.statistics꞉> 
-{:username 1, :wins 0}
-clj꞉seminarski-rad.statistics꞉> 
-; Execution error (NullPointerException) at seminarski-rad.statistics/eval9087 (form-init8530266764389672516.clj:54).
-; Cannot invoke "Object.getClass()" because "x" is null
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.database/find-game-sessions-info
-clj꞉seminarski-rad.database꞉> 
-[{:game_session/id 1,
-  :app_user/id 6,
-  :game_session/won "H",
-  :game_session/human_score 3,
-  :game_session/computer_score 0,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 3}]
-clj꞉seminarski-rad.database꞉> 
-#'seminarski-rad.statistics/game-sessions-info
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/repopulate-game-sessions!
-clj꞉seminarski-rad.statistics꞉> 
-[]
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/repopulate-game-sessions!
-clj꞉seminarski-rad.statistics꞉> 
-[]
-clj꞉seminarski-rad.statistics꞉> 
-[{:game_session/id 1,
-  :app_user/id 6,
-  :game_session/won "H",
-  :game_session/human_score 3,
-  :game_session/computer_score 0,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 3}]
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/repopulate-game-sessions!
-clj꞉seminarski-rad.statistics꞉> 
-[{:game_session/id 1,
-  :app_user/id 6,
-  :game_session/won "H",
-  :game_session/human_score 3,
-  :game_session/computer_score 0,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 3}]
-clj꞉seminarski-rad.statistics꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/human-most-won-helper
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/human-most-won
-clj꞉seminarski-rad.statistics꞉> 
-{}
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/repopulate-game-sessions!
-clj꞉seminarski-rad.statistics꞉> 
-[]
-clj꞉seminarski-rad.statistics꞉> 
-[]
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/repopulate-game-sessions!
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/repopulate-game-sessions!
-clj꞉seminarski-rad.statistics꞉> 
-[]
-clj꞉seminarski-rad.statistics꞉> 
-[{:game_session/id 1,
-  :app_user/id 6,
-  :game_session/won "H",
-  :game_session/human_score 3,
-  :game_session/computer_score 0,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 3}]
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/info
-clj꞉seminarski-rad.statistics꞉> 
-[{:game_session/id 1,
-  :app_user/id 6,
-  :game_session/won "H",
-  :game_session/human_score 3,
-  :game_session/computer_score 0,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 3}]
-clj꞉seminarski-rad.statistics꞉> 
-[{:game_session/id 1,
-  :app_user/id 6,
-  :game_session/won "H",
-  :game_session/human_score 3,
-  :game_session/computer_score 0,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 3}]
-clj꞉seminarski-rad.statistics꞉> 
-[{:game_session/id 1,
-  :app_user/id 6,
-  :game_session/won "H",
-  :game_session/human_score 3,
-  :game_session/computer_score 0,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 3}]
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/repopulate-game-sessions!
-clj꞉seminarski-rad.statistics꞉> 
-[{:game_session/id 1,
-  :app_user/id 6,
-  :game_session/won "H",
-  :game_session/human_score 3,
-  :game_session/computer_score 0,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 3}]
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/repopulate-game-sessions!
-clj꞉seminarski-rad.statistics꞉> 
-[{:game_session/id 1,
-  :app_user/id 6,
-  :game_session/won "H",
-  :game_session/human_score 3,
-  :game_session/computer_score 0,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 3}]
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/repopulate-game-sessions!
-clj꞉seminarski-rad.statistics꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-[{:game_session/id 1,
-  :app_user/id 6,
-  :game_session/won "H",
-  :game_session/human_score 3,
-  :game_session/computer_score 0,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 3}]
-clj꞉seminarski-rad.statistics꞉> 
-; Evaluating file: statistics.clj
-{}
-clj꞉seminarski-rad.statistics꞉> 
-[]
-clj꞉seminarski-rad.statistics꞉> 
-[]
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/repopulate-game-sessions!
-clj꞉seminarski-rad.statistics꞉> 
-[]
-clj꞉seminarski-rad.statistics꞉> 
-[]
-clj꞉seminarski-rad.statistics꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-[{:game_session/id 1,
-  :app_user/id 6,
-  :game_session/won "H",
-  :game_session/human_score 3,
-  :game_session/computer_score 0,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 3}]
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/human-most-won
-clj꞉seminarski-rad.statistics꞉> 
-; Execution error (UnsupportedOperationException) at seminarski-rad.statistics/human-most-won-helper (statistics.clj:39).
-; nth not supported on this type: PersistentArrayMap
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/human-most-won
-clj꞉seminarski-rad.statistics꞉> 
-{:id {:username "stanmil", :wins 1}}
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/human-most-won-helper
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/human-most-won
-clj꞉seminarski-rad.statistics꞉> 
-{nil {:username "stanmil", :wins 1}}
-clj꞉seminarski-rad.statistics꞉> 
-{:game_session/id 1,
- :app_user/id 6,
- :game_session/won "H",
- :game_session/human_score 3,
- :game_session/computer_score 0,
- :game_session/human_color "R",
- :app_user/username "stanmil",
- :board/size 3}
-clj꞉seminarski-rad.statistics꞉> 
-6
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/human-most-won-helper
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/human-most-won
-clj꞉seminarski-rad.statistics꞉> 
-{:game_session/id 1, :app_user/id 6, :game_session/won "H", :game_session/human_score 3, :game_session/computer_score 0, :game_session/human_color "R", :app_user/username "stanmil", :board/size 3}
-{nil {:username "stanmil", :wins 1}}
-clj꞉seminarski-rad.statistics꞉> 
-6
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/human-most-won-helper
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/human-most-won
-clj꞉seminarski-rad.statistics꞉> 
-{:6 {:username "stanmil", :wins 1}}
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/get-map-human-wins-helper
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/get-map-human-wins
-clj꞉seminarski-rad.statistics꞉> 
-{:6 {:username "stanmil", :wins 1}}
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/get-map-human-wins-helper
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/get-map-human-wins
-clj꞉seminarski-rad.statistics꞉> 
-{:stanmil 1}
-clj꞉seminarski-rad.statistics꞉> 
-{:stanmil 1}
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/find-highest-score-player
-clj꞉seminarski-rad.statistics꞉> 
-; Execution error (ArityException) at seminarski-rad.statistics/find-highest-score-player (form-init8530266764389672516.clj:51).
-; Wrong number of args (3) passed to: clojure.core/inc
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/find-highest-score-player
-clj꞉seminarski-rad.statistics꞉> 
-; Execution error (ArityException) at seminarski-rad.statistics/find-highest-score-player (form-init8530266764389672516.clj:51).
-; Wrong number of args (3) passed to: clojure.core/inc
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/repopulate-game-sessions!
-clj꞉seminarski-rad.statistics꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-[{:game_session/id 1,
-  :app_user/id 6,
-  :game_session/won "H",
-  :game_session/human_score 3,
-  :game_session/computer_score 0,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 3}
- {:game_session/id 2,
-  :app_user/id 7,
-  :game_session/won "H",
-  :game_session/human_score 2,
-  :game_session/computer_score 0,
-  :game_session/human_color "B",
-  :app_user/username "ppetar",
-  :board/size 5}
- {:game_session/id 3,
-  :app_user/id 8,
-  :game_session/won "C",
-  :game_session/human_score 0,
-  :game_session/computer_score 3,
-  :game_session/human_color "B",
-  :app_user/username "saraa",
-  :board/size 5}
- {:game_session/id 4,
-  :app_user/id 6,
-  :game_session/won "C",
-  :game_session/human_score 0,
-  :game_session/computer_score 5,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 5}
- {:game_session/id 5,
-  :app_user/id 6,
-  :game_session/won "H",
-  :game_session/human_score 2,
-  :game_session/computer_score 0,
-  :game_session/human_color "B",
-  :app_user/username "stanmil",
-  :board/size 5}]
-clj꞉seminarski-rad.statistics꞉> 
-{:game_session/id 1,
- :app_user/id 6,
- :game_session/won "H",
- :game_session/human_score 3,
- :game_session/computer_score 0,
- :game_session/human_color "R",
- :app_user/username "stanmil",
- :board/size 3}
-clj꞉seminarski-rad.statistics꞉> 
-; Execution error (ClassCastException) at seminarski-rad.statistics/eval9557 (form-init8530266764389672516.clj:64).
-; class clojure.lang.PersistentArrayMap cannot be cast to class java.util.Map$Entry (clojure.lang.PersistentArrayMap is in unnamed module of loader 'app'; java.util.Map$Entry is in module java.base of loader 'bootstrap')
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/get-map-human-wins
-clj꞉seminarski-rad.statistics꞉> 
-; Execution error (UnsupportedOperationException) at seminarski-rad.statistics/get-map-human-wins-helper (form-init8530266764389672516.clj:42).
-; nth not supported on this type: PersistentArrayMap
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/get-map-human-wins
-clj꞉seminarski-rad.statistics꞉> 
-; Execution error (UnsupportedOperationException) at seminarski-rad.statistics/get-map-human-wins-helper (form-init8530266764389672516.clj:42).
-; nth not supported on this type: PersistentArrayMap
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/get-map-human-wins-helper
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/get-map-human-wins
-clj꞉seminarski-rad.statistics꞉> 
-; Execution error (UnsupportedOperationException) at seminarski-rad.statistics/get-map-human-wins-helper (form-init8530266764389672516.clj:39).
-; nth not supported on this type: PersistentArrayMap
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/get-map-human-wins-helper
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/get-map-human-wins
-clj꞉seminarski-rad.statistics꞉> 
-; Execution error (UnsupportedOperationException) at seminarski-rad.statistics/get-map-human-wins-helper (form-init8530266764389672516.clj:39).
-; nth not supported on this type: PersistentArrayMap
-clj꞉seminarski-rad.statistics꞉> 
-({:game_session/id 1,
-  :app_user/id 6,
-  :game_session/won "H",
-  :game_session/human_score 3,
-  :game_session/computer_score 0,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 3}
- {:game_session/id 2,
-  :app_user/id 7,
-  :game_session/won "H",
-  :game_session/human_score 2,
-  :game_session/computer_score 0,
-  :game_session/human_color "B",
-  :app_user/username "ppetar",
-  :board/size 5}
- {:game_session/id 5,
-  :app_user/id 6,
-  :game_session/won "H",
-  :game_session/human_score 2,
-  :game_session/computer_score 0,
-  :game_session/human_color "B",
-  :app_user/username "stanmil",
-  :board/size 5})
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/get-map-human-wins
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/get-map-human-wins-helper
-clj꞉seminarski-rad.statistics꞉> 
-; Execution error (UnsupportedOperationException) at seminarski-rad.statistics/get-map-human-wins-helper (form-init8530266764389672516.clj:39).
-; nth not supported on this type: PersistentArrayMap
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/get-map-human-wins
-clj꞉seminarski-rad.statistics꞉> 
-; Execution error (UnsupportedOperationException) at seminarski-rad.statistics/get-map-human-wins-helper (form-init8530266764389672516.clj:39).
-; nth not supported on this type: PersistentArrayMap
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/get-map-human-wins-helper
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/get-map-human-wins
-clj꞉seminarski-rad.statistics꞉> 
-{:stanmil 2, :ppetar 1}
-clj꞉seminarski-rad.statistics꞉> 
-[:stanmil 2]
-clj꞉seminarski-rad.statistics꞉> 
-2
-clj꞉seminarski-rad.statistics꞉> 
-([:ppetar 1])
-clj꞉seminarski-rad.statistics꞉> 
-:stanmil
-clj꞉seminarski-rad.statistics꞉> 
-2
-clj꞉seminarski-rad.statistics꞉> 
-:stanmil
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/highest-score-helper
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/find-highest-score-player
-clj꞉seminarski-rad.statistics꞉> 
-; Execution error (ArityException) at seminarski-rad.statistics/find-highest-score-player (form-init8530266764389672516.clj:62).
-; Wrong number of args (3) passed to: seminarski-rad.statistics/highest-score-helper
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/highest-score-helper
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/find-highest-score-player
-clj꞉seminarski-rad.statistics꞉> 
-; Execution error (ArityException) at seminarski-rad.statistics/find-highest-score-player (form-init8530266764389672516.clj:62).
-; Wrong number of args (3) passed to: seminarski-rad.statistics/highest-score-helper
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/highest-score-helper
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/find-highest-score-player
-clj꞉seminarski-rad.statistics꞉> 
-; Execution error (ArityException) at seminarski-rad.statistics/find-highest-score-player (form-init8530266764389672516.clj:59).
-; Wrong number of args (3) passed to: seminarski-rad.statistics/highest-score-helper
-clj꞉seminarski-rad.statistics꞉> 
-clojure.core/fn (core.clj:6899)
-clojure.core.protocols/fn (protocols.clj:168)
-clojure.core.protocols/fn (protocols.clj:124)
-clojure.core.protocols/fn (protocols.clj:19)
-clojure.core.protocols/seq-reduce (protocols.clj:31)
-clojure.core.protocols/fn (protocols.clj:75)
-clojure.core.protocols/fn (protocols.clj:13)
-clojure.core/reduce (core.clj:6886)
-clojure.core/fn (core.clj:6888)
-clojure.core.protocols/fn (protocols.clj:175)
-clojure.core/reduce-kv (core.clj:6919)
-seminarski-rad.statistics/find-highest-score-player (form-init8530266764389672516.clj:59)
-seminarski-rad.statistics/eval9652 (form-init8530266764389672516.clj:65)
-clojure.lang.Compiler/eval (Compiler.java:7194)
-clojure.core/eval (core.clj:3215)
-clojure.core/eval (core.clj:3211)
-nrepl.middleware.interruptible-eval/evaluate (interruptible_eval.clj:87)
-clojure.core/apply (core.clj:667)
-clojure.core/with-bindings* (core.clj:1990)
-nrepl.middleware.interruptible-eval/evaluate (interruptible_eval.clj:87)
-clojure.main/repl (main.clj:437)
-clojure.main/repl (main.clj:458)
-nrepl.middleware.interruptible-eval/evaluate (interruptible_eval.clj:115)
-nrepl.middleware.interruptible-eval/interruptible-eval (interruptible_eval.clj:150)
-nrepl.middleware.session/session-exec (session.clj:218)
-nrepl.middleware.session/session-exec (session.clj:217)
-java.lang.Thread/run (Thread.java:840)
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/highest-score-helper
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/find-highest-score-player
-clj꞉seminarski-rad.statistics꞉> 
-; Execution error (ArityException) at seminarski-rad.statistics/find-highest-score-player (form-init8530266764389672516.clj:62).
-; Wrong number of args (3) passed to: seminarski-rad.statistics/highest-score-helper
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/highest-score-helper
-clj꞉seminarski-rad.statistics꞉> 
-; Execution error (IllegalArgumentException) at seminarski-rad.statistics/highest-score-helper (form-init8530266764389672516.clj:53).
-; Don't know how to create ISeq from: java.lang.Long
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/find-highest-score-player
-clj꞉seminarski-rad.statistics꞉> 
-; Execution error (IllegalArgumentException) at seminarski-rad.statistics/highest-score-helper (form-init8530266764389672516.clj:53).
-; Don't know how to create ISeq from: java.lang.Long
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/highest-score-helper
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/find-highest-score-player
-clj꞉seminarski-rad.statistics꞉> 
-; Execution error (IllegalArgumentException) at seminarski-rad.statistics/highest-score-helper (form-init8530266764389672516.clj:53).
-; Don't know how to create ISeq from: java.lang.Long
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/highest-score-helper
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/find-highest-score-player
-clj꞉seminarski-rad.statistics꞉> 
-; Execution error (IllegalArgumentException) at seminarski-rad.statistics/highest-score-helper (form-init8530266764389672516.clj:53).
-; Don't know how to create ISeq from: java.lang.Long
-clj꞉seminarski-rad.statistics꞉> 
-{:stanmil 2, :ppetar 1}
-clj꞉seminarski-rad.statistics꞉> 
-[[:stanmil 2] [:ppetar 1]]
-clj꞉seminarski-rad.statistics꞉> 
-[{:stanmil 2, :ppetar 1}]
-clj꞉seminarski-rad.statistics꞉> 
-[[:stanmil 2] [:ppetar 1]]
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/sort-by-win-count
-clj꞉seminarski-rad.statistics꞉> 
-; Execution error (ArityException) at seminarski-rad.statistics/sort-by-win-count (form-init8530266764389672516.clj:72).
-; Wrong number of args (0) passed to: clojure.lang.PersistentArrayMap
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/sort-by-win-count
-clj꞉seminarski-rad.statistics꞉> 
-; Execution error (ArityException) at seminarski-rad.statistics/sort-by-win-count (form-init8530266764389672516.clj:72).
-; Wrong number of args (0) passed to: clojure.lang.PersistentArrayMap
-clj꞉seminarski-rad.statistics꞉> 
-{:stanmil 2, :ppetar 1}
-clj꞉seminarski-rad.statistics꞉> 
-[[:stanmil 2] [:ppetar 1]]
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/sort-by-win-count
-clj꞉seminarski-rad.statistics꞉> 
-; Execution error (ArityException) at seminarski-rad.statistics/sort-by-win-count (form-init8530266764389672516.clj:72).
-; Wrong number of args (0) passed to: clojure.lang.PersistentArrayMap
-clj꞉seminarski-rad.statistics꞉> 
-; Execution error (ArityException) at seminarski-rad.statistics/sort-by-win-count (form-init8530266764389672516.clj:72).
-; Wrong number of args (0) passed to: clojure.lang.PersistentArrayMap
-clj꞉seminarski-rad.statistics꞉> 
-[[:stanmil 2] [:ppetar 1]]
-nil
-clj꞉seminarski-rad.statistics꞉> 
-[[:stanmil 2] [:ppetar 1]]
-nil
-clj꞉seminarski-rad.statistics꞉> 
-[[:stanmil 2] [:ppetar 1]]
-nil
-clj꞉seminarski-rad.statistics꞉> 
-{:stanmil 2, :ppetar 1}
-nil
-clj꞉seminarski-rad.statistics꞉> 
-{:stanmil 2, :ppetar 1}
-nil
-clj꞉seminarski-rad.statistics꞉> 
-{:stanmil 2, :ppetar 1}
-nil
-clj꞉seminarski-rad.statistics꞉> 
-; Execution error (ArityException) at seminarski-rad.statistics/sort-by-win-count (form-init8530266764389672516.clj:72).
-; Wrong number of args (0) passed to: clojure.lang.PersistentArrayMap
-clj꞉seminarski-rad.statistics꞉> 
-{:stanmil 2, :ppetar 1}
-nil
-clj꞉seminarski-rad.statistics꞉> 
-[[:stanmil 2] [:ppetar 1]]
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/sort-by-win-count
-clj꞉seminarski-rad.statistics꞉> 
-; Execution error (ArityException) at seminarski-rad.statistics/sort-by-win-count (form-init8530266764389672516.clj:72).
-; Wrong number of args (0) passed to: clojure.lang.PersistentArrayMap
-clj꞉seminarski-rad.statistics꞉> 
-; Execution error (ArityException) at seminarski-rad.statistics/sort-by-win-count (form-init8530266764389672516.clj:72).
-; Wrong number of args (0) passed to: clojure.lang.PersistentArrayMap
-clj꞉seminarski-rad.statistics꞉> 
-; Execution error (ArityException) at seminarski-rad.statistics/sort-by-win-count (form-init8530266764389672516.clj:72).
-; Wrong number of args (0) passed to: clojure.lang.PersistentArrayMap
-clj꞉seminarski-rad.statistics꞉> 
-; Execution error (ArityException) at seminarski-rad.statistics/sort-by-win-count (form-init8530266764389672516.clj:72).
-; Wrong number of args (0) passed to: clojure.lang.PersistentArrayMap
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/sort-by-win-count
-clj꞉seminarski-rad.statistics꞉> 
-[[:stanmil 2] [:ppetar 1]]
-clj꞉seminarski-rad.statistics꞉> 
-([:ppetar 1] [:stanmil 2])
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/sort-by-win-count
-clj꞉seminarski-rad.statistics꞉> 
-([:stanmil 2] [:ppetar 1])
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/calculate-percentage
-clj꞉seminarski-rad.statistics꞉> 
-12N
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/calculate-percentage
-clj꞉seminarski-rad.statistics꞉> 
-12.0
-clj꞉seminarski-rad.statistics꞉> 
-6.0
-clj꞉seminarski-rad.statistics꞉> 
-100.0
-clj꞉seminarski-rad.statistics꞉> 
-0.1
-clj꞉seminarski-rad.statistics꞉> 
-({:game_session/id 2,
-  :app_user/id 7,
-  :game_session/won "H",
-  :game_session/human_score 2,
-  :game_session/computer_score 0,
-  :game_session/human_color "B",
-  :app_user/username "ppetar",
-  :board/size 5}
- {:game_session/id 5,
-  :app_user/id 6,
-  :game_session/won "H",
-  :game_session/human_score 2,
-  :game_session/computer_score 0,
-  :game_session/human_color "B",
-  :app_user/username "stanmil",
-  :board/size 5})
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/repopulate-game-sessions!
-clj꞉seminarski-rad.statistics꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-[{:game_session/id 1,
-  :app_user/id 6,
-  :game_session/won "H",
-  :game_session/human_score 3,
-  :game_session/computer_score 0,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 5}
- {:game_session/id 2,
-  :app_user/id 7,
-  :game_session/won "H",
-  :game_session/human_score 2,
-  :game_session/computer_score 0,
-  :game_session/human_color "B",
-  :app_user/username "ppetar",
-  :board/size 7}
- {:game_session/id 3,
-  :app_user/id 8,
-  :game_session/won "C",
-  :game_session/human_score 0,
-  :game_session/computer_score 3,
-  :game_session/human_color "B",
-  :app_user/username "saraa",
-  :board/size 7}
- {:game_session/id 4,
-  :app_user/id 6,
-  :game_session/won "C",
-  :game_session/human_score 0,
-  :game_session/computer_score 5,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 7}
- {:game_session/id 5,
-  :app_user/id 6,
-  :game_session/won "H",
-  :game_session/human_score 2,
-  :game_session/computer_score 0,
-  :game_session/human_color "B",
-  :app_user/username "stanmil",
-  :board/size 7}]
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/win-ratio-board-size
-clj꞉seminarski-rad.statistics꞉> 
-{:human {:5 20.0, :7 40.0, :9 0.0}}
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/calculate-percentage
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/win-ratio-board-size
-clj꞉seminarski-rad.statistics꞉> 
-{:human {:5 20.0, :7 40.0, :9 0}}
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/calculate-percentage
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/win-ratio-board-size
-clj꞉seminarski-rad.statistics꞉> 
-{:human {:5 20.0, :7 40.0, :9 0.0}}
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/win-ratio-human-by-board-size
-clj꞉seminarski-rad.statistics꞉> 
-{:5 20.0, :7 40.0, :9 0.0}
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/get-map-human-wins-helper
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/get-map-human-wins-added
-clj꞉seminarski-rad.statistics꞉> 
-{:stanmil 2, :ppetar 1}
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/number-of-sessions-for-user
-clj꞉seminarski-rad.statistics꞉> 
-({:game_session/id 1,
-  :app_user/id 6,
-  :game_session/won "H",
-  :game_session/human_score 3,
-  :game_session/computer_score 0,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 5}
- {:game_session/id 4,
-  :app_user/id 6,
-  :game_session/won "C",
-  :game_session/human_score 0,
-  :game_session/computer_score 5,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 7}
- {:game_session/id 5,
-  :app_user/id 6,
-  :game_session/won "H",
-  :game_session/human_score 2,
-  :game_session/computer_score 0,
-  :game_session/human_color "B",
-  :app_user/username "stanmil",
-  :board/size 7})
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/sessions-for-user
-clj꞉seminarski-rad.statistics꞉> 
-({:game_session/id 1,
-  :app_user/id 6,
-  :game_session/won "H",
-  :game_session/human_score 3,
-  :game_session/computer_score 0,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 5}
- {:game_session/id 4,
-  :app_user/id 6,
-  :game_session/won "C",
-  :game_session/human_score 0,
-  :game_session/computer_score 5,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 7}
- {:game_session/id 5,
-  :app_user/id 6,
-  :game_session/won "H",
-  :game_session/human_score 2,
-  :game_session/computer_score 0,
-  :game_session/human_color "B",
-  :app_user/username "stanmil",
-  :board/size 7})
-clj꞉seminarski-rad.statistics꞉> 
-(1 2 3 4 5)
-clj꞉seminarski-rad.statistics꞉> 
-(1 2 3 4)
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/get-only-users-for-sessions
-clj꞉seminarski-rad.statistics꞉> 
-["stanmil" "ppetar" "saraa" "stanmil" "stanmil"]
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/distinct-users-who-played
-clj꞉seminarski-rad.statistics꞉> 
-("stanmil" "ppetar" "saraa")
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/distinct-users-who-played
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/colors-helper
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/color-ratio-by-username
-clj꞉seminarski-rad.statistics꞉> 
-{:stanmil 3, :ppetar 1, :saraa 1}
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/colors-helper
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/color-ratio-by-username
-clj꞉seminarski-rad.statistics꞉> 
-; Execution error (NullPointerException) at (REPL:1).
-; null
-clj꞉seminarski-rad.statistics꞉> 
-[{:game_session/id 1,
-  :app_user/id 6,
-  :game_session/won "H",
-  :game_session/human_score 3,
-  :game_session/computer_score 0,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 5}
- {:game_session/id 2,
-  :app_user/id 7,
-  :game_session/won "H",
-  :game_session/human_score 2,
-  :game_session/computer_score 0,
-  :game_session/human_color "B",
-  :app_user/username "ppetar",
-  :board/size 7}
- {:game_session/id 3,
-  :app_user/id 8,
-  :game_session/won "C",
-  :game_session/human_score 0,
-  :game_session/computer_score 3,
-  :game_session/human_color "B",
-  :app_user/username "saraa",
-  :board/size 7}
- {:game_session/id 4,
-  :app_user/id 6,
-  :game_session/won "C",
-  :game_session/human_score 0,
-  :game_session/computer_score 5,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 7}
- {:game_session/id 5,
-  :app_user/id 6,
-  :game_session/won "H",
-  :game_session/human_score 2,
-  :game_session/computer_score 0,
-  :game_session/human_color "B",
-  :app_user/username "stanmil",
-  :board/size 7}]
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/colors-helper
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/color-ratio-by-username
-clj꞉seminarski-rad.statistics꞉> 
-"Not failing"
-"Not failing"
-"Not failing"
-"Not failing"
-"Not failing"
-nil
-clj꞉seminarski-rad.statistics꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-{:1 2}
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/colors-helper
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/color-ratio-by-username
-clj꞉seminarski-rad.statistics꞉> 
-{}
-{:game_session/id 1, :app_user/id 6, :game_session/won "H", :game_session/human_score 3, :game_session/computer_score 0, :game_session/human_color "R", :app_user/username "stanmil", :board/size 5}
-{:stanmil {:R 1, :B 0}}
-{:game_session/id 2, :app_user/id 7, :game_session/won "H", :game_session/human_score 2, :game_session/computer_score 0, :game_session/human_color "B", :app_user/username "ppetar", :board/size 7}
-{:stanmil {:R 1, :B 0}, :ppetar {:B 1, :R 0}}
-{:game_session/id 3, :app_user/id 8, :game_session/won "C", :game_session/human_score 0, :game_session/computer_score 3, :game_session/human_color "B", :app_user/username "saraa", :board/size 7}
-; Execution error (NullPointerException) at (REPL:1).
-; null
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/colors-helper
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/colors-helper
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/color-ratio-by-username
-clj꞉seminarski-rad.statistics꞉> 
-{:stanmil {:R 2, :B 1}, :ppetar {:B 1, :R 0}, :saraa {:B 1, :R 0}}
-clj꞉seminarski-rad.statistics꞉> 
-; Syntax error compiling at (src/seminarski_rad/statistics.clj:112:1).
-; Unable to resolve symbol: colors-played-by-username in this context
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/colors-helper
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/colors-played-by-username
-clj꞉seminarski-rad.statistics꞉> 
-{:stanmil {:R 2, :B 1}, :ppetar {:B 1, :R 0}, :saraa {:B 1, :R 0}}
-clj꞉seminarski-rad.statistics꞉> 
-(:stanmil :ppetar :saraa)
-clj꞉seminarski-rad.statistics꞉> 
-{:5 20.0, :7 40.0, :9 0.0}
-clj꞉seminarski-rad.statistics꞉> 
-({:game_session/id 1,
-  :app_user/id 6,
-  :game_session/won "H",
-  :game_session/human_score 3,
-  :game_session/computer_score 0,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 5})
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/score-for-type?-wins
-clj꞉seminarski-rad.statistics꞉> 
-(#:game_session{:human_score 3, :computer_score 0}
- #:game_session{:human_score 2, :computer_score 0}
- #:game_session{:human_score 2, :computer_score 0})
-clj꞉seminarski-rad.statistics꞉> 
-(#:game_session{:human_score 3, :computer_score 0}
- #:game_session{:human_score 2, :computer_score 0}
- #:game_session{:human_score 2, :computer_score 0})
-clj꞉seminarski-rad.statistics꞉> 
+; Evaluating file: board.clj
+#'seminarski-rad.board/print-the-board
+clj꞉seminarski-rad.board꞉> 
+; Evaluating file: computer_logic.clj
+#'seminarski-rad.computer-logic/take-turns
+clj꞉seminarski-rad.computer-logic꞉> 
+; Evaluating file: input_utility.clj
+#'seminarski-rad.input-utility/adjust-board-size
+clj꞉seminarski-rad.input-utility꞉> 
+; Evaluating file: menu.clj
+#'seminarski-rad.menu/manage-menus
+clj꞉seminarski-rad.menu꞉> 
 ; Evaluating file: statistics.clj
 #'seminarski-rad.statistics/spit-all-contents
 clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/spit-all-contents
-clj꞉seminarski-rad.statistics꞉> 
-()
-()
-{:5 100.0, :7 100.0, :9 100.0}
-()
-{}
-nil
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/spit-all-contents
-clj꞉seminarski-rad.statistics꞉> 
-()
-()
-{:5 100.0, :7 100.0, :9 100.0}
-()
-{}
-nil
-clj꞉seminarski-rad.statistics꞉> 
-()
-clj꞉seminarski-rad.statistics꞉> 
-()
-clj꞉seminarski-rad.statistics꞉> 
-[]
-clj꞉seminarski-rad.statistics꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-[{:game_session/id 1,
-  :app_user/id 6,
-  :game_session/won "H",
-  :game_session/human_score 3,
-  :game_session/computer_score 0,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 5}
- {:game_session/id 2,
-  :app_user/id 7,
-  :game_session/won "H",
-  :game_session/human_score 2,
-  :game_session/computer_score 0,
-  :game_session/human_color "B",
-  :app_user/username "ppetar",
-  :board/size 7}
- {:game_session/id 3,
-  :app_user/id 8,
-  :game_session/won "C",
-  :game_session/human_score 0,
-  :game_session/computer_score 3,
-  :game_session/human_color "B",
-  :app_user/username "saraa",
-  :board/size 7}
- {:game_session/id 4,
-  :app_user/id 6,
-  :game_session/won "C",
-  :game_session/human_score 0,
-  :game_session/computer_score 5,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 7}
- {:game_session/id 5,
-  :app_user/id 6,
-  :game_session/won "H",
-  :game_session/human_score 2,
-  :game_session/computer_score 0,
-  :game_session/human_color "B",
-  :app_user/username "stanmil",
-  :board/size 7}]
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/spit-all-contents
-clj꞉seminarski-rad.statistics꞉> 
-({:game_session/id 1, :app_user/id 6, :game_session/won "H", :game_session/human_score 3, :game_session/computer_score 0, :game_session/human_color "R", :app_user/username "stanmil", :board/size 5} {:game_session/id 2, :app_user/id 7, :game_session/won "H", :game_session/human_score 2, :game_session/computer_score 0, :game_session/human_color "B", :app_user/username "ppetar", :board/size 7} {:game_session/id 5, :app_user/id 6, :game_session/won "H", :game_session/human_score 2, :game_session/computer_score 0, :game_session/human_color "B", :app_user/username "stanmil", :board/size 7})
-({:game_session/id 3, :app_user/id 8, :game_session/won "C", :game_session/human_score 0, :game_session/computer_score 3, :game_session/human_color "B", :app_user/username "saraa", :board/size 7} {:game_session/id 4, :app_user/id 6, :game_session/won "C", :game_session/human_score 0, :game_session/computer_score 5, :game_session/human_color "R", :app_user/username "stanmil", :board/size 7})
-{:5 20.0, :7 40.0, :9 0.0}
-([:stanmil 2] [:ppetar 1])
-{:stanmil {:R 2, :B 1}, :ppetar {:B 1, :R 0}, :saraa {:B 1, :R 0}}
-nil
-clj꞉seminarski-rad.statistics꞉> 
-{:a 2}
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/quits-helper
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/quits-by-users
-clj꞉seminarski-rad.statistics꞉> 
-{:saraa 1, :stanmil 1}
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/quits-helper
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/quits-by-users
-clj꞉seminarski-rad.statistics꞉> 
-{}
-clj꞉seminarski-rad.statistics꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-[{:game_session/id 1,
-  :app_user/id 6,
-  :game_session/won "H",
-  :game_session/human_score 3,
-  :game_session/computer_score 0,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 5}
- {:game_session/id 2,
-  :app_user/id 7,
-  :game_session/won "H",
-  :game_session/human_score 2,
-  :game_session/computer_score 0,
-  :game_session/human_color "B",
-  :app_user/username "ppetar",
-  :board/size 7}
- {:game_session/id 3,
-  :app_user/id 8,
-  :game_session/won "C",
-  :game_session/human_score 0,
-  :game_session/computer_score 3,
-  :game_session/human_color "B",
-  :app_user/username "saraa",
-  :board/size 7}
- {:game_session/id 4,
-  :app_user/id 6,
-  :game_session/won "C",
-  :game_session/human_score 0,
-  :game_session/computer_score 5,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 7}
- {:game_session/id 5,
-  :app_user/id 6,
-  :game_session/won "H",
-  :game_session/human_score 2,
-  :game_session/computer_score 0,
-  :game_session/human_color "B",
-  :app_user/username "stanmil",
-  :board/size 7}
- {:game_session/id 6,
-  :app_user/id 7,
-  :game_session/won "C",
-  :game_session/human_score 5,
-  :game_session/computer_score 6,
-  :game_session/human_color "R",
-  :app_user/username "ppetar",
-  :board/size 5}]
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/quits-helper
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/quits-by-users
-clj꞉seminarski-rad.statistics꞉> 
-{:ppetar 1}
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/quits-helper
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/quits-by-users
-clj꞉seminarski-rad.statistics꞉> 
-{:ppetar 1}
-clj꞉seminarski-rad.statistics꞉> 
-[{:game_session/computer_score 0, :game_session/human_score 3, :game_session/human_color "R", :app_user/username "stanmil", :board/size 3}]
-nil
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/spit-all-contents
-clj꞉seminarski-rad.statistics꞉> 
-({:game_session/id 1, :app_user/id 6, :game_session/won "H", :game_session/human_score 3, :game_session/computer_score 0, :game_session/human_color "R", :app_user/username "stanmil", :board/size 5} {:game_session/id 2, :app_user/id 7, :game_session/won "H", :game_session/human_score 2, :game_session/computer_score 0, :game_session/human_color "B", :app_user/username "ppetar", :board/size 7} {:game_session/id 5, :app_user/id 6, :game_session/won "H", :game_session/human_score 2, :game_session/computer_score 0, :game_session/human_color "B", :app_user/username "stanmil", :board/size 7})
-({:game_session/id 3, :app_user/id 8, :game_session/won "C", :game_session/human_score 0, :game_session/computer_score 3, :game_session/human_color "B", :app_user/username "saraa", :board/size 7} {:game_session/id 4, :app_user/id 6, :game_session/won "C", :game_session/human_score 0, :game_session/computer_score 5, :game_session/human_color "R", :app_user/username "stanmil", :board/size 7} {:game_session/id 6, :app_user/id 7, :game_session/won "C", :game_session/human_score 5, :game_session/computer_score 6, :game_session/human_color "R", :app_user/username "ppetar", :board/size 5})
-{:5 16.666666666666664, :7 33.33333333333333, :9 0.0}
-([:stanmil 2] [:ppetar 1])
-{:stanmil {:R 2, :B 1}, :ppetar {:B 1, :R 1}, :saraa {:B 1, :R 0}}
-{:ppetar 1}
-nil
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/resolve-leaderboard
-clj꞉seminarski-rad.statistics꞉> 
-("stanmil: 2\n" "ppetar: 1\n")
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/resolve-leaderboard
-clj꞉seminarski-rad.statistics꞉> 
-("stanmil: 2" "ppetar: 1")
-clj꞉seminarski-rad.statistics꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/resolve-leaderboard
-clj꞉seminarski-rad.statistics꞉> 
-"1 : 2\n2 : 1"
-clj꞉seminarski-rad.statistics꞉> 
-"1 : 2\n2 : 1"
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/resolve-leaderboard
-clj꞉seminarski-rad.statistics꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-[{:game_session/id 1,
-  :app_user/id 6,
-  :game_session/won "H",
-  :game_session/human_score 3,
-  :game_session/computer_score 0,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 5}
- {:game_session/id 2,
-  :app_user/id 7,
-  :game_session/won "H",
-  :game_session/human_score 2,
-  :game_session/computer_score 0,
-  :game_session/human_color "B",
-  :app_user/username "ppetar",
-  :board/size 7}
- {:game_session/id 3,
-  :app_user/id 8,
-  :game_session/won "C",
-  :game_session/human_score 0,
-  :game_session/computer_score 3,
-  :game_session/human_color "B",
-  :app_user/username "saraa",
-  :board/size 7}
- {:game_session/id 4,
-  :app_user/id 6,
-  :game_session/won "C",
-  :game_session/human_score 0,
-  :game_session/computer_score 5,
-  :game_session/human_color "R",
-  :app_user/username "stanmil",
-  :board/size 7}
- {:game_session/id 5,
-  :app_user/id 6,
-  :game_session/won "H",
-  :game_session/human_score 2,
-  :game_session/computer_score 0,
-  :game_session/human_color "B",
-  :app_user/username "stanmil",
-  :board/size 7}
- {:game_session/id 6,
-  :app_user/id 7,
-  :game_session/won "C",
-  :game_session/human_score 5,
-  :game_session/computer_score 6,
-  :game_session/human_color "R",
-  :app_user/username "ppetar",
-  :board/size 5}]
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/resolve-leaderboard
-clj꞉seminarski-rad.statistics꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/resolve-leaderboard
-clj꞉seminarski-rad.statistics꞉> 
-"stanmil: 2"
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/resolve-leaderboard
-clj꞉seminarski-rad.statistics꞉> 
-("stanmil: 2" "ppetar: 1")
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/resolve-leaderboard
-clj꞉seminarski-rad.statistics꞉> 
-"stanmil: 2ppetar: 1"
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/resolve-leaderboard
-clj꞉seminarski-rad.statistics꞉> 
-stanmil: 2
-ppetar: 1
+; Evaluating file: validator.clj
+#'seminarski-rad.validator/user-color-input-validator
+clj꞉seminarski-rad.validator꞉> 
+Please enter your username:
+Please enter your password:
 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/resolve-leaderboard
-clj꞉seminarski-rad.statistics꞉> 
-"stanmil: 2\nppetar: 1\n"
-clj꞉seminarski-rad.statistics꞉> 
-(1 2)
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/resolve-leaderboard
-clj꞉seminarski-rad.statistics꞉> 
-"stanmil: 2\nppetar: 1\n"
-clj꞉seminarski-rad.statistics꞉> 
-; Syntax error (IllegalArgumentException) compiling . at (src/seminarski_rad/statistics.clj:155:1).
-; No matching method round found taking 2 args for class java.lang.Math
-clj꞉seminarski-rad.statistics꞉> 
-; Execution error (IllegalArgumentException) at seminarski-rad.statistics/eval10483 (form-init8530266764389672516.clj:155).
-; No matching method round found taking 1 args
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/calculate-percentage
-clj꞉seminarski-rad.statistics꞉> 
-"30.00"
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/calculate-percentage
-clj꞉seminarski-rad.statistics꞉> 
-30.0
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/calculate-percentage
-clj꞉seminarski-rad.statistics꞉> 
-30.0
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/calculate-percentage
-clj꞉seminarski-rad.statistics꞉> 
-"30.00"
-clj꞉seminarski-rad.statistics꞉> 
-"33.33"
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/calculate-percentage
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/resolve-colors-map
-clj꞉seminarski-rad.statistics꞉> 
-"stanmil: 2[R] 1[B]\nppetar: 1[R] 1[B]\nsaraa: 0[R] 1[B]\n"
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/resolve-quits-map
-clj꞉seminarski-rad.statistics꞉> 
-"ppetar: 1\n"
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/spit-all-contents
-clj꞉seminarski-rad.statistics꞉> 
-******************ALL WINS******************
-HUMAN: clojure.lang.LazySeq@2e8cf1f0
-COMPUTER: clojure.lang.LazySeq@c879d2e0
-*************WINS BY BOARD SIZE*************
-SIZE 5: HUMAN: 16.666666666666664% COMPUTER: 83.33333333333334% SIZE 7: HUMAN: 33.33333333333333% COMPUTER: 66.66666666666667% SIZE 9: HUMAN: 0.0% COMPUTER: 100.0% ****************LEADERBOARD****************
-stanmil: 2
-ppetar: 1
-***************COLORS BY USER***************
-stanmil: 2[R] 1[B]
-ppetar: 1[R] 1[B]
-saraa: 0[R] 1[B]
-***************QUITS BY USER***************
-ppetar: 1
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/spit-all-contents
-clj꞉seminarski-rad.statistics꞉> 
-******************ALL WINS******************
-HUMAN: clojure.lang.LazySeq@2e8cf1f0
-COMPUTER: clojure.lang.LazySeq@c879d2e0
-*************WINS BY BOARD SIZE*************
-SIZE 5: HUMAN: 16.666666666666664% COMPUTER: 83.33333333333334% SIZE 7: HUMAN: 33.33333333333333% COMPUTER: 66.66666666666667% SIZE 9: HUMAN: 0.0% COMPUTER: 100.0% ****************LEADERBOARD****************
-stanmil: 2
-ppetar: 1
-***************COLORS BY USER***************
-stanmil: 2[R] 1[B]
-ppetar: 1[R] 1[B]
-saraa: 0[R] 1[B]
-***************QUITS BY USER***************
-ppetar: 1
+      To get started you must choose one of the options below:
 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/spit-all-contents
-clj꞉seminarski-rad.statistics꞉> 
-******************ALL WINS******************
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
 
-HUMAN: clojure.lang.LazySeq@2e8cf1f0
-COMPUTER: clojure.lang.LazySeq@c879d2e0
-
-*************WINS BY BOARD SIZE*************
-
-SIZE 5: HUMAN: 16.666666666666664% COMPUTER: 83.33333333333334% SIZE 7: HUMAN: 33.33333333333333% COMPUTER: 66.66666666666667% SIZE 9: HUMAN: 0.0% COMPUTER: 100.0% 
-****************LEADERBOARD****************
-
-stanmil: 2
-ppetar: 1
-
-***************COLORS BY USER***************
-
-stanmil: 2[R] 1[B]
-ppetar: 1[R] 1[B]
-saraa: 0[R] 1[B]
-
-***************QUITS BY USER***************
-
-ppetar: 1
-
-
-nil
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/spit-all-contents
-clj꞉seminarski-rad.statistics꞉> 
-******************ALL WINS******************
-
-HUMAN: clojure.lang.LazySeq@2e8cf1f0
-COMPUTER: clojure.lang.LazySeq@c879d2e0
-
-*************WINS BY BOARD SIZE*************
-
-SIZE 5: HUMAN: 16.666666666666664% COMPUTER: 83.33333333333334% 
-SIZE 7: HUMAN: 33.33333333333333% COMPUTER: 66.66666666666667% 
-SIZE 9: HUMAN: 0.0% COMPUTER: 100.0% 
-****************LEADERBOARD****************
-
-stanmil: 2
-ppetar: 1
-
-***************COLORS BY USER***************
-
-stanmil: 2[R] 1[B]
-ppetar: 1[R] 1[B]
-saraa: 0[R] 1[B]
-
-***************QUITS BY USER***************
-
-ppetar: 1
-
-
-nil
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/spit-all-contents
-clj꞉seminarski-rad.statistics꞉> 
-******************ALL WINS******************
-
-HUMAN: clojure.lang.LazySeq@2e8cf1f0
-COMPUTER: clojure.lang.LazySeq@c879d2e0
-
-*************WINS BY BOARD SIZE*************
-
-SIZE 5: HUMAN: 16.666666666666664% COMPUTER: 83.33333333333334% 
-SIZE 7: HUMAN: 33.33333333333333% COMPUTER: 66.66666666666667% 
-SIZE 9: HUMAN: 0.0% COMPUTER: 100.0% 
-
-****************LEADERBOARD****************
-
-stanmil: 2
-ppetar: 1
-
-***************COLORS BY USER***************
-
-stanmil: 2[R] 1[B]
-ppetar: 1[R] 1[B]
-saraa: 0[R] 1[B]
-
-***************QUITS BY USER***************
-
-ppetar: 1
-
-
-nil
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/spit-all-contents
-clj꞉seminarski-rad.statistics꞉> 
-******************ALL WINS******************
-
-HUMAN: 3
-COMPUTER: 3
-
-*************WINS BY BOARD SIZE*************
-
-SIZE 5: HUMAN: 16.666666666666664% COMPUTER: 83.33333333333334% 
-SIZE 7: HUMAN: 33.33333333333333% COMPUTER: 66.66666666666667% 
-SIZE 9: HUMAN: 0.0% COMPUTER: 100.0% 
-
-****************LEADERBOARD****************
-
-stanmil: 2
-ppetar: 1
-
-***************COLORS BY USER***************
-
-stanmil: 2[R] 1[B]
-ppetar: 1[R] 1[B]
-saraa: 0[R] 1[B]
-
-***************QUITS BY USER***************
-
-ppetar: 1
-
-
-nil
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/spit-all-contents
-clj꞉seminarski-rad.statistics꞉> 
-"******************ALL WINS******************\n\nHUMAN: 3\nCOMPUTER: 3\n\n*************WINS BY BOARD SIZE*************\n\nSIZE 5: HUMAN: 16.666666666666664% COMPUTER: 83.33333333333334% \nSIZE 7: HUMAN: 33.33333333333333% COMPUTER: 66.66666666666667% \nSIZE 9: HUMAN: 0.0% COMPUTER: 100.0% \n\n****************LEADERBOARD****************\n\nstanmil: 2\nppetar: 1\n\n***************COLORS BY USER***************\n\nstanmil: 2[R] 1[B]\nppetar: 1[R] 1[B]\nsaraa: 0[R] 1[B]\n\n***************QUITS BY USER***************\n\nppetar: 1\n\n"
-nil
-clj꞉seminarski-rad.statistics꞉> 
-#'seminarski-rad.statistics/spit-all-contents
-clj꞉seminarski-rad.statistics꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-nil
+Please enter a number:
+Calculating statistics...
+; Execution error (ClassCastException) at seminarski-rad.statistics/spit-all-contents (statistics.clj:147).
+; class java.lang.String cannot be cast to class java.lang.Number (java.lang.String and java.lang.Number are in module java.base of loader 'bootstrap')
 clj꞉seminarski-rad.menu꞉> 
 #'seminarski-rad.statistics/spit-all-contents
 clj꞉seminarski-rad.statistics꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-nil
-clj꞉seminarski-rad.statistics꞉> 
-nil
+#'seminarski-rad.menu/manage-menus
+clj꞉seminarski-rad.menu꞉> 
+Please enter your username:
+Please enter your password:
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+Calculating statistics...
+; Execution error (ClassCastException) at seminarski-rad.statistics/spit-all-contents (statistics.clj:147).
+; class java.lang.String cannot be cast to class java.lang.Number (java.lang.String and java.lang.Number are in module java.base of loader 'bootstrap')
+clj꞉seminarski-rad.menu꞉> 
+#'seminarski-rad.statistics/spit-all-contents
 clj꞉seminarski-rad.statistics꞉> 
 Please enter your username:
 Please enter your password:
@@ -1731,9 +105,122 @@ Please enter your password:
   *********************************************************************
 
 Please enter a number:
-nil
+Calculating statistics...
+; Execution error (ClassCastException) at seminarski-rad.statistics/spit-all-contents (statistics.clj:147).
+; class java.lang.String cannot be cast to class java.lang.Number (java.lang.String and java.lang.Number are in module java.base of loader 'bootstrap')
 clj꞉seminarski-rad.menu꞉> 
-; Evaluating file: menu.clj
+#'seminarski-rad.statistics/spit-all-contents
+clj꞉seminarski-rad.statistics꞉> 
+Please enter your username:
+Please enter your password:
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+Calculating statistics...
+; Execution error (ClassCastException) at seminarski-rad.statistics/spit-all-contents (statistics.clj:147).
+; class java.lang.String cannot be cast to class java.lang.Number (java.lang.String and java.lang.Number are in module java.base of loader 'bootstrap')
+clj꞉seminarski-rad.menu꞉> 
+#'seminarski-rad.statistics/spit-all-contents
+clj꞉seminarski-rad.statistics꞉> 
+Please enter your username:
+Please enter your password:
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+Calculating statistics...
+; Execution error (ClassCastException) at seminarski-rad.statistics/spit-all-contents (statistics.clj:147).
+; class java.lang.String cannot be cast to class java.lang.Number (java.lang.String and java.lang.Number are in module java.base of loader 'bootstrap')
+clj꞉seminarski-rad.menu꞉> 
+Please enter your username:
+Please enter your password:
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+Calculating statistics...
+; Execution error (ClassCastException) at seminarski-rad.statistics/spit-all-contents (statistics.clj:147).
+; class java.lang.String cannot be cast to class java.lang.Number (java.lang.String and java.lang.Number are in module java.base of loader 'bootstrap')
+clj꞉seminarski-rad.menu꞉> 
+Please enter your username:
+Please enter your password:
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+Calculating statistics...
+; Execution error (ClassCastException) at seminarski-rad.statistics/spit-all-contents (statistics.clj:147).
+; class java.lang.String cannot be cast to class java.lang.Number (java.lang.String and java.lang.Number are in module java.base of loader 'bootstrap')
+clj꞉seminarski-rad.menu꞉> 
+#'seminarski-rad.menu/access-main-menu-item
+clj꞉seminarski-rad.menu꞉> 
+#'seminarski-rad.menu/manage-menus
+clj꞉seminarski-rad.menu꞉> 
 Please enter your username:
 Please enter your password:
 
@@ -1780,3 +267,642 @@ Done. Check statistics.txt
 Please enter a number:
 nil
 clj꞉seminarski-rad.menu꞉> 
+#'seminarski-rad.menu/access-main-menu-item
+clj꞉seminarski-rad.menu꞉> 
+Please enter your username:
+Please enter your password:
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+Calculating statistics...
+Done. Check statistics.txt
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+Sending interrupt.; Evaluation was interrupted
+clj꞉seminarski-rad.menu꞉> 
+; Execution error (InterruptedException) at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject/await (AbstractQueuedSynchronizer.java:1638).
+; null
+clj꞉seminarski-rad.menu꞉> 
+Please enter your username:
+Please enter your password:
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+Calculating statistics...
+Done. Check statistics.txt
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+Sending interrupt.; Evaluation was interrupted
+clj꞉seminarski-rad.menu꞉> 
+; Execution error (InterruptedException) at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject/await (AbstractQueuedSynchronizer.java:1638).
+; null
+clj꞉seminarski-rad.menu꞉> 
+Please enter your username:
+Sending interrupt.; Evaluation was interrupted
+clj꞉seminarski-rad.menu꞉> 
+; Execution error (InterruptedException) at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject/await (AbstractQueuedSynchronizer.java:1638).
+; null
+clj꞉seminarski-rad.menu꞉> 
+#'seminarski-rad.menu/access-main-menu-item
+clj꞉seminarski-rad.menu꞉> 
+#'seminarski-rad.menu/manage-menus
+clj꞉seminarski-rad.menu꞉> 
+Please enter your username:
+Please enter your password:
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+Calculating statistics...
+; Execution error (ClassCastException) at seminarski-rad.statistics/spit-all-contents (form-init11651218978411154789.clj:147).
+; class java.lang.String cannot be cast to class java.lang.Number (java.lang.String and java.lang.Number are in module java.base of loader 'bootstrap')
+clj꞉seminarski-rad.menu꞉> 
+#'seminarski-rad.menu/access-main-menu-item
+clj꞉seminarski-rad.menu꞉> 
+#'seminarski-rad.menu/manage-menus
+clj꞉seminarski-rad.menu꞉> 
+Please enter your username:
+Please enter your password:
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+Calculating statistics...
+; Execution error (ClassCastException) at seminarski-rad.statistics/spit-all-contents (form-init11651218978411154789.clj:147).
+; class java.lang.String cannot be cast to class java.lang.Number (java.lang.String and java.lang.Number are in module java.base of loader 'bootstrap')
+clj꞉seminarski-rad.menu꞉> 
+#'seminarski-rad.statistics/spit-all-contents
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.menu/manage-menus
+clj꞉seminarski-rad.menu꞉> 
+#'seminarski-rad.menu/access-main-menu-item
+clj꞉seminarski-rad.menu꞉> 
+Please enter your username:
+Please enter your password:
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+Calculating statistics...
+Done. Check statistics.txt
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+Sending interrupt.; Evaluation was interrupted
+clj꞉seminarski-rad.menu꞉> 
+; Execution error (InterruptedException) at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject/await (AbstractQueuedSynchronizer.java:1638).
+; null
+clj꞉seminarski-rad.menu꞉> 
+{:stanmil {:R 2, :B 1}, :ppetar {:B 1, :R 1}, :saraa {:B 1, :R 0}}
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/spit-all-contents
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.menu/access-main-menu-item
+clj꞉seminarski-rad.menu꞉> 
+#'seminarski-rad.menu/manage-menus
+clj꞉seminarski-rad.menu꞉> 
+Please enter your username:
+Please enter your password:
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+Calculating statistics...
+Done. Check statistics.txt
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+Sending interrupt.; Evaluation was interrupted
+clj꞉seminarski-rad.menu꞉> 
+; Execution error (InterruptedException) at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject/await (AbstractQueuedSynchronizer.java:1638).
+; null
+clj꞉seminarski-rad.menu꞉> 
+#'seminarski-rad.statistics/spit-all-contents
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.menu/access-main-menu-item
+clj꞉seminarski-rad.menu꞉> 
+#'seminarski-rad.menu/manage-menus
+clj꞉seminarski-rad.menu꞉> 
+Please enter your username:
+Please enter your password:
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+Calculating statistics...
+Done. Check statistics.txt
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+Sending interrupt.; Evaluation was interrupted
+clj꞉seminarski-rad.menu꞉> 
+; Execution error (InterruptedException) at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject/await (AbstractQueuedSynchronizer.java:1638).
+; null
+clj꞉seminarski-rad.menu꞉> 
+"******************ALL WINS******************\n\n"
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/spit-all-contents
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.menu/access-main-menu-item
+clj꞉seminarski-rad.menu꞉> 
+#'seminarski-rad.menu/manage-menus
+clj꞉seminarski-rad.menu꞉> 
+Please enter your username:
+Please enter your password:
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+Calculating statistics...
+Done. Check statistics.txt
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+Sending interrupt.; Evaluation was interrupted
+clj꞉seminarski-rad.menu꞉> 
+; Execution error (InterruptedException) at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject/await (AbstractQueuedSynchronizer.java:1638).
+; null
+clj꞉seminarski-rad.menu꞉> 
+; Syntax error reading source at (REPL:159:10).
+; Unmatched delimiter: ]
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/spit-all-contents
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.menu/access-main-menu-item
+clj꞉seminarski-rad.menu꞉> 
+#'seminarski-rad.menu/manage-menus
+clj꞉seminarski-rad.menu꞉> 
+Please enter your username:
+Please enter your password:
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+Calculating statistics...
+Done. Check statistics.txt
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+Sending interrupt.; Evaluation was interrupted
+clj꞉seminarski-rad.menu꞉> 
+; Execution error (InterruptedException) at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject/await (AbstractQueuedSynchronizer.java:1638).
+; null
+clj꞉seminarski-rad.menu꞉> 
+#'seminarski-rad.statistics/spit-all-contents
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.menu/access-main-menu-item
+clj꞉seminarski-rad.menu꞉> 
+#'seminarski-rad.menu/manage-menus
+clj꞉seminarski-rad.menu꞉> 
+Please enter your username:
+Please enter your password:
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+Calculating statistics...
+Done. Check statistics.txt
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+Sending interrupt.; Evaluation was interrupted
+clj꞉seminarski-rad.menu꞉> 
+; Execution error (InterruptedException) at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject/await (AbstractQueuedSynchronizer.java:1638).
+; null
+clj꞉seminarski-rad.menu꞉> 
+#'seminarski-rad.statistics/spit-all-contents
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.menu/access-main-menu-item
+clj꞉seminarski-rad.menu꞉> 
+#'seminarski-rad.menu/manage-menus
+clj꞉seminarski-rad.menu꞉> 
+Please enter your username:
+Please enter your password:
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+Calculating statistics...
+; Execution error (ClassCastException) at seminarski-rad.statistics/spit-all-contents (form-init11651218978411154789.clj:148).
+; class java.lang.String cannot be cast to class java.lang.Number (java.lang.String and java.lang.Number are in module java.base of loader 'bootstrap')
+clj꞉seminarski-rad.menu꞉> 
+"16.67"
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/calculate-percentage
+clj꞉seminarski-rad.statistics꞉> 
+"16.67"
+clj꞉seminarski-rad.statistics꞉> 
+; Syntax error compiling if at (src/seminarski_rad/statistics.clj:60:5).
+; Too many arguments to if
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/calculate-percentage
+clj꞉seminarski-rad.statistics꞉> 
+33.33
+clj꞉seminarski-rad.statistics꞉> 
+; Evaluating file: statistics.clj
+100.0
+clj꞉seminarski-rad.statistics꞉> 
+100.0
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/spit-all-contents
+clj꞉seminarski-rad.statistics꞉> 
+Please enter your username:
+Please enter your password:
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+Calculating statistics...
+; Execution error (ClassCastException) at seminarski-rad.statistics/spit-all-contents (form-init11651218978411154789.clj:148).
+; class java.lang.String cannot be cast to class java.lang.Number (java.lang.String and java.lang.Number are in module java.base of loader 'bootstrap')
+clj꞉seminarski-rad.menu꞉> 
+; Evaluating file: statistics.clj
+#'seminarski-rad.statistics/spit-all-contents
+clj꞉seminarski-rad.statistics꞉> 
+nil
+clj꞉seminarski-rad.menu꞉> 
+#'seminarski-rad.menu/access-main-menu-item
+clj꞉seminarski-rad.menu꞉> 
+#'seminarski-rad.menu/manage-menus
+clj꞉seminarski-rad.menu꞉> 
+Please enter your username:
+Please enter your password:
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+Calculating statistics...
+Done. Check statistics.txt
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+nil
+clj꞉seminarski-rad.menu꞉> 
+; Evaluating file: statistics.clj
+#'seminarski-rad.statistics/spit-all-contents
+clj꞉seminarski-rad.statistics꞉> 

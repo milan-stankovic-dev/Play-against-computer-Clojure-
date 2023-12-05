@@ -59,9 +59,8 @@
     100.0
     (if (= 0 fraction)
       0.0
-      (format "%.2f" (* 100 (/ (float fraction)
-                               total))))))
-
+      (Double/parseDouble (format "%.2f" (* 100 (/ (float fraction)
+                                                   total)))))))
 (defn win-ratio-human-by-board-size
   []
   (let [human-wins-5 (count (wins-board-size?-type? 5 "H")) 
@@ -132,7 +131,8 @@
 (defn spit-all-contents
   []
   (repopulate-game-sessions!)
-  (let [human-wins (type?-wins "H")
+  (let [
+        human-wins (type?-wins "H")
         computer-wins (type?-wins "C")
         win-ratio-map (win-ratio-human-by-board-size )
         leaderboard (sort-by-win-count 
@@ -157,5 +157,3 @@
                       (resolve-quits-map quits-map) "\n")]
                       
                       (spit "statistics.txt" contents)))
-
-
