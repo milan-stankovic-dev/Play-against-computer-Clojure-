@@ -6,7 +6,9 @@
   :dependencies [[org.clojure/clojure "1.11.1"]
                  [seancorfield/next.jdbc "1.2.659"]
                  [mysql/mysql-connector-java "5.1.6"]
-                 [buddy/buddy-hashers "2.0.167"]]
+                 [buddy/buddy-hashers "2.0.167"]
+                 [org.clojure/tools.reader "1.3.7"]
+                 [jline "0.9.94"]]
   :main ^:skip-aot seminarski-rad.core
   ;; :target-path "target/%s"
   :profiles {:uberjar {:aot :all
