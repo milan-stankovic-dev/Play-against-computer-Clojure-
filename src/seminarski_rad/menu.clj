@@ -3,7 +3,8 @@
             [seminarski-rad.validator :as val]
             [seminarski-rad.board :as board]
             [seminarski-rad.computer-logic :as comp]
-            [seminarski-rad.database :as db]))
+            [seminarski-rad.database :as db]
+            [seminarski-rad.statistics :as stats]))
 
 (defn prompt-login
   []
@@ -78,6 +79,10 @@
       "1" (play-game (board/create-board 5) 5)
       "2" (play-game (board/create-board 7) 7)
       "3" (play-game (board/create-board 9) 9)
+      "4" (do 
+            (println "Calculating statistics...")
+            (stats/spit-all-contents)
+            (println "Done. Check statistics.txt"))
       "END")))
 
 (defn manage-menus

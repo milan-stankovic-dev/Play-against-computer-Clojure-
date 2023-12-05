@@ -1206,3 +1206,577 @@ clj꞉seminarski-rad.statistics꞉> 
 clj꞉seminarski-rad.statistics꞉> 
 (:stanmil :ppetar :saraa)
 clj꞉seminarski-rad.statistics꞉> 
+{:5 20.0, :7 40.0, :9 0.0}
+clj꞉seminarski-rad.statistics꞉> 
+({:game_session/id 1,
+  :app_user/id 6,
+  :game_session/won "H",
+  :game_session/human_score 3,
+  :game_session/computer_score 0,
+  :game_session/human_color "R",
+  :app_user/username "stanmil",
+  :board/size 5})
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/score-for-type?-wins
+clj꞉seminarski-rad.statistics꞉> 
+(#:game_session{:human_score 3, :computer_score 0}
+ #:game_session{:human_score 2, :computer_score 0}
+ #:game_session{:human_score 2, :computer_score 0})
+clj꞉seminarski-rad.statistics꞉> 
+(#:game_session{:human_score 3, :computer_score 0}
+ #:game_session{:human_score 2, :computer_score 0}
+ #:game_session{:human_score 2, :computer_score 0})
+clj꞉seminarski-rad.statistics꞉> 
+; Evaluating file: statistics.clj
+#'seminarski-rad.statistics/spit-all-contents
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/spit-all-contents
+clj꞉seminarski-rad.statistics꞉> 
+()
+()
+{:5 100.0, :7 100.0, :9 100.0}
+()
+{}
+nil
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/spit-all-contents
+clj꞉seminarski-rad.statistics꞉> 
+()
+()
+{:5 100.0, :7 100.0, :9 100.0}
+()
+{}
+nil
+clj꞉seminarski-rad.statistics꞉> 
+()
+clj꞉seminarski-rad.statistics꞉> 
+()
+clj꞉seminarski-rad.statistics꞉> 
+[]
+clj꞉seminarski-rad.statistics꞉> 
+nil
+clj꞉seminarski-rad.statistics꞉> 
+[{:game_session/id 1,
+  :app_user/id 6,
+  :game_session/won "H",
+  :game_session/human_score 3,
+  :game_session/computer_score 0,
+  :game_session/human_color "R",
+  :app_user/username "stanmil",
+  :board/size 5}
+ {:game_session/id 2,
+  :app_user/id 7,
+  :game_session/won "H",
+  :game_session/human_score 2,
+  :game_session/computer_score 0,
+  :game_session/human_color "B",
+  :app_user/username "ppetar",
+  :board/size 7}
+ {:game_session/id 3,
+  :app_user/id 8,
+  :game_session/won "C",
+  :game_session/human_score 0,
+  :game_session/computer_score 3,
+  :game_session/human_color "B",
+  :app_user/username "saraa",
+  :board/size 7}
+ {:game_session/id 4,
+  :app_user/id 6,
+  :game_session/won "C",
+  :game_session/human_score 0,
+  :game_session/computer_score 5,
+  :game_session/human_color "R",
+  :app_user/username "stanmil",
+  :board/size 7}
+ {:game_session/id 5,
+  :app_user/id 6,
+  :game_session/won "H",
+  :game_session/human_score 2,
+  :game_session/computer_score 0,
+  :game_session/human_color "B",
+  :app_user/username "stanmil",
+  :board/size 7}]
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/spit-all-contents
+clj꞉seminarski-rad.statistics꞉> 
+({:game_session/id 1, :app_user/id 6, :game_session/won "H", :game_session/human_score 3, :game_session/computer_score 0, :game_session/human_color "R", :app_user/username "stanmil", :board/size 5} {:game_session/id 2, :app_user/id 7, :game_session/won "H", :game_session/human_score 2, :game_session/computer_score 0, :game_session/human_color "B", :app_user/username "ppetar", :board/size 7} {:game_session/id 5, :app_user/id 6, :game_session/won "H", :game_session/human_score 2, :game_session/computer_score 0, :game_session/human_color "B", :app_user/username "stanmil", :board/size 7})
+({:game_session/id 3, :app_user/id 8, :game_session/won "C", :game_session/human_score 0, :game_session/computer_score 3, :game_session/human_color "B", :app_user/username "saraa", :board/size 7} {:game_session/id 4, :app_user/id 6, :game_session/won "C", :game_session/human_score 0, :game_session/computer_score 5, :game_session/human_color "R", :app_user/username "stanmil", :board/size 7})
+{:5 20.0, :7 40.0, :9 0.0}
+([:stanmil 2] [:ppetar 1])
+{:stanmil {:R 2, :B 1}, :ppetar {:B 1, :R 0}, :saraa {:B 1, :R 0}}
+nil
+clj꞉seminarski-rad.statistics꞉> 
+{:a 2}
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/quits-helper
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/quits-by-users
+clj꞉seminarski-rad.statistics꞉> 
+{:saraa 1, :stanmil 1}
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/quits-helper
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/quits-by-users
+clj꞉seminarski-rad.statistics꞉> 
+{}
+clj꞉seminarski-rad.statistics꞉> 
+nil
+clj꞉seminarski-rad.statistics꞉> 
+[{:game_session/id 1,
+  :app_user/id 6,
+  :game_session/won "H",
+  :game_session/human_score 3,
+  :game_session/computer_score 0,
+  :game_session/human_color "R",
+  :app_user/username "stanmil",
+  :board/size 5}
+ {:game_session/id 2,
+  :app_user/id 7,
+  :game_session/won "H",
+  :game_session/human_score 2,
+  :game_session/computer_score 0,
+  :game_session/human_color "B",
+  :app_user/username "ppetar",
+  :board/size 7}
+ {:game_session/id 3,
+  :app_user/id 8,
+  :game_session/won "C",
+  :game_session/human_score 0,
+  :game_session/computer_score 3,
+  :game_session/human_color "B",
+  :app_user/username "saraa",
+  :board/size 7}
+ {:game_session/id 4,
+  :app_user/id 6,
+  :game_session/won "C",
+  :game_session/human_score 0,
+  :game_session/computer_score 5,
+  :game_session/human_color "R",
+  :app_user/username "stanmil",
+  :board/size 7}
+ {:game_session/id 5,
+  :app_user/id 6,
+  :game_session/won "H",
+  :game_session/human_score 2,
+  :game_session/computer_score 0,
+  :game_session/human_color "B",
+  :app_user/username "stanmil",
+  :board/size 7}
+ {:game_session/id 6,
+  :app_user/id 7,
+  :game_session/won "C",
+  :game_session/human_score 5,
+  :game_session/computer_score 6,
+  :game_session/human_color "R",
+  :app_user/username "ppetar",
+  :board/size 5}]
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/quits-helper
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/quits-by-users
+clj꞉seminarski-rad.statistics꞉> 
+{:ppetar 1}
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/quits-helper
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/quits-by-users
+clj꞉seminarski-rad.statistics꞉> 
+{:ppetar 1}
+clj꞉seminarski-rad.statistics꞉> 
+[{:game_session/computer_score 0, :game_session/human_score 3, :game_session/human_color "R", :app_user/username "stanmil", :board/size 3}]
+nil
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/spit-all-contents
+clj꞉seminarski-rad.statistics꞉> 
+({:game_session/id 1, :app_user/id 6, :game_session/won "H", :game_session/human_score 3, :game_session/computer_score 0, :game_session/human_color "R", :app_user/username "stanmil", :board/size 5} {:game_session/id 2, :app_user/id 7, :game_session/won "H", :game_session/human_score 2, :game_session/computer_score 0, :game_session/human_color "B", :app_user/username "ppetar", :board/size 7} {:game_session/id 5, :app_user/id 6, :game_session/won "H", :game_session/human_score 2, :game_session/computer_score 0, :game_session/human_color "B", :app_user/username "stanmil", :board/size 7})
+({:game_session/id 3, :app_user/id 8, :game_session/won "C", :game_session/human_score 0, :game_session/computer_score 3, :game_session/human_color "B", :app_user/username "saraa", :board/size 7} {:game_session/id 4, :app_user/id 6, :game_session/won "C", :game_session/human_score 0, :game_session/computer_score 5, :game_session/human_color "R", :app_user/username "stanmil", :board/size 7} {:game_session/id 6, :app_user/id 7, :game_session/won "C", :game_session/human_score 5, :game_session/computer_score 6, :game_session/human_color "R", :app_user/username "ppetar", :board/size 5})
+{:5 16.666666666666664, :7 33.33333333333333, :9 0.0}
+([:stanmil 2] [:ppetar 1])
+{:stanmil {:R 2, :B 1}, :ppetar {:B 1, :R 1}, :saraa {:B 1, :R 0}}
+{:ppetar 1}
+nil
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/resolve-leaderboard
+clj꞉seminarski-rad.statistics꞉> 
+("stanmil: 2\n" "ppetar: 1\n")
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/resolve-leaderboard
+clj꞉seminarski-rad.statistics꞉> 
+("stanmil: 2" "ppetar: 1")
+clj꞉seminarski-rad.statistics꞉> 
+nil
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/resolve-leaderboard
+clj꞉seminarski-rad.statistics꞉> 
+"1 : 2\n2 : 1"
+clj꞉seminarski-rad.statistics꞉> 
+"1 : 2\n2 : 1"
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/resolve-leaderboard
+clj꞉seminarski-rad.statistics꞉> 
+nil
+clj꞉seminarski-rad.statistics꞉> 
+[{:game_session/id 1,
+  :app_user/id 6,
+  :game_session/won "H",
+  :game_session/human_score 3,
+  :game_session/computer_score 0,
+  :game_session/human_color "R",
+  :app_user/username "stanmil",
+  :board/size 5}
+ {:game_session/id 2,
+  :app_user/id 7,
+  :game_session/won "H",
+  :game_session/human_score 2,
+  :game_session/computer_score 0,
+  :game_session/human_color "B",
+  :app_user/username "ppetar",
+  :board/size 7}
+ {:game_session/id 3,
+  :app_user/id 8,
+  :game_session/won "C",
+  :game_session/human_score 0,
+  :game_session/computer_score 3,
+  :game_session/human_color "B",
+  :app_user/username "saraa",
+  :board/size 7}
+ {:game_session/id 4,
+  :app_user/id 6,
+  :game_session/won "C",
+  :game_session/human_score 0,
+  :game_session/computer_score 5,
+  :game_session/human_color "R",
+  :app_user/username "stanmil",
+  :board/size 7}
+ {:game_session/id 5,
+  :app_user/id 6,
+  :game_session/won "H",
+  :game_session/human_score 2,
+  :game_session/computer_score 0,
+  :game_session/human_color "B",
+  :app_user/username "stanmil",
+  :board/size 7}
+ {:game_session/id 6,
+  :app_user/id 7,
+  :game_session/won "C",
+  :game_session/human_score 5,
+  :game_session/computer_score 6,
+  :game_session/human_color "R",
+  :app_user/username "ppetar",
+  :board/size 5}]
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/resolve-leaderboard
+clj꞉seminarski-rad.statistics꞉> 
+nil
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/resolve-leaderboard
+clj꞉seminarski-rad.statistics꞉> 
+"stanmil: 2"
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/resolve-leaderboard
+clj꞉seminarski-rad.statistics꞉> 
+("stanmil: 2" "ppetar: 1")
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/resolve-leaderboard
+clj꞉seminarski-rad.statistics꞉> 
+"stanmil: 2ppetar: 1"
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/resolve-leaderboard
+clj꞉seminarski-rad.statistics꞉> 
+stanmil: 2
+ppetar: 1
+
+nil
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/resolve-leaderboard
+clj꞉seminarski-rad.statistics꞉> 
+"stanmil: 2\nppetar: 1\n"
+clj꞉seminarski-rad.statistics꞉> 
+(1 2)
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/resolve-leaderboard
+clj꞉seminarski-rad.statistics꞉> 
+"stanmil: 2\nppetar: 1\n"
+clj꞉seminarski-rad.statistics꞉> 
+; Syntax error (IllegalArgumentException) compiling . at (src/seminarski_rad/statistics.clj:155:1).
+; No matching method round found taking 2 args for class java.lang.Math
+clj꞉seminarski-rad.statistics꞉> 
+; Execution error (IllegalArgumentException) at seminarski-rad.statistics/eval10483 (form-init8530266764389672516.clj:155).
+; No matching method round found taking 1 args
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/calculate-percentage
+clj꞉seminarski-rad.statistics꞉> 
+"30.00"
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/calculate-percentage
+clj꞉seminarski-rad.statistics꞉> 
+30.0
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/calculate-percentage
+clj꞉seminarski-rad.statistics꞉> 
+30.0
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/calculate-percentage
+clj꞉seminarski-rad.statistics꞉> 
+"30.00"
+clj꞉seminarski-rad.statistics꞉> 
+"33.33"
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/calculate-percentage
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/resolve-colors-map
+clj꞉seminarski-rad.statistics꞉> 
+"stanmil: 2[R] 1[B]\nppetar: 1[R] 1[B]\nsaraa: 0[R] 1[B]\n"
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/resolve-quits-map
+clj꞉seminarski-rad.statistics꞉> 
+"ppetar: 1\n"
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/spit-all-contents
+clj꞉seminarski-rad.statistics꞉> 
+******************ALL WINS******************
+HUMAN: clojure.lang.LazySeq@2e8cf1f0
+COMPUTER: clojure.lang.LazySeq@c879d2e0
+*************WINS BY BOARD SIZE*************
+SIZE 5: HUMAN: 16.666666666666664% COMPUTER: 83.33333333333334% SIZE 7: HUMAN: 33.33333333333333% COMPUTER: 66.66666666666667% SIZE 9: HUMAN: 0.0% COMPUTER: 100.0% ****************LEADERBOARD****************
+stanmil: 2
+ppetar: 1
+***************COLORS BY USER***************
+stanmil: 2[R] 1[B]
+ppetar: 1[R] 1[B]
+saraa: 0[R] 1[B]
+***************QUITS BY USER***************
+ppetar: 1
+
+nil
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/spit-all-contents
+clj꞉seminarski-rad.statistics꞉> 
+******************ALL WINS******************
+HUMAN: clojure.lang.LazySeq@2e8cf1f0
+COMPUTER: clojure.lang.LazySeq@c879d2e0
+*************WINS BY BOARD SIZE*************
+SIZE 5: HUMAN: 16.666666666666664% COMPUTER: 83.33333333333334% SIZE 7: HUMAN: 33.33333333333333% COMPUTER: 66.66666666666667% SIZE 9: HUMAN: 0.0% COMPUTER: 100.0% ****************LEADERBOARD****************
+stanmil: 2
+ppetar: 1
+***************COLORS BY USER***************
+stanmil: 2[R] 1[B]
+ppetar: 1[R] 1[B]
+saraa: 0[R] 1[B]
+***************QUITS BY USER***************
+ppetar: 1
+
+nil
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/spit-all-contents
+clj꞉seminarski-rad.statistics꞉> 
+******************ALL WINS******************
+
+HUMAN: clojure.lang.LazySeq@2e8cf1f0
+COMPUTER: clojure.lang.LazySeq@c879d2e0
+
+*************WINS BY BOARD SIZE*************
+
+SIZE 5: HUMAN: 16.666666666666664% COMPUTER: 83.33333333333334% SIZE 7: HUMAN: 33.33333333333333% COMPUTER: 66.66666666666667% SIZE 9: HUMAN: 0.0% COMPUTER: 100.0% 
+****************LEADERBOARD****************
+
+stanmil: 2
+ppetar: 1
+
+***************COLORS BY USER***************
+
+stanmil: 2[R] 1[B]
+ppetar: 1[R] 1[B]
+saraa: 0[R] 1[B]
+
+***************QUITS BY USER***************
+
+ppetar: 1
+
+
+nil
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/spit-all-contents
+clj꞉seminarski-rad.statistics꞉> 
+******************ALL WINS******************
+
+HUMAN: clojure.lang.LazySeq@2e8cf1f0
+COMPUTER: clojure.lang.LazySeq@c879d2e0
+
+*************WINS BY BOARD SIZE*************
+
+SIZE 5: HUMAN: 16.666666666666664% COMPUTER: 83.33333333333334% 
+SIZE 7: HUMAN: 33.33333333333333% COMPUTER: 66.66666666666667% 
+SIZE 9: HUMAN: 0.0% COMPUTER: 100.0% 
+****************LEADERBOARD****************
+
+stanmil: 2
+ppetar: 1
+
+***************COLORS BY USER***************
+
+stanmil: 2[R] 1[B]
+ppetar: 1[R] 1[B]
+saraa: 0[R] 1[B]
+
+***************QUITS BY USER***************
+
+ppetar: 1
+
+
+nil
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/spit-all-contents
+clj꞉seminarski-rad.statistics꞉> 
+******************ALL WINS******************
+
+HUMAN: clojure.lang.LazySeq@2e8cf1f0
+COMPUTER: clojure.lang.LazySeq@c879d2e0
+
+*************WINS BY BOARD SIZE*************
+
+SIZE 5: HUMAN: 16.666666666666664% COMPUTER: 83.33333333333334% 
+SIZE 7: HUMAN: 33.33333333333333% COMPUTER: 66.66666666666667% 
+SIZE 9: HUMAN: 0.0% COMPUTER: 100.0% 
+
+****************LEADERBOARD****************
+
+stanmil: 2
+ppetar: 1
+
+***************COLORS BY USER***************
+
+stanmil: 2[R] 1[B]
+ppetar: 1[R] 1[B]
+saraa: 0[R] 1[B]
+
+***************QUITS BY USER***************
+
+ppetar: 1
+
+
+nil
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/spit-all-contents
+clj꞉seminarski-rad.statistics꞉> 
+******************ALL WINS******************
+
+HUMAN: 3
+COMPUTER: 3
+
+*************WINS BY BOARD SIZE*************
+
+SIZE 5: HUMAN: 16.666666666666664% COMPUTER: 83.33333333333334% 
+SIZE 7: HUMAN: 33.33333333333333% COMPUTER: 66.66666666666667% 
+SIZE 9: HUMAN: 0.0% COMPUTER: 100.0% 
+
+****************LEADERBOARD****************
+
+stanmil: 2
+ppetar: 1
+
+***************COLORS BY USER***************
+
+stanmil: 2[R] 1[B]
+ppetar: 1[R] 1[B]
+saraa: 0[R] 1[B]
+
+***************QUITS BY USER***************
+
+ppetar: 1
+
+
+nil
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/spit-all-contents
+clj꞉seminarski-rad.statistics꞉> 
+"******************ALL WINS******************\n\nHUMAN: 3\nCOMPUTER: 3\n\n*************WINS BY BOARD SIZE*************\n\nSIZE 5: HUMAN: 16.666666666666664% COMPUTER: 83.33333333333334% \nSIZE 7: HUMAN: 33.33333333333333% COMPUTER: 66.66666666666667% \nSIZE 9: HUMAN: 0.0% COMPUTER: 100.0% \n\n****************LEADERBOARD****************\n\nstanmil: 2\nppetar: 1\n\n***************COLORS BY USER***************\n\nstanmil: 2[R] 1[B]\nppetar: 1[R] 1[B]\nsaraa: 0[R] 1[B]\n\n***************QUITS BY USER***************\n\nppetar: 1\n\n"
+nil
+clj꞉seminarski-rad.statistics꞉> 
+#'seminarski-rad.statistics/spit-all-contents
+clj꞉seminarski-rad.statistics꞉> 
+nil
+clj꞉seminarski-rad.statistics꞉> 
+nil
+clj꞉seminarski-rad.menu꞉> 
+#'seminarski-rad.statistics/spit-all-contents
+clj꞉seminarski-rad.statistics꞉> 
+nil
+clj꞉seminarski-rad.statistics꞉> 
+nil
+clj꞉seminarski-rad.statistics꞉> 
+nil
+clj꞉seminarski-rad.statistics꞉> 
+nil
+clj꞉seminarski-rad.statistics꞉> 
+Please enter your username:
+Please enter your password:
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+nil
+clj꞉seminarski-rad.menu꞉> 
+; Evaluating file: menu.clj
+Please enter your username:
+Please enter your password:
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+Calculating statistics...
+Done. Check statistics.txt
+
+  *********************************************************************
+            
+      Welcome stanmil to "Play against computer- the app"! This
+      interactive game will have you competing against your family and
+      friends in no time. But first, you need to beat the computer in
+      a one-to-one matchup. Can you do it?
+
+      To get started you must choose one of the options below:
+
+      1 -> play alquerque (easy)
+      2 -> play alquerque (medium)
+      3 -> play alquerque (hard)
+      4 -> game statistics
+            
+      Press any other key to quit.
+            
+  *********************************************************************
+
+Please enter a number:
+nil
+clj꞉seminarski-rad.menu꞉> 

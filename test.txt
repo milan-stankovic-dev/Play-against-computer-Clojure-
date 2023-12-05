@@ -1,3 +1,0 @@
-*****************WINS SUM TOTAL:*******************
-HUMAN: 1
-COMPUTER: 0
