@@ -261,3 +261,6 @@
         (inc inputted-size)
         inputted-size))))
 
+(defn write-to-file
+  [named? contents]
+  (spit named? contents))
