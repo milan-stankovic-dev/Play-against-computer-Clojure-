@@ -1,5 +1,5 @@
 (ns seminarski-rad.core
-  (:require [seminarski-rad.gameplay :as game])
+  (:require [seminarski-rad.menu :as game])
   (:gen-class))
 
 (defn -main

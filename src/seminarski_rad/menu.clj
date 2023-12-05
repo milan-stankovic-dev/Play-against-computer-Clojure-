@@ -2,7 +2,7 @@
   (:require [seminarski-rad.input-utility :as utility]
             [seminarski-rad.validator :as val]
             [seminarski-rad.board :as board]
-            [seminarski-rad.computer :as computer]
+            [seminarski-rad.computer-logic :as comp]
             [seminarski-rad.database :as db]))
 
 (defn prompt-login
@@ -54,7 +54,7 @@
     
     Here's your board:\n")
       (board/print-the-board board board-size)
-      (computer/print-the-score )
+      (comp/print-the-score )
       ;; (computer/initiate-piece-count board-size)
       (println))
 
@@ -66,9 +66,9 @@
                      (utility/prompt-info "user color [B] or [R]"
                                           val/user-color-input-validator))
         computer-color (utility/opposite-player-color human-color)]
-    (computer/initiate-piece-count board
+    (comp/initiate-piece-count board
                                    human-color computer-color) 
-    (computer/take-turns "HUMAN" board human-color computer-color board-size)))
+    (comp/take-turns "HUMAN" board human-color computer-color board-size)))
 
 (defn access-main-menu-item
   []
