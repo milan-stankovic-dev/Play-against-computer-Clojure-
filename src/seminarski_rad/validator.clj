@@ -35,20 +35,20 @@
   "Checks if the user is trying to move their own
     piece color or someone elses or a blank field."
   [input-str board player-color]
-  (= player-color (get-in board (conj (utility/get-move-start input-str) :piece))))
+  (= player-color (get-in board (conj (utility/move-?-coordinate input-str 1) :piece))))
 
 (defn- start-not-the-same-as-finish-validator 
   "Checks if the starting position of the move is 
    not the same as the finishing one."
   [input-str]
-  (not= (utility/get-move-start input-str)
-              (utility/get-move-finish input-str)))
+  (not= (utility/move-?-coordinate input-str 1)
+              (utility/move-?-coordinate input-str 2)))
 
 (defn- end-not-occupied-validator 
   "Checks if the end location of a move is blank or not.
    Returns true if it's open and false otherwise"
   [input-str board]
-  (= (get-in board (conj (utility/get-move-finish input-str) :piece)) " "))
+  (= (get-in board (conj (utility/move-?-coordinate input-str 2) :piece)) " "))
 
 (defn- middle-keyword [kw1 kw2]
   (let [char1 (first (name kw1))
@@ -74,9 +74,9 @@
    AND the player does not \"eat\", true is returned. If \"eating\" occurs, \"eat\"
    is returned. False otherwise."
   [board purified-input-str player-color]
-  (let [first-row-num (utility/get-initial-row-as-num purified-input-str)
-        first-col-str (utility/get-initial-col-as-str purified-input-str)
-        end-of-move (utility/get-move-finish purified-input-str)
+  (let [first-row-num (utility/get-?-row-as-num purified-input-str 1)
+        first-col-str (str (utility/get-?-col-as-char purified-input-str 1))
+        end-of-move (utility/move-?-coordinate purified-input-str 2)
         first-row-keyword (utility/num->keyword first-row-num)
         first-col-keyword (keyword first-col-str)
         opponents-color (utility/opposite-player-color player-color)] 
@@ -108,6 +108,7 @@
 
 (defn not-empty?
   [input]
+  #_{:clj-kondo/ignore [:not-empty?]}
   (not (empty? input)))
 
 (defn user-color-input-validator

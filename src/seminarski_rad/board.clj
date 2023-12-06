@@ -10,12 +10,12 @@
    Returns false if invalid, true if valid and no eat, and 
    \"eat\" if the opponent's piece is eaten."
   [input-str]
-  (let [init-row-number (utility/get-initial-row-as-num input-str)
-        init-col-string (utility/get-initial-col-as-str input-str)
-        init-col-number (utility/get-initial-col-as-num input-str)
-        final-col-string (utility/get-final-col-as-str input-str)
-        final-col-number (utility/get-final-col-as-num input-str)
-        final-row-number (utility/get-final-row-as-num input-str)]
+  (let [init-row-number (utility/get-?-row-as-num input-str 1)
+        init-col-char (utility/get-?-col-as-char input-str 1)
+        init-col-number (utility/get-?-col-as-num input-str 1)
+        final-col-char (utility/get-?-col-as-char input-str 2)
+        final-col-number (utility/get-?-col-as-num input-str 2)
+        final-row-number (utility/get-?-row-as-num input-str 2)]
     ;; Checking if the user is trying to jump too far in any direction
     (if (or (> (Math/abs (- init-row-number final-row-number)) 2)
             (> (Math/abs (- init-col-number final-col-number)) 2))
@@ -23,7 +23,7 @@
       ;; Checking if the user is trying to jump diagonally 1 tile where there are no viable paths
       (if (and (= 1 (Math/abs (- init-row-number final-row-number)))
                (= 1 (Math/abs (- init-col-number final-col-number)))
-               (apply distinct? [init-row-number init-col-string final-row-number final-col-string])
+               (apply distinct? [init-row-number init-col-char final-row-number final-col-char])
                (not= (odd? init-row-number) (odd? init-col-number)))
         false
         ;; Checking if the user can eat horizontally, vertically and diagonally.

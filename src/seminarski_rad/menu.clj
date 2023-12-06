@@ -35,7 +35,8 @@
       2 -> play alquerque (medium)
       3 -> play alquerque (hard)
       4 -> game statistics
-            
+      5 -> just for fun
+      
       Press any other key to quit.
             
   *********************************************************************\n")))
@@ -71,6 +72,18 @@
                                    human-color computer-color) 
     (comp/take-turns "HUMAN" board human-color computer-color board-size)))
 
+(defn- custom-board-menu
+  []
+  (let [fixed-user-input (utility/adjust-board-size
+                          (Integer/parseInt
+                           (utility/purify-user-input
+                            (utility/prompt-info
+                             "board size"
+                             val/not-empty?))))]
+    (prn (str "You inputted: " fixed-user-input))
+    (play-game (board/create-board fixed-user-input)
+               fixed-user-input)))
+
 (defn access-main-menu-item
   []
   (let [user-choice (utility/purify-user-input
@@ -83,6 +96,7 @@
             (println "Calculating statistics...")
             (stats/spit-all-contents)
             (println "Done. Check statistics.txt"))
+      "5" (custom-board-menu)
       "END")))
 
 (defn manage-menus
@@ -93,5 +107,5 @@
    (when-not (= "END" (access-main-menu-item))
      (manage-menus logged-in-user))))
 
-(manage-menus)
+;; (manage-menus)
 ;; (board/print-the-board (board/create-board 5) 5)

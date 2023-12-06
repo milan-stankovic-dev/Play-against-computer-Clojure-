@@ -2,66 +2,75 @@
   (:require [clojure.string :as str]
             [seminarski-rad.input-utility :as utility]))
 
+(defn- allow-?-extras
+  "Takes in adjusted board size and returns how many 
+   extra digits are allowed to be in input (if the 
+   board size is less than 10, it allows no extras,
+   10 and more it allows 1 extra etc.)."
+  [adjusted-board-size]
+  (dec (count (str adjusted-board-size))))
+
 (defn purify-user-input
   "Removes unnecessary blank characters and capitalizes 
    all letters in input. If input contains \"EAT\" in the
    middle of it,function removes it."
-  [input]
-  (let [first-step (str/upper-case (str/trim input))] 
-      (if (and (= (count first-step) 9)
-               (clojure.string/includes? first-step "EAT"))
-        (str (subs first-step 0 3) (subs first-step 7))
+  [input-str]
+  (let [first-step (str/upper-case (str/trim input-str))] 
+      (if (clojure.string/includes? first-step "EAT")
+        
+        (str/replace first-step "EAT-" "")
         first-step)))
 
 (defn extract-keys-from-user-input
-  "Takes in a string representing user input and returns
-   a vector of every character (except '-') as a keyword."
-  [input]
-  (conj (conj (conj (vector (keyword (subs input 0 1)))
-                    (keyword (subs input 1 2)))
-              (keyword (subs input 3 4)))
-        (keyword (subs input 4))))
+  "Takes in a string representing user input (ex. 1A-2A or 111D-111E)
+   and returns a vector of every number or letter as a keyword."
+  [input-str]
+  (vec (first (reduce (fn 
+                        [[acc num-acc] a-char] 
+                        (if (= \- a-char) 
+                          [acc ""] 
+                          (if (empty? num-acc) 
+                            (if (not (Character/isDigit a-char)) 
+                              [(conj acc  
+                                     (keyword (str a-char))) ""] 
+                              [acc (str num-acc a-char)])  
+                            (if (Character/isDigit a-char) 
+                              [acc (str num-acc a-char)] 
+                              [(conj (conj acc (keyword num-acc))
+                                     (keyword (str a-char))) ""])) 
+                          ))[[] ""] input-str))))
+(defn- valid-?half?
+  [half]
+  (or (= 1 half)
+      (= 2 half)))
 
-(defn get-move-start
+(defn move-?-coordinate
   "Takes in a string representing user input and returns
-     a vector of starting coordinates as keywords."
-  [input]
-  (let [user-keys (extract-keys-from-user-input input)]
-    (vector (first user-keys) (first (rest user-keys)))))
+       a vector of specified (first or second) coordinates
+   as keywords."
+  [input-str which-half]
+  (when (valid-?half? which-half)
+    (let [input-arr (.split input-str "-")]
+      (extract-keys-from-user-input 
+       (nth input-arr (dec which-half))))))
 
-(get-move-start "1a-2b")
-
-(defn get-move-finish
+(defn get-?-row-as-num
   "Takes in a string representing user input and returns
-       a vector of ending coordinates as keywords."
-  [input]
-  (let [user-keys (extract-keys-from-user-input input)]
-    (vector (first (rest (rest user-keys)))
-            (first (rest (rest (rest user-keys)))))))
+    the numeric value of the specified coordinate's row."
+  [input-str which-row] 
+  (when (valid-?half? which-row) 
+    (let [extracted (extract-keys-from-user-input input-str)] 
+      (Integer/parseInt (name 
+                         (nth extracted (- (* 2 which-row) 2)))))))
 
-(defn get-initial-row-as-num
+(defn get-?-col-as-char
   "Takes in a string representing user input and returns
-    the numeric value of the starting coordinate's row."
-  [input]
-  (Integer/parseInt (subs input 0 1)))
-
-(defn get-final-row-as-num
-  "Takes in a string representing user input and returns
-      the numeric value of the ending coordinate's row."
-  [input]
-  (Integer/parseInt (subs input 3 4)))
-
-(defn get-initial-col-as-str 
-  "Takes in a string representing user input and returns
-      the string value of the starting coordinate's column."
-  [input]
-  (subs input 1 2))
-
-(defn get-final-col-as-str
-  "Takes in a string representing user input and returns
-        the string value of the ending coordinate's column."
-  [input]
-  (subs input 4 5))
+    the character value of the specified coordinate's 
+   column."
+  [input-str which-col]
+  (when (valid-?half? which-col)
+      (let [extracted (extract-keys-from-user-input input-str)]
+        (first (name (nth extracted (- (* 2 which-col) 1)))))))
 
 (defn number->char
   "Converts number to its character in the alphabet. May behave funky
@@ -79,17 +88,12 @@
     nil
     (- (int a-char) 64)))
 
-(defn get-initial-col-as-num
+(defn get-?-col-as-num
   "Takes in a string representing user input and returns
-            the numeric value of the starting coordinate's column."
- [input-str] 
-   (char->number (first (get-initial-col-as-str input-str))))
-
-(defn get-final-col-as-num
-  "Takes in a string representing user input and returns
-          the numeric value of the ending coordinate's column."
-  [input]
-  (char->number (first (get-final-col-as-str input))))
+            the numeric value of the specified coordinate's column."
+ [input-str which-col] 
+  (when (valid-?half? which-col)
+    (char->number (get-?-col-as-char input-str which-col))))
 
 (defn middle-keyword
   "Takes in two keywords that are single char and alphabetic,
@@ -103,11 +107,10 @@
     middle-keyword))
 
 (defn middle-number
-  "Takes in two numbers, returns the previous value of the one
-   that's greater."
+  "Takes in two numbers, returns the one that's in the middle
+   between them. Rounds down."
   [num1 num2] 
-  (let [bigger-number (max num1 num2)]
-    (dec bigger-number)))
+  (quot (+ num1 num2) 2))
 
 (defn opposite-player-color
   "For given user color as single char string, returns opposite 
@@ -116,7 +119,6 @@
   (if (= color "R")
     "B"
     "R"))
-
 
 (defn midvalue-num
   "Returns the middle value of two numbers as a keyword.
@@ -131,16 +133,14 @@
   [num]
   (keyword (str num)))
 
-(defn midvalue-str->keyword
-  "Takes in two strings that are single char and alphabetic,
-     returns the midvalue between those characters, as a keyword."
-  [str1 str2]
-  (let [num1 (char->number (first str1))
-        num2 (char->number (first str2))
+(defn midvalue-char->keyword
+  "Takes in two characters and returns the midvalue
+   between those characters, as a keyword. Rounds down."
+  [char1 char2]
+  (let [num1 (char->number char1)
+        num2 (char->number char2)
         midvalue-num (midvalue-num num1 num2)]
     (keyword (str (number->char midvalue-num)))))
-
-(midvalue-str->keyword "A" "A")
 
 (defn keyword->str
   [keyword]
@@ -157,24 +157,24 @@
    validated) returns vector of keyworded coordinates of field that
    is to be eaten by user's move."
   [purified-input-str] ;e.g. "1A-3C"
-  (let [init-row-num (get-initial-row-as-num purified-input-str)
-        init-col-str (get-initial-col-as-str purified-input-str)
-        final-row-num (get-final-row-as-num purified-input-str)
-        final-col-str (get-final-col-as-str purified-input-str)]
+  (let [init-row-num (get-?-row-as-num purified-input-str 1)
+        init-col-char (get-?-col-as-char purified-input-str 1)
+        final-row-num (get-?-row-as-num purified-input-str 2)
+        final-col-char (get-?-col-as-char purified-input-str 2)]
     (if (distinct? init-row-num
-                   init-col-str
+                   init-col-char
                    final-row-num
-                   final-col-str)
+                   final-col-char)
       (vector (num->keyword (midvalue-num init-row-num
                                           final-row-num))
-              (midvalue-str->keyword init-col-str
-                                                   final-col-str))
+              (midvalue-char->keyword init-col-char 
+                                      final-col-char))
       (if (= init-row-num final-row-num)
         (vector (num->keyword init-row-num)
-                (midvalue-str->keyword init-col-str
-                                                     final-col-str))
+                (midvalue-char->keyword init-col-char 
+                                        final-col-char))
         (vector (num->keyword (midvalue-num init-row-num final-row-num))
-                (keyword init-col-str))))))
+                (keyword (str init-col-char)))))))
 
 (defn reverse-input
   "Does a semantic reverse, where the end of a move goes first, then the 
@@ -220,8 +220,6 @@
   (let [letter-seq (numeric-seq->letter-seq numeric-seq)]
     (map #(keyword %) letter-seq)))
 
-(numeric-seq->letter-seq [1 2 3 4])
-(numeric-seq->letter-keyword-seq [1 2 3 4])
 (defn ?-half-of-seq
   "Returns specified half of sequence. If sequence has odd
    number of elements, middle is excluded from both halves."
@@ -234,8 +232,6 @@
                 (dec cutoff-index)
                 cutoff-index))
       (subvec a-seq cutoff-index))))
-
-(?-half-of-seq [1 2 3 4 5 6 7 8 9 10] 1)
 
 (defn prompt-info
   [what-to-prompt validator-function]

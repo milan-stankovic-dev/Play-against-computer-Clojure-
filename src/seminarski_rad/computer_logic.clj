@@ -68,8 +68,9 @@
     (do (println "Are you sure you want to quit? 
                 Quitting gives a victory to the computer.
                 [Y] or [N]")
-        (let [subseq-response (utility/prompt-info "your choice"
-                                                   val/confirm-validator-Y-N)]
+        (let [subseq-response (utility/purify-user-input
+                               (utility/prompt-info "your choice" 
+                                                    val/confirm-validator-Y-N))]
           (println "Your choice: " subseq-response)
           (if (= "Y" subseq-response)
             (do
@@ -93,8 +94,8 @@
         (if-not validation-result
           (apply-move-indicator (utility/take-user-input-move) board user-color board-size)
           (let [purified-input-str (utility/purify-user-input user-input)
-                move-start (utility/get-move-start purified-input-str)
-                move-finish (utility/get-move-finish purified-input-str)
+                move-start (utility/?-half-of-seq 1 purified-input-str)
+                move-finish (utility/?-half-of-seq 2 purified-input-str)
                 move-done-board (assoc-in (assoc-in board (conj move-finish :piece) user-color)
                                           (conj move-start :piece) " ")]
             (if (= validation-result "eat")
