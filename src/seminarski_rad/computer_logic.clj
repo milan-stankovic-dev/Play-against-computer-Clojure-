@@ -94,8 +94,8 @@
         (if-not validation-result
           (apply-move-indicator (utility/take-user-input-move) board user-color board-size)
           (let [purified-input-str (utility/purify-user-input user-input)
-                move-start (utility/?-half-of-seq 1 purified-input-str)
-                move-finish (utility/?-half-of-seq 2 purified-input-str)
+                move-start (utility/move-?-coordinate purified-input-str 1)
+                move-finish (utility/move-?-coordinate purified-input-str 2)
                 move-done-board (assoc-in (assoc-in board (conj move-finish :piece) user-color)
                                           (conj move-start :piece) " ")]
             (if (= validation-result "eat")

@@ -2,13 +2,6 @@
   (:require [clojure.string :as str]
             [seminarski-rad.input-utility :as utility]))
 
-(defn- allow-?-extras
-  "Takes in adjusted board size and returns how many 
-   extra digits are allowed to be in input (if the 
-   board size is less than 10, it allows no extras,
-   10 and more it allows 1 extra etc.)."
-  [adjusted-board-size]
-  (dec (count (str adjusted-board-size))))
 
 (defn purify-user-input
   "Removes unnecessary blank characters and capitalizes 
@@ -120,15 +113,6 @@
     "B"
     "R"))
 
-(defn midvalue-num
-  "Returns the middle value of two numbers as a keyword.
-   Best used with integers with odd sized gaps between the values.
-   E.g. 3->5 is good because there is 1 (odd) number between
-        3->6 is not so good because there are two numbers 
-   between them (4 and 5) so the result will be 9/2"
-  [num1 num2]
-  (/ (+ num1 num2) 2))
-
 (defn num->keyword
   [num]
   (keyword (str num)))
@@ -139,7 +123,7 @@
   [char1 char2]
   (let [num1 (char->number char1)
         num2 (char->number char2)
-        midvalue-num (midvalue-num num1 num2)]
+        midvalue-num (middle-number num1 num2)]
     (keyword (str (number->char midvalue-num)))))
 
 (defn keyword->str
@@ -165,7 +149,7 @@
                    init-col-char
                    final-row-num
                    final-col-char)
-      (vector (num->keyword (midvalue-num init-row-num
+      (vector (num->keyword (middle-number init-row-num
                                           final-row-num))
               (midvalue-char->keyword init-col-char 
                                       final-col-char))
@@ -173,7 +157,7 @@
         (vector (num->keyword init-row-num)
                 (midvalue-char->keyword init-col-char 
                                         final-col-char))
-        (vector (num->keyword (midvalue-num init-row-num final-row-num))
+        (vector (num->keyword (middle-number init-row-num final-row-num))
                 (keyword (str init-col-char)))))))
 
 (defn reverse-input
@@ -250,9 +234,15 @@
    boards."
   [inputted-size]
   (if-not (number? inputted-size)
-    5 
+    (do
+      (println "Not a number. Defaulting to 5.")
+      5) 
     (if (< inputted-size 0)
-      5
+      (do 
+        (println "Negative. Defaulting to 5.")
+        5)
       (if (even? inputted-size)
-        (inc inputted-size)
+        (do
+          (println "Size cannot be even. Adding one to it.")
+          (inc inputted-size))
         inputted-size))))

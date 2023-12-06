@@ -107,5 +107,5 @@
    (when-not (= "END" (access-main-menu-item))
      (manage-menus logged-in-user))))
 
-;; (manage-menus)
+(manage-menus)
 ;; (board/print-the-board (board/create-board 5) 5)

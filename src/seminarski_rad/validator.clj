@@ -10,32 +10,63 @@
                             input-str)]
     (some #(= % purified-input-str) ["Y" "N"])))
 
-
+(defn- allow-?-extras
+  "Takes in adjusted board size and returns how many 
+   extra digits are allowed to be in input (if the 
+   board size is less than 10, it allows no extras,
+   10 and more it allows 1 extra etc.)."
+  [adj-board-size]
+  (dec (count (str adj-board-size))))
 
 (defn- input-length-validator 
   "Checks if the user's input is longer or shorter than needed.
    Returns false if it is, true otherwise."
-  [input-str length]
-  (= (count input-str) length))
+  [input-str adj-board-size]
+  (let [input-len (count input-str)]
+    (and (>= input-len 5)
+         (<= input-len (+ 5 (* 2 
+                               (allow-?-extras
+                                adj-board-size)))))))
     
 (defn- input-format-validator
   "Users input must strictly adhere to said form:
-   'NL-NL' where N is a number 1-5 and L is a letter
-   a-e or A-E."
-  [input-str board-size] 
+   'NL-NL' where N is a number 1-(board size) and L is a letter
+   a-(board size as lowercase alpha) or A-(board size as uppercase
+   alpha)."
+  [input-str board-size]
   (let [num-limit board-size
         str-limit-uc (name (utility/num->letter-keyword num-limit))
-        str-limit-lc (str/lower-case str-limit-uc)]
-    ;; (re-matches #"[1-5][a-eA-E]-[1-5][a-eA-E]" input-str) 
-    (re-matches (re-pattern (format "[1-%d][a-%sA-%s]-[1-%d][a-%sA-%s]"
-                                    num-limit str-limit-lc str-limit-uc
-                                    num-limit str-limit-lc str-limit-uc)) input-str)))
+        str-limit-lc (str/lower-case str-limit-uc)
+        last-digit-limit (mod num-limit 10)
+        first-digit-limit (Integer/parseInt (str 
+                                             (first (str num-limit))))
+        extras (allow-?-extras board-size)]
+    (if (< num-limit 10)
+      (re-matches (re-pattern
+                   (format "[1-%d][a-%sA-%s]-[1-%d][a-%sA-%s]"
+                           last-digit-limit str-limit-lc str-limit-uc
+                           last-digit-limit str-limit-lc str-limit-uc)) input-str)
+      (if (and (>= num-limit 10)
+               (< num-limit 100))
+        (re-matches (re-pattern
+                      (format "(?:[1-9]|[1-%d][0-%d])[a-%sA-%s]-(?:[1-9]|[1-%d][0-%d])[a-%sA-%s]" 
+                              first-digit-limit last-digit-limit
+                                str-limit-lc str-limit-uc 
+                              first-digit-limit last-digit-limit
+                                str-limit-lc str-limit-uc)) input-str)
+        (re-matches (re-pattern
+                     (format "(?:[1-9]|[1-%d][0-9]{0,%d}[0-%d])[a-%sA-%s]-(?:[1-9]|[1-%d][0,9]{0,%d}[0-%d])[a-%sA-%s]"
+                             first-digit-limit (dec extras) last-digit-limit
+                             str-limit-lc str-limit-uc first-digit-limit
+                             (dec extras) last-digit-limit str-limit-lc
+                             str-limit-uc)) input-str)))))
 
 (defn- proper-piece-color-validator
   "Checks if the user is trying to move their own
     piece color or someone elses or a blank field."
   [input-str board player-color]
-  (= player-color (get-in board (conj (utility/move-?-coordinate input-str 1) :piece))))
+  (= player-color (get-in board (conj (utility/move-?-coordinate input-str 1) 
+                                      :piece))))
 
 (defn- start-not-the-same-as-finish-validator 
   "Checks if the starting position of the move is 

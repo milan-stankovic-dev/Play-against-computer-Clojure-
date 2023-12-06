@@ -71,7 +71,7 @@
              :7 (calculate-percentage human-wins-7 total)
              :9 (calculate-percentage human-wins-9 total)}))
 
-(defn- distinct-users-who-played
+(defn distinct-users-who-played
   []
   (distinct (reduce (fn 
                       [acc session]
