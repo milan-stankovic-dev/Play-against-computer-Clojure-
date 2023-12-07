@@ -1,6 +1,8 @@
 (ns seminarski-rad.database
   (:require [next.jdbc :as jdbc]
-            [buddy.hashers :as hashing]))
+            [buddy.hashers :as hashing]
+            [seminarski-rad.validator :as val]
+            [seminarski-rad.input-utility :as utility]))
 
 (def ^:private db
   {:dbtype "mysql"
@@ -84,22 +86,57 @@
 ;; (insert-board (get-connection) 5)
 ;; (insert-board (get-connection) 7)
 
+(defn- insert-game-session-clean
+  [conn board-size username
+   who-won human-score
+   computer-score human-color] 
+    (let [app-user-id (:app_user/id
+                       (find-user-by-username conn username))
+          board-id (:board/id
+                    (find-board-by-size conn board-size))]
+      (jdbc/execute!
+       conn
+       ["INSERT INTO game_session (app_user_id,
+       board_id, won, human_score, computer_score, human_color)
+       VALUES (?, ?, ?, ?, ?, ?)"
+        app-user-id board-id who-won
+        human-score computer-score
+        human-color])))
+
 (defn insert-game-session
   [conn board-size username
    who-won human-score
    computer-score human-color]
-  (let [app-user-id (:app_user/id
-                    (find-user-by-username conn username))
-        board-id (:board/id
-                  (find-board-by-size conn board-size))]
-    (jdbc/execute!
-     conn
-     ["INSERT INTO game_session (app_user_id,
-       board_id, won, human_score, computer_score, human_color)
-       VALUES (?, ?, ?, ?, ?, ?)"
-      app-user-id board-id who-won
-      human-score computer-score
-      human-color])))
+  (try
+    (insert-game-session-clean conn
+                               board-size
+                               username
+                               who-won
+                               human-score
+                               computer-score
+                               human-color)
+    (println "Game session saved.")
+    (catch Exception ex
+      (if (= "Column 'board_id' cannot be null"
+             (.getMessage ex))
+        (do
+          (println "You seem to be the first ever player to
+                    play this board size. Would you like to save
+                    it?" ["Y"] ["N"])
+          (let [subseq-response (utility/purify-user-input
+                                 (utility/prompt-info "your choice"
+                                                      val/confirm-validator-Y-N))]
+            (when (= "Y" subseq-response)
+              (insert-board (get-connection) board-size)
+              (println "Board inserted.")
+              (insert-game-session-clean conn
+                                         board-size
+                                         username
+                                         who-won
+                                         human-score
+                                         computer-score
+                                         human-color))))
+        (throw ex)))))
 
 (defn find-all-?
   [conn what-to-find]

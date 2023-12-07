@@ -132,11 +132,18 @@
                  (str (name k) ": " v "\n"))]
     (apply str parsed)))
 
+(defn- resolve-wins-ratio-map
+  [wins-ratio-map]
+  (let [parsed (for [[k v] wins-ratio-map]
+                 (str "SIZE " (name k) " HUMAN: "
+                      v "%\nCOMPUTER: " (- 100 v)
+                      "%" "\n"))]
+    (apply str parsed)))
+
 (defn spit-all-contents
   []
   (repopulate-game-sessions!)
-  (let [
-        human-wins (type?-wins "H")
+  (let [human-wins (type?-wins "H")
         computer-wins (type?-wins "C")
         win-ratio-map (win-ratio-human-by-board-size )
         leaderboard (sort-by-win-count 
@@ -147,12 +154,7 @@
                       "HUMAN: " (count human-wins) "\n"
                       "COMPUTER: " (count computer-wins) "\n\n"
                       "*************WINS BY BOARD SIZE*************\n\n"
-                      "SIZE 5: HUMAN: " (:5 win-ratio-map) "% "
-                      "COMPUTER: " (- 100 (:5 win-ratio-map)) "% \n"
-                      "SIZE 7: HUMAN: " (:7 win-ratio-map) "% "
-                      "COMPUTER: " (- 100 (:7 win-ratio-map)) "% \n"
-                      "SIZE 9: HUMAN: " (:9 win-ratio-map) "% "
-                      "COMPUTER: " (- 100 (:9 win-ratio-map)) "% \n\n"
+                      (resolve-wins-ratio-map win-ratio-map) "\n"
                       "****************LEADERBOARD****************\n\n"
                       (resolve-leaderboard leaderboard) "\n"
                       "***************COLORS BY USER***************\n\n"

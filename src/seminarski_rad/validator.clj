@@ -81,14 +81,6 @@
   [input-str board]
   (= (get-in board (conj (utility/move-?-coordinate input-str 2) :piece)) " "))
 
-(defn- middle-keyword [kw1 kw2]
-  (let [char1 (first (name kw1))
-        char2 (first (name kw2))
-        min-char (char (min (int char1) (int char2)))
-        middle-char (char (inc (int min-char)))
-        middle-keyword (keyword (str middle-char))]
-    middle-keyword)) 
-
 (defn- check-for-eating-new
   "Checks if there is a valid piece to be eaten by player. If true returns \"eat\",
     otherwise returns false. Updated to work with new board."

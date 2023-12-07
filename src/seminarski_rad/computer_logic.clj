@@ -8,6 +8,7 @@
             [seminarski-rad.statistics :as stats]))
 
 (defn- pieces-on-board-for?
+  "Counts available pieces on given board for given player type."
   [player-color board]
   (count (filter #(= player-color (:piece %))
                  (for [row (vals board) col (vals row)] col))))
@@ -47,16 +48,18 @@
   (println))
 
 (defn- save-winner 
+  "Saves winner in database."
   [winner winner-color board-size
    username computer-score human-score]
-  (let [winner-initial (subs winner 0 1)
+  (let [winner-initial (subs (name winner) 0 1)
         human-color (if (= winner "HUMAN")
                       winner-color
                       (utility/opposite-player-color winner-color))] 
     (db/insert-game-session (db/get-connection)
                             board-size username
                             winner-initial human-score
-                            computer-score human-color)))
+                            computer-score human-color)
+    "END"))
 
 (defn assign-victory!
   "Updates atom to reflect victory status of user who won,
@@ -67,8 +70,7 @@
        (println (str winner " wins!" "[" winner-color "]"))
        (swap! wins #(update-in % [winner] (fnil inc 0)))
        (save-winner winner winner-color board-size
-                    username computer-score human-score)
-     (println "Game session saved.")))
+                    username computer-score human-score)))
 
 (defn check-for-win 
   [
@@ -150,6 +152,8 @@
         move-piece-res))))
 
 (defn- win-numeric
+  "Returns numeric value for a win state. If a human wins, returns -1,
+   if a computer wins, returns 1, 0 otherwise."
   [board computer-color]
   (let [human-color (utility/opposite-player-color computer-color)
         win-check-result (check-for-win
@@ -248,7 +252,24 @@
               moves)
       nil)))
 
-(defn take-turns
+(defn- eat-side-effects!
+  "Applies side effects to atoms and potential save to db
+    for each turn taken."
+  [turntaking-player-color
+   affected-player-kw 
+   board-size username ]
+  (swap! pieces update affected-player-kw dec)
+
+  (assign-victory! (check-for-win)
+                   turntaking-player-color
+                   board-size
+                   username
+                   (:computer @pieces)
+                   (:human @pieces)))
+
+(defn take-turns!
+  "Core function of gameplay management. Encodes turn based mechanics as well 
+   as providing side effects for win and quit conditions."
   [username current-player board human-color computer-color board-size]
   (board/print-the-board board board-size)
   (print-the-score)
@@ -259,48 +280,36 @@
                                   board human-color board-size 
                                   username)]
         (if (vector? result-of-piece-move)
-          (if (= "quit" (last result-of-piece-move))
-            nil
-            (do
-              (assign-victory! (check-for-win
-                                        ;; human-color computer-color board
-                                )
-                               human-color
-                               board-size
-                               username
-                               (:computer @pieces)
-                               (:human @pieces))
+          (when-not (= "quit" (last result-of-piece-move)) 
+           ;; We check if the side effects function returned "END" which would
+            ;; be the case if the win condition is satisfied.
+            (when-not (eat-side-effects! human-color :computer 
+                                         board-size username)
               
-              (swap! pieces update :computer dec)
-              (take-turns username "HUMAN" (first result-of-piece-move)
-                          human-color computer-color board-size)))
-          (take-turns username
-                      "COMPUTER" result-of-piece-move human-color computer-color board-size)))
+              (take-turns! username "HUMAN" (first result-of-piece-move)
+                           human-color computer-color board-size)))
+          (take-turns! username
+                      "COMPUTER" result-of-piece-move
+                      human-color computer-color board-size)))
       (do
         (println "Computer's turn...")
-        (Thread/sleep 2000)
         (let [[score best-move] (find-best-move
                                  board 5 computer-color board-size)]
           (println (str "Computer's move: " best-move))
           (println (str "Function returned score: " score))
-          (let [result-of-piece-move (apply-move-indicator best-move 
+          (let [result-of-piece-move (apply-move-indicator best-move
                                                            board computer-color
                                                            board-size
                                                            username)]
             (if (vector? result-of-piece-move)
               ;; Here we do not check for quits because a computer may not quit!
-              (do
-                (assign-victory! (check-for-win
-                                          ;; human-color computer-color board
-                                  )
-                                 computer-color 
-                                 board-size
-                                 username
-                                 (:computer @pieces)
-                                 (:human @pieces))
-                
-                (swap! pieces update :human dec)
-                (take-turns username "COMPUTER" (first result-of-piece-move)
-                            human-color computer-color board-size))
-              (take-turns "HUMAN" username
-                          result-of-piece-move human-color computer-color board-size)))))))
+              ;; But we do check if the side effects function returned "END" in case
+              ;; the win condition is satisfied.
+                (when-not (eat-side-effects! computer-color :human
+                                             board-size username)
+
+                  (take-turns! username "COMPUTER" (first result-of-piece-move)
+                               human-color computer-color board-size))
+              (take-turns! username
+                           "HUMAN" result-of-piece-move
+                           human-color computer-color board-size)))))))

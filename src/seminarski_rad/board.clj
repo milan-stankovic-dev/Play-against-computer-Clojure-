@@ -53,7 +53,8 @@
 
 (def empty-node {:piece " " :moves '() :eats '()})
 
-(defn initialize-empty-board 
+(defn- initialize-empty-board 
+  "Creates board with empty nodes of given size."
   [board-size] 
   (let [numeric-range (range 1 (inc board-size))
         letter-range (utility/numeric-seq->letter-seq
@@ -64,7 +65,9 @@
 
 ;; ex. col  =>   :A
 ;; ex. row  =>   :1
-(defn assign-pieces
+(defn- assign-pieces
+  "Dynamically assigns pieces to empty board of given size. Upper half
+   are blue pieces, bottom half red, and the very center always blank."
   [board board-size]
   (let [numeric-range (range 1 (inc board-size))
         letter-range (into [] (utility/numeric-seq->letter-seq numeric-range))
@@ -91,15 +94,18 @@
      {} board)))
 
 (defn- board-hotspot-range
+  "Function used for optimizing range checks for valid moves.
+   For given coordinate, it returns range in which a check is 
+   sensible to be made."
   [coord board-size]
   (let [start (if (< (- coord 2) 1) 1 (- coord 2))
         finish (inc (if (> (+ coord 2) board-size)
                       board-size (+ coord 2)))]
     (range start finish)))
 
-(board-hotspot-range 3 5)
-
-(defn assign-moves-to-node [board row-kw col-kw board-size]
+(defn- assign-moves-to-node
+  "Assigns moves to one node of given board."
+  [board row-kw col-kw board-size]
   (let [row-numeric (utility/numeric-keyword->num row-kw)
         col-str (name col-kw)
         col-numeric (utility/char->number (first col-str))
@@ -126,7 +132,10 @@
                (fn [node]
                  (assoc node :eats eats :moves moves)))))
 
-(defn assign-all-moves [board board-size]
+(defn- assign-all-moves
+  "Utilizes the 'assign-moves-to-node' function to assign moves
+   to all nodes of given board and board-size."
+  [board board-size]
   (reduce-kv
    (fn [acc row cols]
      (reduce-kv
@@ -136,12 +145,15 @@
    board board))
 
 (defn create-board
+  "Puts together a fully fleshed out board with proper pieces, moves and 
+   eats assigned."
   [board-size]
   (let [adjusted-size (utility/adjust-board-size board-size)]
     (assign-all-moves (assign-pieces (initialize-empty-board adjusted-size)
                                      adjusted-size) adjusted-size)))
 
 (defn- print-slants
+  "Used for displaying available moves to user as ASCII art."
   [board-size pattern]
   (print "   ")
   (doseq [_ (range (/ (- board-size 1) 2))]
@@ -149,6 +161,7 @@
   (println "|"))
 
 (defn- print-row
+  "Prints one row for given board of given size."
   [board-size row-keyword board]
   (let [numeric-sequence (range 1 board-size) 
         letter-range-keywords 
@@ -161,6 +174,7 @@
     (println (get-in board [row-keyword last-col-keyword :piece]))))
 
 (defn print-the-board
+  "Prints the entire board to user with available moves displayed as ASCII art."
   [board board-size]
   (println)
  (print "   ")
@@ -181,4 +195,4 @@
     (print-row board-size last-row-keyword board)))
 
 ;; (print-the-board (create-board 13) 13)
-(create-board 7)
+;; (create-board 7)

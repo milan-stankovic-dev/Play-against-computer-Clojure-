@@ -71,7 +71,7 @@
     (comp/initiate-piece-count board
                                    human-color computer-color) 
     (comp/initiate-win-count username)
-    (comp/take-turns username "HUMAN" board human-color computer-color board-size)))
+    (comp/take-turns! username "HUMAN" board human-color computer-color board-size)))
 
 (defn- custom-board-menu
   [username]
