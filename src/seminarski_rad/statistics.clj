@@ -34,7 +34,7 @@
   (filter #(= username (get % :app_user/username))
           @game-sessions-info))
 
-(defn- get-map-human-wins-helper
+(defn- get-map-human-?s-helper
  [a-win human]
   (let [human-username-kw (keyword (str (:app_user/username
                                          human)))]
@@ -42,10 +42,14 @@
       (update a-win human-username-kw inc)
       (assoc a-win human-username-kw 1))))
 
-(defn get-map-human-wins-added
-  []
-  (let [all-human-wins (type?-wins "H")]
-    (reduce get-map-human-wins-helper {} all-human-wins)))
+(defn get-map-human-?s-added
+  [wins-or-losses]
+  (let [player-type (case wins-or-losses
+                      "WINS" "H"
+                      "LOSSES" "C"
+                      "default")
+        all-?-wins (type?-wins player-type)]
+    (reduce get-map-human-?s-helper {} all-?-wins)))
 
 (defn sort-by-win-count
   [map-human-wins]
@@ -136,7 +140,7 @@
         computer-wins (type?-wins "C")
         win-ratio-map (win-ratio-human-by-board-size )
         leaderboard (sort-by-win-count 
-                     (get-map-human-wins-added))
+                     (get-map-human-?s-added "WINS"))
         colors-played-map (colors-played-by-username)
         quits-map (quits-by-users)
         contents (str "******************ALL WINS******************\n\n"

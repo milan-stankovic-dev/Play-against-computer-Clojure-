@@ -6,7 +6,7 @@
             [seminarski-rad.database :as db]
             [seminarski-rad.statistics :as stats]))
 
-(defn prompt-login
+(defn- prompt-login
   []
   (let [username (utility/prompt-info "your username" val/not-empty?)
         password (utility/prompt-info "your password" val/not-empty?)
@@ -19,7 +19,7 @@
       user-db)))
 
 
-(defn write-main-menu
+(defn- write-main-menu
   [logged-in-user] 
   (println (str "
   *********************************************************************
@@ -41,7 +41,7 @@
             
   *********************************************************************\n")))
 
-(defn write-out-board-convo
+(defn- write-out-board-convo
   [board board-size]
    (println "\n**********************************************************************\n")
       (println
@@ -61,8 +61,8 @@
       (println))
 
 
-(defn play-game
-  [board board-size]
+(defn- play-game
+  [board board-size username]
   (write-out-board-convo board board-size) 
   (let [human-color (utility/purify-user-input 
                      (utility/prompt-info "user color [B] or [R]"
@@ -70,33 +70,34 @@
         computer-color (utility/opposite-player-color human-color)]
     (comp/initiate-piece-count board
                                    human-color computer-color) 
-    (comp/take-turns "HUMAN" board human-color computer-color board-size)))
+    (comp/initiate-win-count username)
+    (comp/take-turns username "HUMAN" board human-color computer-color board-size)))
 
 (defn- custom-board-menu
-  []
+  [username]
   (let [fixed-user-input (utility/adjust-board-size
                           (Integer/parseInt
                            (utility/purify-user-input
                             (utility/prompt-info
                              "board size"
                              val/not-empty?))))]
-    (prn (str "You inputted: " fixed-user-input))
+    (println (str "You inputted: " fixed-user-input))
     (play-game (board/create-board fixed-user-input)
-               fixed-user-input)))
+               fixed-user-input username)))
 
-(defn access-main-menu-item
-  []
+(defn- access-main-menu-item
+  [username]
   (let [user-choice (utility/purify-user-input
                      (utility/prompt-info "a number" val/not-empty?))]
     (case user-choice
-      "1" (play-game (board/create-board 5) 5)
-      "2" (play-game (board/create-board 7) 7)
-      "3" (play-game (board/create-board 9) 9)
+      "1" (play-game (board/create-board 5) 5 username)
+      "2" (play-game (board/create-board 7) 7 username)
+      "3" (play-game (board/create-board 9) 9 username)
       "4" (do 
             (println "Calculating statistics...")
             (stats/spit-all-contents)
             (println "Done. Check statistics.txt"))
-      "5" (custom-board-menu)
+      "5" (custom-board-menu username)
       "END")))
 
 (defn manage-menus
@@ -104,8 +105,9 @@
    (manage-menus (prompt-login)))
   ([logged-in-user]
    (write-main-menu logged-in-user)
-   (when-not (= "END" (access-main-menu-item))
+   (when-not (= "END" (access-main-menu-item 
+                       (:app_user/username logged-in-user)))
      (manage-menus logged-in-user))))
 
-(manage-menus)
-;; (board/print-the-board (board/create-board 5) 5)
+;; (manage-menus)
+;; (board/print-the-board (board/create-board 5) 5)'

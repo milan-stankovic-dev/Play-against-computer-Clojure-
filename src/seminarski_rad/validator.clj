@@ -119,9 +119,6 @@
            (check-for-eating-new (utility/calculate-field-to-eat
                                   purified-input-str) board opponents-color)))))
 
-;; (def board-input (seminarski-rad.board/create-board))
-;; (game-rule-validator board-input "1A-1C" "B")
-
 (defn validate-input
   [input-str board player-color board-size]
   (let [purified-input-str (utility/purify-user-input input-str)] 
@@ -132,10 +129,6 @@
      (start-not-the-same-as-finish-validator purified-input-str)
      (end-not-occupied-validator purified-input-str board)
      (game-rule-validator board purified-input-str player-color))))
-
-;; (validate-input "2c-2c" (board/create-board) "B")
-
-(middle-keyword :A :C)
 
 (defn not-empty?
   [input]

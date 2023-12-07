@@ -2,7 +2,6 @@
   (:require [clojure.string :as str]
             [seminarski-rad.input-utility :as utility]))
 
-
 (defn purify-user-input
   "Removes unnecessary blank characters and capitalizes 
    all letters in input. If input contains \"EAT\" in the
@@ -186,8 +185,6 @@
   [a-seq]
   (map #(keyword (str %)) a-seq))
 
-(seq->keyword-seq [1 2 3 4])
-
 (defn numeric-seq->letter-seq
   "Returns list of appropriate character values for given collection 
    of numbers given as sequence. Uses conversion map for converting
@@ -203,6 +200,14 @@
   [numeric-seq]
   (let [letter-seq (numeric-seq->letter-seq numeric-seq)]
     (map #(keyword %) letter-seq)))
+
+(defn numeric-seq->numeric-keyword-seq
+  "Returns list of appropriate character values for given collection 
+   of numbers given as sequence. Uses conversion map for converting
+   values."
+  [numeric-seq]
+  (let [str-seq (map str numeric-seq)]
+    (map keyword str-seq)))
 
 (defn ?-half-of-seq
   "Returns specified half of sequence. If sequence has odd
@@ -240,9 +245,15 @@
     (if (< inputted-size 0)
       (do 
         (println "Negative. Defaulting to 5.")
-        5)
-      (if (even? inputted-size)
-        (do
-          (println "Size cannot be even. Adding one to it.")
-          (inc inputted-size))
-        inputted-size))))
+        5) 
+        (if (> inputted-size 201)
+          (do
+            (println "You must be stopped, you animal!
+                      That board size is IMMENSE!!!
+                      Defaulting to 5.")
+            5)
+          (if (even? inputted-size)
+            (do
+              (println "Size cannot be even. Adding one to it.")
+              (inc inputted-size))
+          inputted-size))))) 

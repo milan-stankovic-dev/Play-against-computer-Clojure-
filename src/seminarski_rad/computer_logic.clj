@@ -3,45 +3,72 @@
             [seminarski-rad.input-utility :as utility]
             [seminarski-rad.board :as board]
             [clojure.string :as string]
-            [clojure.set :as set]))
+            [clojure.set :as set]
+            [seminarski-rad.database :as db]
+            [seminarski-rad.statistics :as stats]))
 
 (defn- pieces-on-board-for?
   [player-color board]
   (count (filter #(= player-color (:piece %))
                  (for [row (vals board) col (vals row)] col))))
 
-(def wins (atom {"HUMAN" 0 "COMPUTER" 0}))
-(def pieces (atom {"HUMAN" 0 "COMPUTER" 0}))
-@wins
+(def wins (atom {:human 0 :computer 0}))
+(def pieces (atom {:human 0 :computer 0}))
 
 (defn initiate-piece-count
   [board human-color computer-color]
   (let [human-piece-count (pieces-on-board-for? human-color board)
         computer-piece-count (pieces-on-board-for? computer-color board)]
-    (reset! pieces {"HUMAN" human-piece-count 
-                    "COMPUTER" computer-piece-count} )))
+    (reset! pieces {:human human-piece-count 
+                    :computer computer-piece-count} )))
+
+(defn initiate-win-count
+  [username]
+  (stats/repopulate-game-sessions!)
+  (let [user-wins-map (stats/get-map-human-?s-added "WINS")
+        computer-wins-map (stats/get-map-human-?s-added "LOSSES")
+        username-wins (or ((keyword username)
+                           user-wins-map) 0)
+        username-losses (or ((keyword username)
+                             computer-wins-map) 0)] 
+    (reset! wins {:human username-wins
+                  :computer username-losses})))
 
 (defn print-the-score
   []
-  (println "\nHuman Score: " (get @wins "HUMAN"))
-  (println "Computer Score: " (get @wins "COMPUTER"))
+  (println "\nHuman Score: " (:human @wins))
+  (println "Computer Score: " (:computer @wins))
   (println))
 
 (defn print-the-pieces
   []
-  (println "\nHuman pieces left: " (get @pieces "HUMAN"))
-  (println "Computer pieces left: " (get @pieces "COMPUTER"))
+  (println "\nHuman pieces left: " (:human @pieces))
+  (println "Computer pieces left: " (:computer @pieces))
   (println))
 
-(defn assign-victory
+(defn- save-winner 
+  [winner winner-color board-size
+   username computer-score human-score]
+  (let [winner-initial (subs winner 0 1)
+        human-color (if (= winner "HUMAN")
+                      winner-color
+                      (utility/opposite-player-color winner-color))] 
+    (db/insert-game-session (db/get-connection)
+                            board-size username
+                            winner-initial human-score
+                            computer-score human-color)))
+
+(defn assign-victory!
   "Updates atom to reflect victory status of user who won,
    prints winner and score. Returns winner as string." 
-  [winner winner-color] 
-  (if-not winner
-    nil
-    (do
-      (println (str winner " wins!" "[" winner-color "]"))
-      (swap! wins #(update-in % [winner] (fnil inc 0))))))
+  [winner winner-color board-size
+   username computer-score human-score] 
+   (when winner 
+       (println (str winner " wins!" "[" winner-color "]"))
+       (swap! wins #(update-in % [winner] (fnil inc 0)))
+       (save-winner winner winner-color board-size
+                    username computer-score human-score)
+     (println "Game session saved.")))
 
 (defn check-for-win 
   [
@@ -50,49 +77,53 @@
   (let [
         ;; human-piece-count (pieces-on-board-for? human-color board)
         ;; computer-piece-count (pieces-on-board-for? computer-color board)
-        human-piece-count (get @pieces "HUMAN")
-        computer-piece-count (get @pieces "COMPUTER")]
+        human-piece-count (:human @pieces)
+        computer-piece-count (:computer @pieces)]
     (if (= 0 human-piece-count)
-      "COMPUTER"
+      :computer
       (if (= 0 computer-piece-count)
-        "HUMAN"
+        :human
         false))))
 
 
 (defn- quit?
   "Checks if the user is trying to quit. If so, then it ends game 
    process. Gives win to opponent"
-  [purified-input-str opposite-player opposite-player-color]
-  (if (= purified-input-str "Q")
+  [purified-input-str opposite-player-color
+   board-size username]
+  (when (= purified-input-str "Q")
 
-    (do (println "Are you sure you want to quit? 
+     (println "Are you sure you want to quit? 
                 Quitting gives a victory to the computer.
                 [Y] or [N]")
         (let [subseq-response (utility/purify-user-input
                                (utility/prompt-info "your choice" 
                                                     val/confirm-validator-Y-N))]
           (println "Your choice: " subseq-response)
-          (if (= "Y" subseq-response)
-            (do
+          (when (= "Y" subseq-response) 
               (println "\nUSER QUIT. COMPUTER WINS!")
-              (assign-victory opposite-player opposite-player-color)
+              (assign-victory! "COMPUTER" opposite-player-color
+                               board-size username 
+                               (:computer @pieces)
+                               (:human @pieces))
               (print-the-score)
-              true) false))) false))
-
+              true)))) 
 
 (defn apply-move-indicator
   "Returns board with moved piece if the piece was moved 1 tile or
    a vector with edited board and the word \"eaten\" inside it 
    if the user has eaten a piece. If the user quits during move 
    making, the word \"quit\" is sent inside vector with board."
-  [user-input board user-color board-size]
+  [user-input board user-color board-size username]
   (let [purified-input-str (utility/purify-user-input user-input)
         computer-color (utility/opposite-player-color user-color)]
-    (if (quit? purified-input-str "COMPUTER" computer-color)
+    (if (quit? purified-input-str computer-color 
+               board-size username)
       [board "quit"] 
       (let [validation-result (val/validate-input user-input board user-color board-size)]
         (if-not validation-result
-          (apply-move-indicator (utility/take-user-input-move) board user-color board-size)
+          (apply-move-indicator (utility/take-user-input-move) board user-color 
+                                board-size username)
           (let [purified-input-str (utility/purify-user-input user-input)
                 move-start (utility/move-?-coordinate purified-input-str 1)
                 move-finish (utility/move-?-coordinate purified-input-str 2)
@@ -112,7 +143,7 @@
   (if-not (val/validate-input user-input board user-color board-size)
     board
     (let [move-piece-res (apply-move-indicator
-                          user-input board user-color board-size)]
+                          user-input board user-color board-size "")]
       (if (vector? move-piece-res)
         ;; Here we do not check for quits because a computer may not quit!
         (first move-piece-res)
@@ -199,9 +230,6 @@
                                                    (minimax (move-piece-computer move board human-color board-size)
                                                             (dec depth) true computer-color board-size)))))))))
 
-(def all-moves (find-all-possible-moves (board/create-board 5) "R" 5))
-all-moves
-
 (defn find-best-move
   "Find the best move for the computer using the minimax algorithm."
   [board depth computer-color board-size]
@@ -221,44 +249,58 @@ all-moves
       nil)))
 
 (defn take-turns
-  [current-player board human-color computer-color board-size]
+  [username current-player board human-color computer-color board-size]
   (board/print-the-board board board-size)
   (print-the-score)
-  (print-the-pieces)
-  (if (= current-player "HUMAN")
-    (let [result-of-piece-move (apply-move-indicator
-                                (utility/take-user-input-move)
-                                board human-color board-size)]
-      (if (vector? result-of-piece-move)
-        (if (= "quit" (last result-of-piece-move))
-          nil
-          (do
-            (assign-victory (check-for-win
-                                        ;; human-color computer-color board
-                                      )
-                                     human-color
-                            )
-            (swap! pieces update "COMPUTER" dec)
-            (take-turns "HUMAN" (first result-of-piece-move)
-                        human-color computer-color board-size)))
-        (take-turns "COMPUTER" result-of-piece-move human-color computer-color board-size)))
-    (do
-      (println "Computer's turn...")
-      (Thread/sleep 2000)
-      (let [[score best-move] (find-best-move
-                               board 5 computer-color board-size)]
-        (println (str "Computer's move: " best-move))
-        (println (str "Function returned score: " score))
-        (let [result-of-piece-move (apply-move-indicator best-move
-                                                                  board computer-color board-size)]
-          (if (vector? result-of-piece-move)
-              ;; Here we do not check for quits because a computer may not quit!
+  (print-the-pieces) 
+    (if (= current-player "HUMAN")
+      (let [result-of-piece-move (apply-move-indicator
+                                  (utility/take-user-input-move)
+                                  board human-color board-size 
+                                  username)]
+        (if (vector? result-of-piece-move)
+          (if (= "quit" (last result-of-piece-move))
+            nil
             (do
-              (assign-victory (check-for-win
+              (assign-victory! (check-for-win
+                                        ;; human-color computer-color board
+                                )
+                               human-color
+                               board-size
+                               username
+                               (:computer @pieces)
+                               (:human @pieces))
+              
+              (swap! pieces update :computer dec)
+              (take-turns username "HUMAN" (first result-of-piece-move)
+                          human-color computer-color board-size)))
+          (take-turns username
+                      "COMPUTER" result-of-piece-move human-color computer-color board-size)))
+      (do
+        (println "Computer's turn...")
+        (Thread/sleep 2000)
+        (let [[score best-move] (find-best-move
+                                 board 5 computer-color board-size)]
+          (println (str "Computer's move: " best-move))
+          (println (str "Function returned score: " score))
+          (let [result-of-piece-move (apply-move-indicator best-move 
+                                                           board computer-color
+                                                           board-size
+                                                           username)]
+            (if (vector? result-of-piece-move)
+              ;; Here we do not check for quits because a computer may not quit!
+              (do
+                (assign-victory! (check-for-win
                                           ;; human-color computer-color board
-                                        )
-                                       computer-color)
-              (swap! pieces update "HUMAN" dec)
-              (take-turns "COMPUTER" (first result-of-piece-move)
-                          human-color computer-color board-size))
-            (take-turns "HUMAN" result-of-piece-move human-color computer-color board-size)))))))
+                                  )
+                                 computer-color 
+                                 board-size
+                                 username
+                                 (:computer @pieces)
+                                 (:human @pieces))
+                
+                (swap! pieces update :human dec)
+                (take-turns username "COMPUTER" (first result-of-piece-move)
+                            human-color computer-color board-size))
+              (take-turns "HUMAN" username
+                          result-of-piece-move human-color computer-color board-size)))))))

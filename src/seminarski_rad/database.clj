@@ -16,26 +16,6 @@
   []
   (jdbc/get-connection datasource))
 
-(defn- initiate-table-user 
-  []
-  (jdbc/execute!
-   datasource
-   ["CREATE TABLE IF NOT EXISTS app_user 
-     (id SERIAL PRIMARY KEY,
-     username VARCHAR(255) NOT NULL,
-     password VARCHAR(255) NOT NULL)"]))
-
-(defn- insert-user
-  [conn username password]
-  (jdbc/execute!
-   conn
-   ["INSERT INTO app_user (username, password)
-     VALUES (?, ?)" username password]))
-
-;; (def ^:private conn (get-connection))
-;; (initiate-table-user)
-;; (insert-user conn "stanmil" "123abc")
-
 (defn- hash-a-password
   [password]
   (hashing/derive password))
@@ -45,7 +25,7 @@
   [password hashed-pass]
   (hashing/check password hashed-pass))
 
-(defn- find-user-by-username
+(defn find-user-by-username
   [conn username]
   (let [db-result (jdbc/execute! 
                    conn
@@ -56,7 +36,7 @@
 
 ;; ((find-user-by-username (get-connection) "stanmil") :app_user/password)
 
-(defn- register-user
+(defn register-user
   [conn username password]
   (if-not (= [] (find-user-by-username conn username)) 
     (do (println "User exists. Try again.")
@@ -100,17 +80,11 @@
          conn
          ["INSERT INTO board (size) VALUES (?)" size])))
 
-;; (defn- nth-of-dbres
-;;   [nth-place db-res]
-;;   (when db-res
-;;     (nth (vals db-res) nth-place)))
-
-;; (nth-of-dbres 0 (find-board-by-size (get-connection) 3))
 ;; (insert-board (get-connection) 3)
 ;; (insert-board (get-connection) 5)
 ;; (insert-board (get-connection) 7)
 
-(defn- insert-game-session
+(defn insert-game-session
   [conn board-size username
    who-won human-score
    computer-score human-color]
@@ -133,10 +107,6 @@
    conn
    [(str "SELECT * FROM " what-to-find)]))
 
-(find-all-? (get-connection) "app_user")
-
-;; (find-all-game-sessions (get-connection))
-
 (defn find-game-sessions-info
   [conn]
   (jdbc/execute!
@@ -147,8 +117,6 @@
      FROM game_session s JOIN board b
      ON (s.board_id = b.id) JOIN app_user u
      ON (s.app_user_id = u.id)"]))
-
-(find-game-sessions-info (get-connection) )
 
 (defn find-all-game-sessions-for-user
   [conn username]
