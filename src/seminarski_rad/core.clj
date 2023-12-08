@@ -4,5 +4,5 @@
 
 (defn -main
   "Runs the game"
-  [& args]
+  []
   (game/manage-menus))

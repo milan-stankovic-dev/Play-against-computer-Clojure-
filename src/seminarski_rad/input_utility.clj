@@ -7,29 +7,25 @@
    all letters in input. If input contains \"EAT\" in the
    middle of it,function removes it."
   [input-str]
-  (let [first-step (str/upper-case (str/trim input-str))] 
-      (if (clojure.string/includes? first-step "EAT")
-        
-        (str/replace first-step "EAT-" "")
-        first-step)))
+  (str/upper-case (str/trim input-str)))
 
 (defn extract-keys-from-user-input
   "Takes in a string representing user input (ex. 1A-2A or 111D-111E)
    and returns a vector of every number or letter as a keyword."
   [input-str]
-  (vec (first (reduce (fn 
-                        [[acc num-acc] a-char] 
-                        (if (= \- a-char) 
-                          [acc ""] 
-                          (if (empty? num-acc) 
-                            (if (not (Character/isDigit a-char)) 
-                              [(conj acc  
-                                     (keyword (str a-char))) ""] 
-                              [acc (str num-acc a-char)])  
-                            (if (Character/isDigit a-char) 
-                              [acc (str num-acc a-char)] 
+  (vec (first (reduce (fn
+                        [[acc num-acc] a-char]
+                        (if (= \- a-char)
+                          [acc ""]
+                          (if (empty? num-acc)
+                            (if (not (Character/isDigit a-char))
+                              [(conj acc
+                                     (keyword (str a-char))) ""]
+                              [acc (str num-acc a-char)])
+                            (if (Character/isDigit a-char)
+                              [acc (str num-acc a-char)]
                               [(conj (conj acc (keyword num-acc))
-                                     (keyword (str a-char))) ""])) 
+                                     (keyword (str a-char))) ""]))
                           ))[[] ""] input-str))))
 (defn- valid-?half?
   [half]
@@ -43,7 +39,7 @@
   [input-str which-half]
   (when (valid-?half? which-half)
     (let [input-arr (.split input-str "-")]
-      (extract-keys-from-user-input 
+      (extract-keys-from-user-input
        (nth input-arr (dec which-half))))))
 
 (defn get-?-row-as-num
@@ -222,6 +218,16 @@
                 cutoff-index))
       (subvec a-seq cutoff-index))))
 
+(defn reverse-extraction-of-keys
+  [keys]
+  (let [first-half (?-half-of-seq keys 1)
+        second-half (?-half-of-seq keys 2)
+        first-half-mid (for [k first-half] (name k))
+        second-half-mid (for [k second-half] (name k))
+        first-half-str (apply str first-half-mid)
+        second-half-str (apply str second-half-mid)]
+    (str first-half-str "-" second-half-str)))
+
 (defn prompt-info
   [what-to-prompt validator-function]
   (println (str "Please enter " what-to-prompt ":"))
@@ -242,9 +248,9 @@
     (do
       (println "Not a number. Defaulting to 5.")
       5) 
-    (if (< inputted-size 0)
+    (if (< inputted-size 2)
       (do 
-        (println "Negative. Defaulting to 5.")
+        (println "Too small. Defaulting to 5.")
         5) 
         (if (> inputted-size 201)
           (do

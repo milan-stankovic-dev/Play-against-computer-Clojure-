@@ -2,8 +2,6 @@
   (:require [seminarski-rad.validator :as val]
             [seminarski-rad.input-utility :as utility]
             [seminarski-rad.board :as board]
-            [clojure.string :as string]
-            [clojure.set :as set]
             [seminarski-rad.database :as db]
             [seminarski-rad.statistics :as stats]))
 
@@ -126,8 +124,7 @@
         (if-not validation-result
           (apply-move-indicator (utility/take-user-input-move) board user-color 
                                 board-size username)
-          (let [purified-input-str (utility/purify-user-input user-input)
-                move-start (utility/move-?-coordinate purified-input-str 1)
+          (let [move-start (utility/move-?-coordinate purified-input-str 1)
                 move-finish (utility/move-?-coordinate purified-input-str 2)
                 move-done-board (assoc-in (assoc-in board (conj move-finish :piece) user-color)
                                           (conj move-start :piece) " ")]
@@ -160,104 +157,148 @@
                           ;; human-color computer-color board
                           )]
     (case win-check-result
-      "HUMAN" -1
-      "COMPUTER" 1
+      :human -1
+      :computer 1
       false 0
       :default 0)))
 
-(defn- add-suffix-eats-to-eating-keyword
-  "Takes in a vector of row and column keywords and transforms it into a vector
-   input which has '-EATS' appended to the col keyword."
-  [[row col]]
-  (vec [row (keyword (str (name col) "-EAT"))]))
-
-(add-suffix-eats-to-eating-keyword [:3 :C])
-
-(defn- possible-moves-for-one-blank
+(defn- possible-?s-for-one-blank
   "For inputted coords of one blank field it returns a vector of strings of possible
-   moves for that given blank"
-  [[blank-r-key blank-c-key] board player-color board-size]
-  (let [moves (get-in board [blank-r-key blank-c-key :moves])
-        eats (get-in board [blank-r-key blank-c-key :eats])
-        blank-str (str (name blank-r-key) (name blank-c-key))
-        solution-vector (filter
+   moves or eats for that given blank"
+  [[blank-r-key blank-c-key] board player-color
+   board-size moves-or-eats-kw]
+  
+  (let [solution-unvetted (get-in board [blank-r-key
+                                         blank-c-key 
+                                         moves-or-eats-kw])
+        solution-vetted (filter
                          (fn [[r c]]
                            (val/validate-input
-                            (utility/reverse-input (str (name blank-r-key)
-                                                     (name blank-c-key)
-                                                     "-"
-                                                     (name r)
-                                                     (name c)))
-                            board player-color board-size)) 
-                         (into moves (map add-suffix-eats-to-eating-keyword eats)))]
-    (set (map (fn [[r c]] (str (str (name r) (name c)) "-" blank-str))
-              solution-vector))))
+                            (utility/reverse-extraction-of-keys
+                             [r c blank-r-key blank-c-key]) 
+                            board player-color board-size)) solution-unvetted)]
+     (into #{} (map #(utility/reverse-extraction-of-keys
+                      (into  % [blank-r-key blank-c-key])) solution-vetted))))
 
-(defn- find-all-possible-moves [board player-color board-size]
-  (set (apply concat
-              (for [row-key (keys board)
-                    col-key (keys (board row-key))
-                    :when (= (get-in board [row-key col-key :piece]) " ")]
-                (possible-moves-for-one-blank [row-key col-key] board player-color board-size)))))
+(defn- find-all-blanks
+  [board board-size] 
+    (for [row (utility/numeric-seq->numeric-keyword-seq 
+               (range 1 (inc board-size)))
+          col (utility/numeric-seq->letter-keyword-seq
+               (range 1 (inc board-size)))
+          :when (= " " (get-in board [row col :piece]))] 
+       (assoc (assoc (get-in board [row col])
+                :row row) :col col)))
+
+(defn- find-all-possible-?s
+  [board player-color
+   board-size moves-or-eats-kw]
+  (let [all-blanks (find-all-blanks board board-size)]
+    (reduce (fn 
+              [acc blank]
+              (into acc (possible-?s-for-one-blank
+                         [(:row blank) (:col blank)]
+                         board player-color board-size moves-or-eats-kw)))
+            #{} all-blanks)))
+
+(defn- evaluate-minimax-candidate
+  [risk-factor 
+   minimax-result] 
+  (let [computer-weight (- 0.5 (double (/ risk-factor 2)))
+        human-weight (- 1 computer-weight) 
+        human-score (:human (first (vals minimax-result)))
+        computer-score (:computer (first (vals minimax-result)))
+        human-weighted-score (* human-weight human-score)
+        computer-weighted-score (* computer-weight computer-score)]
+    (- computer-weighted-score human-weighted-score)))
+
+(defn- reverse-evaluate-minimax-candidate
+  [risk-factor
+   minimax-result]
+  (evaluate-minimax-candidate 
+   (- 1 risk-factor) minimax-result))
 
 (defn- minimax
   "Minimax algorithm helps us determine the move computer should make against
     the player. It is a heuristic and as such may not always give the best
     answer. We minimize for the human and maximize for the computer."
-  [board depth maximizing? computer-color board-size]
-  (let [human-color (utility/opposite-player-color computer-color)]
-    (if (or (= depth 0) (check-for-win 
-                        ;;  human-color computer-color board
-                         ))
-      (win-numeric board computer-color)
+  [board depth maximizing? computer-color
+   board-size root-move h-score c-score risk-factor]
+  (let [human-color (utility/opposite-player-color computer-color)
+        eating-moves (find-all-possible-?s board computer-color
+                                           board-size :eats)
+        normal-moves (find-all-possible-?s board computer-color
+                                           board-size :moves)]
+    (if (= depth 0)
       (if maximizing?
-        ;; Maximizing algorithm for the computer
-        (let [all-moves (find-all-possible-moves board computer-color board-size)
-              moves-with-eat (filter #(string/includes? "EAT" %) all-moves)
-              moves-without-eat (into '() (set/difference (set all-moves) (set moves-with-eat)))]
-          (if (seq moves-with-eat)
-            (reduce max Double/NEGATIVE_INFINITY (for [move moves-with-eat]
-                                                   (minimax (move-piece-computer move board computer-color board-size)
-                                                            (dec depth) true computer-color board-size)))
-            (reduce max Double/NEGATIVE_INFINITY (for [move moves-without-eat]
-                                                   (minimax (move-piece-computer move board computer-color board-size)
-                                                            (dec depth) false computer-color board-size)))))
-        ;; Minimizing algorithm for the player
-        (let [all-moves (find-all-possible-moves board human-color board-size )
-              moves-with-eat (filter #(string/includes? "EAT" %) all-moves)
-              moves-without-eat (into '() (set/difference (set all-moves) (set moves-with-eat)))]
-          (if (seq moves-with-eat)
-            (reduce min Double/POSITIVE_INFINITY (for [move moves-with-eat]
-                                                   (minimax (move-piece-computer move board human-color board-size)
-                                                            (dec depth) false computer-color board-size)))
-            (reduce min Double/POSITIVE_INFINITY (for [move moves-without-eat]
-                                                   (minimax (move-piece-computer move board human-color board-size)
-                                                            (dec depth) true computer-color board-size)))))))))
+        {root-move {:human h-score :computer (inc c-score)}}
+        {root-move {:human h-score :computer c-score}})
+      (if maximizing?
+        ;; Calculating computer score (depth) moves deep
+        (if (seq eating-moves)
+          (let [candidates (for [move eating-moves]
+                   (minimax (move-piece-computer
+                             move board computer-color
+                             board-size) (dec depth)
+                            true computer-color
+                            board-size root-move
+                            h-score (inc c-score)
+                            risk-factor))]
+            (apply max-key (partial evaluate-minimax-candidate
+                                    risk-factor ) candidates))
+
+          (let [candidates (for [move normal-moves]
+                             (minimax (move-piece-computer
+                                       move board computer-color
+                                       board-size) (dec depth)
+                                      false computer-color
+                                      board-size root-move
+                                      h-score c-score
+                                      risk-factor))]
+            (apply max-key (partial reverse-evaluate-minimax-candidate
+                                     risk-factor) candidates)))
+        ;; Calculating human score (depth) moves deep
+        (if (seq eating-moves)
+          (let [candidates (for [move eating-moves]
+                             (minimax (move-piece-computer
+                                       move board human-color
+                                       board-size) (dec depth)
+                                      false computer-color
+                                      board-size root-move
+                                      (inc h-score) c-score
+                                      risk-factor))]
+            (apply max-key (partial evaluate-minimax-candidate
+                                     risk-factor) candidates))
+
+          (let [candidates (for [move normal-moves]
+                             (minimax (move-piece-computer
+                                       move board human-color
+                                       board-size) (dec depth)
+                                      true computer-color
+                                      board-size root-move
+                                      h-score c-score
+                                      risk-factor))]
+            (apply max-key (partial reverse-evaluate-minimax-candidate
+                                     risk-factor) candidates)))))))
 
 (defn find-best-move
   "Find the best move for the computer using the minimax algorithm."
-  [board depth computer-color board-size]
-  (let [all-moves (find-all-possible-moves board computer-color board-size)
-        moves-with-eat (take-while #(string/includes? "EAT" %) all-moves)
-        moves-without-eat (into '() (set/difference (set all-moves) (set moves-with-eat)))
-        moves (into moves-without-eat moves-with-eat)]
-    (if (seq moves)
-      (reduce (fn [best-move current-move]
-                (let [score (minimax (move-piece-computer current-move board computer-color board-size)
-                                     (dec depth) false computer-color board-size)]
-                  (if (or (nil? best-move) (and (nil? (best-move 1)) (< (score 0) (best-move 0))))
-                    [score current-move]
-                    best-move)))
-              nil
-              moves)
-      nil)))
+  [board depth computer-color board-size risk-factor]
+  (let [initial-moves (future (into (find-all-possible-?s board computer-color
+                                                          board-size :eats)
+                                    (find-all-possible-?s board computer-color
+                                                          board-size :moves)))
+        initial-minimaxed (future (map #(minimax board depth
+                                                 true computer-color
+                                                 board-size % 0 0 risk-factor) @initial-moves))]
+      (apply max-key (partial evaluate-minimax-candidate risk-factor) @initial-minimaxed)))
 
 (defn- eat-side-effects!
   "Applies side effects to atoms and potential save to db
     for each turn taken."
   [turntaking-player-color
    affected-player-kw 
-   board-size username ]
+   board-size username]
   (swap! pieces update affected-player-kw dec)
 
   (assign-victory! (check-for-win)
@@ -293,8 +334,10 @@
                       human-color computer-color board-size)))
       (do
         (println "Computer's turn...")
-        (let [[score best-move] (find-best-move
-                                 board 5 computer-color board-size)]
+        (let [res-map (find-best-move
+                board 3 computer-color board-size 0)
+              best-move (first (keys res-map)) 
+              score (evaluate-minimax-candidate 0 res-map)]
           (println (str "Computer's move: " best-move))
           (println (str "Function returned score: " score))
           (let [result-of-piece-move (apply-move-indicator best-move
@@ -313,3 +356,48 @@
               (take-turns! username
                            "HUMAN" result-of-piece-move
                            human-color computer-color board-size)))))))
+
+;; (def board5 (board/create-board 5))
+;; (def twoc3cboard (move-piece-computer 
+;;                 "2C-3C" board5 "B" 5))
+;; (def fourc2c (move-piece-computer
+;;               "4C-2C" twoc3cboard "R" 5))
+;; (def fourb3c (move-piece-computer 
+;;               "4B-3C" fourc2c "R" 5))
+;; (def twod4b (move-piece-computer
+;;              "2D-4B" fourb3c "B" 5))
+;; (def onec3c (move-piece-computer
+;;              "1C-3C" twod4b "B" 5))
+;; (def threec2c (move-piece-computer
+;;                "3C-2C" onec3c "B" 5))
+
+;; (find-all-possible-?s board5 "R" 5 :moves)
+
+;; (find-all-possible-?s twoc3cboard "R" 5 :moves)
+;; (find-all-possible-?s twoc3cboard "R" 5 :eats)
+;; (board/print-the-board twoc3cboard 5)
+
+;; (find-all-possible-?s fourc2c "R" 5 :moves)
+;; (find-all-possible-?s fourc2c "R" 5 :eats)
+;; (board/print-the-board fourc2c 5)
+
+;; (find-all-possible-?s fourb3c "R" 5 :moves)
+;; (find-all-possible-?s fourb3c "R" 5 :eats)
+;; (board/print-the-board fourb3c 5)
+
+;; (find-all-possible-?s twod4b "R" 5 :moves)
+;; (find-all-possible-?s twod4b "R" 5 :eats)
+;; (board/print-the-board twod4b 5)
+
+;; (find-all-possible-?s onec3c "R" 5 :moves)
+;; (find-all-possible-?s onec3c "R" 5 :eats)
+;; (board/print-the-board onec3c 5)
+
+;; (board/print-the-board threec2c 5)
+
+;; (possible-?s-for-one-blank [:1 :C] threec2c "B" 5 :moves)
+;; (possible-?s-for-one-blank [:3 :C]
+;;                            (board/create-board 5) "R" 5
+;;                            :moves)
+
+;; (board/print-the-board threec2c 5)
