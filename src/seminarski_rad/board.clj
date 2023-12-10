@@ -72,9 +72,9 @@
   (let [numeric-range (range 1 (inc board-size))
         letter-range (into [] (utility/numeric-seq->letter-seq numeric-range))
         letter-range-first-half
-        (into [] (utility/?-half-of-seq letter-range 1))
+        (into [] (utility/?-half-of-vec letter-range 1))
         letter-range-second-half
-        (into [] (utility/?-half-of-seq letter-range 2))
+        (into [] (utility/?-half-of-vec letter-range 2))
         middle-row-num (inc (quot board-size 2))]
     (reduce-kv
      (fn [acc row cols]

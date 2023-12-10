@@ -83,17 +83,6 @@
   (when (valid-?half? which-col)
     (char->number (get-?-col-as-char input-str which-col))))
 
-(defn middle-keyword
-  "Takes in two keywords that are single char and alphabetic,
-   returns the midvalue between those characters, as a keyword."
-  [kw1 kw2]
-  (let [char1 (first (name kw1))
-        char2 (first (name kw2))
-        min-char (char (min (int char1) (int char2)))
-        middle-char (char (inc (int min-char)))
-        middle-keyword (keyword (str middle-char))]
-    middle-keyword))
-
 (defn middle-number
   "Takes in two numbers, returns the one that's in the middle
    between them. Rounds down."
@@ -104,9 +93,10 @@
   "For given user color as single char string, returns opposite 
    user color (for \"R\" returns \"B\" and vice versa)."
   [color]
-  (if (= color "R")
-    "B"
-    "R"))
+  (cond 
+    (= "R" color) "B"
+    (= "B" color) "R"
+    :else nil))
 
 (defn num->keyword
   [num]
@@ -116,14 +106,12 @@
   "Takes in two characters and returns the midvalue
    between those characters, as a keyword. Rounds down."
   [char1 char2]
-  (let [num1 (char->number char1)
-        num2 (char->number char2)
-        midvalue-num (middle-number num1 num2)]
-    (keyword (str (number->char midvalue-num)))))
-
-(defn keyword->str
-  [keyword]
-  (name keyword))
+  (when-not (or (nil? char1)
+                (nil? char2))
+   (let [num1 (char->number char1)
+         num2 (char->number char2)
+         midvalue-num (middle-number num1 num2)]
+     (keyword (str (number->char midvalue-num))))))
 
 (defn numeric-keyword->num
   "Takes in a keyword that is numeric and returns the number
@@ -175,6 +163,18 @@
   [a-number]
   (keyword (str (number->char a-number))))
 
+
+(defn middle-keyword
+  "Takes in two keywords that are single char and alphabetic,
+   returns the midvalue between those characters, as a keyword."
+  [kw1 kw2]
+  (let [char1 (first (name kw1))
+        char2 (first (name kw2))
+        num1 (char->number char1)
+        num2 (char->number char2)
+        mid-num (middle-number num1 num2)]
+    (num->letter-keyword mid-num)))
+
 (defn seq->keyword-seq
   "Returns list of keyword values for given collection 
    of members given as sequence."
@@ -186,7 +186,7 @@
    of numbers given as sequence. Uses conversion map for converting
    values."
   [numeric-seq]
-   (map #(name (num->letter-keyword %))
+   (map #(first (name (num->letter-keyword %)))
                 numeric-seq))
 
 (defn numeric-seq->letter-keyword-seq
@@ -195,7 +195,7 @@
    values."
   [numeric-seq]
   (let [letter-seq (numeric-seq->letter-seq numeric-seq)]
-    (map #(keyword %) letter-seq)))
+    (map #(keyword (str %)) letter-seq)))
 
 (defn numeric-seq->numeric-keyword-seq
   "Returns list of appropriate character values for given collection 
@@ -205,23 +205,28 @@
   (let [str-seq (map str numeric-seq)]
     (map keyword str-seq)))
 
-(defn ?-half-of-seq
+(defn- half-validator 
+  [a-half]
+  (or (= 1 a-half) (= 2 a-half)))
+
+(defn ?-half-of-vec
   "Returns specified half of sequence. If sequence has odd
    number of elements, middle is excluded from both halves."
   [a-seq which-half]
-  (let [len (count a-seq)
-        cutoff-index (quot (inc len) 2)]
-    (if (= 1 which-half)
-      (subvec a-seq 0
-              (if (odd? len)
-                (dec cutoff-index)
-                cutoff-index))
-      (subvec a-seq cutoff-index))))
-
+  (when (half-validator which-half)
+   (let [len (count a-seq)
+         cutoff-index (quot (inc len) 2)]
+     (if (= 1 which-half)
+       (subvec a-seq 0
+               (if (odd? len)
+                 (dec cutoff-index)
+                 cutoff-index))
+       (subvec a-seq cutoff-index)))))
+0
 (defn reverse-extraction-of-keys
   [keys]
-  (let [first-half (?-half-of-seq keys 1)
-        second-half (?-half-of-seq keys 2)
+  (let [first-half (?-half-of-vec keys 1)
+        second-half (?-half-of-vec keys 2)
         first-half-mid (for [k first-half] (name k))
         second-half-mid (for [k second-half] (name k))
         first-half-str (apply str first-half-mid)
@@ -252,7 +257,7 @@
       (do 
         (println "Too small. Defaulting to 5.")
         5) 
-        (if (> inputted-size 201)
+        (if (>= inputted-size 200)
           (do
             (println "You must be stopped, you animal!
                       That board size is IMMENSE!!!
