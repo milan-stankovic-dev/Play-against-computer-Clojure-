@@ -148,20 +148,6 @@
         (first move-piece-res)
         move-piece-res))))
 
-;; (defn- win-numeric
-;;   "Returns numeric value for a win state. If a human wins, returns -1,
-;;    if a computer wins, returns 1, 0 otherwise."
-;;   [board computer-color]
-;;   (let [human-color (utility/opposite-player-color computer-color)
-;;         win-check-result (check-for-win
-;;                           ;; human-color computer-color board
-;;                           )]
-;;     (case win-check-result
-;;       :human -1
-;;       :computer 1
-;;       false 0
-;;       :default 0)))
-
 (defn- possible-?s-for-one-blank
   "For inputted coords of one blank field it returns a vector of strings of possible
    moves or eats for that given blank"
@@ -201,35 +187,43 @@
                          board player-color board-size moves-or-eats-kw)))
             #{} all-blanks)))
 
+
 (defn- evaluate-minimax-candidate
-  [risk-factor
+  [difficulty-factor
    human-score
    computer-score]
-  (let [computer-weight (- 0.5 (double (/ risk-factor 2)))
+  (let [computer-weight (- 0.5 (double (/ difficulty-factor 2)))
         human-weight (- 1 computer-weight) 
         human-weighted-score (* human-weight human-score)
         computer-weighted-score (* computer-weight computer-score)]
     (- computer-weighted-score human-weighted-score)))
 
+(evaluate-minimax-candidate -0.5 1 2)
+
 (defn- reverse-evaluate-minimax-candidate
-  [risk-factor
+  [difficulty-factor
    human-score
    computer-score]
   (evaluate-minimax-candidate
-   (- 1 risk-factor) human-score computer-score))
+   (- 1 difficulty-factor) human-score computer-score))
 
-(defn- best-candidate
-  [candidates]
-  (let [solution (first (reduce (fn
-                                   [acc eval]
-                                   (if (> (first (vals eval)) (first (vals acc)))
-                                     eval
-                                     acc))
-                                 (first candidates) (rest candidates)))]
-    {(first solution) (last solution)}))
+(defn- ?st-candidate
+  [candidates
+   best-or-worst]
+  (let [symbol (if (= "WORST" best-or-worst)
+                 <
+                 >) 
+        solution (first (reduce (fn
+                                    [acc eval]
+                                    (if (symbol (first (vals eval))
+                                                (first (vals acc)))
+                                      eval
+                                      acc))
+                                  (first candidates) (rest candidates)))]
+      {(first solution) (last solution)}))
 
-(find-all-possible-?s (board/create-board 5) 
-                      "R" 5 :eats)
+;; (find-all-possible-?s (board/create-board 5) 
+;;                       "R" 5 :eats)
 
 (def board5 (board/create-board 5))
 (def twoc3cboard (move-piece-computer 
@@ -245,128 +239,164 @@
 (def threec2c (move-piece-computer
                "3C-2C" onec3c "B" 5))
 
+(def -∞ Double/NEGATIVE_INFINITY)
+(def ∞ Double/POSITIVE_INFINITY)
 
+(declare minimax)
 
-(find-all-possible-?s threec2c "R" 5 :eats)
-
-;; (find-all-possible-?s twoc3cboard "R" 5 :moves)
-;; (find-all-possible-?s twoc3cboard "R" 5 :eats)
-;; (board/print-the-board twoc3cboard 5)
-
-;; (find-all-possible-?s fourc2c "R" 5 :moves)
-;; (find-all-possible-?s fourc2c "R" 5 :eats)
-;; (board/print-the-board fourc2c 5)
-
-;; (find-all-possible-?s fourb3c "R" 5 :moves)
-;; (find-all-possible-?s fourb3c "R" 5 :eats)
-;; (board/print-the-board fourb3c 5)
-
-;; (find-all-possible-?s twod4b "R" 5 :moves)
-;; (find-all-possible-?s twod4b "R" 5 :eats)
-;; (board/print-the-board twod4b 5)
-
-;; (find-all-possible-?s onec3c "R" 5 :moves)
-;; (find-all-possible-?s onec3c "R" 5 :eats)
-;; (board/print-the-board onec3c 5)
-
-;; (board/print-the-board threec2c 5)
-
-;; (possible-?s-for-one-blank [:1 :C] threec2c "B" 5 :moves)
-;; (possible-?s-for-one-blank [:3 :C]
-;;                            (board/create-board 5) "R" 5
-;;                            :moves)
-
-;; (board/print-the-board threec2c 5)
+(def memoized-minimax
+  "Memoized version of minimax"
+  (memoize
+   (fn [board depth maximizing? playing-color
+        board-size root-move h-score c-score
+        difficulty-factor alpha beta]
+     (minimax board depth maximizing? playing-color
+              board-size root-move h-score c-score
+              difficulty-factor alpha beta))))
 
 (defn- minimax
   "Minimax algorithm helps us determine the move computer should make against
     the player. It is a heuristic and as such may not always give the best
     answer. We minimize for the human and maximize for the computer."
-  [board depth maximizing? computer-color
-   board-size root-move h-score c-score risk-factor]
-  (let [human-color (utility/opposite-player-color computer-color)
-        eating-moves (find-all-possible-?s board computer-color
-                                           board-size :eats)
-        normal-moves (find-all-possible-?s board computer-color
-                                           board-size :moves)]
+  [board depth maximizing?
+   playing-color board-size
+   root-move h-score
+   c-score difficulty-factor
+   alpha beta]
+  
+  (let [opponent (utility/opposite-player-color playing-color)
+        eval-fn (if maximizing?
+                  evaluate-minimax-candidate
+                  reverse-evaluate-minimax-candidate)
+        eating-moves (find-all-possible-?s
+                      board playing-color board-size
+                      :eats)
+        normal-moves (if (empty? eating-moves)
+                       (find-all-possible-?s
+                        board playing-color board-size
+                        :moves)
+                       #{})
+        next-player (if (empty? eating-moves)
+                      opponent
+                      playing-color)
+        moves (if (empty? eating-moves)
+                normal-moves
+                eating-moves)]
+    
     (if (= depth 0)
+        {root-move (eval-fn difficulty-factor
+                            h-score (if maximizing?
+                                      (inc c-score) c-score))}
+        
       (if maximizing?
-        {root-move (evaluate-minimax-candidate 
-                    risk-factor h-score (inc c-score))}
-        {root-move (reverse-evaluate-minimax-candidate 
-                    risk-factor h-score c-score)})
-      (if maximizing?
-        ;; Calculating computer score (depth) moves deep
-        (if (seq eating-moves) 
-          (let [candidates (for [move eating-moves] 
-                             (minimax (move-piece-computer 
-                                       move board computer-color
-                                       board-size) (dec depth)
-                                      true computer-color
-                                      board-size root-move
-                                      h-score (inc c-score)
-                                      risk-factor))]
-            (best-candidate candidates))
-          
-          (let [candidates (for [move normal-moves] 
-                             (minimax (move-piece-computer 
-                                       move board computer-color 
-                                       board-size) (dec depth) 
-                                      false computer-color 
-                                      board-size root-move 
-                                      h-score c-score 
-                                      risk-factor))] 
-            (best-candidate candidates)))
-        ;; Calculating human score (depth) moves deep
-        (if (seq eating-moves)
-          (let [candidates (for [move eating-moves] 
-                             (minimax (move-piece-computer 
-                                       move board human-color 
-                                       board-size) (dec depth) 
-                                      false computer-color 
-                                      board-size root-move 
-                                      (inc h-score) c-score 
-                                      risk-factor))] 
-            (best-candidate candidates)) 
-          
-            (let [candidates (for [move normal-moves]
-                     (minimax (move-piece-computer
-                               move board human-color
-                               board-size) (dec depth)
-                              true computer-color
-                              board-size root-move
-                              h-score c-score 
-                              risk-factor))]
-    (best-candidate candidates)))))))
+        (let [next-maximizing (seq eating-moves)
+              next-c-score (if (empty? eating-moves)
+                             c-score
+                             (inc c-score))]
+          (loop [moves-to-check moves
+                 best-move nil
+                 curr-alpha alpha]
+            (if (or (empty? moves-to-check)
+                    (and (<= curr-alpha beta)
+                         (not= beta ∞)
+                         (not= alpha -∞)))
+              {root-move curr-alpha}
+              (let [move (first moves-to-check)
+                    result (memoized-minimax (move-piece-computer
+                                     move 
+                                     board
+                                     playing-color
+                                     board-size)
+                                    (dec depth)
+                                    next-maximizing
+                                    next-player
+                                    board-size move
+                                    h-score next-c-score
+                                    difficulty-factor
+                                    curr-alpha beta)
+                    score (get result move)]
+                (if (> score curr-alpha)
+                  (recur (rest moves-to-check) move score)
+                  (recur (rest moves-to-check) best-move curr-alpha))))))
+        
+        (let [next-maximizing (seq normal-moves)
+              next-h-score (if (empty? eating-moves)
+                             h-score
+                             (inc h-score))]
+         (loop [moves-to-check moves
+                best-move nil
+                curr-beta beta]
+           (if (or (empty? moves-to-check)
+                   (and (<= alpha curr-beta)
+                        (not= curr-beta ∞)
+                        (not= alpha -∞)))
+             {root-move curr-beta}
+             (let [move (first moves-to-check)
+                   result (memoized-minimax (move-piece-computer
+                                    move
+                                    board
+                                    playing-color
+                                    board-size)
+                                   (dec depth)
+                                   next-maximizing
+                                   next-player
+                                   board-size move
+                                   next-h-score c-score
+                                   difficulty-factor 
+                                   alpha curr-beta)
+                   score (get result move)]
+               (if (< score curr-beta)
+                  (recur (rest moves-to-check) move score) 
+                  (recur (rest moves-to-check) best-move curr-beta))))))))))
 
+(defn- rand-difficulty 
+  []
+  (-> (rand)
+      (* 2)
+      (- 1)))
 
-(minimax (board/create-board 5) 3 true "R" 5 "2C-3C" 0 0 0)
+(defn- resolve-difficulty-factor 
+  [board-size]
+  (cond 
+    (= board-size 5) -0.5
+    (= board-size 7) 0.0
+    (= board-size 9) 0.5
+    :else (rand-difficulty)))
+
+(defn- resolve-depth
+  [board-size]
+  (cond
+    (= board-size 5) 4
+    :else 3))
 
 (defn find-best-move
   "Find the best move for the computer using the minimax algorithm."
-  [board depth computer-color board-size risk-factor]
-  (let [human-color (utility/opposite-player-color computer-color)
-        initial-eating-moves (future (find-all-possible-?s board computer-color
-                                                                 board-size :eats))
-        initial-normal-moves (future (find-all-possible-?s board computer-color
-                                                           board-size :moves)) 
-        initial-minimaxed (if (seq @initial-eating-moves)
-                            (future (map #(minimax (move-piece-computer
-                                                    % board computer-color 
-                                                    board-size)
-                                                   (dec depth)
-                                                   true computer-color
-                                                   board-size % 0 0 risk-factor)
-                                         @initial-eating-moves))
-                            (future (map #(minimax (move-piece-computer
-                                                    % board computer-color
-                                                    board-size)
-                                                   (dec depth)
-                                                   false human-color
-                                                   board-size % 0 0 risk-factor)
-                                         @initial-normal-moves)))]
-      (apply max-key (partial reverse-evaluate-minimax-candidate
-                              risk-factor) @initial-minimaxed)))
+  [board computer-color board-size]
+  (let [difficulty-factor (resolve-difficulty-factor board-size)
+        depth (resolve-depth board-size)
+        human-color (utility/opposite-player-color computer-color)
+        initial-eating-moves (find-all-possible-?s board computer-color
+                                                                 board-size :eats)
+        initial-normal-moves (find-all-possible-?s board computer-color
+                                                           board-size :moves) 
+        initial-minimaxed (if (seq initial-eating-moves) 
+                               (map #(memoized-minimax (move-piece-computer
+                                                      % board computer-color 
+                                                      board-size)
+                                                     (dec depth)
+                                                     true computer-color
+                                                     board-size % 0 0 difficulty-factor
+                                                     -∞ ∞)
+                                           initial-eating-moves)
+                               (map #(memoized-minimax (move-piece-computer
+                                                      % board computer-color
+                                                      board-size)
+                                                     (dec depth)
+                                                     false human-color
+                                                     board-size % 0 0 difficulty-factor
+                                                     -∞ ∞)
+                                           initial-normal-moves))]
+      (?st-candidate initial-minimaxed "BEST")))
 
 (defn- eat-side-effects!
   "Applies side effects to atoms and potential save to db
@@ -410,12 +440,12 @@
       (do
         (println "Computer's turn...")
         (let [res-map (find-best-move
-                board 3 computer-color board-size 0)
+                board computer-color board-size)
               best-move (first (keys res-map)) 
-              ;; score (best-move res-map)
+              score (get res-map best-move)
               ]
           (println (str "Computer's move: " best-move))
-          (println (str "Function returned score: " -))
+          (println (str "Function returned score: " score))
           (let [result-of-piece-move (apply-move-indicator best-move
                                                            board computer-color
                                                            board-size
