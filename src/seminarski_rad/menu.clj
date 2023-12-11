@@ -44,14 +44,17 @@
 (defn- write-out-board-convo
   [board board-size]
    (println "\n**********************************************************************\n")
-      (println
-       "Welcome to alquerque, the board game. Here you play against the computer.
-    Upon starting the game you are prompted to choose player color. Simply input
-    [B] for blue or [R] for red. To make a turn input the name of the first field
-    (Ex. 1A), followed by a '-' symbol and then the field you want your piece to go
-    (Ex. 1C). You may also include the word \"EAT\" in the middle (Ex. 1A-EAT-1C),
-    if you are skipping a field, but this is not necessary. If your input is invalid,
-    you will get another chance at making a move! The player whose onlypieces remain
+      (println "
+    Welcome to alquerque, the board game. Here you play against the AI.
+    Upon starting the game you were prompted to choose a color. Now you are meant to
+    play a session against an AI with given piece color. To make a turn input
+    the coordinates of the first field (Ex. 1A), followed by a '-' symbol and then the field
+    you want your piece to go (Ex. 1C). Example: 1A-1B or 1A-1C. You may also use lowercase letters
+    if that suits you better, but larger boards may have both uppercase and lowercase letters, 
+    so watch out. If your input is invalid, you will get another chance at making a move! Upon 
+    \"eating\" the opponents piece, you get another move. Same goes for the AI. If you want to 
+    quit the game, press the Q key (gives the AI a victory).
+    The player whose only pieces remain
     wins! Good luck!\n
     
     Here's your board:\n")
