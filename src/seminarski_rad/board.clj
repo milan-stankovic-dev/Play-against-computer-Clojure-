@@ -10,49 +10,53 @@
    The only valid tile to be removed is the opponent's tile.
    Returns false if invalid, true if valid and no eat, and 
    \"eat\" if the opponent's piece is eaten."
-  [input-str]
-  (let [init-row-number (utility/get-?-row-as-num input-str 1)
-        init-col-char (utility/get-?-col-as-char input-str 1)
-        init-col-number (utility/get-?-col-as-num input-str 1)
-        final-col-char (utility/get-?-col-as-char input-str 2)
-        final-col-number (utility/get-?-col-as-num input-str 2)
-        final-row-number (utility/get-?-row-as-num input-str 2)]
+  [purified-input-str]
+  (when (and (string? purified-input-str)
+             (>= (count purified-input-str) 5)
+             (= 4 (count (utility/extract-keys-from-user-input
+                          purified-input-str))))
+    (let [init-row-number (utility/get-?-row-as-num purified-input-str 1)
+          init-col-char (utility/get-?-col-as-char purified-input-str 1)
+          init-col-number (utility/get-?-col-as-num purified-input-str 1)
+          final-col-char (utility/get-?-col-as-char purified-input-str 2)
+          final-col-number (utility/get-?-col-as-num purified-input-str 2)
+          final-row-number (utility/get-?-row-as-num purified-input-str 2)]
     ;;Checking if start is not the same as finish
-    (when (val/start-not-the-same-as-finish-validator input-str)
+      (when (val/start-not-the-same-as-finish-validator purified-input-str)
     ;; Checking if the user is trying to jump too far in any direction
-    (if (or (> (Math/abs (- init-row-number final-row-number)) 2)
-            (> (Math/abs (- init-col-number final-col-number)) 2))
-      false
+        (if (or (> (Math/abs (- init-row-number final-row-number)) 2)
+                (> (Math/abs (- init-col-number final-col-number)) 2))
+          false
       ;; Checking if the user is trying to jump diagonally 1 tile where there are no viable paths
-      (if (and (= 1 (Math/abs (- init-row-number final-row-number)))
-               (= 1 (Math/abs (- init-col-number final-col-number)))
-               (apply distinct? [init-row-number init-col-char final-row-number final-col-char])
-               (not= (odd? init-row-number) (odd? init-col-number)))
-        false
+          (if (and (= 1 (Math/abs (- init-row-number final-row-number)))
+                   (= 1 (Math/abs (- init-col-number final-col-number)))
+                   (apply distinct? [init-row-number init-col-char final-row-number final-col-char])
+                   (not= (odd? init-row-number) (odd? init-col-number)))
+            false
         ;; Checking if the user can eat horizontally, vertically and diagonally.
-        (if (= 2 (Math/abs (- init-row-number final-row-number)))
-          (if (= init-col-number final-col-number)
+            (if (= 2 (Math/abs (- init-row-number final-row-number)))
+              (if (= init-col-number final-col-number)
 
-            "eat";; (check-for-eating-new middle-row-keyword (keyword init-col-string) board opposite-player-color)
+                "eat";; (check-for-eating-new middle-row-keyword (keyword init-col-string) board opposite-player-color)
+                
+                (if (= 2 (Math/abs (- init-col-number final-col-number)))
+                  (if (not= (odd? init-row-number) (odd? init-col-number))
+                    false
 
-            (if (= 2 (Math/abs (- init-col-number final-col-number)))
-              (if (not= (odd? init-row-number) (odd? init-col-number))
-                false
+                    "eat";; (check-for-eating-new middle-row-keyword middle-col-keyword board opposite-player-color))
+                    )
+                  false))
+              (if (and (= 2 (Math/abs (- init-col-number final-col-number)))
+                       (= init-row-number final-row-number))
 
-                "eat";; (check-for-eating-new middle-row-keyword middle-col-keyword board opposite-player-color))
-                )
-              false))
-          (if (and (= 2 (Math/abs (- init-col-number final-col-number)))
-                   (= init-row-number final-row-number))
-
-            "eat";; (check-for-eating-new (keyword (str init-row-number)) middle-col-keyword board opposite-player-color)
-
-            (if (or (and (= 2 (Math/abs (- init-col-number final-col-number)))
-                         (= 1 (Math/abs (- init-row-number final-row-number))))
-                    (and (= 1 (Math/abs (- init-col-number final-col-number)))
-                         (= 2 (Math/abs (- init-row-number final-row-number)))))
-              false
-              true))))))))
+                "eat";; (check-for-eating-new (keyword (str init-row-number)) middle-col-keyword board opposite-player-color)
+                
+                (if (or (and (= 2 (Math/abs (- init-col-number final-col-number)))
+                             (= 1 (Math/abs (- init-row-number final-row-number))))
+                        (and (= 1 (Math/abs (- init-col-number final-col-number)))
+                             (= 2 (Math/abs (- init-row-number final-row-number)))))
+                  false
+                  true)))))))))
 
 (def empty-node {:piece " " :moves '() :eats '()})
 

@@ -131,6 +131,7 @@
   [user-color-input] 
   (let [purified-input-str (utility/purify-user-input user-color-input)]
     (cond
+      (not (string? purified-input-str)) false
       (empty? purified-input-str) false
       (> (count purified-input-str) 1) false
       (not (some #(= % purified-input-str) ["R" "B"])) false

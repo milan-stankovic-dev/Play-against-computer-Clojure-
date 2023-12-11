@@ -1,13 +1,13 @@
 (ns seminarski-rad.input-utility
-  (:require [clojure.string :as str]
-            [seminarski-rad.input-utility :as utility]))
+  (:require [clojure.string :as str]))
 
 (defn purify-user-input
   "Removes unnecessary blank characters and capitalizes 
    all letters in input. If input contains \"EAT\" in the
    middle of it,function removes it."
   [input-str]
-  (str/upper-case (str/trim input-str)))
+  (when (string? input-str)
+        (str/upper-case (str/trim input-str))))
 
 (defn extract-keys-from-user-input
   "Takes in a string representing user input (ex. 1A-2A or 111D-111E)
@@ -46,7 +46,9 @@
   "Takes in a string representing user input and returns
     the numeric value of the specified coordinate's row."
   [input-str which-row] 
-  (when (valid-?half? which-row) 
+  (when (and (valid-?half? which-row)
+             (string? input-str)
+             (seq input-str)) 
     (let [extracted (extract-keys-from-user-input input-str)] 
       (Integer/parseInt (name 
                          (nth extracted (- (* 2 which-row) 2)))))))
@@ -56,7 +58,9 @@
     the character value of the specified coordinate's 
    column."
   [input-str which-col]
-  (when (valid-?half? which-col)
+  (when (and (valid-?half? which-col)
+             (string? input-str)
+             (seq input-str))
       (let [extracted (extract-keys-from-user-input input-str)]
         (first (name (nth extracted (- (* 2 which-col) 1)))))))
 

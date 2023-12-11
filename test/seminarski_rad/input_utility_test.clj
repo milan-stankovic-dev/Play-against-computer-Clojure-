@@ -1,6 +1,6 @@
 (ns seminarski-rad.input-utility-test
-  (:use midje.sweet)
-  (:require [seminarski-rad.input-utility :refer :all]))
+  (:require [seminarski-rad.input-utility :refer :all]
+            [midje.sweet :refer :all]))
 
 (fact "Your first test"
       (+ 1 1) => 2)
@@ -20,6 +20,10 @@
 (fact "Purification both gaps one lowercase"
             ( purify-user-input "  10A-11b ")
             => "10A-11B")
+
+(fact "Purification not a string"
+      (purify-user-input 12)
+      => nil)
 
 (fact "Key extraction simple"
             ( extract-keys-from-user-input "1A-2A")
