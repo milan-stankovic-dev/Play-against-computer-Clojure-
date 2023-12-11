@@ -96,9 +96,10 @@
      (println "Are you sure you want to quit? 
                 Quitting gives a victory to the computer.
                 [Y] or [N]")
-        (let [subseq-response (utility/purify-user-input
+        (let [subseq-response (utility/purify-move-input
                                (utility/prompt-info "your choice" 
-                                                    val/confirm-validator-Y-N))]
+                                                    val/confirm-validator-Y-N)
+                               board-size)]
           (println "Your choice: " subseq-response)
           (when (= "Y" subseq-response) 
               (println "\nUSER QUIT. COMPUTER WINS!")
@@ -115,7 +116,8 @@
    if the user has eaten a piece. If the user quits during move 
    making, the word \"quit\" is sent inside vector with board."
   [user-input board user-color board-size username]
-  (let [purified-input-str (utility/purify-user-input user-input)
+  (let [purified-input-str (utility/purify-move-input user-input
+                                                      board-size)
         computer-color (utility/opposite-player-color user-color)]
     (if (quit? purified-input-str computer-color 
                board-size username)

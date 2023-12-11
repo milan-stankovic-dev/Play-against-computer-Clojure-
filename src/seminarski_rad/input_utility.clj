@@ -2,12 +2,19 @@
   (:require [clojure.string :as str]))
 
 (defn purify-user-input
-  "Removes unnecessary blank characters and capitalizes 
-   all letters in input. If input contains \"EAT\" in the
-   middle of it,function removes it."
+  "Removes blank characters"
   [input-str]
-  (when (string? input-str)
-        (str/upper-case (str/trim input-str))))
+  (str/upper-case (str/trim input-str)))
+
+(defn purify-move-input
+  "Removes unnecessary blank characters and capitalizes 
+   all letters in input if board size is less than 33.
+   Otherwise, it applies purify-user-input to it."
+  [input-str adj-board-size]
+  (when (string? input-str) 
+    (if (< adj-board-size 33)
+      (purify-user-input input-str)
+      (str/trim input-str))))
 
 (defn extract-keys-from-user-input
   "Takes in a string representing user input (ex. 1A-2A or 111D-111E)

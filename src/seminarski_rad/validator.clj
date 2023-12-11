@@ -113,7 +113,8 @@
 
 (defn validate-input
   [input-str board player-color board-size]
-  (let [purified-input-str (utility/purify-user-input input-str)] 
+  (let [purified-input-str (utility/purify-move-input input-str
+                                                      board-size)] 
     (and 
      (input-length-validator purified-input-str 5)
      (input-format-validator purified-input-str board-size)

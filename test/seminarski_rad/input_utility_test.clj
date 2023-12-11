@@ -5,25 +5,49 @@
 (fact "Your first test"
       (+ 1 1) => 2)
 
+(fact "Purification of user input one gap"
+      (purify-user-input "1    ")
+      => "1")
+
+(fact "Purification of user input two gaps"
+      (purify-user-input " 1    ")
+      => "1")
+
+(fact "Purification of user input two gaps lowercase"
+      (purify-user-input " a    ")
+      => "A")
+
+(fact "Purification of user input one gap lowercase"
+      (purify-user-input "     b")
+      => "B")
+
+(fact "Purification of user input mixed"
+      (purify-user-input " aBc123     ")
+      => "ABC123")
+
 (fact "Purification one gap"
-            ( purify-user-input "1      ") 
+            ( purify-move-input "1      " 5) 
             => "1")
 
 (fact "Purification no gaps both lowercase"
-            ( purify-user-input "1a-2a")
+            ( purify-move-input "1a-2a" 7)
             => "1A-2A")
 
 (fact "Purification both gaps both lowercase"
-            ( purify-user-input "    1a-2a  ")
+            ( purify-move-input "    1a-2a  " 5)
             => "1A-2A")
 
 (fact "Purification both gaps one lowercase"
-            ( purify-user-input "  10A-11b ")
+            ( purify-move-input "  10A-11b " 9)
             => "10A-11B")
 
 (fact "Purification not a string"
-      (purify-user-input 12)
+      (purify-move-input 12 5)
       => nil)
+
+(fact "Purification board size is over 31"
+      (purify-move-input "33a-32a" 33)
+      => "33a-32a")
 
 (fact "Key extraction simple"
             ( extract-keys-from-user-input "1A-2A")
