@@ -2,14 +2,15 @@
   (:require [clojure.string :as str]))
 
 (defn purify-user-input
-  "Removes blank characters"
+  "Removes blank characters and capitalizes all letters
+   in input."
   [input-str]
   (str/upper-case (str/trim input-str)))
 
 (defn purify-move-input
-  "Removes unnecessary blank characters and capitalizes 
-   all letters in input if board size is less than 33.
-   Otherwise, it applies purify-user-input to it."
+  "Applies purify-user-input to specified input if board size is less
+   than 33. Removes blank characters otherwise. Lowercase input is required
+   for bigger boards that may have columns that are lowercase."
   [input-str adj-board-size]
   (when (string? input-str) 
     (if (< adj-board-size 33)

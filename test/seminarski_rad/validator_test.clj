@@ -60,7 +60,7 @@
                                      "B" 5))
 (def board5-4B-3C (logic/move-piece-computer
                    "4B-3C" board5 "R" 5))
-(board/print-the-board board5 5)
+
 (fact "Input validation facts part 2"
       (validate-input "4B-3C" board5 "R" 5)
       => truthy
