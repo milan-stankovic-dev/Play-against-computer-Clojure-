@@ -32,17 +32,17 @@ Here is what the "easy" board looks like (board of default size 5):
     Here's your board:
 
 
-   A   B   C   D   E   
+       A   B   C   D   E   
 
-1  B ─ B ─ B ─ B ─ B
-   | \ | / | \ | / |
-2  B ─ B ─ B ─ B ─ B
-   | / | \ | / | \ |
-3  B ─ B ─   ─ R ─ R
-   | \ | / | \ | / |
-4  R ─ R ─ R ─ R ─ R
-   | / | \ | / | \ |
-5  R ─ R ─ R ─ R ─ R
+    1  B ─ B ─ B ─ B ─ B
+       | \ | / | \ | / |
+    2  B ─ B ─ B ─ B ─ B
+       | / | \ | / | \ |
+    3  B ─ B ─   ─ R ─ R
+       | \ | / | \ | / |
+    4  R ─ R ─ R ─ R ─ R
+       | / | \ | / | \ |
+    5  R ─ R ─ R ─ R ─ R
 
 Human Score:  0
 Computer Score:  0
@@ -75,100 +75,100 @@ If the player presses 'Y', the game ends and computer is rewarded with a win. If
 
 Other difficulties lend themselves to using boards of different sizes. And so we have the size 7 board:
 
-   A   B   C   D   E   F   G   
+       A   B   C   D   E   F   G   
 
-1  B ─ B ─ B ─ B ─ B ─ B ─ B
-   | \ | / | \ | / | \ | / |
-2  B ─ B ─ B ─ B ─ B ─ B ─ B
-   | / | \ | / | \ | / | \ |
-3  B ─ B ─ B ─ B ─ B ─ B ─ B
-   | \ | / | \ | / | \ | / |
-4  B ─ B ─ B ─   ─ R ─ R ─ R
-   | / | \ | / | \ | / | \ |
-5  R ─ R ─ R ─ R ─ R ─ R ─ R
-   | \ | / | \ | / | \ | / |
-6  R ─ R ─ R ─ R ─ R ─ R ─ R
-   | / | \ | / | \ | / | \ |
-7  R ─ R ─ R ─ R ─ R ─ R ─ R
+    1  B ─ B ─ B ─ B ─ B ─ B ─ B
+       | \ | / | \ | / | \ | / |
+    2  B ─ B ─ B ─ B ─ B ─ B ─ B
+       | / | \ | / | \ | / | \ |
+    3  B ─ B ─ B ─ B ─ B ─ B ─ B
+       | \ | / | \ | / | \ | / |
+    4  B ─ B ─ B ─   ─ R ─ R ─ R
+       | / | \ | / | \ | / | \ |
+    5  R ─ R ─ R ─ R ─ R ─ R ─ R
+       | \ | / | \ | / | \ | / |
+    6  R ─ R ─ R ─ R ─ R ─ R ─ R
+       | / | \ | / | \ | / | \ |
+    7  R ─ R ─ R ─ R ─ R ─ R ─ R
 
 ... and the dreaded size 9 board:
 
-   A   B   C   D   E   F   G   H   I   
+       A   B   C   D   E   F   G   H   I   
 
-1  B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B
-   | \ | / | \ | / | \ | / | \ | / |
-2  B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B
-   | / | \ | / | \ | / | \ | / | \ |
-3  B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B
-   | \ | / | \ | / | \ | / | \ | / |
-4  B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B
-   | / | \ | / | \ | / | \ | / | \ |
-5  B ─ B ─ B ─ B ─   ─ R ─ R ─ R ─ R
-   | \ | / | \ | / | \ | / | \ | / |
-6  R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R
-   | / | \ | / | \ | / | \ | / | \ |
-7  R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R
-   | \ | / | \ | / | \ | / | \ | / |
-8  R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R
-   | / | \ | / | \ | / | \ | / | \ |
-9  R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R
+    1  B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B
+       | \ | / | \ | / | \ | / | \ | / |
+    2  B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B
+       | / | \ | / | \ | / | \ | / | \ |
+    3  B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B
+       | \ | / | \ | / | \ | / | \ | / |
+    4  B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B
+       | / | \ | / | \ | / | \ | / | \ |
+    5  B ─ B ─ B ─ B ─   ─ R ─ R ─ R ─ R
+       | \ | / | \ | / | \ | / | \ | / |
+    6  R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R
+       | / | \ | / | \ | / | \ | / | \ |
+    7  R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R
+       | \ | / | \ | / | \ | / | \ | / |
+    8  R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R
+       | / | \ | / | \ | / | \ | / | \ |
+    9  R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R
 
 Scary isn't it? Apart from these more standard board sizes, a player may want to play with custom board sizes against the AI. That can be done by inputting '5' at the main menu for the "just for fun" option. Here's a cute little board of 
 size 3:
 
-   A   B   C   
+        A   B   C   
 
-1  B ─ B ─ B
-   | \ | / |
-2  B ─   ─ R
-   | / | \ |
-3  R ─ R ─ R
+    1   B ─ B ─ B
+        | \ | / |
+    2   B ─   ─ R
+        | / | \ |
+    3   R ─ R ─ R
 
 ... or a monstrous one of size 21
 
-  A   B   C   D   E   F   G   H   I   J   K   L   M   N   O   P   Q   R   S   T   U   
+        A   B   C   D   E   F   G   H   I   J   K   L   M   N   O   P   Q   R   S   T   U   
 
-1  B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B
-   | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / |
-2  B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B
-   | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ |
-3  B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B
-   | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / |
-4  B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B
-   | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ |
-5  B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B
-   | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / |
-6  B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B
-   | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ |
-7  B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B
-   | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / |
-8  B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B
-   | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ |
-9  B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B
-   | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / |
-10  B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B
-   | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ |
-11  B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─   ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R
-   | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / |
-12  R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R
-   | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ |
-13  R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R
-   | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / |
-14  R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R
-   | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ |
-15  R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R
-   | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / |
-16  R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R
-   | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ |
-17  R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R
-   | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / |
-18  R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R
-   | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ |
-19  R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R
-   | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / |
-20  R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R
-   | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ |
-21  R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R
+    1   B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B
+        | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / |
+    2   B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B
+        | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ |
+    3   B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B
+        | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / |
+    4   B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B
+        | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ |
+    5   B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B
+        | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / |
+    6   B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B
+        | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ |
+    7   B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B
+        | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / |
+    8   B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B
+        | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ |
+    9   B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B
+        | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / |
+    10  B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B
+        | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ |
+    11  B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─ B ─   ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R
+        | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / |
+    12  R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R
+        | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ |
+    13  R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R
+        | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / |
+    14  R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R
+        | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ |
+    15  R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R
+        | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / |
+    16  R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R
+        | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ |
+    17  R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R
+        | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / |
+    18  R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R
+        | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ |
+    19  R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R
+        | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / |
+    20  R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R
+        | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ | / | \ |
+    21  R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R ─ R
 
 I get dizzy just by looking at this mess!
 
