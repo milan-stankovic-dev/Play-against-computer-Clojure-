@@ -225,19 +225,19 @@
 ;; (find-all-possible-?s (board/create-board 5) 
 ;;                       "R" 5 :eats)
 
-(def board5 (board/create-board 5))
-(def twoc3cboard (move-piece-computer 
-                "2C-3C" board5 "B" 5))
-(def fourc2c (move-piece-computer
-              "4C-2C" twoc3cboard "R" 5))
-(def fourb3c (move-piece-computer 
-              "4B-3C" fourc2c "R" 5))
-(def twod4b (move-piece-computer
-             "2D-4B" fourb3c "B" 5))
-(def onec3c (move-piece-computer
-             "1C-3C" twod4b "B" 5))
-(def threec2c (move-piece-computer
-               "3C-2C" onec3c "B" 5))
+;; (def board5 (board/create-board 5))
+;; (def twoc3cboard (move-piece-computer 
+;;                 "2C-3C" board5 "B" 5))
+;; (def fourc2c (move-piece-computer
+;;               "4C-2C" twoc3cboard "R" 5))
+;; (def fourb3c (move-piece-computer 
+;;               "4B-3C" fourc2c "R" 5))
+;; (def twod4b (move-piece-computer
+;;              "2D-4B" fourb3c "B" 5))
+;; (def onec3c (move-piece-computer
+;;              "1C-3C" twod4b "B" 5))
+;; (def threec2c (move-piece-computer
+;;                "3C-2C" onec3c "B" 5))
 
 (def -∞ Double/NEGATIVE_INFINITY)
 (def ∞ Double/POSITIVE_INFINITY)

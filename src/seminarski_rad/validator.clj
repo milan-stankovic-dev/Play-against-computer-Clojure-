@@ -68,7 +68,7 @@
   (= player-color (get-in board (conj (utility/move-?-coordinate input-str 1) 
                                       :piece))))
 
-(defn- start-not-the-same-as-finish-validator 
+(defn start-not-the-same-as-finish-validator 
   "Checks if the starting position of the move is 
    not the same as the finishing one."
   [input-str]
