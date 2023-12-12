@@ -22,9 +22,9 @@ Upon login, the user is presented with the main menu screen:
       
       Press any other key to quit.
             
-  *********************************************************************
+    *********************************************************************
 
-Please enter a number:
+    Please enter menu item number:
 
 A number is picked by typing in the proper key and pressing enter. If any other key is pressed apart from numbers 1-5, the user is promptly logged out. Upon game session's end, the user will be relocated back to this menu screen.
 Here is what the "easy" board looks like (board of default size 5):
@@ -44,11 +44,11 @@ Here is what the "easy" board looks like (board of default size 5):
        | / | \ | / | \ |
     5  R ─ R ─ R ─ R ─ R
 
-Human Score:  0
-Computer Score:  0
+    Human Score:  0
+    Computer Score:  0
 
 
-Please enter user color [B] or [R]:
+    Please enter user color [B] or [R]:
 
 As you can see, the user is presented with the board and prompted to pick a color. Once that's done, the menu explaining how to play the game is displayed to the user. It reads as follows:
 
@@ -66,10 +66,10 @@ Welcome to alquerque, the board game. Here you play against the AI.
 
 Players (the human and the AI) then take turns to try to beat each other. If the human tries to quit, upon pressing Q, this dialog is shown to them:
 
-Are you sure you want to quit? 
-                Quitting gives a victory to the computer.
-                [Y] or [N]
-Please enter your choice:
+    Are you sure you want to quit? 
+                    Quitting gives a victory to the computer.
+                    [Y] or [N]
+    Please enter your choice:
 
 If the player presses 'Y', the game ends and computer is rewarded with a win. If the user inputs 'N', the game is back to normal. Otherwise, the user is prompted to input again, until the input is valid. Note: a player may want to use a system interrupt (ctrl + C or cmd + C) to stop a running game. While this is effective, it is not fair against other players and can be regarded as cheating or foul play. It is thusly discouraged. 
 
@@ -178,3 +178,8 @@ Sizes of more than 200 are prohibited (who would even want that???)
 
 Last but certainly not least, option 4 presents the user with a statistical overview of all games ever played as well as a scoreboard and other useful information. Sounds fun? Try it yourself!
 
+NOTE: After having worked on this project for some time, I have discovered Taylor Wood's nifty little negamax library (negamax is similar to minimax, the only difference being the way non-AI moves are scored). If I had to get an AI game engine up and running quickly, I'd use his library to get me started. His code is understandable, concise and exposes a useful API that could be utilized for different board games. Here's Taylor Woods' original github repo for this Clojure library:
+
+https://github.com/taylorwood/negamax
+
+Overall, this has been an enjoyable and pleasant experience, and I feel like my grasp on the Clojure language is far better than it was before I started this project (which isn't saying much since I'd had virtually no knowledge of Clojure to speak of beforehand, but still). Some of the code may be cumbersome and I had trouble maintaining, expanding upon it and testing, and if I were to redo this, apart from using Taylor's negamax library, I would also try to keep every function definition concise and break code up into several different maintainable units. Introducing a graphical user interface would come a long way as well, as it would improve user experience as well as make it easier to take and refine user's input. Doing it through the terminal introduces a new level of complexity when it comes to parsing inputs and user interaction. Still, I am fairly happy with how I did considering this is my very first Clojure project.
