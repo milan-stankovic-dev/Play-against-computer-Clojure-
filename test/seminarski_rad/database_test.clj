@@ -12,9 +12,4 @@
        "bcrypt+sha512$6b114eaf0e243b5dce57a5f969c7ad9e$12$a3203c019b211047f4d05e619240966d6c574560fb3781ee")
       => false)
 
-;; (fact "Getting user by username"
-;;       (find-user-by-username 
-;;        (get-connection) "stanmil") 
-;;       (provided
-       
-;;        ))
+

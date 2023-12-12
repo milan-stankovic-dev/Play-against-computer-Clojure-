@@ -6,9 +6,10 @@
   "Checks if the confirmation input of user is contained
    in [\"Y\" \"N\"]."
   [input-str]
-  (let [purified-input-str (utility/purify-user-input
-                            input-str)]
-    (some #(= % purified-input-str) ["Y" "N"])))
+  (when (string? input-str)
+    (let [purified-input-str (utility/purify-user-input
+                              input-str)]
+      (some #(= % purified-input-str) ["Y" "N"]))))
 
 (defn- allow-?-extras
   "Takes in adjusted board size and returns how many 
@@ -137,8 +138,3 @@
       (> (count purified-input-str) 1) false
       (not (some #(= % purified-input-str) ["R" "B"])) false
       :else true)))
-
-
-
-
-

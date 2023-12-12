@@ -5,7 +5,8 @@
   "Removes blank characters and capitalizes all letters
    in input."
   [input-str]
-  (str/upper-case (str/trim input-str)))
+  (when (string? input-str)
+    (str/upper-case (str/trim input-str))))
 
 (defn purify-move-input
   "Applies purify-user-input to specified input if board size is less

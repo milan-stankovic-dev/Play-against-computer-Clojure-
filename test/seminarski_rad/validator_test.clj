@@ -1,7 +1,6 @@
 (ns seminarski-rad.validator-test
   (:require [seminarski-rad.validator :refer :all]
             [midje.sweet :refer :all]
-            [seminarski-rad.board :as board]
             [seminarski-rad.computer-logic :as logic]))
 
 (fact "Confirm validator facts" 
@@ -22,70 +21,55 @@
       (start-not-the-same-as-finish-validator "1A-2B   ")
       => truthy)
 
-(def board5 (board/create-board 5))
-(def board11 (board/create-board 11))
-(def board7 (board/create-board 7))
-
 (fact "Input validation facts part 1"
-      (validate-input " " board5 "R" 5)
+      (validate-input " " logic/board5 "R" 5)
       => falsey
-      (validate-input "2C-3C" board5 "B" 5)
+      (validate-input "2C-3C" logic/board5 "B" 5)
       => truthy
-      (validate-input "***2C-3C***" board5 "B" 5)
+      (validate-input "***2C-3C***" logic/board5 "B" 5)
       => falsey
-      (validate-input "7F-6F" board11 "R" 11)
+      (validate-input "7F-6F" logic/board11 "R" 11)
       => truthy
-      (validate-input "F7-F6" board11 "R" 11)
+      (validate-input "F7-F6" logic/board11 "R" 11)
       => falsey
-      (validate-input "Z1-Z2" board5 "B" 5)
+      (validate-input "Z1-Z2" logic/board5 "B" 5)
       => falsey
-      (validate-input "Z100-Z101" board7 "R" 7)
+      (validate-input "Z100-Z101" logic/board7 "R" 7)
       => falsey
-      (validate-input "   2c-3C " board5 "B" 5)
+      (validate-input "   2c-3C " logic/board5 "B" 5)
       => truthy
-      (validate-input "   2c-3C " board5 "R" 5)
+      (validate-input "   2c-3C " logic/board5 "R" 5)
       => falsey
-      (validate-input "1A-2A" board5 "B" 5)
+      (validate-input "1A-2A" logic/board5 "B" 5)
       => falsey)
 
-(def board5-2C-3C (logic/move-piece-computer 
-                   "2C-3C" board5 "B" 5))
-(def board5-2C-3C-4C-2C (logic/move-piece-computer
-                   "4C-2C" board5-2C-3C "R" 5))
-(def board5-2C-3C-4C-2C-2C-3C (logic/move-piece-computer
-                         "2C-3C" board5-2C-3C-4C-2C "R" 5))
-(def board5-2C-3C-4C-2C-2C-3C-1C-2C (logic/move-piece-computer
-                                     "1C-2C" 
-                                     board5-2C-3C-4C-2C-2C-3C
-                                     "B" 5))
-(def board5-4B-3C (logic/move-piece-computer
-                   "4B-3C" board5 "R" 5))
+
 
 (fact "Input validation facts part 2"
-      (validate-input "4B-3C" board5 "R" 5)
+      (validate-input "4B-3C" logic/board5 "R" 5)
       => truthy
-      (validate-input "4C-2C" board5-2C-3C "R" 5)
+      (validate-input "4C-2C" logic/board5-2C-3C "R" 5)
       => truthy
-      (validate-input "4D-2D" board5-2C-3C "R" 5)
+      (validate-input "4D-2D" logic/board5-2C-3C "R" 5)
       => falsey
-      (validate-input "2C-4C" board5-2C-3C "R" 5)
+      (validate-input "2C-4C" logic/board5-2C-3C "R" 5)
       => falsey
-      (validate-input "2B-4C" board5-2C-3C-4C-2C "B" 5)
+      (validate-input "2B-4C" logic/board5-2C-3C-4C-2C "B" 5)
       => falsey
-      (validate-input "1B-2C" board5-2C-3C-4C-2C-2C-3C "B" 5)
+      (validate-input "1B-2C" logic/board5-2C-3C-4C-2C-2C-3C "B" 5)
       => falsey
-      (validate-input "4A-4C" board5-2C-3C-4C-2C-2C-3C "R" 5)
+      (validate-input "4A-4C" logic/board5-2C-3C-4C-2C-2C-3C "R" 5)
       => falsey
-      (validate-input "3C-1C" board5-2C-3C-4C-2C-2C-3C-1C-2C
+      (validate-input "3C-1C" logic/board5-2C-3C-4C-2C-2C-3C-1C-2C
                       "R" 5)
       => truthy
-      (validate-input "2D-4B" board5-4B-3C "B" 5)
+      (validate-input "2D-4B" logic/board5-4B-3C "B" 5)
       => truthy
-      (validate-input "3A-4B" board5-4B-3C "B" 5)
+      (validate-input "3A-4B" logic/board5-4B-3C "B" 5)
       => truthy 
-      (validate-input "3C-4B" board5-4B-3C "R" 5)
+      (validate-input "3C-4B" logic/board5-4B-3C "R" 5)
       => truthy
-      (validate-input "4C-4B" board5-4B-3C "R" 5)
+      (validate-input "4C-4B" logic/board5-4B-3C "R" 5)
       => truthy)
 
 (fact "Not empty?"
