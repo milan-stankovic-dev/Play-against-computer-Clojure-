@@ -21,7 +21,6 @@
 (defn- hash-a-password
   [password]
   (hashing/derive password))
-(hash-a-password "123abc")
 
 (defn hashed-password-correct?
   [password hashed-pass]
@@ -138,12 +137,6 @@
                                          human-color))))
         (throw ex)))))
 
-(defn find-all-?
-  [conn what-to-find]
-  (jdbc/execute!
-   conn
-   [(str "SELECT * FROM " what-to-find)]))
-
 (defn find-game-sessions-info
   [conn]
   (jdbc/execute!
@@ -154,39 +147,6 @@
      FROM game_session s JOIN board b
      ON (s.board_id = b.id) JOIN app_user u
      ON (s.app_user_id = u.id)"]))
-
-(defn find-all-game-sessions-for-user
-  [conn username]
-  (let [u-id (:app_user/id (find-user-by-username conn username))]
-    (when u-id
-      (jdbc/execute!
-       conn
-       ["SELECT
-         s.computer_score, s.human_color,
-         u.username, b.size
-         FROM game_session s
-         JOIN board b
-         ON (s.board_id = b.id)
-         JOIN app_user u
-         ON (s.app_user_id = u.id)
-         WHERE (u.id = (?))" u-id]))))
-
-(defn find-all-game-sessions-stated-won
-  "Finds relevant information for all game sessions for stated
-   user type (human [H] or computer [C])"
-  [conn stated-player-type]
-  (when (some #(= % stated-player-type) [\H \h \C \c])
-    (jdbc/execute!
-     conn
-     ["SELECT 
-     s.computer_score, s.human_score,
-     s.human_color, u.username, b.size
-     FROM game_session s
-     JOIN board b
-     ON (s.board_id = b.id)
-     JOIN app_user u
-     ON (s.app_user_id = u.id)
-     WHERE (s.won = ?)" (str stated-player-type)])))
 
 ;; (find-all-game-sessions-with-board-size (get-connection)3)
 ;; (find-all-game-sessions-for-user (get-connection) "stanmil")

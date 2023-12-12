@@ -71,9 +71,9 @@
                      (utility/prompt-info "user color [B] or [R]"
                                           val/user-color-input-validator))
         computer-color (utility/opposite-player-color human-color)]
-    (comp/initiate-piece-count board
+    (comp/initiate-piece-count! board
                                    human-color computer-color) 
-    (comp/initiate-win-count username)
+    (comp/initiate-win-count! username)
     (comp/take-turns! username "HUMAN" board human-color computer-color board-size)))
 
 (defn- custom-board-menu
@@ -91,7 +91,7 @@
 (defn- access-main-menu-item
   [username]
   (let [user-choice (utility/purify-user-input
-                     (utility/prompt-info "a number" val/not-empty?))]
+                     (utility/prompt-info "menu item number" val/not-empty?))]
     (case user-choice
       "1" (play-game (board/create-board 5) 5 username)
       "2" (play-game (board/create-board 7) 7 username)

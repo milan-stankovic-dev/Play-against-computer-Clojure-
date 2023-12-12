@@ -11,31 +11,47 @@
     (reset! game-sessions-info @future-result))
   nil)
 
+(db/find-game-sessions-info (db/get-connection))
+
 (defn type?-wins
+  "Filters all wins for specified player type (C or H)."
   [player-type]
- (filter #(= player-type (get % :game_session/won))
-               @game-sessions-info))
+  (if-not (string? player-type)
+    '()
+    (let [type-fixed (util/purify-user-input player-type)]
+      (filter #(= type-fixed (get % :game_session/won))
+              @game-sessions-info))))
 
 (defn wins-board-size?-type?
+  "Filters all wins for specified player type (C or H)
+   and board size."
   [board-size player-type]
   (filter #(and (= player-type (get % :game_session/won))
                        (= board-size (get % :board/size)))
                  @game-sessions-info))
 
 (defn score-for-type?-wins
+  "For all wins of specified type, provides information of 
+   human score and computer score."
   [player-type]
-  (map #(select-keys % [:game_session/human_score
-                        :game_session/computer_score])
-       (filter #(= player-type (get % :game_session/won))
-               @game-sessions-info)))
+  (if-not (string? player-type)
+    '()
+    (let [type-fixed (util/purify-user-input player-type)]
+      (map #(select-keys % [:game_session/human_score
+                            :game_session/computer_score])
+           (filter #(= type-fixed (get % :game_session/won))
+                   @game-sessions-info)))))
 
 (defn sessions-for-user
+  "Filters all sessions for specified user."
   [username]
   (filter #(= username (get % :app_user/username))
           @game-sessions-info))
 
-(defn- get-map-human-?s-helper
- [a-win human]
+(defn- get-map-human-?s-helper 
+  "Helper function for get-map-human-?s-added's reduce
+   function."
+  [a-win human]
   (let [human-username-kw (keyword (str (:app_user/username
                                          human)))]
     (if (some #(= % human-username-kw) (keys a-win))
@@ -43,20 +59,32 @@
       (assoc a-win human-username-kw 1))))
 
 (defn get-map-human-?s-added
+  "Returns a map with aggregated win/loss count for all
+   human players."
   [wins-or-losses]
-  (let [player-type (case wins-or-losses
-                      "WINS" "H"
-                      "LOSSES" "C"
-                      "default")
-        all-?-wins (type?-wins player-type)]
-    (reduce get-map-human-?s-helper {} all-?-wins)))
+  (if-not (string? wins-or-losses)
+    {}
+    (let [fixed-input (util/purify-user-input 
+                       wins-or-losses)
+          player-type (cond 
+                        (= fixed-input "WINS") "H"
+                        (= fixed-input "LOSSES") "C"
+                        :else nil)
+          all-?-wins (type?-wins player-type)]
+      (reduce get-map-human-?s-helper {} all-?-wins))))
 
 (defn sort-by-win-count
+  "Takes a map of all human wins and returns a sorted list
+   of all aggregated wins, as vector entries within that list.
+   If the argument is not a map, returns an empty list."
   [map-human-wins]
-  (let [wins-vector (vec map-human-wins)]
-    (sort-by (comp > last) wins-vector)))
+  (if-not (map? map-human-wins)
+    '()
+    (sort-by (comp > last) map-human-wins)))
 
 (defn- calculate-percentage
+  "Takes in a fraction and a total and converts it into a percentage.
+   Rounds to two digits."
   [fraction total]
   ;; fraction/total * 100
   (if (= 0 total)
@@ -66,6 +94,8 @@
       (Double/parseDouble (format "%.2f" (* 100 (/ (float fraction)
                                                    total)))))))
 (defn win-ratio-human-by-board-size
+  "Calculates the win/loss ratio for human players by board size.
+   Only calculates the values for regular board sizes (5, 7 and 9)."
   []
   (let [human-wins-5 (count (wins-board-size?-type? 5 "H")) 
         human-wins-7 (count (wins-board-size?-type? 7 "H")) 
@@ -76,6 +106,8 @@
              :9 (calculate-percentage human-wins-9 total)}))
 
 (defn distinct-users-who-played
+  "Returns a list of all distinct users who have played at 
+   least 1 game session."
   []
   (distinct (reduce (fn 
                       [acc session]
@@ -83,6 +115,8 @@
                     [] @game-sessions-info)))
 
 (defn- colors-helper
+  "Helper function for 'colors-played-by-username''s reduce
+   function."
   [acc a-session]
   (let [username-kw (keyword (str (:app_user/username a-session)))
         human-color-kw (keyword (:game_session/human_color
@@ -96,10 +130,15 @@
                                 computer-color-kw 0}))))
 
 (defn colors-played-by-username
+  "Returns a hash map with all distinct users who have played
+   the game at least once as keys, with values as hash maps with
+   keys for all the possible piece colors (B and R), with the 
+   number of times the user has played as that color."
   []
   (reduce colors-helper {} @game-sessions-info))
 
 (defn- quits-helper
+  "Helper function for 'quits-by-users''s reduce function."
   [acc a-session]
   (if (and (= (:game_session/won a-session) "C")
            (> (:game_session/human_score a-session)0))
@@ -110,16 +149,20 @@
         )) acc))
 
 (defn quits-by-users
+  "Returns a hash map with all user quits for players that have
+   quit at least once."
   []
   (reduce quits-helper {} @game-sessions-info))
 
 (defn- resolve-leaderboard
+  "Returns parsed leaderboard string for user display."
   [leaderboard]
   (let [parsed (take 3 (for [[k v] leaderboard]
                        (str (name k) ": " v "\n")))]
     (apply str parsed)))
 
 (defn- resolve-colors-map
+  "Returns parsed colors played string for user display."
   [colors-played-map]
   (let [parsed (for [[k v] colors-played-map]
                  (str (name k) ": " (:R v)
@@ -127,12 +170,14 @@
     (apply str parsed)))
 
 (defn- resolve-quits-map
+  "Returns parsed quits string for user display."
   [quits-map]
   (let [parsed (for [[k v] quits-map]
                  (str (name k) ": " v "\n"))]
     (apply str parsed)))
 
 (defn- resolve-wins-ratio-map
+  "Returns parsed win ratio string for user display."
   [wins-ratio-map]
   (let [parsed (for [[k v] wins-ratio-map]
                  (str "SIZE " (name k) " HUMAN: "
@@ -141,6 +186,7 @@
     (apply str parsed)))
 
 (defn spit-all-contents
+  "Saves all statistics to file called 'statistics.txt'."
   []
   (repopulate-game-sessions!)
   (let [human-wins (type?-wins "H")

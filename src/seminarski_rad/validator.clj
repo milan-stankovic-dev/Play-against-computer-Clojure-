@@ -6,9 +6,10 @@
   "Checks if the confirmation input of user is contained
    in [\"Y\" \"N\"]."
   [input-str]
-  (let [purified-input-str (utility/purify-user-input
-                            input-str)]
-    (some #(= % purified-input-str) ["Y" "N"])))
+  (when (string? input-str)
+    (let [purified-input-str (utility/purify-user-input
+                              input-str)]
+      (some #(= % purified-input-str) ["Y" "N"]))))
 
 (defn- allow-?-extras
   "Takes in adjusted board size and returns how many 
@@ -68,7 +69,7 @@
   (= player-color (get-in board (conj (utility/move-?-coordinate input-str 1) 
                                       :piece))))
 
-(defn- start-not-the-same-as-finish-validator 
+(defn start-not-the-same-as-finish-validator 
   "Checks if the starting position of the move is 
    not the same as the finishing one."
   [input-str]
@@ -113,7 +114,8 @@
 
 (defn validate-input
   [input-str board player-color board-size]
-  (let [purified-input-str (utility/purify-user-input input-str)] 
+  (let [purified-input-str (utility/purify-move-input input-str
+                                                      board-size)] 
     (and 
      (input-length-validator purified-input-str 5)
      (input-format-validator purified-input-str board-size)
@@ -131,12 +133,8 @@
   [user-color-input] 
   (let [purified-input-str (utility/purify-user-input user-color-input)]
     (cond
+      (not (string? purified-input-str)) false
       (empty? purified-input-str) false
       (> (count purified-input-str) 1) false
       (not (some #(= % purified-input-str) ["R" "B"])) false
       :else true)))
-
-
-
-
-

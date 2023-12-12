@@ -3,7 +3,8 @@
             [seminarski-rad.input-utility :as utility]
             [seminarski-rad.board :as board]
             [seminarski-rad.database :as db]
-            [seminarski-rad.statistics :as stats]))
+            [seminarski-rad.statistics :as stats]
+            [clojure.string :as str]))
 
 (defn- pieces-on-board-for?
   "Counts available pieces on given board for given player type."
@@ -14,14 +15,14 @@
 (def wins (atom {:human 0 :computer 0}))
 (def pieces (atom {:human 0 :computer 0}))
 
-(defn initiate-piece-count
+(defn initiate-piece-count!
   [board human-color computer-color]
   (let [human-piece-count (pieces-on-board-for? human-color board)
         computer-piece-count (pieces-on-board-for? computer-color board)]
     (reset! pieces {:human human-piece-count 
                     :computer computer-piece-count} )))
 
-(defn initiate-win-count
+(defn initiate-win-count!
   [username]
   (stats/repopulate-game-sessions!)
   (let [user-wins-map (stats/get-map-human-?s-added "WINS")
@@ -49,7 +50,7 @@
   "Saves winner in database."
   [winner winner-color board-size
    username computer-score human-score]
-  (let [winner-initial (subs (name winner) 0 1)
+  (let [winner-initial (str/upper-case (subs (name winner) 0 1))
         human-color (if (= winner "HUMAN")
                       winner-color
                       (utility/opposite-player-color winner-color))] 
@@ -85,7 +86,6 @@
         :human
         false))))
 
-
 (defn- quit?
   "Checks if the user is trying to quit. If so, then it ends game 
    process. Gives win to opponent"
@@ -96,11 +96,12 @@
      (println "Are you sure you want to quit? 
                 Quitting gives a victory to the computer.
                 [Y] or [N]")
-        (let [subseq-response (utility/purify-user-input
+        (let [subseq-response (utility/purify-move-input
                                (utility/prompt-info "your choice" 
-                                                    val/confirm-validator-Y-N))]
+                                                    val/confirm-validator-Y-N)
+                               board-size)]
           (println "Your choice: " subseq-response)
-          (when (= "Y" subseq-response) 
+          (when (= "Y" subseq-response)
               (println "\nUSER QUIT. COMPUTER WINS!")
               (assign-victory! "COMPUTER" opposite-player-color
                                board-size username 
@@ -114,16 +115,21 @@
    a vector with edited board and the word \"eaten\" inside it 
    if the user has eaten a piece. If the user quits during move 
    making, the word \"quit\" is sent inside vector with board."
-  [user-input board user-color board-size username]
-  (let [purified-input-str (utility/purify-user-input user-input)
+  [user-input board 
+   user-color board-size
+   username]
+  (let [purified-input-str (utility/purify-move-input user-input
+                                                      board-size)
         computer-color (utility/opposite-player-color user-color)]
     (if (quit? purified-input-str computer-color 
                board-size username)
       [board "quit"] 
       (let [validation-result (val/validate-input user-input board user-color board-size)]
         (if-not validation-result
-          (apply-move-indicator (utility/take-user-input-move) board user-color 
-                                board-size username)
+          (do
+            (println "Input invalid. Try again.")
+            (apply-move-indicator (utility/take-user-input-move) board user-color 
+                                  board-size username))
           (let [move-start (utility/move-?-coordinate purified-input-str 1)
                 move-finish (utility/move-?-coordinate purified-input-str 2)
                 move-done-board (assoc-in (assoc-in board (conj move-finish :piece) user-color)
@@ -142,7 +148,8 @@
   (if-not (val/validate-input user-input board user-color board-size)
     board
     (let [move-piece-res (apply-move-indicator
-                          user-input board user-color board-size "")]
+                          user-input board user-color 
+                          board-size "")]
       (if (vector? move-piece-res)
         ;; Here we do not check for quits because a computer may not quit!
         (first move-piece-res)
@@ -198,8 +205,6 @@
         computer-weighted-score (* computer-weight computer-score)]
     (- computer-weighted-score human-weighted-score)))
 
-(evaluate-minimax-candidate -0.5 1 2)
-
 (defn- reverse-evaluate-minimax-candidate
   [difficulty-factor
    human-score
@@ -221,23 +226,6 @@
                                       acc))
                                   (first candidates) (rest candidates)))]
       {(first solution) (last solution)}))
-
-;; (find-all-possible-?s (board/create-board 5) 
-;;                       "R" 5 :eats)
-
-(def board5 (board/create-board 5))
-(def twoc3cboard (move-piece-computer 
-                "2C-3C" board5 "B" 5))
-(def fourc2c (move-piece-computer
-              "4C-2C" twoc3cboard "R" 5))
-(def fourb3c (move-piece-computer 
-              "4B-3C" fourc2c "R" 5))
-(def twod4b (move-piece-computer
-             "2D-4B" fourb3c "B" 5))
-(def onec3c (move-piece-computer
-             "1C-3C" twod4b "B" 5))
-(def threec2c (move-piece-computer
-               "3C-2C" onec3c "B" 5))
 
 (def -∞ Double/NEGATIVE_INFINITY)
 (def ∞ Double/POSITIVE_INFINITY)
@@ -463,4 +451,18 @@
                            "HUMAN" result-of-piece-move
                            human-color computer-color board-size)))))))
 
-
+(def board5 (board/create-board 5))
+(def board11 (board/create-board 11))
+(def board7 (board/create-board 7))
+(def board5-2C-3C (move-piece-computer
+                   "2C-3C" board5 "B" 5))
+(def board5-2C-3C-4C-2C (move-piece-computer
+                         "4C-2C" board5-2C-3C "R" 5))
+(def board5-2C-3C-4C-2C-2C-3C (move-piece-computer
+                               "2C-3C" board5-2C-3C-4C-2C "R" 5))
+(def board5-2C-3C-4C-2C-2C-3C-1C-2C (move-piece-computer
+                                     "1C-2C"
+                                     board5-2C-3C-4C-2C-2C-3C
+                                     "B" 5))
+(def board5-4B-3C (move-piece-computer
+                   "4B-3C" board5 "R" 5))

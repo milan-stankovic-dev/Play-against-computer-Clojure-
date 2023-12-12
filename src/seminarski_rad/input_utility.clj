@@ -1,13 +1,22 @@
 (ns seminarski-rad.input-utility
-  (:require [clojure.string :as str]
-            [seminarski-rad.input-utility :as utility]))
+  (:require [clojure.string :as str]))
 
 (defn purify-user-input
-  "Removes unnecessary blank characters and capitalizes 
-   all letters in input. If input contains \"EAT\" in the
-   middle of it,function removes it."
+  "Removes blank characters and capitalizes all letters
+   in input."
   [input-str]
-  (str/upper-case (str/trim input-str)))
+  (when (string? input-str)
+    (str/upper-case (str/trim input-str))))
+
+(defn purify-move-input
+  "Applies purify-user-input to specified input if board size is less
+   than 33. Removes blank characters otherwise. Lowercase input is required
+   for bigger boards that may have columns that are lowercase."
+  [input-str adj-board-size]
+  (when (string? input-str) 
+    (if (< adj-board-size 33)
+      (purify-user-input input-str)
+      (str/trim input-str))))
 
 (defn extract-keys-from-user-input
   "Takes in a string representing user input (ex. 1A-2A or 111D-111E)
@@ -46,7 +55,9 @@
   "Takes in a string representing user input and returns
     the numeric value of the specified coordinate's row."
   [input-str which-row] 
-  (when (valid-?half? which-row) 
+  (when (and (valid-?half? which-row)
+             (string? input-str)
+             (seq input-str)) 
     (let [extracted (extract-keys-from-user-input input-str)] 
       (Integer/parseInt (name 
                          (nth extracted (- (* 2 which-row) 2)))))))
@@ -56,7 +67,9 @@
     the character value of the specified coordinate's 
    column."
   [input-str which-col]
-  (when (valid-?half? which-col)
+  (when (and (valid-?half? which-col)
+             (string? input-str)
+             (seq input-str))
       (let [extracted (extract-keys-from-user-input input-str)]
         (first (name (nth extracted (- (* 2 which-col) 1)))))))
 
@@ -83,17 +96,6 @@
   (when (valid-?half? which-col)
     (char->number (get-?-col-as-char input-str which-col))))
 
-(defn middle-keyword
-  "Takes in two keywords that are single char and alphabetic,
-   returns the midvalue between those characters, as a keyword."
-  [kw1 kw2]
-  (let [char1 (first (name kw1))
-        char2 (first (name kw2))
-        min-char (char (min (int char1) (int char2)))
-        middle-char (char (inc (int min-char)))
-        middle-keyword (keyword (str middle-char))]
-    middle-keyword))
-
 (defn middle-number
   "Takes in two numbers, returns the one that's in the middle
    between them. Rounds down."
@@ -104,9 +106,10 @@
   "For given user color as single char string, returns opposite 
    user color (for \"R\" returns \"B\" and vice versa)."
   [color]
-  (if (= color "R")
-    "B"
-    "R"))
+  (cond 
+    (= "R" color) "B"
+    (= "B" color) "R"
+    :else nil))
 
 (defn num->keyword
   [num]
@@ -116,14 +119,12 @@
   "Takes in two characters and returns the midvalue
    between those characters, as a keyword. Rounds down."
   [char1 char2]
-  (let [num1 (char->number char1)
-        num2 (char->number char2)
-        midvalue-num (middle-number num1 num2)]
-    (keyword (str (number->char midvalue-num)))))
-
-(defn keyword->str
-  [keyword]
-  (name keyword))
+  (when-not (or (nil? char1)
+                (nil? char2))
+   (let [num1 (char->number char1)
+         num2 (char->number char2)
+         midvalue-num (middle-number num1 num2)]
+     (keyword (str (number->char midvalue-num))))))
 
 (defn numeric-keyword->num
   "Takes in a keyword that is numeric and returns the number
@@ -175,6 +176,18 @@
   [a-number]
   (keyword (str (number->char a-number))))
 
+
+(defn middle-keyword
+  "Takes in two keywords that are single char and alphabetic,
+   returns the midvalue between those characters, as a keyword."
+  [kw1 kw2]
+  (let [char1 (first (name kw1))
+        char2 (first (name kw2))
+        num1 (char->number char1)
+        num2 (char->number char2)
+        mid-num (middle-number num1 num2)]
+    (num->letter-keyword mid-num)))
+
 (defn seq->keyword-seq
   "Returns list of keyword values for given collection 
    of members given as sequence."
@@ -186,7 +199,7 @@
    of numbers given as sequence. Uses conversion map for converting
    values."
   [numeric-seq]
-   (map #(name (num->letter-keyword %))
+   (map #(first (name (num->letter-keyword %)))
                 numeric-seq))
 
 (defn numeric-seq->letter-keyword-seq
@@ -195,7 +208,7 @@
    values."
   [numeric-seq]
   (let [letter-seq (numeric-seq->letter-seq numeric-seq)]
-    (map #(keyword %) letter-seq)))
+    (map #(keyword (str %)) letter-seq)))
 
 (defn numeric-seq->numeric-keyword-seq
   "Returns list of appropriate character values for given collection 
@@ -205,23 +218,28 @@
   (let [str-seq (map str numeric-seq)]
     (map keyword str-seq)))
 
-(defn ?-half-of-seq
+(defn- half-validator 
+  [a-half]
+  (or (= 1 a-half) (= 2 a-half)))
+
+(defn ?-half-of-vec
   "Returns specified half of sequence. If sequence has odd
    number of elements, middle is excluded from both halves."
   [a-seq which-half]
-  (let [len (count a-seq)
-        cutoff-index (quot (inc len) 2)]
-    (if (= 1 which-half)
-      (subvec a-seq 0
-              (if (odd? len)
-                (dec cutoff-index)
-                cutoff-index))
-      (subvec a-seq cutoff-index))))
-
+  (when (half-validator which-half)
+   (let [len (count a-seq)
+         cutoff-index (quot (inc len) 2)]
+     (if (= 1 which-half)
+       (subvec a-seq 0
+               (if (odd? len)
+                 (dec cutoff-index)
+                 cutoff-index))
+       (subvec a-seq cutoff-index)))))
+0
 (defn reverse-extraction-of-keys
   [keys]
-  (let [first-half (?-half-of-seq keys 1)
-        second-half (?-half-of-seq keys 2)
+  (let [first-half (?-half-of-vec keys 1)
+        second-half (?-half-of-vec keys 2)
         first-half-mid (for [k first-half] (name k))
         second-half-mid (for [k second-half] (name k))
         first-half-str (apply str first-half-mid)
@@ -252,7 +270,7 @@
       (do 
         (println "Too small. Defaulting to 5.")
         5) 
-        (if (> inputted-size 201)
+        (if (>= inputted-size 200)
           (do
             (println "You must be stopped, you animal!
                       That board size is IMMENSE!!!
