@@ -88,7 +88,7 @@
 (defn- access-main-menu-item
   [username]
   (let [user-choice (utility/purify-user-input
-                     (utility/prompt-info "your number" val/not-empty?))]
+                     (utility/prompt-info "menu item number" val/not-empty?))]
     (case user-choice
       "1" (play-game (board/create-board 5) 5 username)
       "2" (play-game (board/create-board 7) 7 username)

@@ -126,8 +126,10 @@
       [board "quit"] 
       (let [validation-result (val/validate-input user-input board user-color board-size)]
         (if-not validation-result
-          (apply-move-indicator (utility/take-user-input-move) board user-color 
-                                board-size username)
+          (do
+            (println "Input invalid. Try again.")
+            (apply-move-indicator (utility/take-user-input-move) board user-color 
+                                  board-size username))
           (let [move-start (utility/move-?-coordinate purified-input-str 1)
                 move-finish (utility/move-?-coordinate purified-input-str 2)
                 move-done-board (assoc-in (assoc-in board (conj move-finish :piece) user-color)
