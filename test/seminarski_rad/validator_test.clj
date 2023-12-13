@@ -41,7 +41,9 @@
       (validate-input "   2c-3C " logic/board5 "R" 5)
       => falsey
       (validate-input "1A-2A" logic/board5 "B" 5)
-      => falsey)
+      => falsey
+      (validate-input "2c-3C" logic/board5 "B" 5)
+      => truthy)
 
 
 

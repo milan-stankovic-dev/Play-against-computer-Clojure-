@@ -1,6 +1,5 @@
 (ns seminarski-rad.validator 
-  (:require [seminarski-rad.input-utility :as utility]
-            [clojure.string :as str]))
+  (:require [seminarski-rad.input-utility :as utility]))
 
 (defn confirm-validator-Y-N
   "Checks if the confirmation input of user is contained
@@ -34,40 +33,31 @@
    'NL-NL' where N is a number 1-(board size) and L is a letter
    a-(board size as lowercase alpha) or A-(board size as uppercase
    alpha)."
-  [input-str board-size]
-  (let [num-limit board-size
-        str-limit-uc (name (utility/num->letter-keyword num-limit))
-        str-limit-lc (str/lower-case str-limit-uc)
-        last-digit-limit (mod num-limit 10)
-        first-digit-limit (Integer/parseInt (str 
-                                             (first (str num-limit))))
-        extras (allow-?-extras board-size)]
-    (if (< num-limit 10)
-      (re-matches (re-pattern
-                   (format "[1-%d][a-%sA-%s]-[1-%d][a-%sA-%s]"
-                           last-digit-limit str-limit-lc str-limit-uc
-                           last-digit-limit str-limit-lc str-limit-uc)) input-str)
-      (if (and (>= num-limit 10)
-               (< num-limit 100))
-        (re-matches (re-pattern
-                      (format "(?:[1-9]|[1-%d][0-%d])[a-%sA-%s]-(?:[1-9]|[1-%d][0-%d])[a-%sA-%s]" 
-                              first-digit-limit last-digit-limit
-                                str-limit-lc str-limit-uc 
-                              first-digit-limit last-digit-limit
-                                str-limit-lc str-limit-uc)) input-str)
-        (re-matches (re-pattern
-                     (format "(?:[1-9]|[1-%d][0-9]{0,%d}[0-%d])[a-%sA-%s]-(?:[1-9]|[1-%d][0,9]{0,%d}[0-%d])[a-%sA-%s]"
-                             first-digit-limit (dec extras) last-digit-limit
-                             str-limit-lc str-limit-uc first-digit-limit
-                             (dec extras) last-digit-limit str-limit-lc
-                             str-limit-uc)) input-str)))))
+  [input-str board-size] 
+        (let [input-keys (utility/extract-keys-from-user-input input-str)] 
+          (when (and (= 4 (count input-keys))
+                     (re-matches #".*-.+" input-str))
+               (let [first-row-num (utility/get-?-row-as-num input-str 1)
+                     second-row-num (utility/get-?-row-as-num input-str 2)
+                     first-col-char (utility/get-?-col-as-char input-str 1)
+                     second-col-char (utility/get-?-col-as-char input-str 2)
+                     num-range (range 1 board-size)
+                     char-range (utility/numeric-seq->letter-seq 
+                                 num-range)]
+                 (utility/numeric-string? (name (first input-keys)))
+                 (utility/numeric-string? (name (nth input-keys 2)))
+                 (and
+                  (some #(= % first-row-num) num-range)
+                  (some #(= % second-row-num) num-range)
+                  (some #(= % first-col-char) char-range)
+                  (some #(= % second-col-char) char-range))))))
 
-(defn- proper-piece-color-validator
-  "Checks if the user is trying to move their own
+  (defn- proper-piece-color-validator
+    "Checks if the user is trying to move their own
     piece color or someone elses or a blank field."
-  [input-str board player-color]
-  (= player-color (get-in board (conj (utility/move-?-coordinate input-str 1) 
-                                      :piece))))
+    [input-str board player-color]
+    (= player-color (get-in board (conj (utility/move-?-coordinate input-str 1) 
+                                        :piece))))
 
 (defn start-not-the-same-as-finish-validator 
   "Checks if the starting position of the move is 
@@ -115,7 +105,7 @@
 (defn validate-input
   [input-str board player-color board-size]
   (let [purified-input-str (utility/purify-move-input input-str
-                                                      board-size)] 
+                                                      board-size)]
     (and 
      (input-length-validator purified-input-str board-size)
      (input-format-validator purified-input-str board-size)

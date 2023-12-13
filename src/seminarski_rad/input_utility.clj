@@ -297,3 +297,12 @@
                  parsed-size))))
       (catch NumberFormatException _
         5)))
+
+(defn numeric-string? 
+  [a-string]
+  (when (string? a-string)
+    (try 
+      (Integer/parseInt a-string)
+      (catch NumberFormatException _
+        false))))
+
