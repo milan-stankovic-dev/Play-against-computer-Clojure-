@@ -178,7 +178,7 @@ Sizes of more than 200 are prohibited (who would even want that???)
 
 Last but certainly not least, option 4 presents the user with a statistical overview of all games ever played as well as a scoreboard and other useful information. Sounds fun? Try it yourself!
 
-NOTE: After having worked on this project for some time, I have discovered Taylor Wood's nifty little negamax library (negamax is similar to minimax, the only difference being the way non-AI moves are scored). If I had to get an AI game engine up and running quickly, I'd use his library to get me started. His code is understandable, concise and exposes a useful API that could be utilized for different board games. Here's Taylor Woods' original github repo for this Clojure library:
+NOTE: After having worked on this project for some time, I discovered Taylor Wood's nifty little negamax library (negamax is similar to minimax, the only difference being the way non-AI moves are scored). If I had to get an AI game engine up and running quickly, I'd use his library to get me started. His code is understandable, concise and exposes a useful API that could be utilized for different board games. Here's Taylor Woods' original github repo for this Clojure library:
 
 https://github.com/taylorwood/negamax
 
