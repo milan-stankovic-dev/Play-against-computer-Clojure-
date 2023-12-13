@@ -123,11 +123,11 @@
 
 (fact "Number to character 27"
             ( number->char 27)
-            => \[)
+            => \a)
 
 (fact "Number to character 37"
             ( number->char 37)
-            => \e)
+            => \k)
 
 (fact "Char to number A"
             ( char->number \A)
@@ -372,3 +372,27 @@
 (fact "Adjusting board odd"
       (adjust-board-size 11)
       => 11)
+
+(fact "Adjusting board number string 1"
+      (adjust-board-size "11")
+      => 11)
+
+(fact "Adjusting board number string 2"
+      (adjust-board-size "2")
+      => 3)
+
+(fact "Adjusting board number string 3"
+      (adjust-board-size "-1")
+      => 5)
+
+(fact "Adjusting board number string 4"
+      (adjust-board-size "12")
+      => 13)
+
+(fact "Adjusting board number string 5"
+      (adjust-board-size "199")
+      => 199)
+
+(fact "Adjusting board number string 6"
+      (adjust-board-size "200")
+      => 5)

@@ -5,13 +5,12 @@
 (def game-sessions-info (atom []))
 
 (defn repopulate-game-sessions!
+  "Resets the 'game-sessions-info' atom with new data from the database."
   []
   (let [future-result (future (db/find-game-sessions-info
                                (db/get-connection)))]
     (reset! game-sessions-info @future-result))
   nil)
-
-(db/find-game-sessions-info (db/get-connection))
 
 (defn type?-wins
   "Filters all wins for specified player type (C or H)."

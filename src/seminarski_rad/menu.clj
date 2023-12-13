@@ -59,7 +59,7 @@
     
     Here's your board:\n")
       (board/print-the-board board board-size)
-      (comp/print-the-score )
+      ;; (comp/print-the-score )
       ;; (computer/initiate-piece-count board-size)
       (println))
 
@@ -78,12 +78,11 @@
 
 (defn- custom-board-menu
   [username]
-  (let [fixed-user-input (utility/adjust-board-size
-                          (Integer/parseInt
+  (let [fixed-user-input (utility/adjust-board-size 
                            (utility/purify-user-input
                             (utility/prompt-info
                              "board size"
-                             val/not-empty?))))]
+                             val/not-empty?)))]
     (println (str "You inputted: " fixed-user-input))
     (play-game (board/create-board fixed-user-input)
                fixed-user-input username)))
@@ -96,7 +95,7 @@
       "1" (play-game (board/create-board 5) 5 username)
       "2" (play-game (board/create-board 7) 7 username)
       "3" (play-game (board/create-board 9) 9 username)
-      "4" (do 
+      "4" (do
             (println "Calculating statistics...")
             (stats/spit-all-contents)
             (println "Done. Check statistics.txt"))
@@ -109,8 +108,6 @@
   ([logged-in-user]
    (write-main-menu logged-in-user)
    (when-not (= "END" (access-main-menu-item 
-                       (:app_user/username logged-in-user)))
+                     (:app_user/username logged-in-user)))
      (manage-menus logged-in-user))))
-
-;; (manage-menus)
-;; (board/print-the-board (board/create-board 5) 5)'
+;(:app_user/username logged-in-user)

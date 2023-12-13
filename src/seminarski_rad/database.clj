@@ -35,8 +35,6 @@
     (when db-result
       (first db-result))))
 
-;; ((find-user-by-username (get-connection) "stanmil") :app_user/password)
-
 (defn register-user
   [conn username password]
   (if-not (= [] (find-user-by-username conn username)) 
@@ -49,18 +47,12 @@
       (.close conn)
       true)))
 
-;; (register-user (get-connection) "stanmil" "123abc")
-;; (register-user (get-connection) "ppetar" "abc123")
-;; (register-user (get-connection) "saraa" "a1b2c3")
-
 (defn login-user 
   [conn username password]
   (let [db-user (find-user-by-username conn username)]
      (when (hashed-password-correct? password 
                                      (:app_user/password db-user))
        db-user)))
-
-;; (login-user (get-connection) "STANMIL" "123abc")
 
 (defn- find-board-by-size
   [conn size]
@@ -71,8 +63,6 @@
       (when db-result
         (first db-result)))))
 
-;; (find-board-by-size (get-connection) 5)
-
 (defn- insert-board
   [conn size]
   (when (and (number? size)
@@ -80,10 +70,6 @@
         (jdbc/execute!
          conn
          ["INSERT INTO board (size) VALUES (?)" size])))
-
-;; (insert-board (get-connection) 3)
-;; (insert-board (get-connection) 5)
-;; (insert-board (get-connection) 7)
 
 (defn- insert-game-session-clean
   [conn board-size username
@@ -148,7 +134,3 @@
      ON (s.board_id = b.id) JOIN app_user u
      ON (s.app_user_id = u.id)"]))
 
-;; (find-all-game-sessions-with-board-size (get-connection)3)
-;; (find-all-game-sessions-for-user (get-connection) "stanmil")
-;; (find-all-game-sessions-stated-won (get-connection) \H)
-;; (insert-game-session (get-connection) 3 "stanmil" "H" 3 0 "R")

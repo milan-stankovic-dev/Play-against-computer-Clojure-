@@ -72,12 +72,8 @@
                     username computer-score human-score)))
 
 (defn check-for-win 
-  [
-  ;;  human-color computer-color board
-   ]
+  []
   (let [
-        ;; human-piece-count (pieces-on-board-for? human-color board)
-        ;; computer-piece-count (pieces-on-board-for? computer-color board)
         human-piece-count (:human @pieces)
         computer-piece-count (:computer @pieces)]
     (if (= 0 human-piece-count)

@@ -162,11 +162,10 @@
 (defn- print-slants
   "Used for displaying available moves to user as ASCII art."
   [board-size pattern]
-  (print "   ")
-  (doseq [_ (range (/ (- board-size 1) 2))]
-    (print pattern))
+  (print "    ")
+  (dorun (dec (/ (- board-size 1) 2)) (repeatedly #(print pattern)))
   (println "|"))
-
+  
 (defn- print-row
   "Prints one row for given board of given size."
   [board-size row-keyword board]
@@ -175,7 +174,11 @@
         (utility/numeric-seq->letter-keyword-seq
          numeric-sequence)
         last-col-keyword (utility/num->letter-keyword board-size)]
-    (print (str (name row-keyword) "  "))
+    (print (str (name row-keyword))) 
+    (dorun 
+     (- 2 (val/allow-?-extras 
+           (utility/numeric-keyword->num row-keyword)
+           )) (repeatedly #(print " ")))
     (doseq [col letter-range-keywords]
       (print (str (get-in board [row-keyword col :piece])) "─ "))
     (println (get-in board [row-keyword last-col-keyword :piece]))))
@@ -184,7 +187,7 @@
   "Prints the entire board to user with available moves displayed as ASCII art."
   [board board-size]
   (println)
-  (print "   ")
+  (print "    ")
   (doseq [row-num (utility/numeric-seq->letter-seq
                    (range 1 (inc board-size)))]
     (print (str row-num "   ")))
@@ -201,5 +204,5 @@
         (print-slants board-size "| / | \\ ")))
     (print-row board-size last-row-keyword board)))
 
-;; (print-the-board (create-board 13) 13)
+;; (print-the-board (create-board 3) 3)
 ;; (create-board 7)

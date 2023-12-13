@@ -11,7 +11,7 @@
                               input-str)]
       (some #(= % purified-input-str) ["Y" "N"]))))
 
-(defn- allow-?-extras
+(defn allow-?-extras
   "Takes in adjusted board size and returns how many 
    extra digits are allowed to be in input (if the 
    board size is less than 10, it allows no extras,
@@ -28,7 +28,7 @@
          (<= input-len (+ 5 (* 2 
                                (allow-?-extras
                                 adj-board-size)))))))
-    
+
 (defn- input-format-validator
   "Users input must strictly adhere to said form:
    'NL-NL' where N is a number 1-(board size) and L is a letter
@@ -117,7 +117,7 @@
   (let [purified-input-str (utility/purify-move-input input-str
                                                       board-size)] 
     (and 
-     (input-length-validator purified-input-str 5)
+     (input-length-validator purified-input-str board-size)
      (input-format-validator purified-input-str board-size)
      (proper-piece-color-validator purified-input-str board player-color)
      (start-not-the-same-as-finish-validator purified-input-str)

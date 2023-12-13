@@ -14,7 +14,7 @@
    for bigger boards that may have columns that are lowercase."
   [input-str adj-board-size]
   (when (string? input-str) 
-    (if (< adj-board-size 33)
+    (if (< adj-board-size 27)
       (purify-user-input input-str)
       (str/trim input-str))))
 
@@ -74,12 +74,27 @@
         (first (name (nth extracted (- (* 2 which-col) 1)))))))
 
 (defn number->char
-  "Converts number to its character in the alphabet. May behave funky
-   for numbers less than 1 and greater than 26."
+  "Converts given number to its character in the alphabet. Switches to lowercase
+   letters after all uppercase ones have been exhausted, and to symbols after
+   all lowercase letters are exhausted. Skips special characters that may mess 
+   up the program's inner workings."
   [a-number]
   (if-not (number? a-number)
     nil
-    (char (+ 64 a-number))))
+    (let [baseline-char (+ 64 a-number)]
+      (cond
+        (< a-number 27) (char baseline-char)
+        (and (>= a-number 27) (< a-number 53)) (char (+ 6 baseline-char))
+        (and (>= a-number 53) (< a-number 56)) (char (+ 13 baseline-char))
+        (and (>= a-number 56) (< a-number 63)) (char (+ 14 baseline-char))
+        (or (= a-number 63) (= a-number 64)) (char (+ 15 baseline-char))
+        (and (>= a-number 65) (< a-number 67)) (char (+ 16 baseline-char))
+        (and (>= a-number 67) (< a-number 75)) (char (+ 18 baseline-char))
+        (= a-number 75) (char (+ 20 baseline-char)) 
+        (and (>= a-number 76) (< a-number 88)) (char (+ 21 baseline-char))
+        (and (>= a-number 88) (< a-number 114)) (char (+ 22 baseline-char))
+        (>= a-number 114) (char (+ 23 baseline-char))
+        ))))
 
 (defn char->number 
   "Converts single char to the position in the alphabet for that letter.
@@ -235,7 +250,7 @@
                  (dec cutoff-index)
                  cutoff-index))
        (subvec a-seq cutoff-index)))))
-0
+
 (defn reverse-extraction-of-keys
   [keys]
   (let [first-half (?-half-of-vec keys 1)
@@ -261,23 +276,24 @@
    reasonable value. If input is invalid (non-numeric, less than 0 etc.)
    defaults to 5. If even, adds one. The only fair boards are the odd x odd
    boards."
-  [inputted-size]
-  (if-not (number? inputted-size)
-    (do
-      (println "Not a number. Defaulting to 5.")
-      5) 
-    (if (< inputted-size 2)
-      (do 
-        (println "Too small. Defaulting to 5.")
-        5) 
-        (if (>= inputted-size 200)
-          (do
-            (println "You must be stopped, you animal!
+  [inputted-size] 
+    (try (let [parsed-size (if (number? inputted-size)
+                             inputted-size
+                            (Integer/parseInt inputted-size))] 
+           (if (< parsed-size 2)
+             (do 
+               (println "Too small. Defaulting to 5.")
+               5) 
+             (if (>= parsed-size 200)
+               (do
+                 (println "You must be stopped, you animal!
                       That board size is IMMENSE!!!
                       Defaulting to 5.")
-            5)
-          (if (even? inputted-size)
-            (do
-              (println "Size cannot be even. Adding one to it.")
-              (inc inputted-size))
-          inputted-size))))) 
+                 5)
+               (if (even? parsed-size)
+                 (do
+                   (println "Size cannot be even. Adding one to it.")
+                   (inc parsed-size))
+                 parsed-size))))
+      (catch NumberFormatException _
+        5)))
