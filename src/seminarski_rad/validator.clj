@@ -41,11 +41,9 @@
                      second-row-num (utility/get-?-row-as-num input-str 2)
                      first-col-char (utility/get-?-col-as-char input-str 1)
                      second-col-char (utility/get-?-col-as-char input-str 2)
-                     num-range (range 1 board-size)
+                     num-range (range 1 (inc board-size))
                      char-range (utility/numeric-seq->letter-seq 
-                                 num-range)]
-                 (utility/numeric-string? (name (first input-keys)))
-                 (utility/numeric-string? (name (nth input-keys 2)))
+                                 num-range)] 
                  (and
                   (some #(= % first-row-num) num-range)
                   (some #(= % second-row-num) num-range)

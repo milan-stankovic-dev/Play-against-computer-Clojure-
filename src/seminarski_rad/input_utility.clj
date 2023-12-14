@@ -79,30 +79,42 @@
    all lowercase letters are exhausted. Skips special characters that may mess 
    up the program's inner workings."
   [a-number]
-  (if-not (number? a-number)
-    nil
+  (when (number? a-number) 
     (let [baseline-char (+ 64 a-number)]
       (cond
         (< a-number 27) (char baseline-char)
         (and (>= a-number 27) (< a-number 53)) (char (+ 6 baseline-char))
         (and (>= a-number 53) (< a-number 56)) (char (+ 13 baseline-char))
         (and (>= a-number 56) (< a-number 63)) (char (+ 14 baseline-char))
-        (or (= a-number 63) (= a-number 64)) (char (+ 15 baseline-char))
+        (and (>= a-number 63) (< a-number 65)) (char (+ 15 baseline-char))
         (and (>= a-number 65) (< a-number 67)) (char (+ 16 baseline-char))
         (and (>= a-number 67) (< a-number 75)) (char (+ 18 baseline-char))
-        (= a-number 75) (char (+ 20 baseline-char)) 
+        (and (>= a-number 75) (< a-number 76)) (char (+ 20 baseline-char))
         (and (>= a-number 76) (< a-number 88)) (char (+ 21 baseline-char))
         (and (>= a-number 88) (< a-number 114)) (char (+ 22 baseline-char))
-        (>= a-number 114) (char (+ 23 baseline-char))
-        ))))
+        (>= a-number 114) (char (+ 23 baseline-char))))))
 
 (defn char->number 
-  "Converts single char to the position in the alphabet for that letter.
-   May behave funky for non letters or lowercase letters."
+  "Converts given character to its corresponding number. Numbers are first 
+   to be assigned to uppercase letters, then lowercase letters, then other 
+   characters. All blank, reserved and unprintable characters are skipped,
+   and they evaluate to nil. Works up to first 200 characters, then returns nil.
+   Also returns nil for all characters that are less than 65 on the UNICODE table."
   [a-char]
-  (if-not (char? a-char)
-    nil
-    (- (int a-char) 64)))
+  (when (char? a-char)  
+    (let [baseline-num (- (int a-char) 64)]
+         (cond
+           (< baseline-num 27) baseline-num
+           (and (>= baseline-num 27) (< baseline-num (+ 53 6))) (- baseline-num 6)
+           (and (>= baseline-num (+ 53 6)) (< baseline-num (+ 56 13))) (- baseline-num 13)
+           (and (>= baseline-num (+ 56 13)) (< baseline-num (+ 63 14))) (- baseline-num 14)
+           (and (>= baseline-num (+ 63 14)) (< baseline-num (+ 65 15))) (- baseline-num 15)
+           (and (>= baseline-num (+ 65 15)) (< baseline-num (+ 67 16))) (- baseline-num 16)
+           (and (>= baseline-num (+ 67 16)) (< baseline-num (+ 75 18))) (- baseline-num 18)
+           (and (>= baseline-num (+ 75 18)) (< baseline-num (+ 76 20))) (- baseline-num 20)
+           (and (>= baseline-num (+ 76 20)) (< baseline-num (+ 88 21))) (- baseline-num 21)
+           (and (>= baseline-num (+ 88 21)) (< baseline-num (+ 114 22))) (- baseline-num 22)
+           (>= baseline-num (+ 114 22)) (- baseline-num 23)))))
 
 (defn get-?-col-as-num
   "Takes in a string representing user input and returns
@@ -298,11 +310,4 @@
       (catch NumberFormatException _
         5)))
 
-(defn numeric-string? 
-  [a-string]
-  (when (string? a-string)
-    (try 
-      (Integer/parseInt a-string)
-      (catch NumberFormatException _
-        false))))
 

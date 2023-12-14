@@ -205,4 +205,4 @@
     (print-row board-size last-row-keyword board)))
 
 ;; (print-the-board (create-board 3) 3)
-;; (create-board 7)
+

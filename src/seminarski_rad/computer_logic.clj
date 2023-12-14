@@ -20,7 +20,7 @@
   (let [human-piece-count (pieces-on-board-for? human-color board)
         computer-piece-count (pieces-on-board-for? computer-color board)]
     (reset! pieces {:human human-piece-count 
-                    :computer computer-piece-count} )))
+                    :computer computer-piece-count})))
 
 (defn initiate-win-count!
   [username]
@@ -73,8 +73,7 @@
 
 (defn check-for-win 
   []
-  (let [
-        human-piece-count (:human @pieces)
+  (let [human-piece-count (:human @pieces)
         computer-piece-count (:computer @pieces)]
     (if (= 0 human-piece-count)
       :computer
@@ -190,7 +189,6 @@
                          board player-color board-size moves-or-eats-kw)))
             #{} all-blanks)))
 
-
 (defn- evaluate-minimax-candidate
   [difficulty-factor
    human-score
@@ -208,15 +206,11 @@
   (evaluate-minimax-candidate
    (- 1 difficulty-factor) human-score computer-score))
 
-(defn- ?st-candidate
-  [candidates
-   best-or-worst]
-  (let [symbol (if (= "WORST" best-or-worst)
-                 <
-                 >) 
-        solution (first (reduce (fn
+(defn- best-candidate
+  [candidates]
+  (let [solution (first (reduce (fn
                                     [acc eval]
-                                    (if (symbol (first (vals eval))
+                                    (if (> (first (vals eval))
                                                 (first (vals acc)))
                                       eval
                                       acc))
@@ -380,7 +374,9 @@
                                                      board-size % 0 0 difficulty-factor
                                                      -∞ ∞)
                                            initial-normal-moves))]
-      (?st-candidate initial-minimaxed "BEST")))
+      (best-candidate initial-minimaxed)))
+
+(find-all-possible-?s (board/create-board 3) "R" 3 :eats)
 
 (defn- eat-side-effects!
   "Applies side effects to atoms and potential save to db
@@ -429,7 +425,7 @@
               score (get res-map best-move)
               ]
           (println (str "Computer's move: " best-move))
-          (println (str "Function returned score: " score))
+          (println (str "Minimax determined value: " score))
           (let [result-of-piece-move (apply-move-indicator best-move
                                                            board computer-color
                                                            board-size
