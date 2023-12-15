@@ -30,7 +30,7 @@
            (println (.getMessage ex)))))))
 
 ;; Execute it once to get started with your database
-(execute-sql-script)
+;; (execute-sql-script)
 
 (defn- hash-a-password
   [password]
