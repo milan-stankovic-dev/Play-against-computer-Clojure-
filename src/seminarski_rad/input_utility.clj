@@ -105,7 +105,12 @@
   (when (char? a-char)  
     (let [baseline-num (- (int a-char) 64)]
       ;; Manually checking adherence to previously skipped undesirable UNICODE chars.
+      ;; NOTE: could be written as one function together with 
+      ;; number->char (something like 'char-number-converter'). But I wouldn't dare try it,
+      ;; since it's already touchy as is.
          (cond
+           (some #(= % a-char) [\[ \\ \] \^ \_  \` \{ \| \} \~ \ \  \  \  \ 
+                                \\ \ ]) nil
            (< baseline-num 27) baseline-num
            (and (>= baseline-num 27) (< baseline-num (+ 53 6))) (- baseline-num 6)
            (and (>= baseline-num (+ 53 6)) (< baseline-num (+ 56 13))) (- baseline-num 13)
