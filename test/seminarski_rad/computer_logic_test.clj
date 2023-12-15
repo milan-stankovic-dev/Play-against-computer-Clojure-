@@ -7,62 +7,62 @@
 (let [board5 (board/create-board 5)]
   (initiate-piece-count! board5 "B" "R"))
 
-(reset! stats/game-sessions-info [{:game_session/id 1,
-                             :app_user/id 6,
-                             :game_session/won "H",
-                             :game_session/human_score 3,
-                             :game_session/computer_score 0,
-                             :game_session/human_color "B",
-                             :app_user/username "stanmil",
-                             :board/size 5}
-                            {:game_session/id 2,
-                             :app_user/id 6,
-                             :game_session/won "H",
-                             :game_session/human_score 5,
-                             :game_session/computer_score 0,
-                             :game_session/human_color "R",
-                             :app_user/username "stanmil",
-                             :board/size 5}
-                            {:game_session/id 3,
-                             :app_user/id 7,
-                             :game_session/won "C",
-                             :game_session/human_score 18,
-                             :game_session/computer_score 19,
-                             :game_session/human_color "B",
-                             :app_user/username "ppetar",
-                             :board/size 7}
-                            {:game_session/id 4,
-                             :app_user/id 6,
-                             :game_session/won "C",
-                             :game_session/human_score 0,
-                             :game_session/computer_score 8,
-                             :game_session/human_color "B",
-                             :app_user/username "stanmil",
-                             :board/size 5}
-                            {:game_session/id 5,
-                             :app_user/id 8,
-                             :game_session/won "H",
-                             :game_session/human_score 2,
-                             :game_session/computer_score 0,
-                             :game_session/human_color "B",
-                             :app_user/username "saraa",
-                             :board/size 9}
-                            {:game_session/id 6,
-                             :app_user/id 8,
-                             :game_session/won "C",
-                             :game_session/human_score 2,
-                             :game_session/computer_score 2,
-                             :game_session/human_color "B",
-                             :app_user/username "saraa",
-                             :board/size 3}
-                            {:game_session/id 7,
-                             :app_user/id 7,
-                             :game_session/won "C",
-                             :game_session/human_score 0,
-                             :game_session/computer_score 9,
-                             :game_session/human_color "R",
-                             :app_user/username "ppetar",
-                             :board/size 5}])
+(reset! stats/game-sessions-info [{:GAME_SESSION/ID 1,
+                             :APP_USER/ID 6,
+                             :GAME_SESSION/WON "H",
+                             :GAME_SESSION/HUMAN_SCORE 3,
+                             :GAME_SESSION/COMPUTER_SCORE 0,
+                             :GAME_SESSION/HUMAN_COLOR "B",
+                             :APP_USER/USERNAME "stanmil",
+                             :BOARD/SIZE 5}
+                            {:GAME_SESSION/ID 2,
+                             :APP_USER/ID 6,
+                             :GAME_SESSION/WON "H",
+                             :GAME_SESSION/HUMAN_SCORE 5,
+                             :GAME_SESSION/COMPUTER_SCORE 0,
+                             :GAME_SESSION/HUMAN_COLOR "R",
+                             :APP_USER/USERNAME "stanmil",
+                             :BOARD/SIZE 5}
+                            {:GAME_SESSION/ID 3,
+                             :APP_USER/ID 7,
+                             :GAME_SESSION/WON "C",
+                             :GAME_SESSION/HUMAN_SCORE 18,
+                             :GAME_SESSION/COMPUTER_SCORE 19,
+                             :GAME_SESSION/HUMAN_COLOR "B",
+                             :APP_USER/USERNAME "ppetar",
+                             :BOARD/SIZE 7}
+                            {:GAME_SESSION/ID 4,
+                             :APP_USER/ID 6,
+                             :GAME_SESSION/WON "C",
+                             :GAME_SESSION/HUMAN_SCORE 0,
+                             :GAME_SESSION/COMPUTER_SCORE 8,
+                             :GAME_SESSION/HUMAN_COLOR "B",
+                             :APP_USER/USERNAME "stanmil",
+                             :BOARD/SIZE 5}
+                            {:GAME_SESSION/ID 5,
+                             :APP_USER/ID 8,
+                             :GAME_SESSION/WON "H",
+                             :GAME_SESSION/HUMAN_SCORE 2,
+                             :GAME_SESSION/COMPUTER_SCORE 0,
+                             :GAME_SESSION/HUMAN_COLOR "B",
+                             :APP_USER/USERNAME "saraa",
+                             :BOARD/SIZE 9}
+                            {:GAME_SESSION/ID 6,
+                             :APP_USER/ID 8,
+                             :GAME_SESSION/WON "C",
+                             :GAME_SESSION/HUMAN_SCORE 2,
+                             :GAME_SESSION/COMPUTER_SCORE 2,
+                             :GAME_SESSION/HUMAN_COLOR "B",
+                             :APP_USER/USERNAME "saraa",
+                             :BOARD/SIZE 3}
+                            {:GAME_SESSION/ID 7,
+                             :APP_USER/ID 7,
+                             :GAME_SESSION/WON "C",
+                             :GAME_SESSION/HUMAN_SCORE 0,
+                             :GAME_SESSION/COMPUTER_SCORE 9,
+                             :GAME_SESSION/HUMAN_COLOR "R",
+                             :APP_USER/USERNAME "ppetar",
+                             :BOARD/SIZE 5}])
 
 (let [user-wins-map (stats/get-map-human-?s-added "WINS")
       computer-wins-map (stats/get-map-human-?s-added "LOSSES")
@@ -90,8 +90,6 @@
 (swap! pieces update :human #(+ % 12))
 
 (let [board5 (board/create-board 5) 
-      board11 (board/create-board 11) 
-      board7 (board/create-board 7) 
       board5-2C-3C (move-piece-computer 
                     "2C-3C" board5 "B" 5) 
       board5-2C-3C-4C-2C (move-piece-computer
@@ -101,9 +99,7 @@
       board5-2C-3C-4C-2C-2C-3C-1C-2C (move-piece-computer
                                            "1C-2C"
                                            board5-2C-3C-4C-2C-2C-3C
-                                           "B" 5) 
-      board5-4B-3C (move-piece-computer
-                         "4B-3C" board5 "R" 5)]
+                                           "B" 5)]
 (fact "move-piece-computer Moving a piece (human, non eating)." 
       board5-2C-3C => (contains {:2
                          {:A {:piece "B", :moves '([:1 :A] [:2 :B] [:3 :A]), :eats '([:2 :C] [:4 :A])},

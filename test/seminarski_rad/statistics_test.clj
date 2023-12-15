@@ -2,62 +2,62 @@
   (:require [seminarski-rad.statistics :refer :all]
             [midje.sweet :refer :all]))
 
-(reset! game-sessions-info [{:game_session/id 1,
-                             :app_user/id 6,
-                             :game_session/won "H",
-                             :game_session/human_score 3,
-                             :game_session/computer_score 0,
-                             :game_session/human_color "B",
-                             :app_user/username "stanmil",
-                             :board/size 5}
-                            {:game_session/id 2,
-                             :app_user/id 6,
-                             :game_session/won "H",
-                             :game_session/human_score 5,
-                             :game_session/computer_score 0,
-                             :game_session/human_color "R",
-                             :app_user/username "stanmil",
-                             :board/size 5}
-                            {:game_session/id 3,
-                             :app_user/id 7,
-                             :game_session/won "C",
-                             :game_session/human_score 18,
-                             :game_session/computer_score 19,
-                             :game_session/human_color "B",
-                             :app_user/username "ppetar",
-                             :board/size 7}
-                            {:game_session/id 4,
-                             :app_user/id 6,
-                             :game_session/won "C",
-                             :game_session/human_score 0,
-                             :game_session/computer_score 8,
-                             :game_session/human_color "B",
-                             :app_user/username "stanmil",
-                             :board/size 5}
-                            {:game_session/id 5,
-                             :app_user/id 8,
-                             :game_session/won "H",
-                             :game_session/human_score 2,
-                             :game_session/computer_score 0,
-                             :game_session/human_color "B",
-                             :app_user/username "saraa",
-                             :board/size 9}
-                            {:game_session/id 6,
-                             :app_user/id 8,
-                             :game_session/won "C",
-                             :game_session/human_score 2,
-                             :game_session/computer_score 2,
-                             :game_session/human_color "B",
-                             :app_user/username "saraa",
-                             :board/size 3}
-                            {:game_session/id 7,
-                             :app_user/id 7,
-                             :game_session/won "C",
-                             :game_session/human_score 0,
-                             :game_session/computer_score 9,
-                             :game_session/human_color "R",
-                             :app_user/username "ppetar",
-                             :board/size 5}])
+(reset! game-sessions-info [{:GAME_SESSION/ID 1,
+                                   :APP_USER/ID 6,
+                                   :GAME_SESSION/WON "H",
+                                   :GAME_SESSION/HUMAN_SCORE 3,
+                                   :GAME_SESSION/COMPUTER_SCORE 0,
+                                   :GAME_SESSION/HUMAN_COLOR "B",
+                                   :APP_USER/USERNAME "stanmil",
+                                   :BOARD/SIZE 5}
+                                  {:GAME_SESSION/ID 2,
+                                   :APP_USER/ID 6,
+                                   :GAME_SESSION/WON "H",
+                                   :GAME_SESSION/HUMAN_SCORE 5,
+                                   :GAME_SESSION/COMPUTER_SCORE 0,
+                                   :GAME_SESSION/HUMAN_COLOR "R",
+                                   :APP_USER/USERNAME "stanmil",
+                                   :BOARD/SIZE 5}
+                                  {:GAME_SESSION/ID 3,
+                                   :APP_USER/ID 7,
+                                   :GAME_SESSION/WON "C",
+                                   :GAME_SESSION/HUMAN_SCORE 18,
+                                   :GAME_SESSION/COMPUTER_SCORE 19,
+                                   :GAME_SESSION/HUMAN_COLOR "B",
+                                   :APP_USER/USERNAME "ppetar",
+                                   :BOARD/SIZE 7}
+                                  {:GAME_SESSION/ID 4,
+                                   :APP_USER/ID 6,
+                                   :GAME_SESSION/WON "C",
+                                   :GAME_SESSION/HUMAN_SCORE 0,
+                                   :GAME_SESSION/COMPUTER_SCORE 8,
+                                   :GAME_SESSION/HUMAN_COLOR "B",
+                                   :APP_USER/USERNAME "stanmil",
+                                   :BOARD/SIZE 5}
+                                  {:GAME_SESSION/ID 5,
+                                   :APP_USER/ID 8,
+                                   :GAME_SESSION/WON "H",
+                                   :GAME_SESSION/HUMAN_SCORE 2,
+                                   :GAME_SESSION/COMPUTER_SCORE 0,
+                                   :GAME_SESSION/HUMAN_COLOR "B",
+                                   :APP_USER/USERNAME "saraa",
+                                   :BOARD/SIZE 9}
+                                  {:GAME_SESSION/ID 6,
+                                   :APP_USER/ID 8,
+                                   :GAME_SESSION/WON "C",
+                                   :GAME_SESSION/HUMAN_SCORE 2,
+                                   :GAME_SESSION/COMPUTER_SCORE 2,
+                                   :GAME_SESSION/HUMAN_COLOR "B",
+                                   :APP_USER/USERNAME "saraa",
+                                   :BOARD/SIZE 3}
+                                  {:GAME_SESSION/ID 7,
+                                   :APP_USER/ID 7,
+                                   :GAME_SESSION/WON "C",
+                                   :GAME_SESSION/HUMAN_SCORE 0,
+                                   :GAME_SESSION/COMPUTER_SCORE 9,
+                                   :GAME_SESSION/HUMAN_COLOR "R",
+                                   :APP_USER/USERNAME "ppetar",
+                                   :BOARD/SIZE 5}])
 
 (fact "Count wins"
       (count (type?-wins "c")) => 4
@@ -92,15 +92,16 @@
 (fact "Score for specific player type (C or H) wins"
       (count (score-for-type?-wins "C")) => 4
       (count (score-for-type?-wins "H")) => 3
-      (score-for-type?-wins "H") => (just '(#:game_session{:human_score 3, :computer_score 0}
-                                           #:game_session{:human_score 5, :computer_score 0}
-                                           #:game_session{:human_score 2, :computer_score 0}))
-      (score-for-type?-wins "C") => (just '(#:game_session{:human_score 18, :computer_score 19}
-                                            #:game_session{:human_score 0, :computer_score 8}
-                                            #:game_session{:human_score 2, :computer_score 2}
-                                            #:game_session{:human_score 0, :computer_score 9}))
+      (score-for-type?-wins "H") => (just '(#:GAME_SESSION{:HUMAN_SCORE 3, :COMPUTER_SCORE 0}
+                                           #:GAME_SESSION{:HUMAN_SCORE 5, :COMPUTER_SCORE 0}
+                                           #:GAME_SESSION{:HUMAN_SCORE 2, :COMPUTER_SCORE 0}))
+      (score-for-type?-wins "C") => (just '(#:GAME_SESSION{:HUMAN_SCORE 18, :COMPUTER_SCORE 19}
+                                            #:GAME_SESSION{:HUMAN_SCORE 0, :COMPUTER_SCORE 8}
+                                            #:GAME_SESSION{:HUMAN_SCORE 2, :COMPUTER_SCORE 2}
+                                            #:GAME_SESSION{:HUMAN_SCORE 0, :COMPUTER_SCORE 9}))
       (= (score-for-type?-wins "  h") (score-for-type?-wins "H")) => true
       (= (score-for-type?-wins "    c  ") (score-for-type?-wins "C")) => true)
+(score-for-type?-wins "C")
 
 (fact "Score for specified player type edge cases"
       (score-for-type?-wins "FOO BAR") => '()

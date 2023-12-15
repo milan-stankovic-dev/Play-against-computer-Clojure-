@@ -24,7 +24,7 @@
   (println (str "
   *********************************************************************
             
-      Welcome " (:app_user/username logged-in-user) " to \"Play against computer- the app\"! This
+      Welcome " (:APP_USER/USERNAME logged-in-user) " to \"Play against computer- the app\"! This
       interactive game will have you competing against your family and
       friends in no time. But first, you need to beat the computer in
       a one-to-one matchup. Can you do it?
@@ -108,6 +108,6 @@
   ([logged-in-user]
    (write-main-menu logged-in-user)
    (when-not (= "END" (access-main-menu-item 
-                     (:app_user/username logged-in-user)))
+                     (:APP_USER/USERNAME logged-in-user)))
      (manage-menus logged-in-user))))
 ;(:app_user/username logged-in-user)

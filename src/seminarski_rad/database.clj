@@ -10,7 +10,8 @@
    :user "sa"
    :password ""
    :subprotocol "h2:tcp"
-   :subname "//localhost:9092/mem:test-db;DB_CLOSE_DELAY=-1;webAllowOthers=true"
+   :subname "//localhost:9092/mem:seminarski-rad;webAllowOthers=true;
+             AUTO_SERVER=TRUE"
    })
 
 (def ^:private datasource (jdbc/get-datasource db))
@@ -19,13 +20,17 @@
   []
   (jdbc/get-connection datasource))
 
-;; (defn execute-sql-script
-;;   []
-;;   (let [script (slurp "resources/seminarski-rad.sql")]
-;;     (jdbc/with-transaction [tx (get-connection)]
-;;       (jdbc/execute! tx script))))
+(defn execute-sql-script
+  []
+  (let [script (slurp "resources/seminarski-rad.sql")]
+     (jdbc/with-transaction [tx (get-connection)]
+       (try
+           (jdbc/execute! tx [script])
+         (catch Exception ex
+           (println (.getMessage ex)))))))
 
-;; (execute-sql-script)
+;; Execute it once to get started with your database
+(execute-sql-script)
 
 (defn- hash-a-password
   [password]
@@ -60,7 +65,7 @@
   [conn username password]
   (let [db-user (find-user-by-username conn username)]
      (when (hashed-password-correct? password 
-                                     (:app_user/password db-user))
+                                     (:APP_USER/PASSWORD db-user))
        db-user)))
 
 (defn- find-board-by-size
@@ -84,9 +89,9 @@
   [conn board-size username
    who-won human-score
    computer-score human-color] 
-    (let [app-user-id (:app_user/id
+    (let [app-user-id (:APP_USER/ID
                        (find-user-by-username conn username))
-          board-id (:board/id
+          board-id (:BOARD/ID
                     (find-board-by-size conn board-size))]
       (jdbc/execute!
        conn

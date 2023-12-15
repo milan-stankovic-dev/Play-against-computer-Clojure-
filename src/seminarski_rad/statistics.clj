@@ -18,15 +18,15 @@
   (if-not (string? player-type)
     '()
     (let [type-fixed (util/purify-user-input player-type)]
-      (filter #(= type-fixed (get % :game_session/won))
+      (filter #(= type-fixed (get % :GAME_SESSION/WON))
               @game-sessions-info))))
 
 (defn wins-board-size?-type?
   "Filters all wins for specified player type (C or H)
    and board size."
   [board-size player-type]
-  (filter #(and (= player-type (get % :game_session/won))
-                       (= board-size (get % :board/size)))
+  (filter #(and (= player-type (get % :GAME_SESSION/WON))
+                       (= board-size (get % :BOARD/SIZE)))
                  @game-sessions-info))
 
 (defn score-for-type?-wins
@@ -36,22 +36,22 @@
   (if-not (string? player-type)
     '()
     (let [type-fixed (util/purify-user-input player-type)]
-      (map #(select-keys % [:game_session/human_score
-                            :game_session/computer_score])
-           (filter #(= type-fixed (get % :game_session/won))
+      (map #(select-keys % [:GAME_SESSION/HUMAN_SCORE
+                            :GAME_SESSION/COMPUTER_SCORE])
+           (filter #(= type-fixed (get % :GAME_SESSION/WON))
                    @game-sessions-info)))))
 
 (defn sessions-for-user
   "Filters all sessions for specified user."
   [username]
-  (filter #(= username (get % :app_user/username))
+  (filter #(= username (get % :APP_USER/USERNAME))
           @game-sessions-info))
 
 (defn- get-map-human-?s-helper 
   "Helper function for get-map-human-?s-added's reduce
    function."
   [a-win human]
-  (let [human-username-kw (keyword (str (:app_user/username
+  (let [human-username-kw (keyword (str (:APP_USER/USERNAME
                                          human)))]
     (if (some #(= % human-username-kw) (keys a-win))
       (update a-win human-username-kw inc)
@@ -110,18 +110,18 @@
   []
   (distinct (reduce (fn 
                       [acc session]
-                      (conj acc (:app_user/username session)))
+                      (conj acc (:APP_USER/USERNAME session)))
                     [] @game-sessions-info)))
 
 (defn- colors-helper
   "Helper function for 'colors-played-by-username''s reduce
    function."
   [acc a-session]
-  (let [username-kw (keyword (str (:app_user/username a-session)))
-        human-color-kw (keyword (:game_session/human_color
+  (let [username-kw (keyword (str (:APP_USER/USERNAME a-session)))
+        human-color-kw (keyword (:GAME_SESSION/HUMAN_COLOR
                                  a-session))
         computer-color-kw (keyword (util/opposite-player-color
-                                    (:game_session/human_color
+                                    (:GAME_SESSION/HUMAN_COLOR
                                      a-session)))]
     (if (some #(= % username-kw) (keys acc))
       (update-in acc [username-kw human-color-kw] inc) 
@@ -139,9 +139,9 @@
 (defn- quits-helper
   "Helper function for 'quits-by-users''s reduce function."
   [acc a-session]
-  (if (and (= (:game_session/won a-session) "C")
-           (> (:game_session/human_score a-session)0))
-    (let [username-kw (keyword (:app_user/username a-session))]
+  (if (and (= (:GAME_SESSION/WON a-session) "C")
+           (> (:GAME_SESSION/HUMAN_SCORE a-session)0))
+    (let [username-kw (keyword (:APP_USER/USERNAME a-session))]
       (if (some #(= % username-kw) (keys acc))
         (update acc username-kw inc)
         (assoc acc username-kw 1)
