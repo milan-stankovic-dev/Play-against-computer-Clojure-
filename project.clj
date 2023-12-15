@@ -7,7 +7,8 @@
                  [seancorfield/next.jdbc "1.2.659"]
                  [mysql/mysql-connector-java "5.1.6"]
                  [buddy/buddy-hashers "2.0.167"]
-                 [midje "1.10.9"]] 
+                 [midje "1.10.9"]
+                 [com.h2database/h2 "1.4.200"]] 
   :plugins [[lein-midje "3.2.1"]]
   :main ^:skip-aot seminarski-rad.core
   :profiles {:uberjar {:aot :all

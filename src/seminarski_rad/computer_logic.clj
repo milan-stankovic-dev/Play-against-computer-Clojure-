@@ -442,19 +442,3 @@
               (take-turns! username
                            "HUMAN" result-of-piece-move
                            human-color computer-color board-size)))))))
-
-(def board5 (board/create-board 5))
-(def board11 (board/create-board 11))
-(def board7 (board/create-board 7))
-(def board5-2C-3C (move-piece-computer
-                   "2C-3C" board5 "B" 5))
-(def board5-2C-3C-4C-2C (move-piece-computer
-                         "4C-2C" board5-2C-3C "R" 5))
-(def board5-2C-3C-4C-2C-2C-3C (move-piece-computer
-                               "2C-3C" board5-2C-3C-4C-2C "R" 5))
-(def board5-2C-3C-4C-2C-2C-3C-1C-2C (move-piece-computer
-                                     "1C-2C"
-                                     board5-2C-3C-4C-2C-2C-3C
-                                     "B" 5))
-(def board5-4B-3C (move-piece-computer
-                   "4B-3C" board5 "R" 5))

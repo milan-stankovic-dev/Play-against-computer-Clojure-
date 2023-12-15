@@ -5,18 +5,27 @@
             [seminarski-rad.input-utility :as utility]))
 
 (def ^:private db
-  {:dbtype "mysql"
-   :dbname "seminarski-rad"
-   :user "root"
+  {:dbtype "h2"
+   :dbname "mem:seminarski-rad"
+   :user "sa"
    :password ""
-   :host "localhost"
-   :port 3306})
+   :subprotocol "h2:tcp"
+   :subname "//localhost:9092/mem:test-db;DB_CLOSE_DELAY=-1;webAllowOthers=true"
+   })
 
 (def ^:private datasource (jdbc/get-datasource db))
 
 (defn get-connection 
   []
   (jdbc/get-connection datasource))
+
+;; (defn execute-sql-script
+;;   []
+;;   (let [script (slurp "resources/seminarski-rad.sql")]
+;;     (jdbc/with-transaction [tx (get-connection)]
+;;       (jdbc/execute! tx script))))
+
+;; (execute-sql-script)
 
 (defn- hash-a-password
   [password]

@@ -2,10 +2,10 @@
   (:require [seminarski-rad.computer-logic :refer :all]
             [midje.sweet :refer :all]
             [seminarski-rad.statistics :as stats]
-            [seminarski-rad.computer-logic :as logic]
             [seminarski-rad.board :as board]))
 
-(initiate-piece-count! board5 "B" "R")
+(let [board5 (board/create-board 5)]
+  (initiate-piece-count! board5 "B" "R"))
 
 (reset! stats/game-sessions-info [{:game_session/id 1,
                              :app_user/id 6,
@@ -89,10 +89,23 @@
 
 (swap! pieces update :human #(+ % 12))
 
-(apply-move-indicator "2C-3C" board5 "B" 5 "stanmil")
-
+(let [board5 (board/create-board 5) 
+      board11 (board/create-board 11) 
+      board7 (board/create-board 7) 
+      board5-2C-3C (move-piece-computer 
+                    "2C-3C" board5 "B" 5) 
+      board5-2C-3C-4C-2C (move-piece-computer
+                               "4C-2C" board5-2C-3C "R" 5) 
+      board5-2C-3C-4C-2C-2C-3C (move-piece-computer
+                                     "2C-3C" board5-2C-3C-4C-2C "R" 5) 
+      board5-2C-3C-4C-2C-2C-3C-1C-2C (move-piece-computer
+                                           "1C-2C"
+                                           board5-2C-3C-4C-2C-2C-3C
+                                           "B" 5) 
+      board5-4B-3C (move-piece-computer
+                         "4B-3C" board5 "R" 5)]
 (fact "move-piece-computer Moving a piece (human, non eating)." 
-      logic/board5-2C-3C => (contains {:2
+      board5-2C-3C => (contains {:2
                          {:A {:piece "B", :moves '([:1 :A] [:2 :B] [:3 :A]), :eats '([:2 :C] [:4 :A])},
                           :B
                           {:piece "B",
@@ -104,7 +117,7 @@
                            :moves '([:1 :C] [:1 :D] [:1 :E] [:2 :C] [:2 :E] [:3 :C] [:3 :D] [:3 :E]),
                            :eats '([:2 :B] [:4 :B] [:4 :D])},
                           :E {:piece "B", :moves '([:1 :E] [:2 :D] [:3 :E]), :eats '([:2 :C] [:4 :E])}}})
-      logic/board5-2C-3C => (contains {:3
+      board5-2C-3C => (contains {:3
                                   {:A {:piece "B", :moves '([:2 :A] [:2 :B] [:3 :B] [:4 :A] [:4 :B]), :eats '([:1 :A] [:1 :C] [:3 :C] [:5 :A] [:5 :C])},
                                    :B {:piece "B", :moves '([:2 :B] [:3 :A] [:3 :C] [:4 :B]), :eats '([:1 :B] [:3 :D] [:5 :B])},
                                    :C
@@ -115,7 +128,7 @@
                                    :E {:piece "R", :moves '([:2 :D] [:2 :E] [:3 :D] [:4 :D] [:4 :E]), :eats '([:1 :C] [:1 :E] [:3 :C] [:5 :C] [:5 :E])}}}))
 
 (fact "move-piece-computer Moving a piece (computer, eating)" 
-      logic/board5-2C-3C-4C-2C => (contains {:2
+      board5-2C-3C-4C-2C => (contains {:2
                                              {:A {:piece "B", :moves '([:1 :A] [:2 :B] [:3 :A]), :eats '([:2 :C] [:4 :A])},
                                               :B
                                               {:piece "B",
@@ -168,4 +181,4 @@
       (find-best-move board5-2C-3C 
                       "R" 5) => {"4C-2C" 1.5}
       (find-best-move board5-2C-3C-4C-2C-2C-3C-1C-2C 
-                      "R" 5) => {"3E-1C" 1.5})
+                      "R" 5) => {"3E-1C" 1.5}))

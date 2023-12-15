@@ -81,6 +81,7 @@
   [a-number]
   (when (number? a-number) 
     (let [baseline-char (+ 64 a-number)]
+      ;; Manually skipping UNICODE chars that I don't like.
       (cond
         (< a-number 27) (char baseline-char)
         (and (>= a-number 27) (< a-number 53)) (char (+ 6 baseline-char))
@@ -103,6 +104,7 @@
   [a-char]
   (when (char? a-char)  
     (let [baseline-num (- (int a-char) 64)]
+      ;; Manually checking adherence to previously skipped undesirable UNICODE chars.
          (cond
            (< baseline-num 27) baseline-num
            (and (>= baseline-num 27) (< baseline-num (+ 53 6))) (- baseline-num 6)
